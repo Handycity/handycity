@@ -74,12 +74,16 @@ services:
 Sie können Services hinzufügen, ändern oder entfernen.
 
 ### Kundenbewertungen
+Bewertungen werden automatisch direkt von Google geladen (kein manuelles Eintragen in `content.yaml` mehr).
+Damit das funktioniert, müssen in GitHub unter **Settings → Secrets and variables → Actions** diese Secrets gesetzt sein:
+- `GOOGLE_PLACES_API_KEY`
+- optional: `GOOGLE_PLACE_ID` (falls Sie eine feste Place ID erzwingen möchten)
+
+Die folgenden Felder in `content.yaml` sind nur Fallback:
 ```yaml
 reviews:
-  items:
-    - name: "Max Mustermann"
-      text: "Toller Service!"
-      rating: 5
+  headline: "Das sagen unsere Kunden"
+  googleUrl: "https://www.google.com/maps/place/Handycity+Klagenfurt/"
 ```
 
 ### FAQ

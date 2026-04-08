@@ -186,33 +186,9 @@ process:
 reviews:
   headline: "Das sagen unsere Kunden"
   googleUrl: "https://www.google.com/maps/place/Handycity+Klagenfurt/"
-  averageRating: 4.8
-  totalReviews: 47
-  items:
-    - name: "Platzhalter K. 1"
-      text: "Schnelle Reparatur, fairer Preis – kann ich nur empfehlen! Display war innerhalb einer Stunde getauscht."
-      rating: 5
-      date: "März 2026"
-    - name: "Platzhalter K. 2"
-      text: "Akku wurde am selben Tag gewechselt. Super Service und freundliche Beratung. Komme gerne wieder."
-      rating: 5
-      date: "Februar 2026"
-    - name: "Platzhalter K. 3"
-      text: "Geräte-Retter-Prämie konnte ich problemlos einlösen. Habe fast die Hälfte gespart. Top!"
-      rating: 5
-      date: "Jänner 2026"
-    - name: "Platzhalter K. 4"
-      text: "Sehr kompetentes Team. Mein Samsung hatte einen Wasserschaden und läuft jetzt wieder einwandfrei."
-      rating: 4
-      date: "Dezember 2025"
-    - name: "Platzhalter K. 5"
-      text: "Hol & Bring Service genutzt – super bequem. Handy war am nächsten Tag repariert zurück."
-      rating: 5
-      date: "November 2025"
-    - name: "Platzhalter K. 6"
-      text: "Datentransfer von meinem alten Android auf neues iPhone hat perfekt geklappt. Alle Daten da!"
-      rating: 5
-      date: "Oktober 2025"
+  averageRating: 0
+  totalReviews: 0
+  items: []
 
 # ------ Repair Price Calculator ------
 calculator:

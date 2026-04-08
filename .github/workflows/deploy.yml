@@ -27,6 +27,8 @@ jobs:
       - run: npm run build
         env:
           PUBLIC_SITE_BASE: /handycity/
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+          GOOGLE_PLACE_ID: ${{ secrets.GOOGLE_PLACE_ID }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist/

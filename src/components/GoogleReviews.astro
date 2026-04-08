@@ -18,6 +18,7 @@ interface Props {
   };
 }
 const { reviews } = Astro.props;
+const hasReviewItems = reviews.items.length > 0;
 ---
 <section id="bewertungen" class="py-16 md:py-24 bg-white">
   <div class="max-w-7xl mx-auto px-4">
@@ -49,27 +50,33 @@ const { reviews } = Astro.props;
     </div>
 
     <!-- Review cards -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {reviews.items.map((r) => (
-        <div class="border border-slate-200 rounded-xl p-6 bg-slate-50/50">
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-9 h-9 bg-navy/10 rounded-full flex items-center justify-center">
-              <span class="text-sm font-bold text-navy">{r.name.charAt(0)}</span>
+    {hasReviewItems ? (
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {reviews.items.map((r) => (
+          <div class="border border-slate-200 rounded-xl p-6 bg-slate-50/50">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-9 h-9 bg-navy/10 rounded-full flex items-center justify-center">
+                <span class="text-sm font-bold text-navy">{r.name.charAt(0)}</span>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-slate-800">{r.name}</p>
+                <p class="text-xs text-slate-400">{r.date}</p>
+              </div>
             </div>
-            <div>
-              <p class="text-sm font-semibold text-slate-800">{r.name}</p>
-              <p class="text-xs text-slate-400">{r.date}</p>
+            <div class="flex gap-0.5 mb-3">
+              {Array.from({ length: r.rating }).map(() => (
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              ))}
             </div>
+            <p class="text-sm text-slate-600 leading-relaxed">"{r.text}"</p>
           </div>
-          <div class="flex gap-0.5 mb-3">
-            {Array.from({ length: r.rating }).map(() => (
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            ))}
-          </div>
-          <p class="text-sm text-slate-600 leading-relaxed">"{r.text}"</p>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    ) : (
+      <div class="mx-auto max-w-2xl text-center bg-slate-50 border border-slate-200 rounded-xl px-6 py-8 text-slate-600">
+        Google-Bewertungen werden direkt von Google geladen. Sobald die API-Zugangsdaten gesetzt sind, erscheinen hier die echten Bewertungen.
+      </div>
+    )}
 
     <!-- CTA to Google -->
     <div class="text-center mt-8">

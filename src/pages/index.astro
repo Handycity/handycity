@@ -14,12 +14,35 @@ import FAQ from '../components/FAQ.astro';
 import Location from '../components/Location.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
+import { fetchGoogleReviews } from '../lib/google-places-reviews';
 
 import { readFileSync } from 'fs';
 import yaml from 'js-yaml';
 
 const raw = readFileSync('src/data/content.yaml', 'utf-8');
 const content = yaml.load(raw) as Record<string, any>;
+
+let liveReviews = null;
+try {
+  liveReviews = await fetchGoogleReviews({
+    apiKey: import.meta.env.GOOGLE_PLACES_API_KEY,
+    placeId: import.meta.env.GOOGLE_PLACE_ID,
+    placeQuery: `${content.company.name}, ${content.company.address.street}, ${content.company.address.zip} ${content.company.address.city}`,
+    latitude: Number(content.company?.geo?.lat),
+    longitude: Number(content.company?.geo?.lng),
+    language: 'de',
+    maxItems: 6
+  });
+} catch (error) {
+  console.error('Google reviews fetch failed:', error);
+}
+
+const reviewsData = liveReviews
+  ? {
+      ...content.reviews,
+      ...liveReviews
+    }
+  : content.reviews;
 ---
 <Layout>
   <Header company={content.company} />
@@ -31,7 +54,7 @@ const content = yaml.load(raw) as Record<string, any>;
     <Brands brands={content.brands} />
     <Trust trust={content.trust} />
     <Process process={content.process} />
-    <GoogleReviews reviews={content.reviews} />
+    <GoogleReviews reviews={reviewsData} />
     <WillhabenShop willhaben={content.willhaben} />
     <FAQ faq={content.faq} />
     <Location company={content.company} hours={content.hours} />
