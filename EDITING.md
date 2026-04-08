@@ -79,6 +79,13 @@ Damit das funktioniert, müssen in GitHub unter **Settings → Secrets and varia
 - `GOOGLE_PLACES_API_KEY`
 - optional: `GOOGLE_PLACE_ID` (falls Sie eine feste Place ID erzwingen möchten)
 
+Einmaliges Backup der echten Google-Bewertungen in `content.yaml` speichern:
+```sh
+npm run reviews:backup
+```
+
+Optional koennen Sie fuer den einmaligen Lauf `GOOGLE_PLACE_QUERY` setzen, falls die Place-ID nicht aufgeloest wird.
+
 Die folgenden Felder in `content.yaml` sind nur Fallback:
 ```yaml
 reviews:
