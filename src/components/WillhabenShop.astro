@@ -48,13 +48,19 @@ const { willhaben } = Astro.props;
         </div>
       </div>
 
-      <div class="order-1 h-72 lg:order-2 lg:h-full">
-        <img
-          src={`${import.meta.env.BASE_URL}images/store-image-out.png`}
-          alt="Handycity Geschäft Außenansicht Klagenfurt"
-          class="h-full w-full object-cover"
-          loading="lazy"
-        />
+      <div class="order-1 bg-slate-100 p-4 lg:order-2 lg:p-6">
+        <div class="relative h-full overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white shadow-sm">
+          <img
+            src={`${import.meta.env.BASE_URL}images/willhaben.png`}
+            alt="Willhaben Angebote von Handycity"
+            class="h-full w-full object-cover"
+            loading="lazy"
+          />
+          <div class="absolute inset-x-4 bottom-4 rounded-2xl bg-white/92 px-4 py-3 shadow-lg backdrop-blur-sm">
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-slate-500">Willhaben</p>
+            <p class="mt-1 text-sm font-semibold text-slate-900">Aktuelle Geräte, Zubehör und persönliche Beratung direkt aus dem Shop.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>

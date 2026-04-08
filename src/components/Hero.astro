@@ -14,6 +14,7 @@ interface HeroProps {
 interface CompanyProps {
   phone: string;
   phoneDisplay: string;
+  email: string;
   address: {
     street: string;
     zip: string;
@@ -38,20 +39,20 @@ const weekdayHours = hours.find((item) => item.shortDay === 'Mo')?.time || '9:00
 const saturdayHours = hours.find((item) => item.shortDay === 'Sa')?.time || '9:00–13:00';
 const hoursLine = `Mo–Fr ${weekdayHours} • Sa ${saturdayHours}`;
 ---
-<section class="relative overflow-hidden bg-slate-950 text-white">
+<section class="relative overflow-hidden bg-navy-dark text-white">
   <img
     src={`${import.meta.env.BASE_URL}images/store-image-in.jpg`}
     alt="Handycity Geschäft innen"
-    class="absolute inset-0 h-full w-full object-cover brightness-[0.38] saturate-[0.8]"
+    class="absolute inset-0 h-full w-full object-cover brightness-[0.56] saturate-[0.92]"
   />
-  <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.08),_transparent_34%),linear-gradient(118deg,_rgba(2,6,23,0.96),_rgba(15,23,42,0.9)_42%,_rgba(15,23,42,0.78)_100%)]"></div>
-  <div class="absolute inset-x-0 top-0 h-px bg-white/20"></div>
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.16),_transparent_34%),linear-gradient(118deg,_rgba(156,20,29,0.88),_rgba(156,20,29,0.76)_42%,_rgba(122,16,23,0.64)_100%)]"></div>
+  <div class="absolute inset-x-0 top-0 h-px bg-white/28"></div>
 
   <div class="relative mx-auto grid min-h-screen max-w-7xl gap-10 px-4 pb-14 pt-28 lg:grid-cols-[1.15fr_0.85fr] lg:items-start lg:pb-20 lg:pt-32">
-    <div class="max-w-3xl rounded-[2.25rem] border border-white/10 bg-slate-950/40 p-6 shadow-2xl shadow-black/30 backdrop-blur-sm md:p-8 lg:p-10">
+    <div class="max-w-3xl rounded-[2.25rem] border border-white/10 bg-[#020618] p-6 shadow-2xl shadow-black/30 md:p-8 lg:p-10">
       <p class="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-white/70">{hero.kicker}</p>
       <h1 class="max-w-3xl text-4xl font-bold leading-tight text-white md:text-6xl">{hero.headline}</h1>
-      <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-200 md:text-xl">{hero.subheadline}</p>
+      <p class="mt-6 max-w-2xl text-lg leading-8 text-white/88 md:text-xl">{hero.subheadline}</p>
 
       <div class="mt-8 flex flex-col gap-3 sm:flex-row">
         <a
@@ -63,7 +64,7 @@ const hoursLine = `Mo–Fr ${weekdayHours} • Sa ${saturdayHours}`;
         </a>
         <a
           href={hero.ctaSecondary.href}
-          class="inline-flex items-center justify-center gap-2 rounded-full border border-white/25 bg-white/10 px-6 py-3.5 text-base font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/20"
+          class="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/14 px-6 py-3.5 text-base font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/22"
         >
           {hero.ctaSecondary.text}
         </a>
@@ -71,7 +72,7 @@ const hoursLine = `Mo–Fr ${weekdayHours} • Sa ${saturdayHours}`;
 
       <div class="mt-8 flex flex-wrap gap-3">
         {hero.trustBadges.map((badge) => (
-          <span class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm text-slate-100">
+          <span class="inline-flex items-center gap-2 rounded-full border border-white/24 bg-white/12 px-4 py-2 text-sm text-white/92">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
             {badge.text}
           </span>
@@ -79,18 +80,20 @@ const hoursLine = `Mo–Fr ${weekdayHours} • Sa ${saturdayHours}`;
       </div>
 
       <div class="mt-8 grid gap-4 md:grid-cols-2">
-        <div class="rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-sm">
+        <div class="rounded-2xl border border-white/14 bg-white/12 p-5 backdrop-blur-sm">
           <p class="text-sm font-semibold text-white">Öffnungszeiten</p>
-          <p class="mt-2 text-sm leading-6 text-slate-200">{hoursLine}</p>
+          <p class="mt-2 text-sm leading-6 text-white/85">{hoursLine}</p>
         </div>
-        <div class="rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-sm">
+        <div class="rounded-2xl border border-white/14 bg-white/12 p-5 backdrop-blur-sm">
           <p class="text-sm font-semibold text-white">Direkt erreichbar</p>
-          <p class="mt-2 text-sm leading-6 text-slate-200">
+          <p class="mt-2 text-sm leading-6 text-white/85">
             <a href={`tel:${company.phone.replace(/\s/g, '')}`} class="font-medium text-white underline-offset-4 hover:underline">
               {company.phoneDisplay}
             </a>
             <span class="mx-2 text-white/30">•</span>
-            {company.address.street}, {company.address.zip} {company.address.city}
+            <a href={`mailto:${company.email}`} class="font-medium text-white underline-offset-4 hover:underline">
+              {company.email}
+            </a>
           </p>
         </div>
       </div>
