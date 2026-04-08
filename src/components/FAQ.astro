@@ -1,0 +1,46 @@
+---
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+interface Props {
+  faq: {
+    headline: string;
+    items: FAQItem[];
+  };
+}
+const { faq } = Astro.props;
+---
+<section id="faq" class="py-16 md:py-24 bg-slate-50">
+  <div class="max-w-4xl mx-auto px-4">
+    <h2 class="text-2xl md:text-3xl font-bold text-navy text-center mb-12">{faq.headline}</h2>
+    <div class="space-y-3" x-data="{ active: null }">
+      {faq.items.map((item, i) => (
+        <div class="border border-slate-200 rounded-xl bg-white overflow-hidden">
+          <button
+            @click={`active = active === ${i} ? null : ${i}`}
+            class="flex items-center justify-between w-full px-6 py-4 text-left text-sm font-semibold text-slate-800 hover:text-navy transition-colors cursor-pointer"
+            :aria-expanded={`active === ${i}`}
+          >
+            <span>{item.question}</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-4 h-4 shrink-0 ml-4 transition-transform"
+              :class={`{ 'rotate-180': active === ${i} }`}
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            ><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div x-show={`active === ${i}`} x-collapse x-cloak>
+            <div class="px-6 pb-4 text-sm text-slate-600 leading-relaxed">
+              {item.answer}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  [x-cloak] { display: none !important; }
+</style>

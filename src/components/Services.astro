@@ -1,0 +1,51 @@
+---
+interface ServiceItem {
+  name: string;
+  description: string;
+  icon: string;
+  price: string;
+}
+interface Props {
+  services: {
+    headline: string;
+    subheadline: string;
+    items: ServiceItem[];
+  };
+}
+const { services } = Astro.props;
+
+const iconPaths: Record<string, string> = {
+  'smartphone': '<rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>',
+  'battery-charging': '<path d="M5 18H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3.19M15 6h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-3.19"/><line x1="23" y1="13" x2="23" y2="11"/><polyline points="11 6 7 12 13 12 9 18"/>',
+  'camera': '<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>',
+  'plug-zap': '<path d="M12 2v10"/><path d="M18.4 6.6 12 12l-6.4-5.4"/><path d="M6.8 15.3 12 12l5.2 3.3"/><path d="M12 12v10"/>',
+  'volume-2': '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>',
+  'repeat': '<polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>',
+  'shopping-bag': '<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>',
+  'truck': '<rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>',
+};
+---
+<section id="services" class="py-16 md:py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <h2 class="text-2xl md:text-3xl font-bold text-navy mb-3">{services.headline}</h2>
+      <p class="text-slate-600 max-w-xl mx-auto">{services.subheadline}</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {services.items.map((item) => (
+        <div class="group border border-slate-200 rounded-xl p-6 hover:border-cyan hover:shadow-md transition-all">
+          <div class="w-10 h-10 bg-slate-50 rounded-lg flex items-center justify-center mb-4 group-hover:bg-cyan/10 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-navy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <Fragment set:html={iconPaths[item.icon] || iconPaths['smartphone']} />
+            </svg>
+          </div>
+          <h3 class="font-semibold text-slate-800 mb-2">{item.name}</h3>
+          <p class="text-sm text-slate-600 mb-3">{item.description}</p>
+          {item.price && (
+            <span class="text-xs font-medium text-cyan bg-cyan/10 px-2 py-1 rounded-full">{item.price}</span>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

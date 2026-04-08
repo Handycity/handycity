@@ -1,0 +1,63 @@
+---
+interface Props {
+  company: {
+    name: string;
+    legalName: string;
+    phone: string;
+    phoneDisplay: string;
+    email: string;
+    address: { street: string; city: string; zip: string };
+  };
+  social: Record<string, string>;
+}
+const { company, social } = Astro.props;
+const year = new Date().getFullYear();
+---
+<footer class="bg-navy-dark text-white">
+  <div class="max-w-7xl mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Brand -->
+      <div>
+        <div class="font-bold text-lg mb-3">{company.name}</div>
+        <p class="text-sm text-slate-300 leading-relaxed">
+          {company.address.street}<br />
+          {company.address.zip} {company.address.city}
+        </p>
+        <div class="mt-3 space-y-1 text-sm text-slate-300">
+          <a href={`tel:${company.phone.replace(/\s/g, '')}`} class="hover:text-white transition-colors block">{company.phoneDisplay}</a>
+          <a href={`mailto:${company.email}`} class="hover:text-white transition-colors block">{company.email}</a>
+        </div>
+      </div>
+
+      <!-- Links -->
+      <div>
+        <h3 class="font-semibold text-sm uppercase tracking-wider mb-3 text-slate-400">Navigation</h3>
+        <nav class="space-y-2 text-sm text-slate-300" aria-label="Footer Navigation">
+          <a href="#services" class="hover:text-white transition-colors block">Services</a>
+          <a href="#geraete-retter-praemie" class="hover:text-white transition-colors block">Geräte-Retter-Prämie</a>
+          <a href="#faq" class="hover:text-white transition-colors block">FAQ</a>
+          <a href="#standort" class="hover:text-white transition-colors block">Standort</a>
+          <a href="#kontakt" class="hover:text-white transition-colors block">Kontakt</a>
+        </nav>
+      </div>
+
+      <!-- Legal + External -->
+      <div>
+        <h3 class="font-semibold text-sm uppercase tracking-wider mb-3 text-slate-400">Rechtliches</h3>
+        <nav class="space-y-2 text-sm text-slate-300" aria-label="Rechtliche Links">
+          <a href={`${import.meta.env.BASE_URL}impressum`} class="hover:text-white transition-colors block">Impressum</a>
+          <a href={`${import.meta.env.BASE_URL}datenschutz`} class="hover:text-white transition-colors block">Datenschutz</a>
+          {social.willhaben && (
+            <a href={social.willhaben} target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors block">
+              Willhaben Shop ↗
+            </a>
+          )}
+        </nav>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10 mt-10 pt-6 text-center text-xs text-slate-400">
+      © {year} {company.legalName}. Alle Rechte vorbehalten.
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,54 @@
+---
+interface TrustItem {
+  title: string;
+  description: string;
+  icon: string;
+}
+interface Props {
+  trust: {
+    headline: string;
+    items: TrustItem[];
+  };
+}
+const { trust } = Astro.props;
+
+const iconPaths: Record<string, string> = {
+  'award': '<circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>',
+  'zap': '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
+  'piggy-bank': '<path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2"/><path d="M2 9.5a1 1 0 1 0 2 0C4 8.7 3.2 8 2.5 8S1 8.7 1 9.5"/>',
+  'leaf': '<path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 4.5 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>',
+};
+---
+<section id="ueber-uns" class="py-16 md:py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4">
+    <!-- Two-column: photos left, text right -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-16">
+      <div class="grid grid-cols-2 gap-3">
+        <img src={`${import.meta.env.BASE_URL}images/display-reparatur.jpg`} alt="Display Reparatur bei Handycity" class="rounded-xl object-cover w-full h-40 md:h-52" loading="lazy" />
+        <img src={`${import.meta.env.BASE_URL}images/kamera-reparatur.jpg`} alt="Kamera Reparatur bei Handycity" class="rounded-xl object-cover w-full h-40 md:h-52" loading="lazy" />
+        <img src={`${import.meta.env.BASE_URL}images/store-image-in.jpg`} alt="Handycity Geschäft Innenansicht" class="rounded-xl object-cover w-full h-40 md:h-52 col-span-2" loading="lazy" />
+      </div>
+      <div>
+        <h2 class="text-2xl md:text-3xl font-bold text-navy mb-4">{trust.headline}</h2>
+        <p class="text-slate-600 leading-relaxed mb-6">
+          Bei Handycity in Klagenfurt verstehen wir, wie ärgerlich ein gebrochenes Display, ein schwacher Akku oder ein defekter Ladekonnektor sein kann. Statt Ihr wertvolles Gerät zu ersetzen, bieten wir Ihnen eine kostengünstige und schnelle Reparatur. Unsere versierten Techniker stehen bereit, um Ihr Handy schnell und zuverlässig zu servicieren. Sparen Sie nicht nur Geld, sondern auch die Umwelt.
+        </p>
+        <div class="grid grid-cols-2 gap-4">
+          {trust.items.map((item) => (
+            <div class="flex items-start gap-3">
+              <div class="w-9 h-9 bg-navy/10 rounded-lg flex items-center justify-center shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4.5 h-4.5 text-navy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <Fragment set:html={iconPaths[item.icon] || iconPaths['award']} />
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-sm font-semibold text-slate-800">{item.title}</h3>
+                <p class="text-xs text-slate-500 mt-0.5">{item.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

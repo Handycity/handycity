@@ -1,0 +1,19 @@
+---
+interface Props {
+  brands: {
+    headline: string;
+    items: string[];
+  };
+}
+const { brands } = Astro.props;
+---
+<section class="py-12 bg-slate-50 border-y border-slate-200">
+  <div class="max-w-7xl mx-auto px-4">
+    <h2 class="text-center text-sm font-medium text-slate-500 uppercase tracking-wider mb-6">{brands.headline}</h2>
+    <div class="flex flex-wrap items-center justify-center gap-6 md:gap-10">
+      {brands.items.map((brand) => (
+        <span class="text-lg font-semibold text-slate-400 hover:text-navy transition-colors">{brand}</span>
+      ))}
+    </div>
+  </div>
+</section>
