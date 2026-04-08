@@ -1,526 +1,536 @@
 # ============================================================
-# Handycity.at — Content Data File
+# Handycity.at - Content Data File
 # ============================================================
 # This is the SINGLE source of truth for all editable content.
 # Edit this file to update the website. See EDITING.md for instructions.
 # ============================================================
 
 # ------ Site Metadata ------
+
 site:
-  title: "Handy & Tablet Reparatur Klagenfurt | Handycity"
-  description: "Professionelle Handy & Tablet Reparatur in Klagenfurt. Display, Akku, Kamera & mehr – schnell und zuverlässig. Geräte-Retter-Prämie Partnerbetrieb. ✆ +43 463 918559"
-  url: "https://handycity.at"
-  locale: "de_AT"
-  language: "de-AT"
+  title: Handy & Tablet Reparatur Klagenfurt | Handycity
+  description: Professionelle Handy & Tablet Reparatur in Klagenfurt. Display, Akku, Kamera & mehr – schnell und zuverlässig. Geräte-Retter-Prämie Partnerbetrieb. ✆ +43 463 918559
+  url: https://handycity.at
+  locale: de_AT
+  language: de-AT
 
 # ------ Company Info ------
+
 company:
-  name: "Handycity"
-  legalName: "Handycity A.K. GmbH"
-  phone: "+43 463 918559"
-  phoneDisplay: "+43 463 918 559"
-  email: "office@handycityarkaden.at"
+  name: Handycity
+  legalName: Handycity A.K. GmbH
+  phone: +43 463 918559
+  phoneDisplay: +43 463 918 559
+  email: office@handycityarkaden.at
   address:
-    street: "Kardinalplatz 6"
-    city: "Klagenfurt am Wörthersee"
+    street: Kardinalplatz 6
+    city: Klagenfurt am Wörthersee
     zip: "9020"
-    country: "AT"
+    country: AT
   geo:
     lat: 46.6237671
     lng: 14.3123385
   map:
-    placeUrl: "https://www.google.com/maps/place/Handycity/@46.6237671,14.3123385,17z/data=!3m1!4b1!4m6!3m5!1s0x4770749d8151bf2b:0xbfb5d0cf51878c70!8m2!3d46.6237671!4d14.3123385!16s%2Fg%2F1tfvg0j3?hl=de-DE&entry=ttu&g_ep=EgoyMDI2MDQwNS4wIKXMDSoASAFQAw%3D%3D"
-  uid: "ATU63848359"
-  schwerpunkt: "Einzelhandel – Telekommunikation"
+    placeUrl: https://www.google.com/maps/place/Handycity/@46.6237671,14.3123385,17z/data=!3m1!4b1!4m6!3m5!1s0x4770749d8151bf2b:0xbfb5d0cf51878c70!8m2!3d46.6237671!4d14.3123385!16s%2Fg%2F1tfvg0j3?hl=de-DE&entry=ttu&g_ep=EgoyMDI2MDQwNS4wIKXMDSoASAFQAw%3D%3D
+  uid: ATU63848359
+  schwerpunkt: Einzelhandel – Telekommunikation
 
 # ------ Opening Hours ------
+
 hours:
-  - day: "Montag"
-    time: "9:00–18:00"
-    shortDay: "Mo"
-  - day: "Dienstag"
-    time: "9:00–18:00"
-    shortDay: "Di"
-  - day: "Mittwoch"
-    time: "9:00–18:00"
-    shortDay: "Mi"
-  - day: "Donnerstag"
-    time: "9:00–18:00"
-    shortDay: "Do"
-  - day: "Freitag"
-    time: "9:00–18:00"
-    shortDay: "Fr"
-  - day: "Samstag"
-    time: "9:00–13:00"
-    shortDay: "Sa"
-  - day: "Sonntag"
-    time: "Geschlossen"
-    shortDay: "So"
+  - day: Montag
+    time: 9:00–18:00
+    shortDay: Mo
+  - day: Dienstag
+    time: 9:00–18:00
+    shortDay: Di
+  - day: Mittwoch
+    time: 9:00–18:00
+    shortDay: Mi
+  - day: Donnerstag
+    time: 9:00–18:00
+    shortDay: Do
+  - day: Freitag
+    time: 9:00–18:00
+    shortDay: Fr
+  - day: Samstag
+    time: 9:00–13:00
+    shortDay: Sa
+  - day: Sonntag
+    time: Geschlossen
+    shortDay: So
 
 # ------ Hero Section ------
-hero:
-  kicker: "Klagenfurt am Wörthersee • Kardinalplatz 6"
-  headline: "Handy & Tablet Reparatur in Klagenfurt"
-  subheadline: "Schnell. Zuverlässig. Leistbar. Ihr Gerät ist bei uns in besten Händen."
-  ctaPrimary:
-    text: "Jetzt anrufen"
-    href: "tel:+43463918559"
-  ctaSecondary:
-    text: "Reparatur anfragen"
-    href: "#kontakt"
-  quickContactHeadline: "Schnellkontakt"
-  quickContactText: "Für eine schnelle Einschätzung einfach Marke, Modell und Schaden nennen. Während der Öffnungszeiten melden wir uns rasch zurück."
-  quickContactNote: "Direkt vor Ort am Kardinalplatz 6 oder per Anfrage über das Kontaktformular."
-  trustBadges:
-    - text: "Geräte-Retter-Prämie Partner"
-    - text: "Erfahrene Techniker"
-    - text: "Faire Preise"
 
-# ------ Trust Bar ------ 
+hero:
+  kicker: Klagenfurt am Wörthersee • Kardinalplatz 6
+  headline: Handy & Tablet Reparatur in Klagenfurt
+  subheadline: Schnell. Zuverlässig. Leistbar. Ihr Gerät ist bei uns in besten Händen.
+  ctaPrimary:
+    text: Jetzt anrufen
+    href: tel:+43463918559
+  ctaSecondary:
+    text: Reparatur anfragen
+    href: "#kontakt"
+  quickContactHeadline: Schnellkontakt
+  quickContactText: Für eine schnelle Einschätzung einfach Marke, Modell und Schaden nennen. Während der Öffnungszeiten melden wir uns rasch zurück.
+  quickContactNote: Direkt vor Ort am Kardinalplatz 6 oder per Anfrage über das Kontaktformular.
+  trustBadges:
+    - text: Geräte-Retter-Prämie Partner
+    - text: Erfahrene Techniker
+    - text: Faire Preise
+
+# ------ Trust Bar ------
+
 trustBar:
-  googleLabel: "Google Bewertungen"
-  googleHint: "Echte Google-Daten werden eingeblendet, sobald sie verfügbar sind."
+  googleLabel: Google Bewertungen
+  googleHint: Echte Google-Daten werden eingeblendet, sobald sie verfügbar sind.
   items:
-    - title: "Schnell"
-      text: "Viele Reparaturen erledigen wir noch am selben Tag."
-      icon: "zap"
-    - title: "Transparent"
-      text: "Richtpreise sofort sehen, finale Kosten vorab klar abgesprochen."
-      icon: "shield-check"
-    - title: "Nachhaltig"
-      text: "Reparieren statt ersetzen spart Geld und schont Ressourcen."
-      icon: "leaf"
-    - title: "Zentral"
-      text: "Direkt in Klagenfurt am Kardinalplatz erreichbar."
-      icon: "map-pin"
+    - title: Schnell
+      text: Viele Reparaturen erledigen wir noch am selben Tag.
+      icon: zap
+    - title: Transparent
+      text: Richtpreise sofort sehen, finale Kosten vorab klar abgesprochen.
+      icon: shield-check
+    - title: Nachhaltig
+      text: Reparieren statt ersetzen spart Geld und schont Ressourcen.
+      icon: leaf
+    - title: Zentral
+      text: Direkt in Klagenfurt am Kardinalplatz erreichbar.
+      icon: map-pin
 
 # ------ Services ------
-services:
-  headline: "Unsere Services"
-  subheadline: "Professionelle Reparatur für alle gängigen Geräte und Marken"
-  items:
-    - name: "Display Reparatur"
-      description: "Gebrochenes oder beschädigtes Display? Wir tauschen es schnell und fachgerecht aus."
-      icon: "smartphone"
-      price: "Preis auf Anfrage"
-    - name: "Akku Tausch"
-      description: "Akku hält nicht mehr? Neuer Akku für längere Laufzeit – meist am selben Tag erledigt."
-      icon: "battery-charging"
-      price: "Preis auf Anfrage"
-    - name: "Kamera Reparatur"
-      description: "Unscharfe Bilder oder defekte Kamera? Wir reparieren Front- und Hauptkamera."
-      icon: "camera"
-      price: "Preis auf Anfrage"
-    - name: "Ladekonnektor"
-      description: "Handy lädt nicht mehr? Wir reparieren oder tauschen den Ladeanschluss."
-      icon: "plug-zap"
-      price: "Preis auf Anfrage"
-    - name: "Lautsprecher & Mikrofon"
-      description: "Kein Ton oder Gesprächspartner hört Sie nicht? Wir beheben Audio-Probleme."
-      icon: "volume-2"
-      price: "Preis auf Anfrage"
-    - name: "Datentransfer"
-      description: "Wechsel von Android zu iPhone oder umgekehrt – wir übertragen Ihre Daten sicher."
-      icon: "repeat"
-      price: "Preis auf Anfrage"
-    - name: "Handy An- & Verkauf"
-      description: "Wir kaufen und verkaufen Smartphones – direkt im Geschäft oder über unseren Willhaben-Auftritt."
-      icon: "shopping-bag"
-      price: ""
-    - name: "Hol & Bring Service"
-      description: "Wir holen Ihr Gerät ab und bringen es repariert zurück – innerhalb Klagenfurt."
-      icon: "truck"
-      price: "€10 Pauschale"
 
-# ------ Geräte-Retter-Prämie ------
+services:
+  headline: Unsere Services
+  subheadline: Professionelle Reparatur für alle gängigen Geräte und Marken
+  items:
+    - name: Display Reparatur
+      description: Gebrochenes oder beschädigtes Display? Wir tauschen es schnell und fachgerecht aus.
+      icon: smartphone
+      price: Preis auf Anfrage
+    - name: Akku Tausch
+      description: Akku hält nicht mehr? Neuer Akku für längere Laufzeit – meist am selben Tag erledigt.
+      icon: battery-charging
+      price: Preis auf Anfrage
+    - name: Kamera Reparatur
+      description: Unscharfe Bilder oder defekte Kamera? Wir reparieren Front- und Hauptkamera.
+      icon: camera
+      price: Preis auf Anfrage
+    - name: Ladekonnektor
+      description: Handy lädt nicht mehr? Wir reparieren oder tauschen den Ladeanschluss.
+      icon: plug-zap
+      price: Preis auf Anfrage
+    - name: Lautsprecher & Mikrofon
+      description: Kein Ton oder Gesprächspartner hört Sie nicht? Wir beheben Audio-Probleme.
+      icon: volume-2
+      price: Preis auf Anfrage
+    - name: Datentransfer
+      description: Wechsel von Android zu iPhone oder umgekehrt – wir übertragen Ihre Daten sicher.
+      icon: repeat
+      price: Preis auf Anfrage
+    - name: Handy An- & Verkauf
+      description: Wir kaufen und verkaufen Smartphones – direkt im Geschäft oder über unseren Willhaben-Auftritt.
+      icon: shopping-bag
+      price: ""
+    - name: Hol & Bring Service
+      description: Wir holen Ihr Gerät ab und bringen es repariert zurück – innerhalb Klagenfurt.
+      icon: truck
+      price: €10 Pauschale
+
+# ------ Geraete-Retter-Praemie ------
+
 geraeteRetterPraemie:
-  headline: "Geräte-Retter-Prämie"
-  subheadline: "Sparen Sie bis zu €130 bei Ihrer Reparatur!"
-  description: "Als registrierter Partnerbetrieb der Geräte-Retter-Prämie können Sie bei uns Ihren Bon einlösen. Sie erhalten 50 % der Reparaturkosten zurück – bis zu €130."
+  headline: Geräte-Retter-Prämie
+  subheadline: Sparen Sie bis zu €130 bei Ihrer Reparatur!
+  description: Als registrierter Partnerbetrieb der Geräte-Retter-Prämie können Sie bei uns Ihren Bon einlösen. Sie erhalten 50 % der Reparaturkosten zurück – bis zu €130.
   highlights:
-    - "50 % Ersparnis auf förderungsfähige Reparaturen"
-    - "Bis zu €130 für Reparatur, Service & Wartung"
-    - "Bis zu €30 für Kostenvoranschlag"
-    - "Bon online beantragen auf geräte-retter-prämie.at"
-  ctaText: "Mehr erfahren"
-  ctaHref: "https://www.oesterreich.gv.at/de/themen/umwelt_und_klima/energie_und_ressourcen_sparen/geraete-retter-praemie"
+    - 50 % Ersparnis auf förderungsfähige Reparaturen
+    - Bis zu €130 für Reparatur, Service & Wartung
+    - Bis zu €30 für Kostenvoranschlag
+    - Bon online beantragen auf geräte-retter-prämie.at
+  ctaText: Mehr erfahren
+  ctaHref: https://www.oesterreich.gv.at/de/themen/umwelt_und_klima/energie_und_ressourcen_sparen/geraete-retter-praemie
   steps:
     - step: "1"
-      title: "Bon beantragen"
-      description: "Online auf geräte-retter-prämie.at einen Bon erstellen."
+      title: Bon beantragen
+      description: Online auf geräte-retter-prämie.at einen Bon erstellen.
     - step: "2"
-      title: "Zu uns kommen"
-      description: "Bringen Sie Ihr Gerät und den Bon zu Handycity."
+      title: Zu uns kommen
+      description: Bringen Sie Ihr Gerät und den Bon zu Handycity.
     - step: "3"
-      title: "Geld zurück"
-      description: "Der Förderbetrag wird auf Ihr Bankkonto überwiesen."
+      title: Geld zurück
+      description: Der Förderbetrag wird auf Ihr Bankkonto überwiesen.
 
 # ------ Brands ------
+
 brands:
-  headline: "Wir reparieren alle Marken"
+  headline: Wir reparieren alle Marken
   items:
-    - "Apple"
-    - "Samsung"
-    - "Huawei"
-    - "Xiaomi"
-    - "OnePlus"
-    - "Google"
-    - "Sony"
-    - "Nokia"
+    - Apple
+    - Samsung
+    - Huawei
+    - Xiaomi
+    - OnePlus
+    - Google
+    - Sony
+    - Nokia
 
 # ------ Why Us / Trust ------
+
 trust:
-  headline: "Warum Handycity?"
+  headline: Warum Handycity?
   items:
-    - title: "Erfahrene Techniker"
-      description: "Unser Team verfügt über langjährige Erfahrung in der Reparatur aller gängigen Geräte."
-      icon: "award"
-    - title: "Schnelle Reparatur"
-      description: "Die meisten Reparaturen erledigen wir noch am selben Tag."
-      icon: "zap"
-    - title: "Faire Preise"
-      description: "Transparente Preisgestaltung ohne versteckte Kosten. Geräte-Retter-Prämie einlösbar."
-      icon: "piggy-bank"
-    - title: "Umwelt schonen"
-      description: "Reparieren statt wegwerfen – sparen Sie Geld und schonen Sie die Umwelt."
-      icon: "leaf"
+    - title: Erfahrene Techniker
+      description: Unser Team verfügt über langjährige Erfahrung in der Reparatur aller gängigen Geräte.
+      icon: award
+    - title: Schnelle Reparatur
+      description: Die meisten Reparaturen erledigen wir noch am selben Tag.
+      icon: zap
+    - title: Faire Preise
+      description: Transparente Preisgestaltung ohne versteckte Kosten. Geräte-Retter-Prämie einlösbar.
+      icon: piggy-bank
+    - title: Umwelt schonen
+      description: Reparieren statt wegwerfen – sparen Sie Geld und schonen Sie die Umwelt.
+      icon: leaf
 
 # ------ Process (How it works) ------
+
 process:
-  headline: "So einfach funktioniert's"
+  headline: So einfach funktioniert's
   steps:
     - step: "1"
-      title: "Kontakt aufnehmen"
-      description: "Rufen Sie uns an oder schreiben Sie uns – wir beraten Sie gerne."
-      icon: "phone"
+      title: Kontakt aufnehmen
+      description: Rufen Sie uns an oder schreiben Sie uns – wir beraten Sie gerne.
+      icon: phone
     - step: "2"
-      title: "Gerät vorbeibringen"
-      description: "Kommen Sie zu uns am Kardinalplatz 6 – oder nutzen Sie unseren Hol & Bring Service."
-      icon: "map-pin"
+      title: Gerät vorbeibringen
+      description: Kommen Sie zu uns am Kardinalplatz 6 – oder nutzen Sie unseren Hol & Bring Service.
+      icon: map-pin
     - step: "3"
-      title: "Diagnose & Reparatur"
-      description: "Unsere Techniker analysieren den Schaden und reparieren Ihr Gerät fachgerecht."
-      icon: "wrench"
+      title: Diagnose & Reparatur
+      description: Unsere Techniker analysieren den Schaden und reparieren Ihr Gerät fachgerecht.
+      icon: wrench
     - step: "4"
-      title: "Gerät abholen"
-      description: "Ihr repariertes Gerät ist bereit – schnell und zuverlässig."
-      icon: "check-circle"
+      title: Gerät abholen
+      description: Ihr repariertes Gerät ist bereit – schnell und zuverlässig.
+      icon: check-circle
 
 # ------ Reviews / Google Bewertungen ------
+
 reviews:
-  headline: "Das sagen unsere Kunden"
-  googleUrl: "https://www.google.com/maps/place/Handycity/@46.6237671,14.3123385,17z/data=!3m1!4b1!4m6!3m5!1s0x4770749d8151bf2b:0xbfb5d0cf51878c70!8m2!3d46.6237671!4d14.3123385!16s%2Fg%2F1tfvg0j3?hl=de-DE&entry=ttu&g_ep=EgoyMDI2MDQwNS4wIKXMDSoASAFQAw%3D%3D"
+  headline: Das sagen unsere Kunden
+  googleUrl: https://www.google.com/maps/place/Handycity/@46.6237671,14.3123385,17z/data=!3m1!4b1!4m6!3m5!1s0x4770749d8151bf2b:0xbfb5d0cf51878c70!8m2!3d46.6237671!4d14.3123385!16s%2Fg%2F1tfvg0j3?hl=de-DE&entry=ttu&g_ep=EgoyMDI2MDQwNS4wIKXMDSoASAFQAw%3D%3D
   averageRating: 4.6
   totalReviews: 171
   items:
-    - name: "Mario"
-      text: "Habe diesen Betrieb zum ersten Mal besucht. Bin sehr zufrieden. Kann ich jedem weiter empfehlen."
+    - name: Mario
+      text: Habe diesen Betrieb zum ersten Mal besucht. Bin sehr zufrieden. Kann ich jedem weiter empfehlen.
       rating: 5
-      date: "vor einem Monat"
-    - name: "Serif Elezoski"
-      text: "Perfekte Beratung. Sehr empfehlenswert."
+      date: vor einem Monat
+    - name: Serif Elezoski
+      text: Perfekte Beratung. Sehr empfehlenswert.
       rating: 5
-      date: "vor 4 Monaten"
-    - name: "Philipp Sadounik"
-      text: "Der Chef ist sehr freundlich und hilfsbereit. Er hat mich sehr gut beraten. Ich empfehle jeden in diesem Geschäft einzukaufen oder wenn einer Handy braucht."
+      date: vor 4 Monaten
+    - name: Philipp Sadounik
+      text: Der Chef ist sehr freundlich und hilfsbereit. Er hat mich sehr gut beraten. Ich empfehle jeden in diesem Geschäft einzukaufen oder wenn einer Handy braucht.
       rating: 5
-      date: "vor 7 Monaten"
-    - name: "Markus Gamnig"
-      text: "Top Beratung, Top Service und gute Preise. Nur zu empfehlen."
+      date: vor 7 Monaten
+    - name: Markus Gamnig
+      text: Top Beratung, Top Service und gute Preise. Nur zu empfehlen.
       rating: 5
-      date: "vor 9 Monaten"
-    - name: "Ewald Spiess"
-      text: "Top Beratung, freundlich und unkompliziert. Faire Preise und zuverlässige Terminvereinbarung. Gerne wieder."
+      date: vor 9 Monaten
+    - name: Ewald Spiess
+      text: Top Beratung, freundlich und unkompliziert. Faire Preise und zuverlässige Terminvereinbarung. Gerne wieder.
       rating: 5
-      date: "vor 10 Monaten"
-    - name: "Joe Snow"
-      text: "Schon telefonisch wurde mir ein Reparaturbonus angeboten sowie die Reparatur meines kaputten Handydisplays an einem Samstagvormittag. Innerhalb einer Stunde war alles erledigt, das Display sieht wie beim Neukauf meines Smartphones aus. Der Reparaturbonus wurde bereits genehmigt. Bin beeindruckt, es ist alles super gelaufen."
+      date: vor 10 Monaten
+    - name: Joe Snow
+      text: Schon telefonisch wurde mir ein Reparaturbonus angeboten sowie die Reparatur meines kaputten Handydisplays an einem Samstagvormittag. Innerhalb einer Stunde war alles erledigt, das Display sieht wie beim Neukauf meines Smartphones aus. Der Reparaturbonus wurde bereits genehmigt. Bin beeindruckt, es ist alles super gelaufen.
       rating: 5
-      date: "vor einem Jahr"
-    - name: "Karim Elkhaiat"
-      text: "Unfassbar nette Mitarbeiter. In 2 Minuten wurde mein Problem behoben und das auch noch gratis."
+      date: vor einem Jahr
+    - name: Karim Elkhaiat
+      text: Unfassbar nette Mitarbeiter. In 2 Minuten wurde mein Problem behoben und das auch noch gratis.
       rating: 5
-      date: "vor einem Jahr"
-    - name: "Cindy van Gorp"
-      text: "Schneller Service; ich konnte mein Gerät innerhalb einer halben Stunde abholen. Die Diagnose ging schnell und die Reparatur war kinderleicht. Mein Gerät funktionierte wieder. Die Mitarbeiter waren ehrlich; ich war erleichtert, dass es sich nur um ein kleines Problem handelte und keine hohen Kosten anfielen. Ein idealer Ort für Touristen, um ihr Gerät reparieren zu lassen."
+      date: vor einem Jahr
+    - name: Cindy van Gorp
+      text: Schneller Service; ich konnte mein Gerät innerhalb einer halben Stunde abholen. Die Diagnose ging schnell und die Reparatur war kinderleicht. Mein Gerät funktionierte wieder. Die Mitarbeiter waren ehrlich; ich war erleichtert, dass es sich nur um ein kleines Problem handelte und keine hohen Kosten anfielen. Ein idealer Ort für Touristen, um ihr Gerät reparieren zu lassen.
       rating: 5
-      date: "vor einem Jahr"
-    - name: "ingrid grünwald"
-      text: "Sehr gute und kompetente Beratung. Wenn es ein Problem mit dem Handy gibt ist es mein erster Weg dort hin."
+      date: vor einem Jahr
+    - name: ingrid grünwald
+      text: Sehr gute und kompetente Beratung. Wenn es ein Problem mit dem Handy gibt ist es mein erster Weg dort hin.
       rating: 5
-      date: "vor einem Jahr"
+      date: vor einem Jahr
 
 # ------ Repair Price Calculator ------
+
 calculator:
-  headline: "Reparatur-Check"
-  subheadline: "Marke, Modell und Schaden auswählen – der Richtpreis erscheint sofort."
-  helper: "Wenn Ihr Modell nicht gelistet ist, rufen Sie kurz an. Wir prüfen Verfügbarkeit und Preis direkt."
-  resultTitle: "Richtpreis"
-  note: "Alle Preise sind Richtwerte inkl. MwSt. Nach kurzer Diagnose nennen wir den finalen Preis transparent vor Reparaturbeginn."
-  ctaPrimaryText: "Jetzt anrufen"
-  ctaSecondaryText: "Reparatur anfragen"
-  subsidyBadge: "Geräte-Retter-Prämie möglich"
-  subsidyText: "Je nach Reparatur sind bis zu 50 % Förderung bzw. bis zu EUR 130 Rückerstattung möglich."
+  headline: Reparatur-Check
+  subheadline: Marke, Modell und Schaden auswählen – der Richtpreis erscheint sofort.
+  helper: Wenn Ihr Modell nicht gelistet ist, rufen Sie kurz an. Wir prüfen Verfügbarkeit und Preis direkt.
+  resultTitle: Richtpreis
+  note: Alle Preise sind Richtwerte inkl. MwSt. Nach kurzer Diagnose nennen wir den finalen Preis transparent vor Reparaturbeginn.
+  ctaPrimaryText: Jetzt anrufen
+  ctaSecondaryText: Reparatur anfragen
+  subsidyBadge: Geräte-Retter-Prämie möglich
+  subsidyText: Je nach Reparatur sind bis zu 50 % Förderung bzw. bis zu EUR 130 Rückerstattung möglich.
   prices:
-    # Apple iPhone
-    - brand: "Apple"
-      device: "iPhone 15"
-      repair: "Display Reparatur"
-      price: "ab €149"
-    - brand: "Apple"
-      device: "iPhone 15"
-      repair: "Akku Tausch"
-      price: "ab €69"
-    - brand: "Apple"
-      device: "iPhone 15"
-      repair: "Kamera Reparatur"
-      price: "ab €89"
-    - brand: "Apple"
-      device: "iPhone 15"
-      repair: "Ladekonnektor"
-      price: "ab €69"
-    - brand: "Apple"
-      device: "iPhone 14"
-      repair: "Display Reparatur"
-      price: "ab €129"
-    - brand: "Apple"
-      device: "iPhone 14"
-      repair: "Akku Tausch"
-      price: "ab €59"
-    - brand: "Apple"
-      device: "iPhone 14"
-      repair: "Kamera Reparatur"
-      price: "ab €79"
-    - brand: "Apple"
-      device: "iPhone 14"
-      repair: "Ladekonnektor"
-      price: "ab €59"
-    - brand: "Apple"
-      device: "iPhone 13"
-      repair: "Display Reparatur"
-      price: "ab €109"
-    - brand: "Apple"
-      device: "iPhone 13"
-      repair: "Akku Tausch"
-      price: "ab €49"
-    - brand: "Apple"
-      device: "iPhone 13"
-      repair: "Kamera Reparatur"
-      price: "ab €69"
-    - brand: "Apple"
-      device: "iPhone 12"
-      repair: "Display Reparatur"
-      price: "ab €89"
-    - brand: "Apple"
-      device: "iPhone 12"
-      repair: "Akku Tausch"
-      price: "ab €45"
-    - brand: "Apple"
-      device: "iPhone SE"
-      repair: "Display Reparatur"
-      price: "ab €59"
-    - brand: "Apple"
-      device: "iPhone SE"
-      repair: "Akku Tausch"
-      price: "ab €39"
-    - brand: "Apple"
-      device: "iPad"
-      repair: "Display Reparatur"
-      price: "ab €119"
-    - brand: "Apple"
-      device: "iPad"
-      repair: "Akku Tausch"
-      price: "ab €79"
-    # Samsung
-    - brand: "Samsung"
-      device: "Galaxy S24"
-      repair: "Display Reparatur"
-      price: "ab €179"
-    - brand: "Samsung"
-      device: "Galaxy S24"
-      repair: "Akku Tausch"
-      price: "ab €59"
-    - brand: "Samsung"
-      device: "Galaxy S24"
-      repair: "Kamera Reparatur"
-      price: "ab €79"
-    - brand: "Samsung"
-      device: "Galaxy S23"
-      repair: "Display Reparatur"
-      price: "ab €149"
-    - brand: "Samsung"
-      device: "Galaxy S23"
-      repair: "Akku Tausch"
-      price: "ab €55"
-    - brand: "Samsung"
-      device: "Galaxy S22"
-      repair: "Display Reparatur"
-      price: "ab €119"
-    - brand: "Samsung"
-      device: "Galaxy S22"
-      repair: "Akku Tausch"
-      price: "ab €49"
-    - brand: "Samsung"
-      device: "Galaxy A-Serie"
-      repair: "Display Reparatur"
-      price: "ab €69"
-    - brand: "Samsung"
-      device: "Galaxy A-Serie"
-      repair: "Akku Tausch"
-      price: "ab €39"
-    - brand: "Samsung"
-      device: "Galaxy Tab"
-      repair: "Display Reparatur"
-      price: "ab €99"
-    - brand: "Samsung"
-      device: "Galaxy Tab"
-      repair: "Akku Tausch"
-      price: "ab €59"
-    # Huawei
-    - brand: "Huawei"
-      device: "P-Serie"
-      repair: "Display Reparatur"
-      price: "ab €89"
-    - brand: "Huawei"
-      device: "P-Serie"
-      repair: "Akku Tausch"
-      price: "ab €45"
-    - brand: "Huawei"
-      device: "Mate-Serie"
-      repair: "Display Reparatur"
-      price: "ab €99"
-    - brand: "Huawei"
-      device: "Mate-Serie"
-      repair: "Akku Tausch"
-      price: "ab €49"
-    # Xiaomi
-    - brand: "Xiaomi"
-      device: "Redmi Note"
-      repair: "Display Reparatur"
-      price: "ab €59"
-    - brand: "Xiaomi"
-      device: "Redmi Note"
-      repair: "Akku Tausch"
-      price: "ab €35"
-    - brand: "Xiaomi"
-      device: "Mi-Serie"
-      repair: "Display Reparatur"
-      price: "ab €79"
-    - brand: "Xiaomi"
-      device: "Mi-Serie"
-      repair: "Akku Tausch"
-      price: "ab €39"
-    # Other
-    - brand: "OnePlus"
-      device: "OnePlus (alle)"
-      repair: "Display Reparatur"
-      price: "ab €89"
-    - brand: "OnePlus"
-      device: "OnePlus (alle)"
-      repair: "Akku Tausch"
-      price: "ab €45"
-    - brand: "Google"
-      device: "Pixel (alle)"
-      repair: "Display Reparatur"
-      price: "ab €99"
-    - brand: "Google"
-      device: "Pixel (alle)"
-      repair: "Akku Tausch"
-      price: "ab €49"
-    - brand: "Sony"
-      device: "Xperia (alle)"
-      repair: "Display Reparatur"
-      price: "ab €89"
-    - brand: "Sony"
-      device: "Xperia (alle)"
-      repair: "Akku Tausch"
-      price: "ab €45"
-    - brand: "Nokia"
-      device: "Nokia (alle)"
-      repair: "Display Reparatur"
-      price: "ab €69"
-    - brand: "Nokia"
-      device: "Nokia (alle)"
-      repair: "Akku Tausch"
-      price: "ab €39"
+    - brand: Apple
+      device: iPhone 15
+      repair: Display Reparatur
+      price: ab €149
+    - brand: Apple
+      device: iPhone 15
+      repair: Akku Tausch
+      price: ab €69
+    - brand: Apple
+      device: iPhone 15
+      repair: Kamera Reparatur
+      price: ab €89
+    - brand: Apple
+      device: iPhone 15
+      repair: Ladekonnektor
+      price: ab €69
+    - brand: Apple
+      device: iPhone 14
+      repair: Display Reparatur
+      price: ab €129
+    - brand: Apple
+      device: iPhone 14
+      repair: Akku Tausch
+      price: ab €59
+    - brand: Apple
+      device: iPhone 14
+      repair: Kamera Reparatur
+      price: ab €79
+    - brand: Apple
+      device: iPhone 14
+      repair: Ladekonnektor
+      price: ab €59
+    - brand: Apple
+      device: iPhone 13
+      repair: Display Reparatur
+      price: ab €109
+    - brand: Apple
+      device: iPhone 13
+      repair: Akku Tausch
+      price: ab €49
+    - brand: Apple
+      device: iPhone 13
+      repair: Kamera Reparatur
+      price: ab €69
+    - brand: Apple
+      device: iPhone 12
+      repair: Display Reparatur
+      price: ab €89
+    - brand: Apple
+      device: iPhone 12
+      repair: Akku Tausch
+      price: ab €45
+    - brand: Apple
+      device: iPhone SE
+      repair: Display Reparatur
+      price: ab €59
+    - brand: Apple
+      device: iPhone SE
+      repair: Akku Tausch
+      price: ab €39
+    - brand: Apple
+      device: iPad
+      repair: Display Reparatur
+      price: ab €119
+    - brand: Apple
+      device: iPad
+      repair: Akku Tausch
+      price: ab €79
+    - brand: Samsung
+      device: Galaxy S24
+      repair: Display Reparatur
+      price: ab €179
+    - brand: Samsung
+      device: Galaxy S24
+      repair: Akku Tausch
+      price: ab €59
+    - brand: Samsung
+      device: Galaxy S24
+      repair: Kamera Reparatur
+      price: ab €79
+    - brand: Samsung
+      device: Galaxy S23
+      repair: Display Reparatur
+      price: ab €149
+    - brand: Samsung
+      device: Galaxy S23
+      repair: Akku Tausch
+      price: ab €55
+    - brand: Samsung
+      device: Galaxy S22
+      repair: Display Reparatur
+      price: ab €119
+    - brand: Samsung
+      device: Galaxy S22
+      repair: Akku Tausch
+      price: ab €49
+    - brand: Samsung
+      device: Galaxy A-Serie
+      repair: Display Reparatur
+      price: ab €69
+    - brand: Samsung
+      device: Galaxy A-Serie
+      repair: Akku Tausch
+      price: ab €39
+    - brand: Samsung
+      device: Galaxy Tab
+      repair: Display Reparatur
+      price: ab €99
+    - brand: Samsung
+      device: Galaxy Tab
+      repair: Akku Tausch
+      price: ab €59
+    - brand: Huawei
+      device: P-Serie
+      repair: Display Reparatur
+      price: ab €89
+    - brand: Huawei
+      device: P-Serie
+      repair: Akku Tausch
+      price: ab €45
+    - brand: Huawei
+      device: Mate-Serie
+      repair: Display Reparatur
+      price: ab €99
+    - brand: Huawei
+      device: Mate-Serie
+      repair: Akku Tausch
+      price: ab €49
+    - brand: Xiaomi
+      device: Redmi Note
+      repair: Display Reparatur
+      price: ab €59
+    - brand: Xiaomi
+      device: Redmi Note
+      repair: Akku Tausch
+      price: ab €35
+    - brand: Xiaomi
+      device: Mi-Serie
+      repair: Display Reparatur
+      price: ab €79
+    - brand: Xiaomi
+      device: Mi-Serie
+      repair: Akku Tausch
+      price: ab €39
+    - brand: OnePlus
+      device: OnePlus (alle)
+      repair: Display Reparatur
+      price: ab €89
+    - brand: OnePlus
+      device: OnePlus (alle)
+      repair: Akku Tausch
+      price: ab €45
+    - brand: Google
+      device: Pixel (alle)
+      repair: Display Reparatur
+      price: ab €99
+    - brand: Google
+      device: Pixel (alle)
+      repair: Akku Tausch
+      price: ab €49
+    - brand: Sony
+      device: Xperia (alle)
+      repair: Display Reparatur
+      price: ab €89
+    - brand: Sony
+      device: Xperia (alle)
+      repair: Akku Tausch
+      price: ab €45
+    - brand: Nokia
+      device: Nokia (alle)
+      repair: Display Reparatur
+      price: ab €69
+    - brand: Nokia
+      device: Nokia (alle)
+      repair: Akku Tausch
+      price: ab €39
 
 # ------ Hol & Bring Service ------
+
 pickup:
-  headline: "Hol & Bring Service"
-  description: "Wenn Sie keine Zeit für den Weg ins Geschäft haben, holen wir Ihr Gerät innerhalb von Klagenfurt ab, reparieren es und bringen es zuverlässig zurück."
-  badge: "10 EUR Pauschale innerhalb Klagenfurt"
-  ctaText: "Abholung anfragen"
+  headline: Hol & Bring Service
+  description: Wenn Sie keine Zeit für den Weg ins Geschäft haben, holen wir Ihr Gerät innerhalb von Klagenfurt ab, reparieren es und bringen es zuverlässig zurück.
+  badge: 10 EUR Pauschale innerhalb Klagenfurt
+  ctaText: Abholung anfragen
   steps:
-    - title: "Abholung anfragen"
-      text: "Kurz telefonisch oder über das Kontaktformular melden."
-    - title: "Reparatur im Shop"
-      text: "Wir prüfen das Gerät, besprechen den Preis und reparieren es fachgerecht."
-    - title: "Zurückgebracht"
-      text: "Ihr Gerät kommt repariert und einsatzbereit wieder zu Ihnen."
+    - title: Abholung anfragen
+      text: Kurz telefonisch oder über das Kontaktformular melden.
+    - title: Reparatur im Shop
+      text: Wir prüfen das Gerät, besprechen den Preis und reparieren es fachgerecht.
+    - title: Zurückgebracht
+      text: Ihr Gerät kommt repariert und einsatzbereit wieder zu Ihnen.
 
 # ------ Willhaben / Handy kaufen ------
+
 willhaben:
-  headline: "Handy kaufen & verkaufen"
-  description: "Neue und gebrauchte Smartphones erhalten Sie direkt bei uns im Geschäft oder über unseren Willhaben-Shop. Wir kaufen auch Geräte an und helfen auf Wunsch bei Einrichtung, Datentransfer und Gerätewahl."
+  headline: Handy kaufen & verkaufen
+  description: Neue und gebrauchte Smartphones erhalten Sie direkt bei uns im Geschäft oder über unseren Willhaben-Shop. Wir kaufen auch Geräte an und helfen auf Wunsch bei Einrichtung, Datentransfer und Gerätewahl.
   highlights:
-    - "Geprüfte Geräte mit persönlicher Beratung"
-    - "Willhaben-Angebote und Shop vor Ort"
-    - "Ankauf von Smartphones direkt im Geschäft"
-    - "Einrichtung und Datenübernahme auf Wunsch"
-  url: "https://www.willhaben.at/iad/bap/webstore/shop?orgId=26610249"
-  ctaText: "Auf Willhaben ansehen"
+    - Geprüfte Geräte mit persönlicher Beratung
+    - Willhaben-Angebote und Shop vor Ort
+    - Ankauf von Smartphones direkt im Geschäft
+    - Einrichtung und Datenübernahme auf Wunsch
+  url: https://www.willhaben.at/iad/bap/webstore/shop?orgId=26610249
+  ctaText: Auf Willhaben ansehen
 
 # ------ FAQ ------
+
 faq:
-  headline: "Häufig gestellte Fragen"
+  headline: Häufig gestellte Fragen
   items:
-    - question: "Wie lange dauert eine Reparatur?"
-      answer: "Die meisten Reparaturen erledigen wir noch am selben Tag. Die genaue Dauer hängt vom Schaden ab – wir informieren Sie vorab."
-    - question: "Was ist die Geräte-Retter-Prämie?"
-      answer: "Die Geräte-Retter-Prämie ist ein Förderprogramm des Bundesministeriums. Sie erhalten 50 % der Reparaturkosten zurück – bis zu €130. Als registrierter Partnerbetrieb können Sie den Bon direkt bei uns einlösen."
-    - question: "Kann ich den Geräte-Retter-Bon bei Ihnen einlösen?"
-      answer: "Ja! Handycity ist ein registrierter Partnerbetrieb. Beantragen Sie Ihren Bon online auf geräte-retter-prämie.at und bringen Sie ihn einfach mit."
-    - question: "Welche Geräte und Marken repariert ihr?"
-      answer: "Wir reparieren Smartphones und Tablets aller gängigen Marken – Apple, Samsung, Huawei, Xiaomi und viele mehr."
-    - question: "Was kostet eine Reparatur?"
-      answer: "Die Kosten hängen vom Gerät und Schaden ab. Kontaktieren Sie uns für ein unverbindliches Angebot. Mit der Geräte-Retter-Prämie sparen Sie bis zu 50 %."
-    - question: "Bietet ihr einen Hol & Bring Service an?"
-      answer: "Ja! Innerhalb von Klagenfurt holen wir Ihr Gerät für nur €10 Pauschale ab und bringen es repariert zurück."
-    - question: "Kann ich bei euch auch ein Handy kaufen oder verkaufen?"
-      answer: "Ja, Sie können bei uns Smartphones kaufen und Geräte direkt im Geschäft zum Ankauf anbieten."
+    - question: Wie lange dauert eine Reparatur?
+      answer: Die meisten Reparaturen erledigen wir noch am selben Tag. Die genaue Dauer hängt vom Schaden ab – wir informieren Sie vorab.
+    - question: Was ist die Geräte-Retter-Prämie?
+      answer: Die Geräte-Retter-Prämie ist ein Förderprogramm des Bundesministeriums. Sie erhalten 50 % der Reparaturkosten zurück – bis zu €130. Als registrierter Partnerbetrieb können Sie den Bon direkt bei uns einlösen.
+    - question: Kann ich den Geräte-Retter-Bon bei Ihnen einlösen?
+      answer: Ja! Handycity ist ein registrierter Partnerbetrieb. Beantragen Sie Ihren Bon online auf geräte-retter-prämie.at und bringen Sie ihn einfach mit.
+    - question: Welche Geräte und Marken repariert ihr?
+      answer: Wir reparieren Smartphones und Tablets aller gängigen Marken – Apple, Samsung, Huawei, Xiaomi und viele mehr.
+    - question: Was kostet eine Reparatur?
+      answer: Die Kosten hängen vom Gerät und Schaden ab. Kontaktieren Sie uns für ein unverbindliches Angebot. Mit der Geräte-Retter-Prämie sparen Sie bis zu 50 %.
+    - question: Bietet ihr einen Hol & Bring Service an?
+      answer: Ja! Innerhalb von Klagenfurt holen wir Ihr Gerät für nur €10 Pauschale ab und bringen es repariert zurück.
+    - question: Kann ich bei euch auch ein Handy kaufen oder verkaufen?
+      answer: Ja, Sie können bei uns Smartphones kaufen und Geräte direkt im Geschäft zum Ankauf anbieten.
 
 # ------ Contact Form ------
-# To activate: replace YOUR_FORM_ID with your Formspree form ID
-# Get a free one at https://formspree.io (sign up, create form, copy ID)
+
 contact:
-  headline: "Kontaktieren Sie uns"
-  subheadline: "Schreiben Sie uns oder rufen Sie direkt an – wir beraten Sie gerne"
-  formAction: "https://formspree.io/f/YOUR_FORM_ID"
+  headline: Kontaktieren Sie uns
+  subheadline: Schreiben Sie uns oder rufen Sie direkt an – wir beraten Sie gerne
+  formAction: https://formspree.io/f/YOUR_FORM_ID
   fields:
-    - name: "name"
-      label: "Name"
-      type: "text"
+    - name: name
+      label: Name
+      type: text
       required: true
-    - name: "email"
-      label: "E-Mail"
-      type: "email"
+    - name: email
+      label: E-Mail
+      type: email
       required: true
-    - name: "phone"
-      label: "Telefon"
-      type: "tel"
+    - name: phone
+      label: Telefon
+      type: tel
       required: false
-    - name: "device"
-      label: "Gerät & Modell"
-      type: "text"
+    - name: device
+      label: Gerät & Modell
+      type: text
       required: false
-    - name: "message"
-      label: "Ihre Nachricht"
-      type: "textarea"
+    - name: message
+      label: Ihre Nachricht
+      type: textarea
       required: true
 
 # ------ Impressum ------
+
 impressum:
-  headline: "Impressum"
+  headline: Impressum
   content: |
     Handycity A.K. GmbH
     Kardinalplatz 6
@@ -535,8 +545,9 @@ impressum:
     Umsatzsteuer-Identifikationsnummer: ATU63848359
 
 # ------ Datenschutz ------
+
 datenschutz:
-  headline: "Datenschutzerklärung"
+  headline: Datenschutzerklärung
   content: |
     ## Verantwortlicher
 
@@ -575,7 +586,6 @@ datenschutz:
     https://www.dsb.gv.at
 
 # ------ Social Links ------
+
 social:
-  willhaben: "https://www.willhaben.at/iad/bap/webstore/shop?orgId=26610249"
-  # instagram: ""
-  # facebook: ""
+  willhaben: https://www.willhaben.at/iad/bap/webstore/shop?orgId=26610249
