@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import PickupService from '../components/PickupService.astro';
 import Services from '../components/Services.astro';
 import PriceCalculator from '../components/PriceCalculator.astro';
 import GeraeteRetterPraemie from '../components/GeraeteRetterPraemie.astro';
@@ -47,9 +49,11 @@ const reviewsData = liveReviews
 <Layout>
   <Header company={content.company} />
   <main id="main">
-    <Hero hero={content.hero} />
-    <Services services={content.services} />
+    <Hero hero={content.hero} company={content.company} hours={content.hours} />
+    <TrustBar trustBar={content.trustBar} reviews={reviewsData} />
     <PriceCalculator calculator={content.calculator} />
+    <Services services={content.services} />
+    <PickupService pickup={content.pickup} />
     <GeraeteRetterPraemie data={content.geraeteRetterPraemie} />
     <Brands brands={content.brands} />
     <Trust trust={content.trust} />

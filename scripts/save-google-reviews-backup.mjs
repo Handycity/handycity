@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 
 const CONTENT_PATH = 'src/data/content.yaml';
 const MAX_ITEMS = Number.parseInt(process.env.GOOGLE_REVIEWS_MAX_ITEMS || '6', 10);
-const DEFAULT_QUERY = 'Handycity, Kardinalplatz 6, 9020 Klagenfurt am Worthersee';
+const DEFAULT_QUERY = 'Handycity, Kardinalplatz 6, 9020 Klagenfurt am Wörthersee';
 
 function exitWithError(message) {
   console.error(message);

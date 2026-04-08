@@ -1,53 +1,135 @@
 ---
-interface Props {
-  hero: {
-    headline: string;
-    subheadline: string;
-    ctaPrimary: { text: string; href: string };
-    ctaSecondary: { text: string; href: string };
-    trustBadges: { text: string }[];
+interface HeroProps {
+  kicker: string;
+  headline: string;
+  subheadline: string;
+  ctaPrimary: { text: string; href: string };
+  ctaSecondary: { text: string; href: string };
+  quickContactHeadline: string;
+  quickContactText: string;
+  quickContactNote: string;
+  trustBadges: { text: string }[];
+}
+
+interface CompanyProps {
+  phone: string;
+  phoneDisplay: string;
+  address: {
+    street: string;
+    zip: string;
+    city: string;
   };
 }
-const { hero } = Astro.props;
+
+interface HoursItem {
+  day: string;
+  time: string;
+  shortDay: string;
+}
+
+interface Props {
+  hero: HeroProps;
+  company: CompanyProps;
+  hours: HoursItem[];
+}
+
+const { hero, company, hours } = Astro.props;
+const weekdayHours = hours.find((item) => item.shortDay === 'Mo')?.time || '9:00–18:00';
+const saturdayHours = hours.find((item) => item.shortDay === 'Sa')?.time || '9:00–13:00';
+const hoursLine = `Mo–Fr ${weekdayHours} • Sa ${saturdayHours}`;
 ---
-<section class="relative bg-navy min-h-screen flex flex-col justify-center overflow-hidden">
-  <img src={`${import.meta.env.BASE_URL}images/store-image-in.jpg`} alt="Handycity Geschäft innen" class="absolute inset-0 w-full h-full object-cover" />
-  <div class="absolute inset-0 bg-gradient-to-br from-navy/90 via-navy-dark/85 to-navy/90"></div>
-  <div class="relative max-w-7xl mx-auto px-4 text-center">
-    <h1 class="text-3xl md:text-5xl font-bold text-white leading-tight mb-4">
-      {hero.headline}
-    </h1>
-    <p class="text-lg md:text-xl text-slate-200 max-w-2xl mx-auto mb-8">
-      {hero.subheadline}
-    </p>
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
-      <a
-        href={hero.ctaPrimary.href}
-        class="inline-flex items-center gap-2 bg-cyan text-white px-6 py-3 rounded-lg font-semibold text-lg hover:bg-cyan-light transition-colors w-full sm:w-auto justify-center"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        {hero.ctaPrimary.text}
-      </a>
-      <a
-        href={hero.ctaSecondary.href}
-        class="inline-flex items-center gap-2 border-2 border-white/30 text-white px-6 py-3 rounded-lg font-semibold text-lg hover:bg-white/10 transition-colors w-full sm:w-auto justify-center"
-      >
-        {hero.ctaSecondary.text}
-      </a>
+<section class="relative overflow-hidden bg-slate-950 text-white">
+  <img
+    src={`${import.meta.env.BASE_URL}images/store-image-in.jpg`}
+    alt="Handycity Geschäft innen"
+    class="absolute inset-0 h-full w-full object-cover brightness-[0.38] saturate-[0.8]"
+  />
+  <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.08),_transparent_34%),linear-gradient(118deg,_rgba(2,6,23,0.96),_rgba(15,23,42,0.9)_42%,_rgba(15,23,42,0.78)_100%)]"></div>
+  <div class="absolute inset-x-0 top-0 h-px bg-white/20"></div>
+
+  <div class="relative mx-auto grid min-h-screen max-w-7xl gap-10 px-4 pb-14 pt-28 lg:grid-cols-[1.15fr_0.85fr] lg:items-start lg:pb-20 lg:pt-32">
+    <div class="max-w-3xl rounded-[2.25rem] border border-white/10 bg-slate-950/40 p-6 shadow-2xl shadow-black/30 backdrop-blur-sm md:p-8 lg:p-10">
+      <p class="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-white/70">{hero.kicker}</p>
+      <h1 class="max-w-3xl text-4xl font-bold leading-tight text-white md:text-6xl">{hero.headline}</h1>
+      <p class="mt-6 max-w-2xl text-lg leading-8 text-slate-200 md:text-xl">{hero.subheadline}</p>
+
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <a
+          href={hero.ctaPrimary.href}
+          class="inline-flex items-center justify-center gap-2 rounded-full bg-navy px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-navy/30 transition hover:-translate-y-0.5 hover:bg-navy-light"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          {hero.ctaPrimary.text}
+        </a>
+        <a
+          href={hero.ctaSecondary.href}
+          class="inline-flex items-center justify-center gap-2 rounded-full border border-white/25 bg-white/10 px-6 py-3.5 text-base font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/20"
+        >
+          {hero.ctaSecondary.text}
+        </a>
+      </div>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        {hero.trustBadges.map((badge) => (
+          <span class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm text-slate-100">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            {badge.text}
+          </span>
+        ))}
+      </div>
+
+      <div class="mt-8 grid gap-4 md:grid-cols-2">
+        <div class="rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-sm">
+          <p class="text-sm font-semibold text-white">Öffnungszeiten</p>
+          <p class="mt-2 text-sm leading-6 text-slate-200">{hoursLine}</p>
+        </div>
+        <div class="rounded-2xl border border-white/10 bg-white/10 p-5 backdrop-blur-sm">
+          <p class="text-sm font-semibold text-white">Direkt erreichbar</p>
+          <p class="mt-2 text-sm leading-6 text-slate-200">
+            <a href={`tel:${company.phone.replace(/\s/g, '')}`} class="font-medium text-white underline-offset-4 hover:underline">
+              {company.phoneDisplay}
+            </a>
+            <span class="mx-2 text-white/30">•</span>
+            {company.address.street}, {company.address.zip} {company.address.city}
+          </p>
+        </div>
+      </div>
     </div>
-    <div class="flex flex-wrap items-center justify-center gap-4 md:gap-6">
-      {hero.trustBadges.map((badge) => (
-        <span class="inline-flex items-center gap-2 text-sm text-slate-200 bg-white/10 px-4 py-2 rounded-full">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-green" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-          {badge.text}
-        </span>
-      ))}
-    </div>
+
+    <aside class="rounded-[2rem] border border-white/10 bg-white/97 p-7 text-slate-900 shadow-2xl shadow-black/25 backdrop-blur">
+      <div class="inline-flex rounded-full bg-navy/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-navy">
+        {hero.quickContactHeadline}
+      </div>
+      <h2 class="mt-5 text-2xl font-bold text-slate-900">Reparatur schnell einschätzen</h2>
+      <p class="mt-3 text-sm leading-7 text-slate-600">{hero.quickContactText}</p>
+
+      <div class="mt-6 space-y-3">
+        <a
+          href={`tel:${company.phone.replace(/\s/g, '')}`}
+          class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-navy px-5 py-3.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-navy-light"
+        >
+          Jetzt anrufen
+        </a>
+        <a
+          href="#preisrechner"
+          class="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-3.5 text-sm font-semibold text-slate-800 transition hover:-translate-y-0.5 hover:border-navy/40 hover:text-navy"
+        >
+          Preischeck starten
+        </a>
+      </div>
+
+      <div class="mt-6 rounded-2xl bg-slate-50 p-4">
+        <p class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Vor Ort</p>
+        <p class="mt-2 text-sm font-semibold text-slate-800">{company.address.street}</p>
+        <p class="text-sm text-slate-600">{company.address.zip} {company.address.city}</p>
+      </div>
+
+      <p class="mt-5 text-xs leading-6 text-slate-500">{hero.quickContactNote}</p>
+    </aside>
   </div>
 
-  <!-- Scroll-down arrow -->
-  <a href="#services" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/70 hover:text-white transition-colors" aria-label="Nach unten scrollen">
-    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 animate-hero-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <a href="#trustbar" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/70 transition hover:text-white" aria-label="Nach unten scrollen">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 animate-hero-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <polyline points="6 9 12 15 18 9"/>
     </svg>
   </a>
@@ -58,5 +140,6 @@ const { hero } = Astro.props;
     0%, 100% { transform: translateY(0); opacity: 0.7; }
     50% { transform: translateY(8px); opacity: 1; }
   }
+
   .animate-hero-bounce { animation: hero-bounce 2s ease-in-out infinite; }
 </style>

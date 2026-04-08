@@ -26,8 +26,10 @@ company:
     zip: "9020"
     country: "AT"
   geo:
-    lat: 46.6249
-    lng: 14.3110
+    lat: 46.6237671
+    lng: 14.3123385
+  map:
+    placeUrl: "https://www.google.com/maps/place/Handycity/@46.6237671,14.3123385,17z/data=!3m1!4b1!4m6!3m5!1s0x4770749d8151bf2b:0xbfb5d0cf51878c70!8m2!3d46.6237671!4d14.3123385!16s%2Fg%2F1tfvg0j3?hl=de-DE&entry=ttu&g_ep=EgoyMDI2MDQwNS4wIKXMDSoASAFQAw%3D%3D"
   uid: "ATU63848359"
   schwerpunkt: "Einzelhandel – Telekommunikation"
 
@@ -57,6 +59,7 @@ hours:
 
 # ------ Hero Section ------
 hero:
+  kicker: "Klagenfurt am Wörthersee • Kardinalplatz 6"
   headline: "Handy & Tablet Reparatur in Klagenfurt"
   subheadline: "Schnell. Zuverlässig. Leistbar. Ihr Gerät ist bei uns in besten Händen."
   ctaPrimary:
@@ -65,10 +68,31 @@ hero:
   ctaSecondary:
     text: "Reparatur anfragen"
     href: "#kontakt"
+  quickContactHeadline: "Schnellkontakt"
+  quickContactText: "Für eine schnelle Einschätzung einfach Marke, Modell und Schaden nennen. Während der Öffnungszeiten melden wir uns rasch zurück."
+  quickContactNote: "Direkt vor Ort am Kardinalplatz 6 oder per Anfrage über das Kontaktformular."
   trustBadges:
     - text: "Geräte-Retter-Prämie Partner"
     - text: "Erfahrene Techniker"
     - text: "Faire Preise"
+
+# ------ Trust Bar ------ 
+trustBar:
+  googleLabel: "Google Bewertungen"
+  googleHint: "Echte Google-Daten werden eingeblendet, sobald sie verfügbar sind."
+  items:
+    - title: "Schnell"
+      text: "Viele Reparaturen erledigen wir noch am selben Tag."
+      icon: "zap"
+    - title: "Transparent"
+      text: "Richtpreise sofort sehen, finale Kosten vorab klar abgesprochen."
+      icon: "shield-check"
+    - title: "Nachhaltig"
+      text: "Reparieren statt ersetzen spart Geld und schont Ressourcen."
+      icon: "leaf"
+    - title: "Zentral"
+      text: "Direkt in Klagenfurt am Kardinalplatz erreichbar."
+      icon: "map-pin"
 
 # ------ Services ------
 services:
@@ -185,15 +209,22 @@ process:
 # ------ Reviews / Google Bewertungen ------
 reviews:
   headline: "Das sagen unsere Kunden"
-  googleUrl: "https://www.google.com/maps/place/Handycity+Klagenfurt/"
+  googleUrl: "https://www.google.com/maps/place/Handycity/@46.6237671,14.3123385,17z/data=!3m1!4b1!4m6!3m5!1s0x4770749d8151bf2b:0xbfb5d0cf51878c70!8m2!3d46.6237671!4d14.3123385!16s%2Fg%2F1tfvg0j3?hl=de-DE&entry=ttu&g_ep=EgoyMDI2MDQwNS4wIKXMDSoASAFQAw%3D%3D"
   averageRating: 0
   totalReviews: 0
   items: []
 
 # ------ Repair Price Calculator ------
 calculator:
-  headline: "Reparatur Preisrechner"
-  subheadline: "Wählen Sie Ihr Gerät und erfahren Sie sofort den Richtpreis"
+  headline: "Reparatur-Check"
+  subheadline: "Marke, Modell und Schaden auswählen – der Richtpreis erscheint sofort."
+  helper: "Wenn Ihr Modell nicht gelistet ist, rufen Sie kurz an. Wir prüfen Verfügbarkeit und Preis direkt."
+  resultTitle: "Richtpreis"
+  note: "Alle Preise sind Richtwerte inkl. MwSt. Nach kurzer Diagnose nennen wir den finalen Preis transparent vor Reparaturbeginn."
+  ctaPrimaryText: "Jetzt anrufen"
+  ctaSecondaryText: "Reparatur anfragen"
+  subsidyBadge: "Geräte-Retter-Prämie möglich"
+  subsidyText: "Je nach Reparatur sind bis zu 50 % Förderung bzw. bis zu EUR 130 Rückerstattung möglich."
   prices:
     # Apple iPhone
     - brand: "Apple"
@@ -377,10 +408,28 @@ calculator:
       repair: "Akku Tausch"
       price: "ab €39"
 
+# ------ Hol & Bring Service ------
+pickup:
+  headline: "Hol & Bring Service"
+  description: "Wenn Sie keine Zeit für den Weg ins Geschäft haben, holen wir Ihr Gerät innerhalb von Klagenfurt ab, reparieren es und bringen es zuverlässig zurück."
+  badge: "10 EUR Pauschale innerhalb Klagenfurt"
+  ctaText: "Abholung anfragen"
+  steps:
+    - title: "Abholung anfragen"
+      text: "Kurz telefonisch oder über das Kontaktformular melden."
+    - title: "Reparatur im Shop"
+      text: "Wir prüfen das Gerät, besprechen den Preis und reparieren es fachgerecht."
+    - title: "Zurückgebracht"
+      text: "Ihr Gerät kommt repariert und einsatzbereit wieder zu Ihnen."
+
 # ------ Willhaben / Handy kaufen ------
 willhaben:
   headline: "Handy kaufen"
-  description: "Entdecken Sie bei uns die Möglichkeit, ein neues Handy zu erwerben. Besuchen Sie gerne unser Geschäft in Klagenfurt oder stöbern Sie auf der Plattform Willhaben, um unsere Auswahl zu erkunden. Wir freuen uns darauf, Ihnen bei der Suche nach Ihrem perfekten Smartphone behilflich zu sein!"
+  description: "Neue und gebrauchte Smartphones erhalten Sie direkt bei uns im Geschäft oder über unseren Willhaben-Shop. Auf Wunsch helfen wir auch bei Einrichtung, Datentransfer und Gerätewahl."
+  highlights:
+    - "Geprüfte Geräte mit persönlicher Beratung"
+    - "Willhaben-Angebote und Shop vor Ort"
+    - "Einrichtung und Datenübernahme auf Wunsch"
   url: "https://www.willhaben.at/iad/bap/webstore/shop?orgId=26610249"
   ctaText: "Auf Willhaben ansehen"
 

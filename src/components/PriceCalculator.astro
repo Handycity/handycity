@@ -5,262 +5,221 @@ interface RepairPrice {
   repair: string;
   price: string;
 }
+
 interface Props {
   calculator: {
     headline: string;
     subheadline: string;
+    helper: string;
+    resultTitle: string;
+    note: string;
+    ctaPrimaryText: string;
+    ctaSecondaryText: string;
+    subsidyBadge: string;
+    subsidyText: string;
     prices: RepairPrice[];
   };
 }
+
 const { calculator } = Astro.props;
 const pricesJson = JSON.stringify(calculator.prices);
+const calculatorState = `{
+  allPrices: ${pricesJson},
+  selectedBrand: '',
+  selectedDevice: '',
+  selectedRepair: '',
 
-const brandEmojis: Record<string, string> = {
-  'Apple': '🍎',
-  'Samsung': '📱',
-  'Huawei': '🌐',
-  'Xiaomi': '🔧',
-  'OnePlus': '⚡',
-  'Google': '🔍',
-  'Sony': '🎮',
-  'Nokia': '📞',
-};
+  get brands() {
+    return [...new Set(this.allPrices.map((item) => item.brand))];
+  },
 
-const repairEmojis: Record<string, string> = {
-  'Display': '🖥️',
-  'Akku': '🔋',
-  'Kamera': '📸',
-  'Ladebuchse': '🔌',
-  'Lautsprecher': '🔊',
-  'Backcover': '🛡️',
-};
+  get devices() {
+    return [...new Set(this.allPrices.filter((item) => item.brand === this.selectedBrand).map((item) => item.device))];
+  },
+
+  get repairs() {
+    return this.allPrices.filter((item) => item.brand === this.selectedBrand && item.device === this.selectedDevice);
+  },
+
+  get selectedPrice() {
+    const match = this.repairs.find((item) => item.repair === this.selectedRepair);
+    return match ? match.price : '';
+  },
+
+  get progressWidth() {
+    if (!this.selectedBrand) return 10;
+    if (!this.selectedDevice) return 45;
+    if (!this.selectedRepair) return 78;
+    return 100;
+  },
+
+  get progressText() {
+    if (!this.selectedBrand) return 'Schritt 1 von 3';
+    if (!this.selectedDevice) return 'Schritt 2 von 3';
+    if (!this.selectedRepair) return 'Schritt 3 von 3';
+    return 'Preis gefunden';
+  },
+
+  get hasSelection() {
+    return Boolean(this.selectedBrand && this.selectedDevice && this.selectedRepair);
+  },
+
+  handleBrandChange() {
+    this.selectedDevice = '';
+    this.selectedRepair = '';
+  },
+
+  handleDeviceChange() {
+    this.selectedRepair = '';
+  },
+
+  handleRepairChange() {
+    return;
+  }
+}`;
 ---
-<section id="preisrechner" class="py-16 md:py-24 bg-gradient-to-b from-slate-50 to-white">
-  <div class="max-w-5xl mx-auto px-4">
-    <div class="text-center mb-10">
-      <span class="inline-block text-4xl mb-3 animate-bounce-slow">🔧</span>
-      <h2 class="text-2xl md:text-3xl font-bold text-navy mb-3">{calculator.headline}</h2>
-      <p class="text-slate-600 max-w-lg mx-auto">{calculator.subheadline}</p>
+<section id="preisrechner" class="bg-white py-16 md:py-24">
+  <div class="mx-auto max-w-7xl px-4">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">Preischeck</p>
+      <h2 class="mt-3 text-3xl font-bold text-navy md:text-4xl">{calculator.headline}</h2>
+      <p class="mt-4 text-base leading-8 text-slate-600 md:text-lg">{calculator.subheadline}</p>
     </div>
 
     <div
-      x-data={`priceCalculator(${pricesJson})`}
-      class="relative bg-white border-2 border-slate-100 rounded-3xl p-6 md:p-10 shadow-lg shadow-slate-200/50 overflow-hidden"
+      x-data={calculatorState}
+      class="mt-10 grid gap-6 rounded-[2rem] border border-slate-200 bg-slate-50/70 p-6 shadow-xl shadow-slate-100/80 lg:grid-cols-[0.94fr_1.06fr] lg:p-8"
     >
-      <!-- Decorative corner blobs -->
-      <div class="absolute -top-12 -right-12 w-32 h-32 bg-navy/5 rounded-full blur-2xl pointer-events-none"></div>
-      <div class="absolute -bottom-8 -left-8 w-24 h-24 bg-green/5 rounded-full blur-2xl pointer-events-none"></div>
-
-      <!-- Progress bar -->
-      <div class="relative mb-8">
-        <div class="flex items-center justify-between mb-2">
-          <template x-for="(label, i) in ['Marke', 'Modell', 'Reparatur']" :key="i">
-            <div class="flex flex-col items-center flex-1">
-              <div
-                class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 border-2"
-                :class="step > i + 1 ? 'bg-green border-green text-white scale-110' : step === i + 1 ? 'bg-navy border-navy text-white scale-110 shadow-md shadow-navy/30' : 'bg-white border-slate-200 text-slate-400'"
-              >
-                <template x-if="step > i + 1">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                </template>
-                <template x-if="step <= i + 1">
-                  <span x-text="i + 1"></span>
-                </template>
-              </div>
-              <span class="text-[11px] font-medium mt-1.5 transition-colors" :class="step >= i + 1 ? 'text-slate-700' : 'text-slate-400'" x-text="label"></span>
-            </div>
-          </template>
-        </div>
-        <div class="absolute top-5 left-[16%] right-[16%] h-0.5 bg-slate-100 -z-0">
-          <div class="h-full bg-navy transition-all duration-500 rounded-full" :style="`width: ${step === 1 ? '0%' : step === 2 ? '50%' : '100%'}`"></div>
-        </div>
-      </div>
-
-      <!-- Step 1: Brand -->
-      <div x-show="step === 1" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
-        <p class="text-center text-lg font-semibold text-slate-800 mb-2">Welche Marke hat dein Gerät?</p>
-        <p class="text-center text-sm text-slate-500 mb-6">Wähle deinen Hersteller aus</p>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <template x-for="brand in brands" :key="brand">
-            <button
-              @click="selectBrand(brand)"
-              class="group relative border-2 rounded-2xl px-4 py-5 font-medium text-slate-700 bg-white cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
-              :class="selectedBrand === brand ? 'border-navy bg-navy/5 text-navy shadow-md shadow-navy/10' : 'border-slate-100 hover:border-navy/40'"
-            >
-              <span class="block text-2xl mb-2" x-text="brandEmoji(brand)"></span>
-              <span class="block text-sm" x-text="brand"></span>
-            </button>
-          </template>
-        </div>
-      </div>
-
-      <!-- Step 2: Device -->
-      <div x-show="step === 2" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
-        <button @click="goBack(1)" class="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-navy cursor-pointer mb-5 group transition-colors">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-          <span>Zurück zu <span class="font-medium" x-text="selectedBrand"></span></span>
-        </button>
-        <p class="text-center text-lg font-semibold text-slate-800 mb-2">Welches Modell?</p>
-        <p class="text-center text-sm text-slate-500 mb-6">Dein <span class="font-medium text-navy" x-text="selectedBrand"></span> Gerät auswählen</p>
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-          <template x-for="device in devices" :key="device">
-            <button
-              @click="selectDevice(device)"
-              class="group relative border-2 rounded-2xl px-4 py-5 font-medium text-slate-700 bg-white cursor-pointer transition-all duration-200 hover:-translate-y-1 hover:shadow-md"
-              :class="selectedDevice === device ? 'border-navy bg-navy/5 text-navy shadow-md shadow-navy/10' : 'border-slate-100 hover:border-navy/40'"
-            >
-              <span class="block text-2xl mb-2">📱</span>
-              <span class="block text-sm" x-text="device"></span>
-            </button>
-          </template>
-        </div>
-      </div>
-
-      <!-- Step 3: Repair type + Price -->
-      <div x-show="step === 3" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
-        <button @click="goBack(2)" class="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-navy cursor-pointer mb-5 group transition-colors">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-          <span>Zurück zu Modellwahl</span>
-        </button>
-
-        <!-- Breadcrumb pills -->
-        <div class="flex items-center justify-center gap-2 mb-6">
-          <span class="inline-flex items-center gap-1 bg-navy/10 text-navy text-xs font-semibold px-3 py-1 rounded-full">
-            <span x-text="brandEmoji(selectedBrand)"></span>
-            <span x-text="selectedBrand"></span>
-          </span>
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 text-slate-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
-          <span class="inline-flex items-center gap-1 bg-navy/10 text-navy text-xs font-semibold px-3 py-1 rounded-full">
-            📱 <span x-text="selectedDevice"></span>
-          </span>
-        </div>
-
-        <p class="text-center text-lg font-semibold text-slate-800 mb-2">Was sollen wir reparieren?</p>
-        <p class="text-center text-sm text-slate-500 mb-6">Hier sind die Preise für dein <span class="font-medium text-navy" x-text="selectedDevice"></span></p>
-
-        <div class="space-y-3">
-          <template x-for="repair in repairs" :key="repair.repair">
-            <div class="flex items-center justify-between border-2 border-slate-100 rounded-2xl px-5 py-4 bg-white hover:border-navy/30 transition-colors group">
-              <div class="flex items-center gap-3">
-                <span class="text-xl" x-text="repairEmoji(repair.repair)"></span>
-                <span class="text-sm font-semibold text-slate-700" x-text="repair.repair"></span>
-              </div>
-              <span class="text-base font-bold text-navy bg-navy/5 px-4 py-1.5 rounded-full" x-text="repair.price"></span>
-            </div>
-          </template>
-        </div>
-
-        <!-- Geräte-Retter-Prämie hint -->
-        <div class="mt-6 bg-gradient-to-r from-green/5 to-green/10 border-2 border-green/20 rounded-2xl p-5 flex items-start gap-4">
-          <span class="text-2xl shrink-0">💰</span>
+      <div class="rounded-[1.75rem] border border-slate-200 bg-white p-6 lg:p-7">
+        <div class="flex items-center justify-between gap-4">
           <div>
-            <p class="text-sm font-bold text-green">Geräte-Retter-Prämie: Bis zu 50 % zurück!</p>
-            <p class="text-xs text-slate-600 mt-1">Mit der Geräte-Retter-Prämie erhalten Sie bis zu €130 zurück. <a href="#geraete-retter-praemie" class="underline font-medium text-green hover:text-green/80">Mehr erfahren →</a></p>
+            <p class="text-sm font-semibold uppercase tracking-[0.16em] text-slate-500">Reparatur-Check</p>
+            <h3 class="mt-2 text-2xl font-bold text-slate-900">Preis in wenigen Schritten</h3>
+          </div>
+          <div class="rounded-full bg-navy/10 px-4 py-2 text-xs font-semibold text-navy" x-text="progressText"></div>
+        </div>
+
+        <div class="mt-6 h-2 overflow-hidden rounded-full bg-slate-100">
+          <div class="h-full rounded-full bg-navy transition-all duration-300" :style="`width: ${progressWidth}%`"></div>
+        </div>
+
+        <div class="mt-6 space-y-5">
+          <div>
+            <label for="brandSelect" class="mb-2 block text-sm font-semibold text-slate-800">1. Marke</label>
+            <div class="relative">
+              <select
+                id="brandSelect"
+                x-model="selectedBrand"
+                @change="handleBrandChange"
+                class="w-full appearance-none rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-800 outline-none transition focus:border-navy"
+              >
+                <option value="">Marke wählen</option>
+                <template x-for="brand in brands" :key="brand">
+                  <option :value="brand" x-text="brand"></option>
+                </template>
+              </select>
+              <svg xmlns="http://www.w3.org/2000/svg" class="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </div>
+
+          <div>
+            <label for="deviceSelect" class="mb-2 block text-sm font-semibold text-slate-800">2. Modell</label>
+            <div class="relative">
+              <select
+                id="deviceSelect"
+                x-model="selectedDevice"
+                @change="handleDeviceChange"
+                :disabled="!selectedBrand"
+                class="w-full appearance-none rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-800 outline-none transition disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 focus:border-navy"
+              >
+                <option value="">Modell wählen</option>
+                <template x-for="device in devices" :key="device">
+                  <option :value="device" x-text="device"></option>
+                </template>
+              </select>
+              <svg xmlns="http://www.w3.org/2000/svg" class="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </div>
+
+          <div>
+            <label for="repairSelect" class="mb-2 block text-sm font-semibold text-slate-800">3. Reparatur</label>
+            <div class="relative">
+              <select
+                id="repairSelect"
+                x-model="selectedRepair"
+                @change="handleRepairChange"
+                :disabled="!selectedDevice"
+                class="w-full appearance-none rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-sm text-slate-800 outline-none transition disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400 focus:border-navy"
+              >
+                <option value="">Reparatur wählen</option>
+                <template x-for="repair in repairs" :key="repair.repair">
+                  <option :value="repair.repair" x-text="repair.repair"></option>
+                </template>
+              </select>
+              <svg xmlns="http://www.w3.org/2000/svg" class="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
           </div>
         </div>
 
-        <!-- CTA -->
-        <div class="mt-6 flex flex-col sm:flex-row gap-3">
-          <a href="tel:+43463918559" class="flex-1 inline-flex items-center justify-center gap-2 bg-navy text-white px-5 py-3.5 rounded-xl font-semibold text-sm hover:bg-navy-light transition-all hover:shadow-lg hover:shadow-navy/20 hover:-translate-y-0.5">
-            📞 Jetzt anrufen
-          </a>
-          <a href="#kontakt" class="flex-1 inline-flex items-center justify-center gap-2 border-2 border-navy text-navy px-5 py-3.5 rounded-xl font-semibold text-sm hover:bg-navy/5 transition-all hover:-translate-y-0.5">
-            ✉️ Reparatur anfragen
-          </a>
+        <div class="mt-6 rounded-2xl border border-dashed border-slate-200 bg-slate-50 px-4 py-4 text-sm leading-6 text-slate-600">
+          {calculator.helper}
         </div>
       </div>
-    </div>
 
-    <p class="text-xs text-slate-400 text-center mt-4">Alle Preise sind Richtwerte inkl. MwSt. Der endgültige Preis wird nach Diagnose festgelegt.</p>
+      <aside class="space-y-5">
+        <div class="rounded-[1.75rem] bg-navy p-6 text-white shadow-xl shadow-navy/20 lg:p-7">
+          <p class="text-xs font-semibold uppercase tracking-[0.18em] text-white/70">{calculator.resultTitle}</p>
+
+          <div x-show="hasSelection" x-cloak class="mt-4">
+            <div class="flex flex-wrap gap-2">
+              <span class="rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold" x-text="selectedBrand || 'Marke'"></span>
+              <span class="rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold" x-text="selectedDevice || 'Modell'"></span>
+              <span class="rounded-full bg-white/10 px-3 py-1.5 text-xs font-semibold" x-text="selectedRepair || 'Reparatur'"></span>
+            </div>
+            <div class="mt-5 rounded-[1.5rem] bg-white/10 p-5">
+              <p class="text-sm text-white/70">Aktueller Richtpreis</p>
+              <p class="mt-2 text-4xl font-bold" x-text="selectedPrice || 'Preis auf Anfrage'"></p>
+              <p class="mt-3 text-sm leading-6 text-white/75">{calculator.note}</p>
+            </div>
+          </div>
+
+          <div x-show="!hasSelection" class="mt-4 rounded-[1.5rem] bg-white/10 p-5">
+            <p class="text-sm text-white/70">Beispiel</p>
+            <p class="mt-2 text-3xl font-bold">ab EUR 89</p>
+            <p class="mt-3 text-sm leading-6 text-white/75">Für viele Standardreparaturen sehen Sie den Richtpreis sofort. Danach klären wir den finalen Aufwand transparent vor Ort.</p>
+          </div>
+
+          <div class="mt-5 grid gap-3 sm:grid-cols-2">
+            <a
+              href="tel:+43463918559"
+              class="inline-flex items-center justify-center rounded-xl bg-white px-5 py-3 text-sm font-semibold text-navy transition hover:-translate-y-0.5"
+            >
+              {calculator.ctaPrimaryText}
+            </a>
+            <a
+              href="#kontakt"
+              class="inline-flex items-center justify-center rounded-xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/20"
+            >
+              {calculator.ctaSecondaryText}
+            </a>
+          </div>
+        </div>
+
+        <div class="rounded-[1.75rem] border border-green/20 bg-green-light/60 p-6">
+          <div class="inline-flex rounded-full bg-green px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em] text-white">
+            {calculator.subsidyBadge}
+          </div>
+          <p class="mt-4 text-base font-semibold text-slate-900">{calculator.subsidyText}</p>
+          <a href="#geraete-retter-praemie" class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-green hover:underline">
+            Mehr zur Förderung
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </aside>
+    </div>
   </div>
 </section>
 
-<script>
-  import Alpine from 'alpinejs';
-
-  const brandEmojiMap: Record<string, string> = {
-    'Apple': '🍎',
-    'Samsung': '📱',
-    'Huawei': '🌐',
-    'Xiaomi': '🔧',
-    'OnePlus': '⚡',
-    'Google': '🔍',
-    'Sony': '🎮',
-    'Nokia': '📞',
-  };
-
-  const repairEmojiMap: Record<string, string> = {
-    'Display': '🖥️',
-    'Akku': '🔋',
-    'Kamera': '📸',
-    'Ladebuchse': '🔌',
-    'Lautsprecher': '🔊',
-    'Backcover': '🛡️',
-  };
-
-  Alpine.data('priceCalculator', (allPrices) => ({
-    allPrices,
-    step: 1,
-    selectedBrand: '',
-    selectedDevice: '',
-    selectedRepair: '',
-
-    brandEmoji(brand: string) {
-      return brandEmojiMap[brand] || '📱';
-    },
-
-    repairEmoji(repair: string) {
-      for (const [key, emoji] of Object.entries(repairEmojiMap)) {
-        if (repair.toLowerCase().includes(key.toLowerCase())) return emoji;
-      }
-      return '🔧';
-    },
-
-    get brands() {
-      return [...new Set(this.allPrices.map((p: any) => p.brand))];
-    },
-
-    get devices() {
-      return [...new Set(this.allPrices.filter((p: any) => p.brand === this.selectedBrand).map((p: any) => p.device))];
-    },
-
-    get repairs() {
-      return this.allPrices.filter((p: any) => p.brand === this.selectedBrand && p.device === this.selectedDevice);
-    },
-
-    selectBrand(brand: string) {
-      this.selectedBrand = brand;
-      this.selectedDevice = '';
-      this.selectedRepair = '';
-      this.step = 2;
-    },
-
-    selectDevice(device: string) {
-      this.selectedDevice = device;
-      this.selectedRepair = '';
-      this.step = 3;
-    },
-
-    goBack(toStep: number) {
-      if (toStep <= 1) {
-        this.selectedBrand = '';
-        this.selectedDevice = '';
-        this.selectedRepair = '';
-        this.step = 1;
-      } else if (toStep <= 2) {
-        this.selectedDevice = '';
-        this.selectedRepair = '';
-        this.step = 2;
-      }
-    },
-  }));
-</script>
-
 <style>
   [x-cloak] { display: none !important; }
-  @keyframes bounce-slow {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
-  }
-  .animate-bounce-slow { animation: bounce-slow 2s ease-in-out infinite; }
 </style>

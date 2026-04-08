@@ -4,24 +4,32 @@ interface Props {
     name: string;
     address: { street: string; city: string; zip: string };
     geo: { lat: number; lng: number };
+    map: { placeUrl: string };
   };
   hours: { day: string; time: string; shortDay: string }[];
 }
+
 const { company, hours } = Astro.props;
-const mapsQuery = encodeURIComponent(`${company.name}, ${company.address.street}, ${company.address.zip} ${company.address.city}`);
-const mapsDirections = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${company.address.street}, ${company.address.zip} ${company.address.city}`)}`;
+const embedUrl = `https://www.google.com/maps?q=${company.geo.lat},${company.geo.lng}&z=17&hl=de&output=embed`;
+const mapsDirections = `https://www.google.com/maps/dir/?api=1&destination=${company.geo.lat},${company.geo.lng}`;
 ---
-<section id="standort" class="py-16 md:py-24 bg-white">
-  <div class="max-w-7xl mx-auto px-4">
-    <h2 class="text-2xl md:text-3xl font-bold text-navy text-center mb-12">Standort & Öffnungszeiten</h2>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      <!-- Map -->
-      <div class="rounded-xl overflow-hidden border border-slate-200 min-h-[300px] bg-slate-100">
+<section id="standort" class="bg-slate-50 py-16 md:py-24">
+  <div class="mx-auto max-w-7xl px-4">
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">Standort</p>
+      <h2 class="mt-3 text-3xl font-bold text-navy md:text-4xl">Standort & Öffnungszeiten</h2>
+      <p class="mt-4 text-base leading-8 text-slate-600">Der Kartenpin ist auf den verifizierten Handycity-Standort gesetzt und öffnet auf Wunsch direkt den Google-Maps-Eintrag.</p>
+    </div>
+
+    <div class="mt-10 overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-xl shadow-slate-100/80 lg:grid lg:grid-cols-[1.08fr_0.92fr]">
+      <div class="relative min-h-[420px] border-b border-slate-200 bg-slate-100 lg:border-b-0 lg:border-r">
+        <div class="absolute left-5 top-5 z-10 rounded-full bg-white/95 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-700 shadow-lg shadow-slate-300/40">
+          Google Maps Live
+        </div>
         <iframe
-          src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2764.5!2d${company.geo.lng}!3d${company.geo.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2z${company.address.street}!5e0!3m2!1sde!2sat&q=${mapsQuery}`}
-          width="100%"
-          height="300"
-          style="border:0;"
+          src={embedUrl}
+          class="h-full min-h-[420px] w-full"
+          style="border:0"
           allowfullscreen=""
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
@@ -29,33 +37,44 @@ const mapsDirections = `https://www.google.com/maps/dir/?api=1&destination=${enc
         ></iframe>
       </div>
 
-      <!-- Info -->
-      <div class="space-y-6">
-        <div>
-          <h3 class="font-semibold text-slate-800 mb-2">Adresse</h3>
-          <p class="text-slate-600">
-            {company.name}<br />
+      <div class="bg-slate-950 p-6 text-white lg:p-8">
+        <div class="rounded-[1.75rem] border border-white/10 bg-white/5 p-6">
+          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-white/60">Adresse</p>
+          <p class="mt-3 text-2xl font-bold text-white">{company.name}</p>
+          <p class="mt-2 text-sm leading-7 text-slate-200">
             {company.address.street}<br />
             {company.address.zip} {company.address.city}
           </p>
-          <a
-            href={mapsDirections}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-1 text-sm text-cyan hover:underline mt-2"
-          >
-            Route planen
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          </a>
+          <p class="mt-4 text-sm leading-7 text-slate-300">
+            Direkt am verifizierten Google-Maps-Eintrag. Route und Eintrag oeffnen konsistent denselben Standort.
+          </p>
+          <div class="mt-6 flex flex-col gap-3">
+            <a
+              href={mapsDirections}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center rounded-full bg-navy px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-navy-light"
+            >
+              Route planen
+            </a>
+            <a
+              href={company.map.placeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-white/15"
+            >
+              In Google Maps öffnen
+            </a>
+          </div>
         </div>
 
-        <div>
-          <h3 class="font-semibold text-slate-800 mb-2">Öffnungszeiten</h3>
-          <div class="space-y-1">
-            {hours.map((h) => (
-              <div class="flex justify-between text-sm">
-                <span class="text-slate-600">{h.day}</span>
-                <span class={`font-medium ${h.time === 'Geschlossen' ? 'text-slate-400' : 'text-slate-800'}`}>{h.time}</span>
+        <div class="mt-6">
+          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-white/60">Öffnungszeiten</p>
+          <div class="mt-4 grid gap-3">
+            {hours.map((item) => (
+              <div class="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm">
+                <span class="font-medium text-slate-200">{item.day}</span>
+                <span class={`${item.time === 'Geschlossen' ? 'text-slate-500' : 'font-semibold text-white'}`}>{item.time}</span>
               </div>
             ))}
           </div>
