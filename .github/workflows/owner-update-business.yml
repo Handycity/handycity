@@ -1,0 +1,103 @@
+name: Owner Update Business Info
+
+on:
+  workflow_dispatch:
+    inputs:
+      hero_kicker:
+        description: "Kleine Zeile ueber der Hauptueberschrift"
+        required: false
+        type: string
+      hero_headline:
+        description: "Hero Hauptueberschrift"
+        required: false
+        type: string
+      hero_subheadline:
+        description: "Hero Unterzeile"
+        required: false
+        type: string
+      company_phone:
+        description: "Telefonnummer im technischen Format"
+        required: false
+        type: string
+      company_phone_display:
+        description: "Telefonnummer wie sie sichtbar angezeigt werden soll"
+        required: false
+        type: string
+      company_email:
+        description: "E-Mail-Adresse"
+        required: false
+        type: string
+      company_street:
+        description: "Strasse und Hausnummer"
+        required: false
+        type: string
+      company_zip:
+        description: "PLZ"
+        required: false
+        type: string
+      company_city:
+        description: "Ort"
+        required: false
+        type: string
+      company_map_url:
+        description: "Direkter Google-Maps-Link"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - id: meta
+        run: echo "branch=owner/update-business-${GITHUB_RUN_ID}" >> "$GITHUB_OUTPUT"
+      - id: update
+        env:
+          HERO_KICKER: ${{ inputs.hero_kicker }}
+          HERO_HEADLINE: ${{ inputs.hero_headline }}
+          HERO_SUBHEADLINE: ${{ inputs.hero_subheadline }}
+          COMPANY_PHONE: ${{ inputs.company_phone }}
+          COMPANY_PHONE_DISPLAY: ${{ inputs.company_phone_display }}
+          COMPANY_EMAIL: ${{ inputs.company_email }}
+          COMPANY_STREET: ${{ inputs.company_street }}
+          COMPANY_ZIP: ${{ inputs.company_zip }}
+          COMPANY_CITY: ${{ inputs.company_city }}
+          COMPANY_MAP_URL: ${{ inputs.company_map_url }}
+          BRANCH_NAME: ${{ steps.meta.outputs.branch }}
+        run: |
+          git switch -c "$BRANCH_NAME"
+          npm run owner:update:business
+          npm run content:validate
+          npm run assets:validate
+          ASTRO_TELEMETRY_DISABLED=1 PUBLIC_SITE_BASE=/handycity/ npm run build
+
+          if git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/content.yaml
+          git commit -m "chore: update business info"
+          git push --set-upstream origin "$BRANCH_NAME"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - if: steps.update.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH_NAME: ${{ steps.meta.outputs.branch }}
+        run: |
+          gh pr create \
+            --base main \
+            --head "$BRANCH_NAME" \
+            --title "Update business info" \
+            --body "Automatisch erstellter Owner-PR fuer Hero-, Kontakt- oder Standortdaten."

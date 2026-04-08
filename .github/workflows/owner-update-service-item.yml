@@ -1,0 +1,81 @@
+name: Owner Update Service Item
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "Service aktualisieren oder entfernen"
+        required: true
+        type: choice
+        options:
+          - upsert
+          - remove
+      name:
+        description: "Service-Name"
+        required: true
+        type: string
+      description:
+        description: "Service-Beschreibung"
+        required: false
+        type: string
+      icon:
+        description: "Icon-Name, z. B. smartphone oder truck"
+        required: false
+        type: string
+      price:
+        description: "Preistext, z. B. Preis auf Anfrage"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - id: meta
+        run: echo "branch=owner/update-service-${GITHUB_RUN_ID}" >> "$GITHUB_OUTPUT"
+      - id: update
+        env:
+          ACTION: ${{ inputs.action }}
+          NAME: ${{ inputs.name }}
+          DESCRIPTION: ${{ inputs.description }}
+          ICON: ${{ inputs.icon }}
+          PRICE: ${{ inputs.price }}
+          BRANCH_NAME: ${{ steps.meta.outputs.branch }}
+        run: |
+          git switch -c "$BRANCH_NAME"
+          npm run owner:update:service
+          npm run content:validate
+          npm run assets:validate
+          ASTRO_TELEMETRY_DISABLED=1 PUBLIC_SITE_BASE=/handycity/ npm run build
+
+          if git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/content.yaml
+          git commit -m "chore: update service item"
+          git push --set-upstream origin "$BRANCH_NAME"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - if: steps.update.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH_NAME: ${{ steps.meta.outputs.branch }}
+        run: |
+          gh pr create \
+            --base main \
+            --head "$BRANCH_NAME" \
+            --title "Update service item" \
+            --body "Automatisch erstellter Owner-PR fuer Servicepflege."

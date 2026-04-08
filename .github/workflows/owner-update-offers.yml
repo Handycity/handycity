@@ -1,0 +1,103 @@
+name: Owner Update Offers and Pickup
+
+on:
+  workflow_dispatch:
+    inputs:
+      willhaben_headline:
+        description: "Headline fuer Kaufen/Verkaufen"
+        required: false
+        type: string
+      willhaben_description:
+        description: "Beschreibung fuer die Willhaben-Sektion"
+        required: false
+        type: string
+      willhaben_url:
+        description: "Willhaben-Shop-URL"
+        required: false
+        type: string
+      willhaben_cta_text:
+        description: "Buttontext fuer Willhaben"
+        required: false
+        type: string
+      willhaben_highlights:
+        description: "Highlights getrennt durch Zeilenumbrueche oder |"
+        required: false
+        type: string
+      pickup_headline:
+        description: "Headline fuer Hol- und Bring-Service"
+        required: false
+        type: string
+      pickup_description:
+        description: "Beschreibung fuer Hol- und Bring-Service"
+        required: false
+        type: string
+      pickup_badge:
+        description: "Badge-Text, z. B. 10 EUR Pauschale innerhalb Klagenfurt"
+        required: false
+        type: string
+      pickup_cta_text:
+        description: "Buttontext fuer Hol- und Bring-Service"
+        required: false
+        type: string
+      pickup_steps:
+        description: "Schritte im Format Titel :: Text, getrennt durch Zeilenumbrueche oder |"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - id: meta
+        run: echo "branch=owner/update-offers-${GITHUB_RUN_ID}" >> "$GITHUB_OUTPUT"
+      - id: update
+        env:
+          WILLHABEN_HEADLINE: ${{ inputs.willhaben_headline }}
+          WILLHABEN_DESCRIPTION: ${{ inputs.willhaben_description }}
+          WILLHABEN_URL: ${{ inputs.willhaben_url }}
+          WILLHABEN_CTA_TEXT: ${{ inputs.willhaben_cta_text }}
+          WILLHABEN_HIGHLIGHTS: ${{ inputs.willhaben_highlights }}
+          PICKUP_HEADLINE: ${{ inputs.pickup_headline }}
+          PICKUP_DESCRIPTION: ${{ inputs.pickup_description }}
+          PICKUP_BADGE: ${{ inputs.pickup_badge }}
+          PICKUP_CTA_TEXT: ${{ inputs.pickup_cta_text }}
+          PICKUP_STEPS: ${{ inputs.pickup_steps }}
+          BRANCH_NAME: ${{ steps.meta.outputs.branch }}
+        run: |
+          git switch -c "$BRANCH_NAME"
+          npm run owner:update:offers
+          npm run content:validate
+          npm run assets:validate
+          ASTRO_TELEMETRY_DISABLED=1 PUBLIC_SITE_BASE=/handycity/ npm run build
+
+          if git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/content.yaml
+          git commit -m "chore: update offers and pickup content"
+          git push --set-upstream origin "$BRANCH_NAME"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - if: steps.update.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH_NAME: ${{ steps.meta.outputs.branch }}
+        run: |
+          gh pr create \
+            --base main \
+            --head "$BRANCH_NAME" \
+            --title "Update offers and pickup content" \
+            --body "Automatisch erstellter Owner-PR fuer Willhaben-, Ankauf- oder Hol-und-Bring-Inhalte."

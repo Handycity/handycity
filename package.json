@@ -10,7 +10,14 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "reviews:backup": "node scripts/save-google-reviews-backup.mjs"
+    "reviews:backup": "node scripts/save-google-reviews-backup.mjs",
+    "content:validate": "node scripts/validate-content.mjs",
+    "assets:validate": "node scripts/validate-assets.mjs",
+    "owner:update:business": "node scripts/update-business-info.mjs",
+    "owner:update:hours": "node scripts/update-hours.mjs",
+    "owner:update:price": "node scripts/update-price-entry.mjs",
+    "owner:update:service": "node scripts/update-service-item.mjs",
+    "owner:update:offers": "node scripts/update-offers.mjs"
   },
   "dependencies": {
     "@alpinejs/collapse": "^3.15.11",

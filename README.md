@@ -35,6 +35,20 @@ public/
 
 Siehe [EDITING.md](EDITING.md) für die Anleitung.
 
+## Owner Quick Start
+
+Fuer den Betreiber gibt es jetzt GitHub-native Pflegewege ohne externes CMS:
+
+- `Actions -> Owner Update Business Info`
+- `Actions -> Owner Update Opening Hours`
+- `Actions -> Owner Update Price Entry`
+- `Actions -> Owner Update Service Item`
+- `Actions -> Owner Update Offers and Pickup`
+
+Diese Workflows erzeugen jeweils einen Branch und einen Pull Request mit den gewuenschten Aenderungen.
+
+Bilder werden direkt ueber `public/images/` gepflegt. Details stehen in `public/images/README.md`.
+
 ## Deployment
 
 Push auf `main` → GitHub Actions baut und deployed automatisch auf GitHub Pages.

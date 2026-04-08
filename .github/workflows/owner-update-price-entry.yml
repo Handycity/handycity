@@ -1,0 +1,81 @@
+name: Owner Update Price Entry
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "Eintrag aktualisieren oder entfernen"
+        required: true
+        type: choice
+        options:
+          - upsert
+          - remove
+      brand:
+        description: "Marke, z. B. Apple"
+        required: true
+        type: string
+      device:
+        description: "Modell, z. B. iPhone 15"
+        required: true
+        type: string
+      repair:
+        description: "Reparaturart, z. B. Display Reparatur"
+        required: true
+        type: string
+      price:
+        description: "Preistext, z. B. ab EUR149 (bei remove leer lassen)"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - id: meta
+        run: echo "branch=owner/update-price-${GITHUB_RUN_ID}" >> "$GITHUB_OUTPUT"
+      - id: update
+        env:
+          ACTION: ${{ inputs.action }}
+          BRAND: ${{ inputs.brand }}
+          DEVICE: ${{ inputs.device }}
+          REPAIR: ${{ inputs.repair }}
+          PRICE: ${{ inputs.price }}
+          BRANCH_NAME: ${{ steps.meta.outputs.branch }}
+        run: |
+          git switch -c "$BRANCH_NAME"
+          npm run owner:update:price
+          npm run content:validate
+          npm run assets:validate
+          ASTRO_TELEMETRY_DISABLED=1 PUBLIC_SITE_BASE=/handycity/ npm run build
+
+          if git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/content.yaml
+          git commit -m "chore: update calculator price entry"
+          git push --set-upstream origin "$BRANCH_NAME"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - if: steps.update.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BRANCH_NAME: ${{ steps.meta.outputs.branch }}
+        run: |
+          gh pr create \
+            --base main \
+            --head "$BRANCH_NAME" \
+            --title "Update calculator price entry" \
+            --body "Automatisch erstellter Owner-PR fuer Marken-, Modell- oder Preispflege."
