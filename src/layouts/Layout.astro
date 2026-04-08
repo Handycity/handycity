@@ -6,6 +6,15 @@ import yaml from 'js-yaml';
 const raw = readFileSync('src/data/content.yaml', 'utf-8');
 const content = yaml.load(raw) as Record<string, any>;
 
+function parseOpeningHours(time: string) {
+  const normalized = String(time || '').replace(/\s*[-–]\s*/g, '–');
+  const [open = '', close = ''] = normalized.split('–');
+  return {
+    open: open.trim(),
+    close: close.trim()
+  };
+}
+
 const { site, company } = content;
 const schemaLocalBusiness = {
   "@context": "https://schema.org",
@@ -29,7 +38,7 @@ const schemaLocalBusiness = {
   },
   "openingHoursSpecification": content.hours.filter((h: any) => h.time !== 'Geschlossen').map((h: any) => {
     const dayMap: Record<string, string> = { Montag: 'Monday', Dienstag: 'Tuesday', Mittwoch: 'Wednesday', Donnerstag: 'Thursday', Freitag: 'Friday', Samstag: 'Saturday' };
-    const [open, close] = h.time.split('–');
+    const { open, close } = parseOpeningHours(h.time);
     return {
       "@type": "OpeningHoursSpecification",
       "dayOfWeek": dayMap[h.day],

@@ -34,6 +34,7 @@ public/
 ## Inhalte bearbeiten
 
 Siehe [EDITING.md](EDITING.md) für die Anleitung.
+Siehe [OWNER_GUIDE.md](OWNER_GUIDE.md) für die vollständige Betreiber-Dokumentation mit Schritt-für-Schritt-Beispielen.
 
 ## Owner Quick Start
 
@@ -45,7 +46,7 @@ Fuer den Betreiber gibt es jetzt GitHub-native Pflegewege ohne externes CMS:
 - `Actions -> Owner Update Service Item`
 - `Actions -> Owner Update Offers and Pickup`
 
-Diese Workflows erzeugen jeweils einen Branch und einen Pull Request mit den gewuenschten Aenderungen.
+Diese Workflows schreiben die geprueften Aenderungen direkt nach `main` und loesen danach automatisch Build und Deploy aus.
 
 Bilder werden direkt ueber `public/images/` gepflegt. Details stehen in `public/images/README.md`.
 

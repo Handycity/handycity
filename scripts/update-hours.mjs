@@ -10,6 +10,13 @@ const dayValues = {
   So: process.env.HOURS_SO
 };
 
+function normalizeHours(value) {
+  const trimmed = String(value || '').trim();
+  if (!trimmed) return trimmed;
+  if (trimmed.toLowerCase() === 'geschlossen') return 'Geschlossen';
+  return trimmed.replace(/\s*[-–]\s*/g, '–');
+}
+
 const { content } = await readContent();
 
 content.hours = content.hours.map((entry) => {
@@ -17,7 +24,7 @@ content.hours = content.hours.map((entry) => {
   if (typeof nextValue === 'string' && nextValue.trim()) {
     return {
       ...entry,
-      time: nextValue.trim()
+      time: normalizeHours(nextValue)
     };
   }
 

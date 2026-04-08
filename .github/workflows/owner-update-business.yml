@@ -46,20 +46,17 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
 
 jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
           node-version: 22
           cache: npm
       - run: npm ci
-      - id: meta
-        run: echo "branch=owner/update-business-${GITHUB_RUN_ID}" >> "$GITHUB_OUTPUT"
       - id: update
         env:
           HERO_KICKER: ${{ inputs.hero_kicker }}
@@ -72,9 +69,7 @@ jobs:
           COMPANY_ZIP: ${{ inputs.company_zip }}
           COMPANY_CITY: ${{ inputs.company_city }}
           COMPANY_MAP_URL: ${{ inputs.company_map_url }}
-          BRANCH_NAME: ${{ steps.meta.outputs.branch }}
         run: |
-          git switch -c "$BRANCH_NAME"
           npm run owner:update:business
           npm run content:validate
           npm run assets:validate
@@ -89,15 +84,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add src/data/content.yaml
           git commit -m "chore: update business info"
-          git push --set-upstream origin "$BRANCH_NAME"
+          git push origin HEAD:main
           echo "changed=true" >> "$GITHUB_OUTPUT"
-      - if: steps.update.outputs.changed == 'true'
-        env:
-          GH_TOKEN: ${{ github.token }}
-          BRANCH_NAME: ${{ steps.meta.outputs.branch }}
-        run: |
-          gh pr create \
-            --base main \
-            --head "$BRANCH_NAME" \
-            --title "Update business info" \
-            --body "Automatisch erstellter Owner-PR fuer Hero-, Kontakt- oder Standortdaten."

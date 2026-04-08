@@ -8,7 +8,7 @@ Die Website ist so aufgebaut, dass fast alle Inhalte ueber eine zentrale Datei g
 
 Solange es nur um Texte, Preise, Kontaktdaten, Bilder, FAQ, Bewertungen oder Angebote geht, muss in der Regel nur diese Datei angepasst werden.
 
-Der empfohlene Weg fuer den Betreiber ist jetzt aber nicht mehr das direkte YAML-Editieren, sondern die vorbereiteten GitHub-Actions-Workflows. Diese erzeugen automatisch einen Pull Request und sind sicherer als freies Bearbeiten der Datei.
+Der empfohlene Weg fuer den Betreiber ist jetzt aber nicht mehr das direkte YAML-Editieren, sondern die vorbereiteten GitHub-Actions-Workflows. Diese schreiben gepruefte Aenderungen direkt nach `main` und sind sicherer als freies Bearbeiten der Datei.
 
 --------------------------------------------------
 ## 1. Was kann der Inhaber selbst aendern?
@@ -65,21 +65,15 @@ Fuer die haeufigsten Aenderungen gibt es vorbereitete Workflows unter `Actions`.
 
 Danach passiert der Rest automatisch:
 
-- ein neuer Branch wird erstellt
 - die Inhalte werden aktualisiert
 - die Website wird validiert und gebaut
-- automatisch wird ein Pull Request erstellt
-
-Danach muessen Sie nur noch:
-
-1. den Pull Request kontrollieren
-2. `Merge pull request` klicken
-3. warten bis GitHub Pages live ist
+- die Aenderung wird direkt nach `main` geschrieben
+- GitHub Pages deployt die neue Version
 
 ### Wo pruefen?
 
 - Repository -> `Actions`
-- danach den erstellten Pull Request pruefen
+- danach den Workflow-Run und den Deploy pruefen
 
 --------------------------------------------------
 ## 3. Direkter Weg: Inhalte direkt in GitHub aendern
