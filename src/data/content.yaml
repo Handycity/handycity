@@ -210,9 +210,17 @@ process:
 reviews:
   headline: "Das sagen unsere Kunden"
   googleUrl: "https://www.google.com/maps/place/Handycity/@46.6237671,14.3123385,17z/data=!3m1!4b1!4m6!3m5!1s0x4770749d8151bf2b:0xbfb5d0cf51878c70!8m2!3d46.6237671!4d14.3123385!16s%2Fg%2F1tfvg0j3?hl=de-DE&entry=ttu&g_ep=EgoyMDI2MDQwNS4wIKXMDSoASAFQAw%3D%3D"
-  averageRating: 0
-  totalReviews: 0
-  items: []
+  averageRating: 4.6
+  totalReviews: 171
+  items:
+    - name: "Mario"
+      text: "Habe diesen Betrieb zum ersten Mal besucht. Bin sehr zufrieden. Kann ich jedem weiter empfehlen."
+      rating: 5
+      date: "vor einem Monat"
+    - name: "Philipp Sadounik"
+      text: "Der Chef ist sehr freundlich und hilfsbereit er hat mich sehr gut beraten ich empfehle jeden in diesem Geschäft einzukaufen oder wenn einer Handy braucht."
+      rating: 5
+      date: "vor 7 Monaten"
 
 # ------ Repair Price Calculator ------
 calculator:
