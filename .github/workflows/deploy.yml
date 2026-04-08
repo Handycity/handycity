@@ -4,6 +4,15 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  workflow_run:
+    workflows:
+      - Owner Update Business Info
+      - Owner Update Opening Hours
+      - Owner Update Price Entry
+      - Owner Update Service Item
+      - Owner Update Offers and Pickup
+    types:
+      - completed
 
 permissions:
   contents: read
@@ -16,9 +25,12 @@ concurrency:
 
 jobs:
   build:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
+        with:
+          ref: main
       - uses: actions/setup-node@v6
         with:
           node-version: 22
