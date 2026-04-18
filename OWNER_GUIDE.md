@@ -658,8 +658,24 @@ Bereich:
 willhaben:
   headline: "Handy kaufen & verkaufen"
   description: "..."
+  verifiedOn: "17. April 2026"
+  url: "https://www.willhaben.at/..."
+  ctaText: "Zum Willhaben-Shop"
+  contactCtaText: "Geraet anfragen"
   highlights:
     - "..."
+  offers:
+    - title: "iPhone 12 64GB White Neu/Haendler"
+      price: "EUR 369,90"
+      url: "https://www.willhaben.at/..."
+      image: "https://cache.willhaben.at/..."
+      imageAlt: "iPhone 12 White von Handycity auf willhaben"
+      listedAt: "18.11.2025"
+      storage: "64 GB"
+      unlocked: "Ja"
+      condition: "Neu"
+      delivery: "Selbstabholung, Versand"
+      note: "Optional"
 ```
 
 Beispiel:
@@ -667,12 +683,37 @@ Beispiel:
 ```yaml
 willhaben:
   headline: "Handy kaufen, verkaufen und eintauschen"
-  description: "Neue und gebrauchte Smartphones erhalten Sie direkt bei uns im Geschaeft oder ueber unseren Willhaben-Shop."
+  description: "Diese Angebote sind aktuell live im Handycity-Shop auf willhaben."
+  verifiedOn: "17. April 2026"
+  url: "https://www.willhaben.at/iad/shop/handycity-ak-gmbh"
+  ctaText: "Zum Willhaben-Shop"
+  contactCtaText: "Geraet anfragen"
   highlights:
     - "Gepruefte Geraete mit persoenlicher Beratung"
     - "Ankauf direkt im Geschaeft"
     - "Datenuebernahme auf Wunsch"
+  offers:
+    - title: "Samsung S23 128GB Green Neu/Haendler"
+      price: "EUR 469"
+      url: "https://www.willhaben.at/iad/kaufen-und-verkaufen/d/..."
+      image: "https://cache.willhaben.at/mmo/..."
+      imageAlt: "Samsung S23 Green von Handycity auf willhaben"
+      listedAt: "14.11.2025"
+      storage: "128 GB"
+      unlocked: "Ja"
+      condition: "Neu"
+      delivery: "Selbstabholung, Versand"
 ```
+
+Bearbeitung in GitHub:
+
+- Abschnittstexte, CTA-Texte und der Shop-Link sind direkt im `willhaben:`-Block editierbar.
+- Ein einzelnes Angebot ist jeweils ein kompletter Block unter `offers:`.
+- Neues Angebot: bestehenden Angebotsblock kopieren, einfuegen und anpassen.
+- Angebot entfernen: gesamten Block loeschen.
+- Reihenfolge aendern: Angebotsbloecke innerhalb von `offers:` verschieben.
+- Bild aendern: `image` austauschen.
+- Fuer Barrierefreiheit `imageAlt` immer passend zum Geraet pflegen.
 
 --------------------------------------------------
 ### 6.8 Hol- & Bring-Service

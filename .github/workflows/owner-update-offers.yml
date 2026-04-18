@@ -11,12 +11,20 @@ on:
         description: "Beschreibung fuer die Willhaben-Sektion"
         required: false
         type: string
+      willhaben_verified_on:
+        description: "Geprueft-am-Datum fuer die Willhaben-Sektion"
+        required: false
+        type: string
       willhaben_url:
         description: "Willhaben-Shop-URL"
         required: false
         type: string
       willhaben_cta_text:
         description: "Buttontext fuer Willhaben"
+        required: false
+        type: string
+      willhaben_contact_cta_text:
+        description: "Buttontext fuer Kontakt in der Willhaben-Sektion"
         required: false
         type: string
       willhaben_highlights:
@@ -61,8 +69,10 @@ jobs:
         env:
           WILLHABEN_HEADLINE: ${{ inputs.willhaben_headline }}
           WILLHABEN_DESCRIPTION: ${{ inputs.willhaben_description }}
+          WILLHABEN_VERIFIED_ON: ${{ inputs.willhaben_verified_on }}
           WILLHABEN_URL: ${{ inputs.willhaben_url }}
           WILLHABEN_CTA_TEXT: ${{ inputs.willhaben_cta_text }}
+          WILLHABEN_CONTACT_CTA_TEXT: ${{ inputs.willhaben_contact_cta_text }}
           WILLHABEN_HIGHLIGHTS: ${{ inputs.willhaben_highlights }}
           PICKUP_HEADLINE: ${{ inputs.pickup_headline }}
           PICKUP_DESCRIPTION: ${{ inputs.pickup_description }}

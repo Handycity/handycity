@@ -599,19 +599,44 @@ Pfad:
 willhaben:
   headline: "Handy kaufen & verkaufen"
   description: "..."
+  verifiedOn: "17. April 2026"
+  url: "https://www.willhaben.at/..."
+  ctaText: "Zum Willhaben-Shop"
+  contactCtaText: "Geraet anfragen"
   highlights:
     - "Gepruefte Geraete mit persoenlicher Beratung"
-  url: "https://www.willhaben.at/..."
-  ctaText: "Auf Willhaben ansehen"
+  offers:
+    - title: "iPhone 12 64GB White Neu/Haendler"
+      price: "EUR 369,90"
+      url: "https://www.willhaben.at/..."
+      image: "https://cache.willhaben.at/..."
+      imageAlt: "iPhone 12 White von Handycity auf willhaben"
+      listedAt: "18.11.2025"
+      storage: "64 GB"
+      unlocked: "Ja"
+      condition: "Neu"
+      delivery: "Selbstabholung, Versand"
+      note: "Optional"
 ```
 
 Hier aendern Sie:
 
 - Titel
 - Text
+- Stand-Datum
 - Vorteile
 - Willhaben-Link
-- Button-Text
+- Button-Texte
+- Angebote / Produktkarten
+- Bild-URL und Alternativtext pro Karte
+
+So bearbeiten Sie die Karten:
+
+- Neuer Eintrag: kopieren Sie einen kompletten `- title:`-Block unter `offers:` und passen Sie ihn an.
+- Eintrag loeschen: loeschen Sie den gesamten Block von `- title:` bis zum letzten Feld dieses Angebots.
+- Reihenfolge aendern: verschieben Sie die Angebotsbloecke innerhalb von `offers:`.
+- Bild wechseln: Feld `image` anpassen.
+- Text oder Preis aendern: die jeweiligen Felder direkt im Angebotsblock aendern.
 
 ### 5.17 FAQ
 

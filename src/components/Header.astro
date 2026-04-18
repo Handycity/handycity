@@ -25,6 +25,7 @@ const { company } = Astro.props;
       <a href="#geraete-retter-praemie" class="hover:text-navy transition-colors">Geräte-Retter-Prämie</a>
       <a href="#ueber-uns" class="hover:text-navy transition-colors">Über uns</a>
       <a href="#bewertungen" class="hover:text-navy transition-colors">Bewertungen</a>
+      <a href="#handy-kaufen" class="hover:text-navy transition-colors">Angebote</a>
       <a href="#kontakt" class="hover:text-navy transition-colors">Kontakt</a>
     </nav>
 
@@ -62,6 +63,7 @@ const { company } = Astro.props;
       <a href="#geraete-retter-praemie" @click="open = false" class="hover:text-navy py-1">Geräte-Retter-Prämie</a>
       <a href="#ueber-uns" @click="open = false" class="hover:text-navy py-1">Über uns</a>
       <a href="#bewertungen" @click="open = false" class="hover:text-navy py-1">Bewertungen</a>
+      <a href="#handy-kaufen" @click="open = false" class="hover:text-navy py-1">Angebote</a>
       <a href="#kontakt" @click="open = false" class="hover:text-navy py-1">Kontakt</a>
       <a
         href={`tel:${company.phone.replace(/\s/g, '')}`}

@@ -19,7 +19,7 @@ const { faq } = Astro.props;
         <div class="border border-slate-200 rounded-xl bg-white overflow-hidden">
           <button
             @click={`active = active === ${i} ? null : ${i}`}
-            class="flex items-center justify-between w-full px-6 py-4 text-left text-sm font-semibold text-slate-800 hover:text-navy transition-colors cursor-pointer"
+            class="flex items-center justify-between w-full px-6 py-4.5 text-left text-base font-semibold text-slate-800 hover:text-navy transition-colors cursor-pointer md:text-[1.05rem]"
             :aria-expanded={`active === ${i}`}
           >
             <span>{item.question}</span>
@@ -31,7 +31,7 @@ const { faq } = Astro.props;
             ><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div x-show={`active === ${i}`} x-collapse x-cloak>
-            <div class="px-6 pb-4 text-sm text-slate-600 leading-relaxed">
+            <div class="px-6 pb-5 text-[0.98rem] text-slate-600 leading-8">
               {item.answer}
             </div>
           </div>

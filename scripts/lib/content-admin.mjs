@@ -210,6 +210,23 @@ export function validateContent(content) {
     errors.push('willhaben.highlights must contain at least one highlight.');
   }
 
+  if (!Array.isArray(content.willhaben?.offers)) {
+    errors.push('willhaben.offers must be an array.');
+  } else {
+    for (const [index, item] of content.willhaben.offers.entries()) {
+      pushIfMissing(errors, item?.title, `willhaben.offers[${index}].title`);
+      pushIfMissing(errors, item?.price, `willhaben.offers[${index}].price`);
+      pushIfMissing(errors, item?.imageAlt, `willhaben.offers[${index}].imageAlt`);
+      pushIfMissing(errors, item?.listedAt, `willhaben.offers[${index}].listedAt`);
+      pushIfMissing(errors, item?.storage, `willhaben.offers[${index}].storage`);
+      pushIfMissing(errors, item?.unlocked, `willhaben.offers[${index}].unlocked`);
+      pushIfMissing(errors, item?.condition, `willhaben.offers[${index}].condition`);
+      pushIfMissing(errors, item?.delivery, `willhaben.offers[${index}].delivery`);
+      validateUrlish(errors, item?.url, `willhaben.offers[${index}].url`);
+      validateUrlish(errors, item?.image, `willhaben.offers[${index}].image`);
+    }
+  }
+
   return errors;
 }
 
