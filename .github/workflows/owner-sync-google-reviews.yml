@@ -1,0 +1,77 @@
+name: Sync Google Reviews Backup
+
+on:
+  workflow_dispatch:
+    inputs:
+      place_id:
+        description: "Google Place ID (optional)"
+        required: false
+        type: string
+      place_query:
+        description: "Google Place Query (optional fallback)"
+        required: false
+        type: string
+      language:
+        description: "Sprache, z. B. de"
+        required: false
+        default: "de"
+        type: string
+      max_items:
+        description: "Maximale Anzahl Reviews"
+        required: false
+        default: "6"
+        type: string
+  schedule:
+    - cron: "17 5 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: owner-sync-google-reviews
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/Vienna
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - id: sync
+        env:
+          GOOGLE_PLACES_API_KEY: ${{ secrets.GOOGLE_PLACES_API_KEY }}
+          GOOGLE_PLACE_ID: ${{ github.event.inputs.place_id }}
+          GOOGLE_PLACE_QUERY: ${{ github.event.inputs.place_query }}
+          GOOGLE_LANGUAGE: ${{ github.event.inputs.language }}
+          GOOGLE_REVIEWS_MAX_ITEMS: ${{ github.event.inputs.max_items }}
+        run: |
+          if [ -z "${GOOGLE_PLACES_API_KEY}" ]; then
+            echo "GOOGLE_PLACES_API_KEY is missing. Add it to repository secrets."
+            exit 1
+          fi
+
+          npm run owner:sync:google
+          npm run content:validate
+          npm run assets:validate
+          ASTRO_TELEMETRY_DISABLED=1 PUBLIC_SITE_BASE=/handycity/ npm run build
+
+          if git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/content.yaml
+          git commit -m "chore: sync google reviews backup"
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"

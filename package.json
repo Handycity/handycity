@@ -18,7 +18,8 @@
     "owner:update:price": "node scripts/update-price-entry.mjs",
     "owner:update:service": "node scripts/update-service-item.mjs",
     "owner:update:offers": "node scripts/update-offers.mjs",
-    "owner:sync:willhaben": "node scripts/sync-willhaben-offers.mjs"
+    "owner:sync:willhaben": "node scripts/sync-willhaben-offers.mjs",
+    "owner:sync:google": "node scripts/save-google-reviews-backup.mjs"
   },
   "dependencies": {
     "@alpinejs/collapse": "^3.15.11",

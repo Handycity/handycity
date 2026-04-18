@@ -26,6 +26,14 @@ on:
         description: "Preistext, z. B. Preis auf Anfrage"
         required: false
         type: string
+      href:
+        description: "Linkziel, z. B. #preisrechner, #handy-kaufen oder #kontakt"
+        required: false
+        type: string
+      action_text:
+        description: "Button-/Aktions-Text der Service-Karte"
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -47,6 +55,8 @@ jobs:
           DESCRIPTION: ${{ inputs.description }}
           ICON: ${{ inputs.icon }}
           PRICE: ${{ inputs.price }}
+          HREF: ${{ inputs.href }}
+          ACTION_TEXT: ${{ inputs.action_text }}
         run: |
           npm run owner:update:service
           npm run content:validate

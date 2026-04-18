@@ -89,6 +89,8 @@ Die wichtigsten Workflows liegen in:
 - `.github/workflows/owner-update-price-entry.yml`
 - `.github/workflows/owner-update-service-item.yml`
 - `.github/workflows/owner-update-offers.yml`
+- `.github/workflows/owner-sync-willhaben.yml`
+- `.github/workflows/owner-sync-google-reviews.yml`
 - `.github/workflows/validate-site.yml`
 
 --------------------------------------------------
@@ -372,6 +374,8 @@ Damit aenderbar:
 - `description`
 - `icon`
 - `price`
+- `href` (optional)
+- `action_text` (optional)
 
 ### Beispiel 1 - neuen Service hinzufuegen
 
@@ -462,6 +466,55 @@ Abholung anfragen :: Kurz telefonisch oder ueber das Kontaktformular melden.
 Reparatur im Shop :: Wir pruefen das Geraet, nennen den Preis und reparieren es fachgerecht.
 Zurueckgebracht :: Ihr Geraet kommt repariert und einsatzbereit wieder zu Ihnen.
 ```
+
+--------------------------------------------------
+### 5.6 Sync Willhaben Offers
+--------------------------------------------------
+
+Workflow:
+
+- `Actions -> Sync Willhaben Offers`
+
+Damit aenderbar:
+
+- Live-Angebote aus dem Willhaben-Shop automatisch nach `content.yaml` uebernehmen
+- `verifiedOn` automatisch auf den aktuellen Tag setzen
+- Trigger-basiert: manuell ueber `Run workflow` oder regelmaessig per Zeitplan
+
+### Felder
+
+- `shop_url` (optional)
+- `max_offers` (optional)
+
+### Typische Nutzung
+
+- Manuell starten, wenn neue Anzeigen sofort auf der Website sichtbar sein sollen
+- Zeitplan laufen lassen, damit die Sektion automatisch aktuell bleibt
+
+--------------------------------------------------
+### 5.7 Sync Google Reviews Backup
+--------------------------------------------------
+
+Workflow:
+
+- `Actions -> Sync Google Reviews Backup`
+
+Damit aenderbar:
+
+- Google-Bewertungen als Backup in `content.yaml` aktualisieren
+- Durchschnittsbewertung und Gesamtanzahl uebernehmen
+- Trigger-basiert: manuell ueber `Run workflow` oder regelmaessig per Zeitplan
+
+### Voraussetzung
+
+- Repository Secret `GOOGLE_PLACES_API_KEY`
+
+### Felder
+
+- `place_id` (optional)
+- `place_query` (optional)
+- `language` (optional)
+- `max_items` (optional)
 
 --------------------------------------------------
 ## 6. Direkte Bearbeitung in `content.yaml`
@@ -936,13 +989,17 @@ Pruefen:
 
 - `Actions -> Owner Update Offers and Pickup`
 
+### Ich will Willhaben-Angebote automatisch aktualisieren
+
+- `Actions -> Sync Willhaben Offers`
+
 ### Ich will FAQ aendern
 
 - `src/data/content.yaml`
 
 ### Ich will Bewertungen aendern
 
-- `src/data/content.yaml`
+- `Actions -> Sync Google Reviews Backup`
 
 ### Ich will ein Bild austauschen
 

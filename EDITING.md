@@ -53,6 +53,8 @@ Fuer die haeufigsten Aenderungen gibt es vorbereitete Workflows unter `Actions`.
 - `Owner Update Price Entry`
 - `Owner Update Service Item`
 - `Owner Update Offers and Pickup`
+- `Sync Willhaben Offers`
+- `Sync Google Reviews Backup`
 
 ### So gehen Sie vor
 

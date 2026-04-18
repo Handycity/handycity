@@ -12,9 +12,15 @@ on:
         required: false
         default: "12"
         type: string
+  schedule:
+    - cron: "11 */6 * * *"
 
 permissions:
   contents: write
+
+concurrency:
+  group: owner-sync-willhaben
+  cancel-in-progress: false
 
 jobs:
   sync:
@@ -33,8 +39,8 @@ jobs:
 
       - id: sync
         env:
-          WILLHABEN_SHOP_URL: ${{ inputs.shop_url }}
-          WILLHABEN_MAX_OFFERS: ${{ inputs.max_offers }}
+          WILLHABEN_SHOP_URL: ${{ github.event.inputs.shop_url }}
+          WILLHABEN_MAX_OFFERS: ${{ github.event.inputs.max_offers }}
         run: |
           npm run owner:sync:willhaben
           npm run content:validate

@@ -29,16 +29,18 @@ interface Props {
 const { willhaben } = Astro.props;
 const offers = Array.isArray(willhaben.offers) ? willhaben.offers : [];
 const contactCtaText = willhaben.contactCtaText || 'Kontakt';
+const syncLabel = willhaben.verifiedOn ? `Live-Sync ${willhaben.verifiedOn}` : 'Regelmaessig synchronisiert';
+
 const stats = [
   {
     label: 'Live-Angebote',
     value: String(offers.length),
-    detail: willhaben.verifiedOn ? `Stand ${willhaben.verifiedOn}` : 'Aktuell geprüft'
+    detail: willhaben.verifiedOn ? `Stand ${willhaben.verifiedOn}` : 'Aktuell geprueft'
   },
   {
-    label: 'Übergabe',
+    label: 'Uebergabe',
     value: 'Shop oder Versand',
-    detail: 'Je nach Anzeige verfügbar'
+    detail: 'Je nach Anzeige verfuegbar'
   },
   {
     label: 'Service',
@@ -50,18 +52,16 @@ const stats = [
 <section id="handy-kaufen" class="border-y border-slate-200 bg-slate-50 py-16 md:py-24">
   <div class="mx-auto max-w-7xl px-4">
     <div class="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm shadow-slate-200/70">
-      <div class="grid gap-8 border-b border-slate-200 p-8 lg:grid-cols-[minmax(0,1.2fr)_22rem] lg:p-10">
+      <div class="grid gap-8 border-b border-slate-200 p-8 lg:grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] lg:p-10">
         <div>
           <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">Willhaben & Shop</p>
           <h2 class="mt-3 text-3xl font-bold text-navy md:text-4xl">{willhaben.headline}</h2>
           <p class="mt-4 max-w-3xl text-base leading-8 text-slate-600">{willhaben.description}</p>
 
           <div class="mt-6 flex flex-wrap gap-2">
-            {willhaben.verifiedOn && (
-              <div class="inline-flex items-center gap-2 rounded-full border border-navy/15 bg-navy/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-navy">
-                Live geprüft am {willhaben.verifiedOn}
-              </div>
-            )}
+            <div class="inline-flex items-center gap-2 rounded-full border border-navy/15 bg-navy/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-navy">
+              {syncLabel}
+            </div>
             <div class="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-600">
               {offers.length} aktuelle Anzeigen
             </div>
@@ -77,10 +77,43 @@ const stats = [
               </div>
             ))}
           </div>
+
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a
+              href={willhaben.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 rounded-full bg-navy px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-navy-light"
+            >
+              {willhaben.ctaText}
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>
+            </a>
+            <a
+              href="#kontakt"
+              class="inline-flex items-center rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-800 transition hover:-translate-y-0.5 hover:border-navy/40 hover:text-navy"
+            >
+              {contactCtaText}
+            </a>
+          </div>
         </div>
 
         <aside class="rounded-[1.75rem] border border-slate-200 bg-slate-50 p-5">
-          <div class="grid gap-3">
+          <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm shadow-slate-100">
+            <img
+              src="/images/willhaben.png"
+              alt="Willhaben Shop von Handycity"
+              class="h-40 w-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="border-t border-slate-200 px-4 py-3">
+              <p class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Shop Vorschau</p>
+              <p class="mt-1 text-sm font-semibold text-slate-900">Handycity auf Willhaben</p>
+              <p class="mt-1 text-sm text-slate-600">Live-Angebote, Ankauf und persoenliche Beratung in einem Bereich.</p>
+            </div>
+          </div>
+
+          <div class="mt-4 grid gap-3">
             {stats.map((stat) => (
               <div class="rounded-2xl border border-white bg-white px-4 py-4 shadow-sm shadow-slate-100">
                 <p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500">{stat.label}</p>
@@ -90,27 +123,9 @@ const stats = [
             ))}
           </div>
 
-          <div class="mt-5 flex flex-col gap-3">
-            <a
-              href={willhaben.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center justify-center gap-2 rounded-full bg-navy px-6 py-3.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-navy-light"
-            >
-              {willhaben.ctaText}
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>
-            </a>
-            <a
-              href="#kontakt"
-              class="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3.5 text-sm font-semibold text-slate-800 transition hover:-translate-y-0.5 hover:border-navy/40 hover:text-navy"
-            >
-              {contactCtaText}
-            </a>
-          </div>
-
-          <p class="mt-5 text-sm leading-6 text-slate-600">
-            Die Karten basieren auf dem am {willhaben.verifiedOn || 'zuletzt geprüften'} live sichtbaren Handycity-Auftritt auf willhaben.
-            Wenn eine Anzeige inzwischen verkauft wurde, prüfen wir gerne Alternativen direkt im Shop.
+          <p class="mt-4 text-sm leading-6 text-slate-600">
+            Die Karten basieren auf dem zuletzt synchronisierten Handycity-Auftritt auf willhaben.
+            Wenn eine Anzeige inzwischen verkauft wurde, pruefen wir gerne Alternativen direkt im Shop.
           </p>
         </aside>
       </div>
@@ -179,7 +194,7 @@ const stats = [
                       <dd class="mt-1 font-semibold text-slate-900">{offer.condition}</dd>
                     </div>
                     <div class="rounded-2xl bg-slate-50 px-4 py-3">
-                      <dt class="text-slate-500">Übergabe</dt>
+                      <dt class="text-slate-500">Uebergabe</dt>
                       <dd class="mt-1 font-semibold text-slate-900">{offer.delivery}</dd>
                     </div>
                   </dl>
@@ -191,7 +206,7 @@ const stats = [
                       rel="noopener noreferrer"
                       class="inline-flex items-center justify-center gap-2 rounded-full bg-navy px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-navy-light"
                     >
-                      Willhaben öffnen
+                      Willhaben oeffnen
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>
                     </a>
                     <a

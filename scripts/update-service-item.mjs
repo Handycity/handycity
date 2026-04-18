@@ -5,6 +5,8 @@ const name = (process.env.NAME || '').trim();
 const description = (process.env.DESCRIPTION || '').trim();
 const icon = (process.env.ICON || '').trim();
 const price = process.env.PRICE === undefined ? undefined : String(process.env.PRICE).trim();
+const href = process.env.HREF === undefined ? undefined : String(process.env.HREF).trim();
+const actionText = process.env.ACTION_TEXT === undefined ? undefined : String(process.env.ACTION_TEXT).trim();
 
 if (!name) {
   throw new Error('NAME is required.');
@@ -35,15 +37,29 @@ if (action === 'remove') {
     name,
     description,
     icon,
-    price: price ?? ''
+    price: price ?? '',
+    href: href || '#kontakt',
+    actionText: actionText || 'Mehr erfahren'
   });
 } else {
-  items[index] = {
+  const nextItem = {
     ...items[index],
     name,
     description,
     icon,
     price: price ?? items[index].price
+  };
+
+  if (href) {
+    nextItem.href = href;
+  }
+
+  if (actionText) {
+    nextItem.actionText = actionText;
+  }
+
+  items[index] = {
+    ...nextItem
   };
 }
 

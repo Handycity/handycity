@@ -102,8 +102,8 @@ trustBar:
 # ------ Services ------
 
 services:
-  headline: Unsere Services
-  subheadline: Professionelle Reparatur für alle gängigen Geräte und Marken
+  headline: Ihr Service-Navigator
+  subheadline: Schnell zum passenden Weg - Reparatur-Check, Webshop oder direkte Anfrage in wenigen Klicks.
   items:
     - name: Display Reparatur
       description: Gebrochenes oder beschädigtes Display? Wir tauschen es schnell und fachgerecht aus.
@@ -486,12 +486,12 @@ pickup:
 
 willhaben:
   headline: Handy kaufen & verkaufen
-  description: Diese Angebote sind aktuell live im Handycity-Shop auf willhaben. Jede Karte verlinkt direkt zur Anzeige; für Reservierung, Eintausch oder Rückfragen können Sie uns zusätzlich direkt kontaktieren.
+  description: Diese Karten zeigen live synchronisierte Angebote aus dem Handycity-Willhaben-Shop. Mit einem Klick gelangen Sie direkt zur Anzeige; fuer Reservierung, Eintausch oder Rueckfragen erreichen Sie uns jederzeit.
   highlights:
     - Aktuelle Live-Angebote direkt aus dem Handycity-Shop
-    - Persönliche Beratung, Reservierung und Eintausch im Geschäft
+    - Regelmaessig synchronisierte Daten fuer hohe Aktualitaet
+    - Persoenliche Beratung, Reservierung und Eintausch im Geschaeft
     - Selbstabholung in Klagenfurt oder Versand je nach Anzeige
-    - Unterstützung bei Einrichtung und Datenübernahme auf Wunsch
   verifiedOn: 17. April 2026
   url: https://www.willhaben.at/iad/shop/handycity-ak-gmbh
   ctaText: Zum Willhaben-Shop
