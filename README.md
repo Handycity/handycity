@@ -35,6 +35,17 @@ public/
 
 Siehe [EDITING.md](EDITING.md) für die Anleitung.
 Siehe [OWNER_GUIDE.md](OWNER_GUIDE.md) für die vollständige Betreiber-Dokumentation mit Schritt-für-Schritt-Beispielen.
+Siehe [HOMEPAGE_FULL_OVERVIEW.md](HOMEPAGE_FULL_OVERVIEW.md) für die vollständige Leistungs- und Integrationsübersicht.
+Siehe [CUSTOMER_OVERVIEW.md](CUSTOMER_OVERVIEW.md) für die kundenfreundliche Übergabe-Zusammenfassung.
+
+## Recherche-Dateien
+
+Für die aktuelle Konkurrenz-/Förder-Recherche wurden folgende Dateien erzeugt:
+
+- `research/geraete-retter-relevante-geraete.md`
+- `research/phone-experts-repair-data.csv`
+- `research/phone-experts-repair-data.json`
+- `research/phone-experts-repair-data-summary.md`
 
 ## Owner Quick Start
 

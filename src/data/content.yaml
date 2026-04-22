@@ -102,57 +102,17 @@ trustBar:
 # ------ Services ------
 
 services:
-  headline: Ihr Service-Navigator
-  subheadline: Schnell zum passenden Weg - Reparatur-Check, Webshop oder direkte Anfrage in wenigen Klicks.
+  headline: "Unsere Services"
+  subheadline: "Professionelle Reparatur für alle gängigen Geräte und Marken"
   items:
-    - name: Display Reparatur
-      description: Gebrochenes oder beschädigtes Display? Wir tauschen es schnell und fachgerecht aus.
-      icon: smartphone
-      price: Preis auf Anfrage
-      href: "#preisrechner"
-      actionText: Zum Reparatur-Check
-    - name: Akku Tausch
-      description: Akku hält nicht mehr? Neuer Akku für längere Laufzeit – meist am selben Tag erledigt.
-      icon: battery-charging
-      price: Preis auf Anfrage
-      href: "#preisrechner"
-      actionText: Zum Reparatur-Check
-    - name: Kamera Reparatur
-      description: Unscharfe Bilder oder defekte Kamera? Wir reparieren Front- und Hauptkamera.
-      icon: camera
-      price: Preis auf Anfrage
-      href: "#preisrechner"
-      actionText: Zum Reparatur-Check
-    - name: Ladekonnektor
-      description: Handy lädt nicht mehr? Wir reparieren oder tauschen den Ladeanschluss.
-      icon: plug-zap
-      price: Preis auf Anfrage
-      href: "#preisrechner"
-      actionText: Zum Reparatur-Check
-    - name: Lautsprecher & Mikrofon
-      description: Kein Ton oder Gesprächspartner hört Sie nicht? Wir beheben Audio-Probleme.
-      icon: volume-2
-      price: Preis auf Anfrage
-      href: "#preisrechner"
-      actionText: Zum Reparatur-Check
-    - name: Datentransfer
-      description: Wechsel von Android zu iPhone oder umgekehrt – wir übertragen Ihre Daten sicher.
-      icon: repeat
-      price: Preis auf Anfrage
-      href: "#kontakt"
-      actionText: Datentransfer anfragen
-    - name: Handy An- & Verkauf
-      description: Wir kaufen und verkaufen Smartphones – direkt im Geschäft oder über unseren Willhaben-Auftritt.
-      icon: shopping-bag
-      price: ""
-      href: "#handy-kaufen"
-      actionText: Zum Webshop
-    - name: Hol & Bring Service
-      description: Wir holen Ihr Gerät ab und bringen es repariert zurück – innerhalb Klagenfurt.
-      icon: truck
-      price: €10 Pauschale
-      href: "#hol-bring-service"
-      actionText: Service ansehen
+    - { name: "Display Reparatur",       description: "Gebrochenes oder beschädigtes Display? Wir tauschen es schnell und fachgerecht aus.", icon: "smartphone",        price: "Preis auf Anfrage" }
+    - { name: "Akku Tausch",             description: "Akku hält nicht mehr? Neuer Akku für längere Laufzeit – meist am selben Tag erledigt.", icon: "battery-charging", price: "Preis auf Anfrage" }
+    - { name: "Kamera Reparatur",        description: "Unscharfe Bilder oder defekte Kamera? Wir reparieren Front- und Hauptkamera.",          icon: "camera",            price: "Preis auf Anfrage" }
+    - { name: "Ladekonnektor",           description: "Handy lädt nicht mehr? Wir reparieren oder tauschen den Ladeanschluss.",                icon: "plug-zap",          price: "Preis auf Anfrage" }
+    - { name: "Lautsprecher & Mikrofon", description: "Kein Ton oder Gesprächspartner hört Sie nicht? Wir beheben Audio-Probleme.",            icon: "volume-2",          price: "Preis auf Anfrage" }
+    - { name: "Datentransfer",           description: "Wechsel von Android zu iPhone oder umgekehrt – wir übertragen Ihre Daten sicher.",      icon: "repeat",            price: "Preis auf Anfrage" }
+    - { name: "Handy Verkauf",           description: "Entdecken Sie unsere Auswahl an Smartphones – im Geschäft oder auf Willhaben.",         icon: "shopping-bag",      price: "" }
+    - { name: "Hol & Bring Service",     description: "Wir holen Ihr Gerät ab und bringen es repariert zurück – innerhalb Klagenfurt.",        icon: "truck",             price: "€10 Pauschale" }
 
 # ------ Geraete-Retter-Praemie ------
 
@@ -280,192 +240,52 @@ reviews:
 # ------ Repair Price Calculator ------
 
 calculator:
-  headline: Reparatur-Check
-  subheadline: Marke, Modell und Schaden auswählen – der Richtpreis erscheint sofort.
-  helper: Wenn Ihr Modell nicht gelistet ist, rufen Sie kurz an. Wir prüfen Verfügbarkeit und Preis direkt.
-  resultTitle: Richtpreis
-  note: Alle Preise sind Richtwerte inkl. MwSt. Nach kurzer Diagnose nennen wir den finalen Preis transparent vor Reparaturbeginn.
-  ctaPrimaryText: Jetzt anrufen
-  ctaSecondaryText: Reparatur anfragen
-  subsidyBadge: Geräte-Retter-Prämie möglich
-  subsidyText: Je nach Reparatur sind bis zu 50 % Förderung bzw. bis zu EUR 130 Rückerstattung möglich.
+  headline: "Reparatur Preisrechner"
+  subheadline: "Wählen Sie Ihr Gerät und erfahren Sie sofort den Richtpreis"
   prices:
-    - brand: Apple
-      device: iPhone 15
-      repair: Display Reparatur
-      price: ab €149
-    - brand: Apple
-      device: iPhone 15
-      repair: Akku Tausch
-      price: ab €69
-    - brand: Apple
-      device: iPhone 15
-      repair: Kamera Reparatur
-      price: ab €89
-    - brand: Apple
-      device: iPhone 15
-      repair: Ladekonnektor
-      price: ab €69
-    - brand: Apple
-      device: iPhone 14
-      repair: Display Reparatur
-      price: ab €129
-    - brand: Apple
-      device: iPhone 14
-      repair: Akku Tausch
-      price: ab €59
-    - brand: Apple
-      device: iPhone 14
-      repair: Kamera Reparatur
-      price: ab €79
-    - brand: Apple
-      device: iPhone 14
-      repair: Ladekonnektor
-      price: ab €59
-    - brand: Apple
-      device: iPhone 13
-      repair: Display Reparatur
-      price: ab €109
-    - brand: Apple
-      device: iPhone 13
-      repair: Akku Tausch
-      price: ab €49
-    - brand: Apple
-      device: iPhone 13
-      repair: Kamera Reparatur
-      price: ab €69
-    - brand: Apple
-      device: iPhone 12
-      repair: Display Reparatur
-      price: ab €89
-    - brand: Apple
-      device: iPhone 12
-      repair: Akku Tausch
-      price: ab €45
-    - brand: Apple
-      device: iPhone SE
-      repair: Display Reparatur
-      price: ab €59
-    - brand: Apple
-      device: iPhone SE
-      repair: Akku Tausch
-      price: ab €39
-    - brand: Apple
-      device: iPad
-      repair: Display Reparatur
-      price: ab €119
-    - brand: Apple
-      device: iPad
-      repair: Akku Tausch
-      price: ab €79
-    - brand: Samsung
-      device: Galaxy S24
-      repair: Display Reparatur
-      price: ab €179
-    - brand: Samsung
-      device: Galaxy S24
-      repair: Akku Tausch
-      price: ab €59
-    - brand: Samsung
-      device: Galaxy S24
-      repair: Kamera Reparatur
-      price: ab €79
-    - brand: Samsung
-      device: Galaxy S23
-      repair: Display Reparatur
-      price: ab €149
-    - brand: Samsung
-      device: Galaxy S23
-      repair: Akku Tausch
-      price: ab €55
-    - brand: Samsung
-      device: Galaxy S22
-      repair: Display Reparatur
-      price: ab €119
-    - brand: Samsung
-      device: Galaxy S22
-      repair: Akku Tausch
-      price: ab €49
-    - brand: Samsung
-      device: Galaxy A-Serie
-      repair: Display Reparatur
-      price: ab €69
-    - brand: Samsung
-      device: Galaxy A-Serie
-      repair: Akku Tausch
-      price: ab €39
-    - brand: Samsung
-      device: Galaxy Tab
-      repair: Display Reparatur
-      price: ab €99
-    - brand: Samsung
-      device: Galaxy Tab
-      repair: Akku Tausch
-      price: ab €59
-    - brand: Huawei
-      device: P-Serie
-      repair: Display Reparatur
-      price: ab €89
-    - brand: Huawei
-      device: P-Serie
-      repair: Akku Tausch
-      price: ab €45
-    - brand: Huawei
-      device: Mate-Serie
-      repair: Display Reparatur
-      price: ab €99
-    - brand: Huawei
-      device: Mate-Serie
-      repair: Akku Tausch
-      price: ab €49
-    - brand: Xiaomi
-      device: Redmi Note
-      repair: Display Reparatur
-      price: ab €59
-    - brand: Xiaomi
-      device: Redmi Note
-      repair: Akku Tausch
-      price: ab €35
-    - brand: Xiaomi
-      device: Mi-Serie
-      repair: Display Reparatur
-      price: ab €79
-    - brand: Xiaomi
-      device: Mi-Serie
-      repair: Akku Tausch
-      price: ab €39
-    - brand: OnePlus
-      device: OnePlus (alle)
-      repair: Display Reparatur
-      price: ab €89
-    - brand: OnePlus
-      device: OnePlus (alle)
-      repair: Akku Tausch
-      price: ab €45
-    - brand: Google
-      device: Pixel (alle)
-      repair: Display Reparatur
-      price: ab €99
-    - brand: Google
-      device: Pixel (alle)
-      repair: Akku Tausch
-      price: ab €49
-    - brand: Sony
-      device: Xperia (alle)
-      repair: Display Reparatur
-      price: ab €89
-    - brand: Sony
-      device: Xperia (alle)
-      repair: Akku Tausch
-      price: ab €45
-    - brand: Nokia
-      device: Nokia (alle)
-      repair: Display Reparatur
-      price: ab €69
-    - brand: Nokia
-      device: Nokia (alle)
-      repair: Akku Tausch
-      price: ab €39
+    - { brand: "Apple",   device: "iPhone 15", repair: "Display Reparatur", price: "ab €149" }
+    - { brand: "Apple",   device: "iPhone 15", repair: "Akku Tausch",       price: "ab €69"  }
+    - { brand: "Apple",   device: "iPhone 15", repair: "Kamera Reparatur",  price: "ab €89"  }
+    - { brand: "Apple",   device: "iPhone 15", repair: "Ladekonnektor",     price: "ab €69"  }
+    - { brand: "Apple",   device: "iPhone 14", repair: "Display Reparatur", price: "ab €129" }
+    - { brand: "Apple",   device: "iPhone 14", repair: "Akku Tausch",       price: "ab €59"  }
+    - { brand: "Apple",   device: "iPhone 14", repair: "Kamera Reparatur",  price: "ab €79"  }
+    - { brand: "Apple",   device: "iPhone 14", repair: "Ladekonnektor",     price: "ab €59"  }
+    - { brand: "Apple",   device: "iPhone 13", repair: "Display Reparatur", price: "ab €109" }
+    - { brand: "Apple",   device: "iPhone 13", repair: "Akku Tausch",       price: "ab €49"  }
+    - { brand: "Apple",   device: "iPhone 13", repair: "Kamera Reparatur",  price: "ab €69"  }
+    - { brand: "Apple",   device: "iPhone 12", repair: "Display Reparatur", price: "ab €89"  }
+    - { brand: "Apple",   device: "iPhone 12", repair: "Akku Tausch",       price: "ab €45"  }
+    - { brand: "Apple",   device: "iPhone SE", repair: "Display Reparatur", price: "ab €59"  }
+    - { brand: "Apple",   device: "iPhone SE", repair: "Akku Tausch",       price: "ab €39"  }
+    - { brand: "Apple",   device: "iPad",      repair: "Display Reparatur", price: "ab €119" }
+    - { brand: "Apple",   device: "iPad",      repair: "Akku Tausch",       price: "ab €79"  }
+    - { brand: "Samsung", device: "Galaxy S24",    repair: "Display Reparatur", price: "ab €179" }
+    - { brand: "Samsung", device: "Galaxy S24",    repair: "Akku Tausch",       price: "ab €59"  }
+    - { brand: "Samsung", device: "Galaxy S24",    repair: "Kamera Reparatur",  price: "ab €79"  }
+    - { brand: "Samsung", device: "Galaxy S23",    repair: "Display Reparatur", price: "ab €149" }
+    - { brand: "Samsung", device: "Galaxy S23",    repair: "Akku Tausch",       price: "ab €55"  }
+    - { brand: "Samsung", device: "Galaxy S22",    repair: "Display Reparatur", price: "ab €119" }
+    - { brand: "Samsung", device: "Galaxy S22",    repair: "Akku Tausch",       price: "ab €49"  }
+    - { brand: "Samsung", device: "Galaxy A-Serie", repair: "Display Reparatur", price: "ab €69"  }
+    - { brand: "Samsung", device: "Galaxy A-Serie", repair: "Akku Tausch",       price: "ab €39"  }
+    - { brand: "Samsung", device: "Galaxy Tab",     repair: "Display Reparatur", price: "ab €99"  }
+    - { brand: "Samsung", device: "Galaxy Tab",     repair: "Akku Tausch",       price: "ab €59"  }
+    - { brand: "Huawei",  device: "P-Serie",    repair: "Display Reparatur", price: "ab €89" }
+    - { brand: "Huawei",  device: "P-Serie",    repair: "Akku Tausch",       price: "ab €45" }
+    - { brand: "Huawei",  device: "Mate-Serie", repair: "Display Reparatur", price: "ab €99" }
+    - { brand: "Huawei",  device: "Mate-Serie", repair: "Akku Tausch",       price: "ab €49" }
+    - { brand: "Xiaomi",  device: "Redmi Note", repair: "Display Reparatur", price: "ab €59" }
+    - { brand: "Xiaomi",  device: "Redmi Note", repair: "Akku Tausch",       price: "ab €35" }
+    - { brand: "Xiaomi",  device: "Mi-Serie",   repair: "Display Reparatur", price: "ab €79" }
+    - { brand: "Xiaomi",  device: "Mi-Serie",   repair: "Akku Tausch",       price: "ab €39" }
+    - { brand: "OnePlus", device: "OnePlus (alle)", repair: "Display Reparatur", price: "ab €89" }
+    - { brand: "OnePlus", device: "OnePlus (alle)", repair: "Akku Tausch",       price: "ab €45" }
+    - { brand: "Google",  device: "Pixel (alle)",   repair: "Display Reparatur", price: "ab €99" }
+    - { brand: "Google",  device: "Pixel (alle)",   repair: "Akku Tausch",       price: "ab €49" }
+    - { brand: "Sony",    device: "Xperia (alle)",  repair: "Display Reparatur", price: "ab €89" }
+    - { brand: "Sony",    device: "Xperia (alle)",  repair: "Akku Tausch",       price: "ab €45" }
+    - { brand: "Nokia",   device: "Nokia (alle)",   repair: "Display Reparatur", price: "ab €69" }
 
 # ------ Hol & Bring Service ------
 

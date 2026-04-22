@@ -1,0 +1,174 @@
+---
+interface ServiceItem { name: string; description: string; icon: string; price: string; }
+interface Props {
+  services: { headline: string; subheadline: string; items: ServiceItem[]; };
+}
+
+const { services } = Astro.props;
+
+const chipEmojiMap: Record<string, string> = {
+  'smartphone': '📱',
+  'battery-charging': '🔋',
+  'camera': '📸',
+  'plug-zap': '🔌',
+  'volume-2': '🔊',
+  'shopping-bag': '🛍️',
+  'repeat': '🔄',
+  'truck': '🚚',
+};
+
+const intents = [
+  {
+    key: 'repair',
+    title: 'Reparieren',
+    emoji: '🔧',
+    gradient: 'from-navy to-navy-light',
+    href: '#preisrechner',
+    cta: 'Preis checken',
+    tagline: 'Display, Akku, Kamera & mehr — Preis sofort ausrechnen.',
+    icons: ['smartphone', 'battery-charging', 'camera', 'plug-zap', 'volume-2'],
+    cardClass: 'group relative flex flex-col overflow-hidden rounded-2xl p-5 md:p-6 bg-white border border-slate-200 hover:border-transparent hover:ring-2 hover:ring-navy/35 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-4 focus-visible:ring-navy/35',
+  },
+  {
+    key: 'buy',
+    title: 'Handy kaufen',
+    emoji: '🛍️',
+    gradient: 'from-pink-500 to-rose-500',
+    href: '#handy-kaufen',
+    cta: 'Zum Shop',
+    tagline: 'Geprüfte Smartphones im Shop oder auf Willhaben.',
+    icons: ['shopping-bag'],
+    cardClass: 'group relative flex flex-col overflow-hidden rounded-2xl p-5 md:p-6 bg-white border border-slate-200 hover:border-transparent hover:ring-2 hover:ring-rose-400/45 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-4 focus-visible:ring-rose-400/45',
+  },
+  {
+    key: 'service',
+    title: 'Extra-Service',
+    emoji: '🚚',
+    gradient: 'from-teal-500 to-cyan-600',
+    href: '#kontakt',
+    cta: 'Anfragen',
+    tagline: 'Datentransfer & Hol- / Bring-Dienst in Klagenfurt.',
+    icons: ['repeat', 'truck'],
+    cardClass: 'group relative flex flex-col overflow-hidden rounded-2xl p-5 md:p-6 bg-white border border-slate-200 hover:border-transparent hover:ring-2 hover:ring-cyan-500/45 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-4 focus-visible:ring-cyan-500/45',
+  },
+] as const;
+
+const cards = intents.map((intent) => {
+  const chips = intent.icons
+    .map((icon) => {
+      const item = services.items.find((service) => service.icon === icon);
+      return item
+        ? {
+            icon,
+            emoji: chipEmojiMap[icon] ?? '🔧',
+            label: item.name,
+          }
+        : null;
+    })
+    .filter((chip): chip is { icon: string; emoji: string; label: string } => chip !== null);
+
+  return {
+    ...intent,
+    chips,
+    optionLabel: chips.length === 1 ? '1 Option' : `${chips.length} Optionen`,
+  };
+});
+---
+<section id="services-hub" class="py-12 md:py-16 bg-white">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex items-end justify-between gap-4 mb-6 md:mb-8">
+      <div>
+        <h2 class="text-2xl md:text-3xl font-bold text-navy flex items-center gap-2">
+          {services.headline}
+          <span class="animate-wave" aria-hidden="true">👋</span>
+        </h2>
+        <p class="mt-2 text-sm md:text-base text-slate-600">Wähle, was du brauchst — ein Klick genügt.</p>
+      </div>
+
+      <a
+        href="#kontakt"
+        class="hidden md:inline-flex items-center gap-1.5 text-sm font-semibold text-navy hover:text-navy-light transition-colors"
+      >
+        Beratung
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+      {cards.map((card) => (
+        <a href={card.href} class={card.cardClass}>
+          <span class={`absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r ${card.gradient}`}></span>
+
+          <div class="flex items-start gap-3">
+            <span
+              class={`inline-flex w-10 h-10 items-center justify-center rounded-xl bg-gradient-to-br ${card.gradient} text-white text-lg shadow-md group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300`}
+              aria-hidden="true"
+            >
+              {card.emoji}
+            </span>
+
+            <div>
+              <h3 class="text-lg md:text-xl font-bold text-slate-900">{card.title}</h3>
+              <p class="mt-1 text-sm text-slate-600 leading-snug">{card.tagline}</p>
+            </div>
+          </div>
+
+          <div class="mt-4 flex flex-wrap gap-1.5">
+            {card.chips.map((chip) => (
+              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 text-xs font-medium">
+                <span aria-hidden="true">{chip.emoji}</span>
+                <span>{chip.label}</span>
+              </span>
+            ))}
+          </div>
+
+          <div class="border-t border-slate-100 pt-3 mt-4 flex items-center justify-between gap-3">
+            <span class="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-900">
+              {card.cta}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14" />
+                <path d="m13 5 7 7-7 7" />
+              </svg>
+            </span>
+
+            <span class="text-xs font-medium text-slate-500">{card.optionLabel}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="md:hidden mt-6 text-center text-sm">
+      <a href="#kontakt" class="font-medium text-navy hover:text-navy-light transition-colors">Nicht sicher? Wir beraten dich →</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes wave {
+    0%, 60%, 100% { transform: rotate(0deg); }
+    10%, 30% { transform: rotate(14deg); }
+    20% { transform: rotate(-8deg); }
+    40% { transform: rotate(-4deg); }
+    50% { transform: rotate(10deg); }
+  }
+
+  .animate-wave {
+    display: inline-block;
+    transform-origin: 70% 70%;
+    animation: wave 3.5s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-wave { animation: none !important; }
+  }
+</style>
