@@ -1,0 +1,72 @@
+---
+interface TrustBarItem {
+  title: string;
+  text: string;
+  icon: string;
+}
+
+interface ReviewsData {
+  googleUrl: string;
+  averageRating: number;
+  totalReviews: number;
+}
+
+interface Props {
+  trustBar: {
+    googleLabel: string;
+    googleHint: string;
+    items: TrustBarItem[];
+  };
+  reviews: ReviewsData;
+}
+
+const { trustBar, reviews } = Astro.props;
+const hasGoogleRating = reviews.averageRating > 0 && reviews.totalReviews > 0;
+
+const iconPaths: Record<string, string> = {
+  'zap': '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
+  'shield-check': '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/>',
+  'leaf': '<path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 4.5 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>',
+  'map-pin': '<path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>'
+};
+---
+<section id="trustbar" class="border-y border-slate-200 bg-white py-8 md:py-10">
+  <div class="mx-auto grid max-w-7xl gap-5 px-4 lg:grid-cols-[0.78fr_1.22fr] lg:items-stretch">
+    <a
+      href={reviews.googleUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="flex items-center gap-4 rounded-3xl border border-slate-200 bg-slate-50 px-5 py-5 transition hover:-translate-y-0.5 hover:border-navy/30 hover:shadow-lg hover:shadow-slate-200/60"
+      aria-label="Google Bewertungen öffnen"
+    >
+      <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white text-yellow-400 shadow-sm shadow-slate-200">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 fill-current" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <div class="min-w-0">
+        <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">{trustBar.googleLabel}</p>
+        {hasGoogleRating ? (
+          <div class="mt-1">
+            <p class="text-2xl font-bold text-slate-900">{reviews.averageRating.toFixed(1)} / 5</p>
+            <p class="text-sm text-slate-600">{reviews.totalReviews} Bewertungen auf Google</p>
+          </div>
+        ) : (
+          <p class="mt-1 text-sm leading-6 text-slate-600">{trustBar.googleHint}</p>
+        )}
+      </div>
+    </a>
+
+    <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      {trustBar.items.map((item) => (
+        <div class="rounded-3xl border border-slate-200 bg-white px-5 py-5 shadow-sm shadow-slate-100">
+          <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-navy/10">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-navy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <Fragment set:html={iconPaths[item.icon] || iconPaths['zap']} />
+            </svg>
+          </div>
+          <p class="mt-4 text-base font-semibold text-slate-900">{item.title}</p>
+          <p class="mt-2 text-sm leading-6 text-slate-600">{item.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

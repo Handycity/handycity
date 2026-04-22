@@ -1,5 +1,5 @@
 {
-  "name": "stellar-saturn",
+  "name": "handycity-website",
   "type": "module",
   "version": "0.0.1",
   "engines": {
@@ -9,9 +9,24 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "reviews:backup": "node scripts/save-google-reviews-backup.mjs",
+    "content:validate": "node scripts/validate-content.mjs",
+    "assets:validate": "node scripts/validate-assets.mjs",
+    "owner:update:business": "node scripts/update-business-info.mjs",
+    "owner:update:hours": "node scripts/update-hours.mjs",
+    "owner:update:price": "node scripts/update-price-entry.mjs",
+    "owner:update:service": "node scripts/update-service-item.mjs",
+    "owner:update:offers": "node scripts/update-offers.mjs",
+    "owner:sync:willhaben": "node scripts/sync-willhaben-offers.mjs",
+    "owner:sync:google": "node scripts/save-google-reviews-backup.mjs"
   },
   "dependencies": {
-    "astro": "^6.1.4"
+    "@alpinejs/collapse": "^3.15.11",
+    "@tailwindcss/vite": "^4.2.2",
+    "alpinejs": "^3.15.11",
+    "astro": "^6.1.4",
+    "js-yaml": "^4.1.1",
+    "tailwindcss": "^4.2.2"
   }
 }

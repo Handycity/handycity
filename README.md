@@ -1,43 +1,70 @@
-# Astro Starter Kit: Minimal
+# Handycity.at — Website
+
+Moderne, statische Website für Handycity Klagenfurt. Gebaut mit Astro + Tailwind CSS.
+
+## Setup
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev      # Dev-Server auf http://localhost:4321
+npm run build    # Produktions-Build in dist/
+npm run preview  # Build-Preview starten
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Projektstruktur
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```
+src/
+├── components/     # Astro-Komponenten (Header, Hero, Services, etc.)
+├── data/
+│   └── content.yaml  # ← ALLE editierbaren Inhalte
+├── layouts/
+│   └── Layout.astro  # Basis-Layout mit SEO + Schema.org
+├── pages/
+│   └── index.astro   # Hauptseite
+└── styles/
+    └── global.css     # Tailwind + Design-Tokens
+public/
+├── CNAME             # Custom Domain
+├── robots.txt
+├── sitemap.xml
+└── images/
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Inhalte bearbeiten
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Siehe [EDITING.md](EDITING.md) für die Anleitung.
+Siehe [OWNER_GUIDE.md](OWNER_GUIDE.md) für die vollständige Betreiber-Dokumentation mit Schritt-für-Schritt-Beispielen.
+Siehe [HOMEPAGE_FULL_OVERVIEW.md](HOMEPAGE_FULL_OVERVIEW.md) für die vollständige Leistungs- und Integrationsübersicht.
+Siehe [CUSTOMER_OVERVIEW.md](CUSTOMER_OVERVIEW.md) für die kundenfreundliche Übergabe-Zusammenfassung.
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Recherche-Dateien
 
-## 🧞 Commands
+Für die aktuelle Konkurrenz-/Förder-Recherche wurden folgende Dateien erzeugt:
 
-All commands are run from the root of the project, from a terminal:
+- `research/geraete-retter-relevante-geraete.md`
+- `research/phone-experts-repair-data.csv`
+- `research/phone-experts-repair-data.json`
+- `research/phone-experts-repair-data-summary.md`
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Owner Quick Start
 
-## 👀 Want to learn more?
+Fuer den Betreiber gibt es jetzt GitHub-native Pflegewege ohne externes CMS:
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- `Actions -> Owner Update Business Info`
+- `Actions -> Owner Update Opening Hours`
+- `Actions -> Owner Update Price Entry`
+- `Actions -> Owner Update Service Item`
+- `Actions -> Owner Update Offers and Pickup`
+
+Diese Workflows schreiben die geprueften Aenderungen direkt nach `main` und loesen danach automatisch Build und Deploy aus.
+
+Bilder werden direkt ueber `public/images/` gepflegt. Details stehen in `public/images/README.md`.
+
+## Deployment
+
+Push auf `main` → GitHub Actions baut und deployed automatisch auf GitHub Pages.
+
+## Architektur-Entscheidungen
+
+Siehe [DECISIONS.md](DECISIONS.md).

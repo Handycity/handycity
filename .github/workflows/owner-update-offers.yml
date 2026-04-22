@@ -1,0 +1,98 @@
+name: Owner Update Offers and Pickup
+
+on:
+  workflow_dispatch:
+    inputs:
+      willhaben_headline:
+        description: "Headline fuer Kaufen/Verkaufen"
+        required: false
+        type: string
+      willhaben_description:
+        description: "Beschreibung fuer die Willhaben-Sektion"
+        required: false
+        type: string
+      willhaben_verified_on:
+        description: "Geprueft-am-Datum fuer die Willhaben-Sektion"
+        required: false
+        type: string
+      willhaben_url:
+        description: "Willhaben-Shop-URL"
+        required: false
+        type: string
+      willhaben_cta_text:
+        description: "Buttontext fuer Willhaben"
+        required: false
+        type: string
+      willhaben_contact_cta_text:
+        description: "Buttontext fuer Kontakt in der Willhaben-Sektion"
+        required: false
+        type: string
+      willhaben_highlights:
+        description: "Highlights getrennt durch Zeilenumbrueche oder |"
+        required: false
+        type: string
+      pickup_headline:
+        description: "Headline fuer Hol- und Bring-Service"
+        required: false
+        type: string
+      pickup_description:
+        description: "Beschreibung fuer Hol- und Bring-Service"
+        required: false
+        type: string
+      pickup_badge:
+        description: "Badge-Text, z. B. 10 EUR Pauschale innerhalb Klagenfurt"
+        required: false
+        type: string
+      pickup_cta_text:
+        description: "Buttontext fuer Hol- und Bring-Service"
+        required: false
+        type: string
+      pickup_steps:
+        description: "Schritte im Format Titel :: Text, getrennt durch Zeilenumbrueche oder |"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - id: update
+        env:
+          WILLHABEN_HEADLINE: ${{ inputs.willhaben_headline }}
+          WILLHABEN_DESCRIPTION: ${{ inputs.willhaben_description }}
+          WILLHABEN_VERIFIED_ON: ${{ inputs.willhaben_verified_on }}
+          WILLHABEN_URL: ${{ inputs.willhaben_url }}
+          WILLHABEN_CTA_TEXT: ${{ inputs.willhaben_cta_text }}
+          WILLHABEN_CONTACT_CTA_TEXT: ${{ inputs.willhaben_contact_cta_text }}
+          WILLHABEN_HIGHLIGHTS: ${{ inputs.willhaben_highlights }}
+          PICKUP_HEADLINE: ${{ inputs.pickup_headline }}
+          PICKUP_DESCRIPTION: ${{ inputs.pickup_description }}
+          PICKUP_BADGE: ${{ inputs.pickup_badge }}
+          PICKUP_CTA_TEXT: ${{ inputs.pickup_cta_text }}
+          PICKUP_STEPS: ${{ inputs.pickup_steps }}
+        run: |
+          npm run owner:update:offers
+          npm run content:validate
+          npm run assets:validate
+          ASTRO_TELEMETRY_DISABLED=1 PUBLIC_SITE_BASE=/handycity/ npm run build
+
+          if git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/content.yaml
+          git commit -m "chore: update offers and pickup content"
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"

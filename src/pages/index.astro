@@ -1,17 +1,71 @@
 ---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import TrustBar from '../components/TrustBar.astro';
+import PickupService from '../components/PickupService.astro';
+import ServicesHub from '../components/ServicesHub.astro';
+import PriceCalculator from '../components/PriceCalculator.astro';
+import GeraeteRetterPraemie from '../components/GeraeteRetterPraemie.astro';
+import Brands from '../components/Brands.astro';
+import Trust from '../components/Trust.astro';
+import Process from '../components/Process.astro';
+import GoogleReviews from '../components/GoogleReviews.astro';
+import WillhabenShop from '../components/WillhabenShop.astro';
+import FAQ from '../components/FAQ.astro';
+import Location from '../components/Location.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+import { fetchGoogleReviews } from '../lib/google-places-reviews';
 
+import { readFileSync } from 'fs';
+import yaml from 'js-yaml';
+
+const raw = readFileSync('src/data/content.yaml', 'utf-8');
+const content = yaml.load(raw) as Record<string, any>;
+
+let liveReviews = null;
+try {
+  liveReviews = await fetchGoogleReviews({
+    apiKey: import.meta.env.GOOGLE_PLACES_API_KEY,
+    placeId: import.meta.env.GOOGLE_PLACE_ID,
+    placeQuery: `${content.company.name}, ${content.company.address.street}, ${content.company.address.zip} ${content.company.address.city}`,
+    latitude: Number(content.company?.geo?.lat),
+    longitude: Number(content.company?.geo?.lng),
+    language: 'de',
+    maxItems: 6,
+  });
+} catch (error) {
+  console.error('Google reviews fetch failed:', error);
+}
+
+const reviewsData = liveReviews
+  ? {
+      ...content.reviews,
+      ...liveReviews,
+    }
+  : content.reviews;
 ---
+<Layout>
+  <Header company={content.company} />
+  <main id="main">
+    <Hero hero={content.hero} company={content.company} hours={content.hours} />
+    <TrustBar trustBar={content.trustBar} reviews={reviewsData} />
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+    <div id="services" aria-hidden="true"></div>
+    <ServicesHub services={content.services} />
+    <PriceCalculator calculator={content.calculator} />
+
+    <GeraeteRetterPraemie data={content.geraeteRetterPraemie} />
+    <Trust trust={content.trust} />
+    <Process process={content.process} />
+    <WillhabenShop willhaben={content.willhaben} />
+    <PickupService pickup={content.pickup} />
+    <GoogleReviews reviews={reviewsData} />
+    <FAQ faq={content.faq} />
+    <Contact contact={content.contact} company={content.company} />
+    <Location company={content.company} hours={content.hours} />
+    <Brands brands={content.brands} />
+  </main>
+  <Footer company={content.company} social={content.social} />
+</Layout>

@@ -1,0 +1,73 @@
+name: Owner Update Opening Hours
+
+on:
+  workflow_dispatch:
+    inputs:
+      hours_mo:
+        description: "Montag, z. B. 9:00-18:00 oder Geschlossen"
+        required: true
+        type: string
+      hours_di:
+        description: "Dienstag"
+        required: true
+        type: string
+      hours_mi:
+        description: "Mittwoch"
+        required: true
+        type: string
+      hours_do:
+        description: "Donnerstag"
+        required: true
+        type: string
+      hours_fr:
+        description: "Freitag"
+        required: true
+        type: string
+      hours_sa:
+        description: "Samstag"
+        required: true
+        type: string
+      hours_so:
+        description: "Sonntag"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - id: update
+        env:
+          HOURS_MO: ${{ inputs.hours_mo }}
+          HOURS_DI: ${{ inputs.hours_di }}
+          HOURS_MI: ${{ inputs.hours_mi }}
+          HOURS_DO: ${{ inputs.hours_do }}
+          HOURS_FR: ${{ inputs.hours_fr }}
+          HOURS_SA: ${{ inputs.hours_sa }}
+          HOURS_SO: ${{ inputs.hours_so }}
+        run: |
+          npm run owner:update:hours
+          npm run content:validate
+          npm run assets:validate
+          ASTRO_TELEMETRY_DISABLED=1 PUBLIC_SITE_BASE=/handycity/ npm run build
+
+          if git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/content.yaml
+          git commit -m "chore: update opening hours"
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
