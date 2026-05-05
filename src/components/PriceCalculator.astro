@@ -232,9 +232,7 @@ const progressSteps = [
 </section>
 
 <script define:vars={{ baseUrl }}>
-  import Alpine from 'alpinejs';
-
-  const brandLogoMap: Record<string, string> = {
+  const brandLogoMap = {
     'Apple': `${baseUrl}brands/apple.svg`,
     'Samsung': `${baseUrl}brands/samsung.svg`,
     'Huawei': `${baseUrl}brands/huawei.svg`,
@@ -245,43 +243,45 @@ const progressSteps = [
     'Nokia': `${baseUrl}brands/nokia.svg`,
   };
 
-  const brandEmojiMap: Record<string, string> = {
+  const brandEmojiMap = {
     'Apple': '🍎', 'Samsung': '📱', 'Huawei': '🌐', 'Xiaomi': '🔧',
     'OnePlus': '⚡', 'Google': '🔍', 'Sony': '🎮', 'Nokia': '📞',
   };
 
-  const repairEmojiMap: Record<string, string> = {
+  const repairEmojiMap = {
     'Display': '🖥️', 'Akku': '🔋', 'Kamera': '📸',
     'Ladebuchse': '🔌', 'Lautsprecher': '🔊', 'Backcover': '🛡️',
   };
 
-  Alpine.data('priceCalculator', (allPrices) => ({
-    allPrices,
-    step: 1,
-    selectedBrand: '',
-    selectedDevice: '',
-    selectedRepair: '',
-    brandLogo(brand) {
-      return brandLogoMap[brand] ?? '';
-    },
-    brandEmoji(brand)  {
-      return brandEmojiMap[brand] ?? '📱';
-    },
-    repairEmoji(repair){
-      const normalizedRepair = String(repair || '').toLowerCase();
-      const match = Object.entries(repairEmojiMap).find(([key]) => normalizedRepair.includes(key.toLowerCase()));
-      return match ? match[1] : '🔧';
-    },
-    get brands()  { return [...new Set(this.allPrices.map((p) => p.brand))]; },
-    get devices() { return [...new Set(this.allPrices.filter((p) => p.brand === this.selectedBrand).map((p) => p.device))]; },
-    get repairs() { return this.allPrices.filter((p) => p.brand === this.selectedBrand && p.device === this.selectedDevice); },
-    selectBrand(b)  { this.selectedBrand = b; this.selectedDevice = ''; this.selectedRepair = ''; this.step = 2; },
-    selectDevice(d) { this.selectedDevice = d; this.selectedRepair = ''; this.step = 3; },
-    goBack(toStep)  {
-      if (toStep <= 1) { this.selectedBrand = ''; this.selectedDevice = ''; this.selectedRepair = ''; this.step = 1; }
-      else if (toStep <= 2) { this.selectedDevice = ''; this.selectedRepair = ''; this.step = 2; }
-    },
-  }));
+  document.addEventListener('alpine:init', () => {
+    window.Alpine.data('priceCalculator', (allPrices) => ({
+      allPrices,
+      step: 1,
+      selectedBrand: '',
+      selectedDevice: '',
+      selectedRepair: '',
+      brandLogo(brand) {
+        return brandLogoMap[brand] ?? '';
+      },
+      brandEmoji(brand)  {
+        return brandEmojiMap[brand] ?? '📱';
+      },
+      repairEmoji(repair){
+        const normalizedRepair = String(repair || '').toLowerCase();
+        const match = Object.entries(repairEmojiMap).find(([key]) => normalizedRepair.includes(key.toLowerCase()));
+        return match ? match[1] : '🔧';
+      },
+      get brands()  { return [...new Set(this.allPrices.map((p) => p.brand))]; },
+      get devices() { return [...new Set(this.allPrices.filter((p) => p.brand === this.selectedBrand).map((p) => p.device))]; },
+      get repairs() { return this.allPrices.filter((p) => p.brand === this.selectedBrand && p.device === this.selectedDevice); },
+      selectBrand(b)  { this.selectedBrand = b; this.selectedDevice = ''; this.selectedRepair = ''; this.step = 2; },
+      selectDevice(d) { this.selectedDevice = d; this.selectedRepair = ''; this.step = 3; },
+      goBack(toStep)  {
+        if (toStep <= 1) { this.selectedBrand = ''; this.selectedDevice = ''; this.selectedRepair = ''; this.step = 1; }
+        else if (toStep <= 2) { this.selectedDevice = ''; this.selectedRepair = ''; this.step = 2; }
+      },
+    }));
+  });
 </script>
 
 <style>

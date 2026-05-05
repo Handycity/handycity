@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import alpineScriptUrl from '../scripts/alpine.ts?url';
 import { readFileSync } from 'fs';
 import yaml from 'js-yaml';
 
@@ -103,12 +104,6 @@ const schemaFAQ = {
   <slot />
 
   <!-- Alpine.js -->
-  <script>
-    import Alpine from 'alpinejs';
-    import collapse from '@alpinejs/collapse';
-    Alpine.plugin(collapse);
-    window.Alpine = Alpine;
-    Alpine.start();
-  </script>
+  <script type="module" src={alpineScriptUrl}></script>
 </body>
 </html>
