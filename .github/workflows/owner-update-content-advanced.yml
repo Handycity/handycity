@@ -1,0 +1,87 @@
+name: Owner Update Content Advanced
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "Operation: set, remove, list_upsert, list_remove"
+        required: true
+        type: choice
+        options:
+          - set
+          - remove
+          - list_upsert
+          - list_remove
+      target_path:
+        description: "Pfad in content.yaml, z. B. faq.items oder company.address.street"
+        required: true
+        type: string
+      value_json:
+        description: "JSON-Wert fuer set/list_*. Bei set sind auch reine Strings erlaubt."
+        required: false
+        type: string
+      key_fields:
+        description: "Schluesselfelder fuer list_* (kommagetrennt), z. B. brand,device,repair"
+        required: false
+        type: string
+      commit_message:
+        description: "Optionaler Commit-Text"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - id: update
+        env:
+          ACTION: ${{ inputs.action }}
+          TARGET_PATH: ${{ inputs.target_path }}
+          VALUE_JSON: ${{ inputs.value_json }}
+          KEY_FIELDS: ${{ inputs.key_fields }}
+          COMMIT_MESSAGE: ${{ inputs.commit_message }}
+        run: |
+          npm run owner:update:content
+          npm run content:validate
+          npm run assets:validate
+          ASTRO_TELEMETRY_DISABLED=1 PUBLIC_SITE_BASE=/handycity/ npm run build
+
+          if git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            {
+              echo "## Owner Update Content Advanced"
+              echo ""
+              echo "- Result: no file changes detected"
+              echo "- Action: \`${ACTION}\`"
+              echo "- Target path: \`${TARGET_PATH}\`"
+            } >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/content.yaml
+          if [ -n "${COMMIT_MESSAGE}" ]; then
+            git commit -m "${COMMIT_MESSAGE}"
+          else
+            git commit -m "chore: owner advanced content update"
+          fi
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+          {
+            echo "## Owner Update Content Advanced"
+            echo ""
+            echo "- Result: content updated and pushed to \`main\`"
+            echo "- Action: \`${ACTION}\`"
+            echo "- Target path: \`${TARGET_PATH}\`"
+            echo "- Next: verify \`Deploy to GitHub Pages\` run"
+          } >> "$GITHUB_STEP_SUMMARY"

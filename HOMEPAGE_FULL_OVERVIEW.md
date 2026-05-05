@@ -125,6 +125,9 @@ Workflows in `.github/workflows/`:
 - `owner-update-price-entry.yml`
 - `owner-update-service-item.yml`
 - `owner-update-offers.yml`
+- `owner-update-faq-item.yml`
+- `owner-update-willhaben-offer.yml`
+- `owner-update-content-advanced.yml` (generischer Vollzugriff auf beliebige `content.yaml`-Pfade inkl. Add/Edit/Delete)
 
 Diese Workflows:
 - nehmen Eingaben im Action-Form entgegen
@@ -143,6 +146,7 @@ Diese Workflows:
 - Preisrechner-Einträge hinzufügen/entfernen
 - Services ändern
 - Willhaben-Textbausteine und Pickup-Bereich ändern
+- Beliebige weitere Inhalte über `Owner Update Content Advanced` add/edit/delete pflegen (z. B. FAQ, Rechtstexte, Social-Links, Headline-Felder)
 - Willhaben-Angebote und Google-Reviews automatisiert synchronisieren
 - Jede Änderung via CI validieren und automatisch deployen
 
@@ -154,4 +158,3 @@ Diese Workflows:
 - Layout/SEO: `src/layouts/Layout.astro`
 - Owner-Skripte: `scripts/*.mjs`
 - Automationen: `.github/workflows/*.yml`
-

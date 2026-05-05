@@ -76,79 +76,99 @@ const cards = intents.map((intent) => {
 ---
 <section id="services-hub" class="py-12 md:py-16 bg-white">
   <div class="max-w-7xl mx-auto px-4">
-    <div class="flex items-end justify-between gap-4 mb-6 md:mb-8">
-      <div>
-        <h2 class="text-2xl md:text-3xl font-bold text-navy flex items-center gap-2">
-          {services.headline}
-          <span class="animate-wave" aria-hidden="true">👋</span>
-        </h2>
-        <p class="mt-2 text-sm md:text-base text-slate-600">Wähle, was du brauchst — ein Klick genügt.</p>
+    <div class="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
+      <aside class="order-2 lg:order-1">
+        <div class="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-slate-50 p-3 shadow-sm shadow-slate-200/60">
+          <img
+            src="/images/shop-innen-right.avif"
+            alt="Handycity Servicebereich im Shop"
+            class="h-[300px] w-full rounded-[1.25rem] object-cover sm:h-[360px] lg:h-[612px]"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="px-3 pb-1 pt-3">
+            <p class="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">Interaktive Service-Navigation</p>
+            <p class="mt-1 text-sm font-semibold text-slate-900">Schnell zum passenden Service</p>
+          </div>
+        </div>
+      </aside>
+
+      <div class="order-1 lg:order-2">
+        <div class="flex items-end justify-between gap-4 mb-6 md:mb-8">
+          <div>
+            <h2 class="text-2xl md:text-3xl font-bold text-navy flex items-center gap-2">
+              {services.headline}
+              <span class="animate-wave" aria-hidden="true">👋</span>
+            </h2>
+            <p class="mt-2 text-sm md:text-base text-slate-600">Wähle, was du brauchst — ein Klick genügt.</p>
+          </div>
+
+          <a
+            href="#kontakt"
+            class="hidden md:inline-flex items-center gap-1.5 text-sm font-semibold text-navy hover:text-navy-light transition-colors"
+          >
+            Beratung
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+          {cards.map((card) => (
+            <a href={card.href} class={card.cardClass}>
+              <span class={`absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r ${card.gradient}`}></span>
+
+              <div class="flex items-start gap-3">
+                <span
+                  class={`inline-flex w-10 h-10 items-center justify-center rounded-xl bg-gradient-to-br ${card.gradient} text-white text-lg shadow-md group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300`}
+                  aria-hidden="true"
+                >
+                  {card.emoji}
+                </span>
+
+                <div>
+                  <h3 class="text-lg md:text-xl font-bold text-slate-900">{card.title}</h3>
+                  <p class="mt-1 text-sm text-slate-600 leading-snug">{card.tagline}</p>
+                </div>
+              </div>
+
+              <div class="mt-4 flex flex-wrap gap-1.5">
+                {card.chips.map((chip) => (
+                  <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 text-xs font-medium">
+                    <span aria-hidden="true">{chip.emoji}</span>
+                    <span>{chip.label}</span>
+                  </span>
+                ))}
+              </div>
+
+              <div class="border-t border-slate-100 pt-3 mt-4 flex items-center justify-between gap-3">
+                <span class="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-900">
+                  {card.cta}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M5 12h14" />
+                    <path d="m13 5 7 7-7 7" />
+                  </svg>
+                </span>
+
+                <span class="text-xs font-medium text-slate-500">{card.optionLabel}</span>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <div class="md:hidden mt-6 text-center text-sm">
+          <a href="#kontakt" class="font-medium text-navy hover:text-navy-light transition-colors">Nicht sicher? Wir beraten dich →</a>
+        </div>
       </div>
-
-      <a
-        href="#kontakt"
-        class="hidden md:inline-flex items-center gap-1.5 text-sm font-semibold text-navy hover:text-navy-light transition-colors"
-      >
-        Beratung
-        <span aria-hidden="true">→</span>
-      </a>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
-      {cards.map((card) => (
-        <a href={card.href} class={card.cardClass}>
-          <span class={`absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r ${card.gradient}`}></span>
-
-          <div class="flex items-start gap-3">
-            <span
-              class={`inline-flex w-10 h-10 items-center justify-center rounded-xl bg-gradient-to-br ${card.gradient} text-white text-lg shadow-md group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300`}
-              aria-hidden="true"
-            >
-              {card.emoji}
-            </span>
-
-            <div>
-              <h3 class="text-lg md:text-xl font-bold text-slate-900">{card.title}</h3>
-              <p class="mt-1 text-sm text-slate-600 leading-snug">{card.tagline}</p>
-            </div>
-          </div>
-
-          <div class="mt-4 flex flex-wrap gap-1.5">
-            {card.chips.map((chip) => (
-              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 text-xs font-medium">
-                <span aria-hidden="true">{chip.emoji}</span>
-                <span>{chip.label}</span>
-              </span>
-            ))}
-          </div>
-
-          <div class="border-t border-slate-100 pt-3 mt-4 flex items-center justify-between gap-3">
-            <span class="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-900">
-              {card.cta}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <path d="M5 12h14" />
-                <path d="m13 5 7 7-7 7" />
-              </svg>
-            </span>
-
-            <span class="text-xs font-medium text-slate-500">{card.optionLabel}</span>
-          </div>
-        </a>
-      ))}
-    </div>
-
-    <div class="md:hidden mt-6 text-center text-sm">
-      <a href="#kontakt" class="font-medium text-navy hover:text-navy-light transition-colors">Nicht sicher? Wir beraten dich →</a>
     </div>
   </div>
 </section>

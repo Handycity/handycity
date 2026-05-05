@@ -22,7 +22,7 @@ const progressSteps = [
   { index: 3, label: 'Reparatur' },
 ];
 ---
-<section id="preisrechner" class="py-16 md:py-24 bg-gradient-to-b from-slate-50 to-white">
+<section id="preisrechner" class="py-16 md:py-24 bg-white">
   <div class="max-w-5xl mx-auto px-4">
     <div class="text-center mb-8 md:mb-10">
       <div class="text-4xl animate-bounce-slow" aria-hidden="true">🔧</div>
@@ -88,7 +88,17 @@ const progressSteps = [
               class="border-2 rounded-2xl px-4 py-5 font-medium bg-white hover:-translate-y-1 hover:shadow-md transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-navy/40"
               :class="selectedBrand === brand ? 'border-navy bg-navy/5 text-navy shadow-md shadow-navy/10' : 'border-slate-100 hover:border-navy/40'"
             >
-              <div class="text-2xl mb-2" x-text="brandEmoji(brand)" aria-hidden="true"></div>
+              <div class="mb-2 flex h-8 items-center justify-center">
+                <img
+                  x-show="brandLogo(brand)"
+                  :src="brandLogo(brand)"
+                  :alt="brand + ' Logo'"
+                  class="h-7 w-auto object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span x-show="!brandLogo(brand)" class="text-2xl" x-text="brandEmoji(brand)" aria-hidden="true"></span>
+              </div>
               <div class="text-sm" x-text="brand"></div>
             </button>
           </template>
@@ -149,7 +159,15 @@ const progressSteps = [
 
         <div class="mt-4 mb-5 flex flex-wrap items-center justify-center gap-2">
           <span class="inline-flex items-center gap-1.5 bg-navy/10 text-navy text-xs font-semibold px-3 py-1 rounded-full">
-            <span x-text="brandEmoji(selectedBrand)" aria-hidden="true"></span>
+            <img
+              x-show="brandLogo(selectedBrand)"
+              :src="brandLogo(selectedBrand)"
+              :alt="selectedBrand + ' Logo'"
+              class="h-4 w-auto object-contain"
+              loading="lazy"
+              decoding="async"
+            />
+            <span x-show="!brandLogo(selectedBrand)" x-text="brandEmoji(selectedBrand)" aria-hidden="true"></span>
             <span x-text="selectedBrand"></span>
           </span>
           <span class="text-slate-400" aria-hidden="true">→</span>
@@ -215,6 +233,17 @@ const progressSteps = [
 <script>
   import Alpine from 'alpinejs';
 
+  const brandLogoMap: Record<string, string> = {
+    'Apple': '/brands/apple.svg',
+    'Samsung': '/brands/samsung.svg',
+    'Huawei': '/brands/huawei.svg',
+    'Xiaomi': '/brands/xiaomi.svg',
+    'OnePlus': '/brands/oneplus.svg',
+    'Google': '/brands/google.svg',
+    'Sony': '/brands/sony.svg',
+    'Nokia': '/brands/nokia.svg',
+  };
+
   const brandEmojiMap: Record<string, string> = {
     'Apple': '🍎', 'Samsung': '📱', 'Huawei': '🌐', 'Xiaomi': '🔧',
     'OnePlus': '⚡', 'Google': '🔍', 'Sony': '🎮', 'Nokia': '📞',
@@ -231,6 +260,9 @@ const progressSteps = [
     selectedBrand: '',
     selectedDevice: '',
     selectedRepair: '',
+    brandLogo(brand) {
+      return brandLogoMap[brand] ?? '';
+    },
     brandEmoji(brand)  {
       return brandEmojiMap[brand] ?? '📱';
     },

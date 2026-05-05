@@ -53,6 +53,9 @@ Fuer die haeufigsten Aenderungen gibt es vorbereitete Workflows unter `Actions`.
 - `Owner Update Price Entry`
 - `Owner Update Service Item`
 - `Owner Update Offers and Pickup`
+- `Owner Update FAQ Item`
+- `Owner Update Willhaben Offer`
+- `Owner Update Content Advanced`
 - `Sync Willhaben Offers`
 - `Sync Google Reviews Backup`
 
@@ -72,6 +75,10 @@ Danach passiert der Rest automatisch:
 - die Aenderung wird direkt nach `main` geschrieben
 - GitHub Pages deployt die neue Version
 
+Hinweis:
+
+- Mit `Owner Update Content Advanced` koennen beliebige Felder und Listen in `content.yaml` per Action gepflegt werden (setzen, hinzufuegen/aktualisieren, loeschen).
+
 ### Wo pruefen?
 
 - Repository -> `Actions`
@@ -81,7 +88,7 @@ Danach passiert der Rest automatisch:
 ## 3. Direkter Weg: Inhalte direkt in GitHub aendern
 --------------------------------------------------
 
-Wenn Sie etwas aendern wollen, das nicht ueber einen Workflow abgedeckt ist, koennen Sie weiterhin direkt in GitHub bearbeiten.
+Wenn Sie etwas aendern wollen, das nicht ueber die Standard-Workflows abgedeckt ist, nutzen Sie zuerst `Owner Update Content Advanced`. Direkte YAML-Bearbeitung bleibt als Fallback moeglich.
 
 ### So gehen Sie vor
 

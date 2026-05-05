@@ -11,6 +11,11 @@ on:
       - Owner Update Price Entry
       - Owner Update Service Item
       - Owner Update Offers and Pickup
+      - Owner Update FAQ Item
+      - Owner Update Willhaben Offer
+      - Owner Update Content Advanced
+      - Sync Willhaben Offers
+      - Sync Google Reviews Backup
     types:
       - completed
 

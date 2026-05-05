@@ -16,6 +16,10 @@ Die Website bleibt auf GitHub Pages. Es gibt daher kein separates Admin-System a
 - entweder ueber vorbereitete `Actions`
 - oder direkt ueber Dateien im Repository
 
+Fuer den operativen End-to-End-Ablauf (inkl. Publish und Rollback) siehe zusaetzlich:
+
+- `OWNER_INTERACTION_RUNBOOK.md`
+
 --------------------------------------------------
 ## 1. Grundprinzip
 --------------------------------------------------
@@ -89,6 +93,9 @@ Die wichtigsten Workflows liegen in:
 - `.github/workflows/owner-update-price-entry.yml`
 - `.github/workflows/owner-update-service-item.yml`
 - `.github/workflows/owner-update-offers.yml`
+- `.github/workflows/owner-update-faq-item.yml`
+- `.github/workflows/owner-update-willhaben-offer.yml`
+- `.github/workflows/owner-update-content-advanced.yml`
 - `.github/workflows/owner-sync-willhaben.yml`
 - `.github/workflows/owner-sync-google-reviews.yml`
 - `.github/workflows/validate-site.yml`
@@ -468,7 +475,77 @@ Zurueckgebracht :: Ihr Geraet kommt repariert und einsatzbereit wieder zu Ihnen.
 ```
 
 --------------------------------------------------
-### 5.6 Sync Willhaben Offers
+### 5.6 Owner Update FAQ Item
+--------------------------------------------------
+
+Workflow:
+
+- `Actions -> Owner Update FAQ Item`
+
+Damit aenderbar:
+
+- FAQ-Eintrag anlegen
+- FAQ-Eintrag aktualisieren
+- FAQ-Eintrag entfernen
+
+Felder:
+
+- `action`: `upsert` oder `remove`
+- `question`
+- `answer` (bei `upsert` erforderlich)
+
+Beispiele:
+
+- Neu/Update:
+  - `action`: `upsert`
+  - `question`: `Bietet ihr Express-Service?`
+  - `answer`: `Ja, je nach Ersatzteil oft am selben Tag.`
+
+- Entfernen:
+  - `action`: `remove`
+  - `question`: `Bietet ihr Express-Service?`
+
+--------------------------------------------------
+### 5.7 Owner Update Willhaben Offer
+--------------------------------------------------
+
+Workflow:
+
+- `Actions -> Owner Update Willhaben Offer`
+
+Damit aenderbar:
+
+- Einzelnes Angebot anlegen
+- Einzelnes Angebot aktualisieren
+- Einzelnes Angebot entfernen
+
+Felder:
+
+- `action`: `upsert` oder `remove`
+- `url` (empfohlener Schluessel) oder `title`
+- bei neuem `upsert`: Titel, Preis, Bilddaten und Meta-Felder
+
+Beispiele:
+
+- Neu:
+  - `action`: `upsert`
+  - `title`: `iPhone 14 128GB Black Neu/Haendler`
+  - `price`: `EUR 499`
+  - `url`: `https://www.willhaben.at/iad/kaufen-und-verkaufen/d/...`
+  - `image`: `https://cache.willhaben.at/...`
+  - `image_alt`: `iPhone 14 Black von Handycity auf willhaben`
+  - `listed_at`: `05.05.2026`
+  - `storage`: `128 GB`
+  - `unlocked`: `Ja`
+  - `condition`: `Neu`
+  - `delivery`: `Selbstabholung, Versand`
+
+- Entfernen:
+  - `action`: `remove`
+  - `url`: `https://www.willhaben.at/iad/kaufen-und-verkaufen/d/...`
+
+--------------------------------------------------
+### 5.8 Sync Willhaben Offers
 --------------------------------------------------
 
 Workflow:
@@ -492,7 +569,7 @@ Damit aenderbar:
 - Zeitplan laufen lassen, damit die Sektion automatisch aktuell bleibt
 
 --------------------------------------------------
-### 5.7 Sync Google Reviews Backup
+### 5.9 Sync Google Reviews Backup
 --------------------------------------------------
 
 Workflow:
@@ -517,10 +594,51 @@ Damit aenderbar:
 - `max_items` (optional)
 
 --------------------------------------------------
+### 5.10 Owner Update Content Advanced
+--------------------------------------------------
+
+Workflow:
+
+- `Actions -> Owner Update Content Advanced`
+
+Damit aenderbar:
+
+- beliebige Felder in `src/data/content.yaml`
+- Listen-Eintraege hinzufuegen/aktualisieren (`list_upsert`)
+- Listen-Eintraege loeschen (`list_remove`)
+- beliebige Felder entfernen (`remove`)
+
+Felder:
+
+- `action`: `set` | `remove` | `list_upsert` | `list_remove`
+- `target_path`: Pfad in `content.yaml`, z. B. `faq.items` oder `company.address.street`
+- `value_json`: JSON-Wert fuer die Aktion
+- `key_fields`: Schluesselfelder fuer Listenabgleich, z. B. `brand,device,repair`
+
+Beispiele:
+
+1. FAQ-Eintrag hinzufuegen:
+- `action`: `list_upsert`
+- `target_path`: `faq.items`
+- `key_fields`: `question`
+- `value_json`: `{"question":"Bietet ihr Express-Service?","answer":"Ja, je nach Ersatzteil oft am selben Tag."}`
+
+2. Rechtstext aendern:
+- `action`: `set`
+- `target_path`: `impressum.content`
+- `value_json`: `"Neuer Impressumstext ..."`
+
+3. Preiszeile loeschen:
+- `action`: `list_remove`
+- `target_path`: `calculator.prices`
+- `key_fields`: `brand,device,repair`
+- `value_json`: `{"brand":"Apple","device":"iPhone 15","repair":"Akku Tausch"}`
+
+--------------------------------------------------
 ## 6. Direkte Bearbeitung in `content.yaml`
 --------------------------------------------------
 
-Wenn kein passender Workflow existiert, erfolgt die Pflege direkt ueber:
+Wenn Sie keinen Action-Workflow verwenden moechten, erfolgt die Pflege direkt ueber:
 
 - `src/data/content.yaml`
 
@@ -995,7 +1113,11 @@ Pruefen:
 
 ### Ich will FAQ aendern
 
-- `src/data/content.yaml`
+- `Actions -> Owner Update FAQ Item`
+
+### Ich will ein einzelnes Willhaben-Angebot anlegen, aendern oder loeschen
+
+- `Actions -> Owner Update Willhaben Offer`
 
 ### Ich will Bewertungen aendern
 
