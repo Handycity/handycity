@@ -125,18 +125,20 @@ services:
       description: Kein Ton oder Gesprächspartner hört Sie nicht? Wir beheben Audio-Probleme.
       icon: volume-2
       price: Preis auf Anfrage
-    - name: Datentransfer
-      description: Wechsel von Android zu iPhone oder umgekehrt – wir übertragen Ihre Daten sicher.
-      icon: repeat
-      price: Preis auf Anfrage
+    # Temporarily disabled: Datentransfer / Extra-Service card
+    # - name: Datentransfer
+    #   description: Wechsel von Android zu iPhone oder umgekehrt – wir übertragen Ihre Daten sicher.
+    #   icon: repeat
+    #   price: Preis auf Anfrage
     - name: Handy Verkauf
       description: Entdecken Sie unsere Auswahl an Smartphones – im Geschäft oder auf Willhaben.
       icon: shopping-bag
       price: ""
-    - name: Hol & Bring Service
-      description: Wir holen Ihr Gerät ab und bringen es repariert zurück – innerhalb Klagenfurt.
-      icon: truck
-      price: €10 Pauschale
+    # Temporarily disabled: Hol & Bring Service
+    # - name: Hol & Bring Service
+    #   description: Wir holen Ihr Gerät ab und bringen es repariert zurück – innerhalb Klagenfurt.
+    #   icon: truck
+    #   price: €10 Pauschale
 
 # ------ Geraete-Retter-Praemie ------
 
@@ -205,7 +207,7 @@ process:
       icon: phone
     - step: "2"
       title: Gerät vorbeibringen
-      description: Kommen Sie zu uns am Kardinalplatz 6 – oder nutzen Sie unseren Hol & Bring Service.
+      description: Kommen Sie zu uns am Kardinalplatz 6 und wir prüfen Ihr Gerät direkt vor Ort.
       icon: map-pin
     - step: "3"
       title: Diagnose & Reparatur
@@ -11360,20 +11362,20 @@ calculator:
       repair: Display Reparatur
       price: ab €69
 
-# ------ Hol & Bring Service ------
-
-pickup:
-  headline: Hol & Bring Service
-  description: Wenn Sie keine Zeit für den Weg ins Geschäft haben, holen wir Ihr Gerät innerhalb von Klagenfurt ab, reparieren es und bringen es zuverlässig zurück.
-  badge: 10 EUR Pauschale innerhalb Klagenfurt
-  ctaText: Abholung anfragen
-  steps:
-    - title: Abholung anfragen
-      text: Kurz telefonisch oder über das Kontaktformular melden.
-    - title: Reparatur im Shop
-      text: Wir prüfen das Gerät, besprechen den Preis und reparieren es fachgerecht.
-    - title: Zurückgebracht
-      text: Ihr Gerät kommt repariert und einsatzbereit wieder zu Ihnen.
+# ------ Hol & Bring Service (temporarily disabled) ------
+#
+# pickup:
+#   headline: Hol & Bring Service
+#   description: Wenn Sie keine Zeit für den Weg ins Geschäft haben, holen wir Ihr Gerät innerhalb von Klagenfurt ab, reparieren es und bringen es zuverlässig zurück.
+#   badge: 10 EUR Pauschale innerhalb Klagenfurt
+#   ctaText: Abholung anfragen
+#   steps:
+#     - title: Abholung anfragen
+#       text: Kurz telefonisch oder über das Kontaktformular melden.
+#     - title: Reparatur im Shop
+#       text: Wir prüfen das Gerät, besprechen den Preis und reparieren es fachgerecht.
+#     - title: Zurückgebracht
+#       text: Ihr Gerät kommt repariert und einsatzbereit wieder zu Ihnen.
 
 # ------ Willhaben / Handy kaufen ------
 
@@ -11457,8 +11459,9 @@ faq:
       answer: Wir reparieren Smartphones und Tablets aller gängigen Marken – Apple, Samsung, Huawei, Xiaomi und viele mehr.
     - question: Was kostet eine Reparatur?
       answer: Die Kosten hängen vom Gerät und Schaden ab. Kontaktieren Sie uns für ein unverbindliches Angebot. Mit der Geräte-Retter-Prämie sparen Sie bis zu 50 %.
-    - question: Bietet ihr einen Hol & Bring Service an?
-      answer: Ja! Innerhalb von Klagenfurt holen wir Ihr Gerät für nur €10 Pauschale ab und bringen es repariert zurück.
+    # Temporarily disabled: Hol & Bring FAQ
+    # - question: Bietet ihr einen Hol & Bring Service an?
+    #   answer: Ja! Innerhalb von Klagenfurt holen wir Ihr Gerät für nur €10 Pauschale ab und bringen es repariert zurück.
     - question: Kann ich bei euch auch ein Handy kaufen oder verkaufen?
       answer: Ja, Sie können bei uns Smartphones kaufen und Geräte direkt im Geschäft zum Ankauf anbieten.
 

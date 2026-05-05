@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
 import TrustBar from '../components/TrustBar.astro';
-import PickupService from '../components/PickupService.astro';
+// import PickupService from '../components/PickupService.astro';
 import ServicesHub from '../components/ServicesHub.astro';
 import PriceCalculator from '../components/PriceCalculator.astro';
 import GeraeteRetterPraemie from '../components/GeraeteRetterPraemie.astro';
@@ -60,7 +60,7 @@ const reviewsData = liveReviews
     <GeraeteRetterPraemie data={content.geraeteRetterPraemie} />
     <Trust trust={content.trust} />
     <WillhabenShop willhaben={content.willhaben} />
-    <PickupService pickup={content.pickup} />
+    {/* <PickupService pickup={content.pickup} /> */}
     <GoogleReviews reviews={reviewsData} />
     <FAQ faq={content.faq} />
     <Contact contact={content.contact} company={content.company} />

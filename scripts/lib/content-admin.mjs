@@ -202,8 +202,10 @@ export function validateContent(content) {
     errors.push('faq.items must be an array.');
   }
 
-  if (!Array.isArray(content.pickup?.steps) || content.pickup.steps.length === 0) {
-    errors.push('pickup.steps must contain at least one step.');
+  if (content.pickup !== undefined) {
+    if (!Array.isArray(content.pickup?.steps) || content.pickup.steps.length === 0) {
+      errors.push('pickup.steps must contain at least one step.');
+    }
   }
 
   if (!Array.isArray(content.willhaben?.highlights) || content.willhaben.highlights.length === 0) {

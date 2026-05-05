@@ -6,16 +6,17 @@ interface Props {
   };
 }
 const { brands } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL;
 
 const brandLogoMap: Record<string, string> = {
-  Apple: '/brands/apple.svg',
-  Samsung: '/brands/samsung.svg',
-  Huawei: '/brands/huawei.svg',
-  Xiaomi: '/brands/xiaomi.svg',
-  OnePlus: '/brands/oneplus.svg',
-  Google: '/brands/google.svg',
-  Sony: '/brands/sony.svg',
-  Nokia: '/brands/nokia.svg',
+  Apple: `${baseUrl}brands/apple.svg`,
+  Samsung: `${baseUrl}brands/samsung.svg`,
+  Huawei: `${baseUrl}brands/huawei.svg`,
+  Xiaomi: `${baseUrl}brands/xiaomi.svg`,
+  OnePlus: `${baseUrl}brands/oneplus.svg`,
+  Google: `${baseUrl}brands/google.svg`,
+  Sony: `${baseUrl}brands/sony.svg`,
+  Nokia: `${baseUrl}brands/nokia.svg`,
 };
 ---
 <section class="py-12 bg-slate-50 border-y border-slate-200">

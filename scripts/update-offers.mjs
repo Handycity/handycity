@@ -14,28 +14,30 @@ if (willhabenHighlights.length) {
   content.willhaben.highlights = willhabenHighlights;
 }
 
-applyIfSet(content.pickup, 'headline', process.env.PICKUP_HEADLINE);
-applyIfSet(content.pickup, 'description', process.env.PICKUP_DESCRIPTION);
-applyIfSet(content.pickup, 'badge', process.env.PICKUP_BADGE);
-applyIfSet(content.pickup, 'ctaText', process.env.PICKUP_CTA_TEXT);
+if (content.pickup) {
+  applyIfSet(content.pickup, 'headline', process.env.PICKUP_HEADLINE);
+  applyIfSet(content.pickup, 'description', process.env.PICKUP_DESCRIPTION);
+  applyIfSet(content.pickup, 'badge', process.env.PICKUP_BADGE);
+  applyIfSet(content.pickup, 'ctaText', process.env.PICKUP_CTA_TEXT);
 
-const pickupStepsInput = parseListInput(process.env.PICKUP_STEPS);
-if (pickupStepsInput.length) {
-  const pickupSteps = pickupStepsInput.map((line) => {
-    const [title, text] = line.split(/\s*::\s*/, 2);
-    return {
-      title: title?.trim() || '',
-      text: text?.trim() || ''
-    };
-  });
+  const pickupStepsInput = parseListInput(process.env.PICKUP_STEPS);
+  if (pickupStepsInput.length) {
+    const pickupSteps = pickupStepsInput.map((line) => {
+      const [title, text] = line.split(/\s*::\s*/, 2);
+      return {
+        title: title?.trim() || '',
+        text: text?.trim() || ''
+      };
+    });
 
-  if (!pickupSteps.every((step) => step.title && step.text)) {
-    throw new Error('PICKUP_STEPS must use the format "Titel :: Text", one entry per line.');
+    if (!pickupSteps.every((step) => step.title && step.text)) {
+      throw new Error('PICKUP_STEPS must use the format "Titel :: Text", one entry per line.');
+    }
+
+    content.pickup.steps = pickupSteps;
   }
-
-  content.pickup.steps = pickupSteps;
 }
 
 failOnValidationErrors(content);
 await writeContent(content);
-console.log('Updated offers and pickup content.');
+console.log('Updated offers content.');

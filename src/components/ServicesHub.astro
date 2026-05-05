@@ -5,6 +5,7 @@ interface Props {
 }
 
 const { services } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL;
 
 const chipEmojiMap: Record<string, string> = {
   'smartphone': '📱',
@@ -13,8 +14,6 @@ const chipEmojiMap: Record<string, string> = {
   'plug-zap': '🔌',
   'volume-2': '🔊',
   'shopping-bag': '🛍️',
-  'repeat': '🔄',
-  'truck': '🚚',
 };
 
 const intents = [
@@ -39,17 +38,6 @@ const intents = [
     tagline: 'Geprüfte Smartphones im Shop oder auf Willhaben.',
     icons: ['shopping-bag'],
     cardClass: 'group relative flex flex-col overflow-hidden rounded-2xl p-5 md:p-6 bg-white border border-slate-200 hover:border-transparent hover:ring-2 hover:ring-rose-400/45 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-4 focus-visible:ring-rose-400/45',
-  },
-  {
-    key: 'service',
-    title: 'Extra-Service',
-    emoji: '🚚',
-    gradient: 'from-teal-500 to-cyan-600',
-    href: '#kontakt',
-    cta: 'Anfragen',
-    tagline: 'Datentransfer & Hol- / Bring-Dienst in Klagenfurt.',
-    icons: ['repeat', 'truck'],
-    cardClass: 'group relative flex flex-col overflow-hidden rounded-2xl p-5 md:p-6 bg-white border border-slate-200 hover:border-transparent hover:ring-2 hover:ring-cyan-500/45 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-4 focus-visible:ring-cyan-500/45',
   },
 ] as const;
 
@@ -80,7 +68,7 @@ const cards = intents.map((intent) => {
       <aside class="order-2 lg:order-1">
         <div class="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-slate-50 p-3 shadow-sm shadow-slate-200/60">
           <img
-            src="/images/shop-innen-right.avif"
+            src={`${baseUrl}images/shop-innen-right.avif`}
             alt="Handycity Servicebereich im Shop"
             class="h-[300px] w-full rounded-[1.25rem] object-cover sm:h-[360px] lg:h-[612px]"
             loading="lazy"
@@ -112,7 +100,7 @@ const cards = intents.map((intent) => {
           </a>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
           {cards.map((card) => (
             <a href={card.href} class={card.cardClass}>
               <span class={`absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r ${card.gradient}`}></span>
