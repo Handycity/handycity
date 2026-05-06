@@ -125,20 +125,10 @@ services:
       description: Kein Ton oder Gesprächspartner hört Sie nicht? Wir beheben Audio-Probleme.
       icon: volume-2
       price: Preis auf Anfrage
-    # Temporarily disabled: Datentransfer / Extra-Service card
-    # - name: Datentransfer
-    #   description: Wechsel von Android zu iPhone oder umgekehrt – wir übertragen Ihre Daten sicher.
-    #   icon: repeat
-    #   price: Preis auf Anfrage
     - name: Handy Verkauf
       description: Entdecken Sie unsere Auswahl an Smartphones – im Geschäft oder auf Willhaben.
       icon: shopping-bag
       price: ""
-    # Temporarily disabled: Hol & Bring Service
-    # - name: Hol & Bring Service
-    #   description: Wir holen Ihr Gerät ab und bringen es repariert zurück – innerhalb Klagenfurt.
-    #   icon: truck
-    #   price: €10 Pauschale
 
 # ------ Geraete-Retter-Praemie ------
 
@@ -11362,21 +11352,6 @@ calculator:
       repair: Display Reparatur
       price: ab €69
 
-# ------ Hol & Bring Service (temporarily disabled) ------
-#
-# pickup:
-#   headline: Hol & Bring Service
-#   description: Wenn Sie keine Zeit für den Weg ins Geschäft haben, holen wir Ihr Gerät innerhalb von Klagenfurt ab, reparieren es und bringen es zuverlässig zurück.
-#   badge: 10 EUR Pauschale innerhalb Klagenfurt
-#   ctaText: Abholung anfragen
-#   steps:
-#     - title: Abholung anfragen
-#       text: Kurz telefonisch oder über das Kontaktformular melden.
-#     - title: Reparatur im Shop
-#       text: Wir prüfen das Gerät, besprechen den Preis und reparieren es fachgerecht.
-#     - title: Zurückgebracht
-#       text: Ihr Gerät kommt repariert und einsatzbereit wieder zu Ihnen.
-
 # ------ Willhaben / Handy kaufen ------
 
 willhaben:
@@ -11387,11 +11362,61 @@ willhaben:
     - Regelmaessig synchronisierte Daten fuer hohe Aktualitaet
     - Persoenliche Beratung, Reservierung und Eintausch im Geschaeft
     - Selbstabholung in Klagenfurt oder Versand je nach Anzeige
-  verifiedOn: 17. April 2026
+  verifiedOn: 6. Mai 2026
   url: https://www.willhaben.at/iad/shop/handycity-ak-gmbh
   ctaText: Zum Willhaben-Shop
   contactCtaText: Gerät anfragen
   offers:
+    - title: Apple iPhone 12 64GB White Neu/Händler
+      price: € 369,90
+      url: https://www.willhaben.at/iad/kaufen-und-verkaufen/d/apple-iphone-12-64gb-white-neu-haendler-1575571676/
+      image: https://cache.willhaben.at/mmo/6/157/557/1676_-186322744_n.jpg
+      imageAlt: Apple iPhone 12 64GB White Neu/Händler von Handycity auf willhaben
+      listedAt: 23.04.2026
+      storage: 64 GB
+      unlocked: Ja
+      condition: Neu
+      delivery: Selbstabholung, Versand
+    - title: Apple iPhone Air 256GB Black Neu/Händler
+      price: € 999,90
+      url: https://www.willhaben.at/iad/kaufen-und-verkaufen/d/apple-iphone-air-256gb-black-neu-haendler-1825341841/
+      image: https://cache.willhaben.at/mmo/1/182/534/1841_-156838688_n.jpg
+      imageAlt: Apple iPhone Air 256GB Black Neu/Händler von Handycity auf willhaben
+      listedAt: 23.04.2026
+      storage: 256 GB
+      unlocked: Ja
+      condition: Neu
+      delivery: Selbstabholung, Versand
+    - title: Samsung S23 128GB Green Neu/Händler
+      price: € 469
+      url: https://www.willhaben.at/iad/kaufen-und-verkaufen/d/samsung-s23-128gb-green-neu-haendler-1212821411/
+      image: https://cache.willhaben.at/mmo/1/121/282/1411_1604442506_n.jpg
+      imageAlt: Samsung S23 128GB Green Neu/Händler von Handycity auf willhaben
+      listedAt: 23.04.2026
+      storage: 128 GB
+      unlocked: Ja
+      condition: Neu
+      delivery: Selbstabholung, Versand
+    - title: Samsung S26 512GB Black Neu/Händler
+      price: € 1.099,90
+      url: https://www.willhaben.at/iad/kaufen-und-verkaufen/d/samsung-s26-512gb-black-neu-haendler-1916459356/
+      image: https://cache.willhaben.at/mmo/6/191/645/9356_1691343020_n.jpg
+      imageAlt: Samsung S26 512GB Black Neu/Händler von Handycity auf willhaben
+      listedAt: 23.04.2026
+      storage: ab 512 GB
+      unlocked: Ja
+      condition: Neu
+      delivery: Selbstabholung, Versand
+    - title: Samsung S26 Ultra 256GB Black Neu/Händler
+      price: € 1.399,90
+      url: https://www.willhaben.at/iad/kaufen-und-verkaufen/d/samsung-s26-ultra-256gb-black-neu-haendler-1873813641/
+      image: https://cache.willhaben.at/mmo/1/187/381/3641_-1753100470_n.jpg
+      imageAlt: Samsung S26 Ultra 256GB Black Neu/Händler von Handycity auf willhaben
+      listedAt: 22.04.2026
+      storage: 256 GB
+      unlocked: Ja
+      condition: Neu
+      delivery: Selbstabholung, Versand
     - title: Xiaomi Redmi Note 15 Pro+ Black 8GB Ram 256 GB Speicherplatz Neu/Händler
       price: € 399
       url: https://www.willhaben.at/iad/kaufen-und-verkaufen/d/xiaomi-redmi-note-15-pro-black-8gb-ram-256-gb-speicherplatz-neu-haendler-839911287/
@@ -11413,36 +11438,6 @@ willhaben:
       condition: Gebraucht
       delivery: Selbstabholung, Versand
       note: Neuer Akku
-    - title: iPhone 12 64GB White Neu/Händler
-      price: € 369,90
-      url: https://www.willhaben.at/iad/kaufen-und-verkaufen/d/iphone-12-64gb-white-neu-haendler-956042433/
-      image: https://cache.willhaben.at/mmo/3/956/042/433_130080724.jpg
-      imageAlt: iPhone 12 64GB White Neu/Händler von Handycity auf willhaben
-      listedAt: 09.03.2026
-      storage: 64 GB
-      unlocked: Ja
-      condition: Neu
-      delivery: Selbstabholung, Versand
-    - title: Samsung S23 128GB Green Neu/Händler
-      price: € 469
-      url: https://www.willhaben.at/iad/kaufen-und-verkaufen/d/samsung-s23-128gb-green-neu-haendler-2099057942/
-      image: https://cache.willhaben.at/mmo/2/209/905/7942_544271083.jpg
-      imageAlt: Samsung S23 128GB Green Neu/Händler von Handycity auf willhaben
-      listedAt: 09.03.2026
-      storage: 128 GB
-      unlocked: Ja
-      condition: Neu
-      delivery: Selbstabholung, Versand
-    - title: iPhone 16e 256GB Black Neu/Händler
-      price: € 729
-      url: https://www.willhaben.at/iad/kaufen-und-verkaufen/d/iphone-16e-256gb-black-neu-haendler-1183800738/
-      image: https://cache.willhaben.at/mmo/8/118/380/0738_-1067652391.jpg
-      imageAlt: iPhone 16e 256GB Black Neu/Händler von Handycity auf willhaben
-      listedAt: 09.03.2026
-      storage: 256 GB
-      unlocked: Ja
-      condition: Neu
-      delivery: Selbstabholung, Versand
 
 # ------ FAQ ------
 
@@ -11459,9 +11454,6 @@ faq:
       answer: Wir reparieren Smartphones und Tablets aller gängigen Marken – Apple, Samsung, Huawei, Xiaomi und viele mehr.
     - question: Was kostet eine Reparatur?
       answer: Die Kosten hängen vom Gerät und Schaden ab. Kontaktieren Sie uns für ein unverbindliches Angebot. Mit der Geräte-Retter-Prämie sparen Sie bis zu 50 %.
-    # Temporarily disabled: Hol & Bring FAQ
-    # - question: Bietet ihr einen Hol & Bring Service an?
-    #   answer: Ja! Innerhalb von Klagenfurt holen wir Ihr Gerät für nur €10 Pauschale ab und bringen es repariert zurück.
     - question: Kann ich bei euch auch ein Handy kaufen oder verkaufen?
       answer: Ja, Sie können bei uns Smartphones kaufen und Geräte direkt im Geschäft zum Ankauf anbieten.
 
