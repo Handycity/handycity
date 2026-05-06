@@ -13,6 +13,8 @@
     "reviews:backup": "node scripts/save-google-reviews-backup.mjs",
     "content:validate": "node scripts/validate-content.mjs",
     "assets:validate": "node scripts/validate-assets.mjs",
+    "vendor:sync": "node scripts/sync-vendor-assets.mjs",
+    "vendor:check": "node scripts/sync-vendor-assets.mjs --check",
     "owner:update:business": "node scripts/update-business-info.mjs",
     "owner:update:hours": "node scripts/update-hours.mjs",
     "owner:update:price": "node scripts/update-price-entry.mjs",

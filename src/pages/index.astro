@@ -17,12 +17,9 @@ import Location from '../components/Location.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import { fetchGoogleReviews } from '../lib/google-places-reviews';
+import { loadContentSync } from '../lib/content-store.mjs';
 
-import { readFileSync } from 'fs';
-import yaml from 'js-yaml';
-
-const raw = readFileSync('src/data/content.yaml', 'utf-8');
-const content = yaml.load(raw) as Record<string, any>;
+const content = loadContentSync() as Record<string, any>;
 
 let liveReviews = null;
 try {

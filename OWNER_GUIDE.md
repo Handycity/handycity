@@ -33,7 +33,7 @@ Es gibt drei Ebenen der Pflege:
 
 2. Direkte Inhaltsbearbeitung
    - fuer Inhalte, die nicht ueber einen Workflow abgedeckt sind
-   - Hauptdatei: `src/data/content.yaml`
+   - Hauptdatei: `src/data/content/*.yaml`
 
 3. Bildaustausch
    - ueber `public/images/`
@@ -47,7 +47,7 @@ Wenn moeglich, immer zuerst `Actions` verwenden.
 
 ### Zentrale Inhaltsdatei
 
-- `src/data/content.yaml`
+- `src/data/content/*.yaml`
 
 Hier liegen fast alle bearbeitbaren Inhalte:
 
@@ -603,7 +603,7 @@ Workflow:
 
 Damit aenderbar:
 
-- beliebige Felder in `src/data/content.yaml`
+- beliebige Felder in `src/data/content/*.yaml`
 - Listen-Eintraege hinzufuegen/aktualisieren (`list_upsert`)
 - Listen-Eintraege loeschen (`list_remove`)
 - beliebige Felder entfernen (`remove`)
@@ -640,7 +640,7 @@ Beispiele:
 
 Wenn Sie keinen Action-Workflow verwenden moechten, erfolgt die Pflege direkt ueber:
 
-- `src/data/content.yaml`
+- `src/data/content/*.yaml`
 
 ### Wichtigste Regeln
 
@@ -997,7 +997,7 @@ Wenn kein API-Key hinterlegt ist, wird das Backup verwendet.
 
 Bereich:
 
-- `reviews` in `src/data/content.yaml`
+- `reviews` in `src/data/content/*.yaml`
 
 ### Backup einmalig automatisch aktualisieren
 
@@ -1129,7 +1129,7 @@ Pruefen:
 
 ### Ich will Impressum oder Datenschutz aendern
 
-- `src/data/content.yaml`
+- `src/data/content/*.yaml`
 
 --------------------------------------------------
 ## 13. Empfehlung fuer den Betreiber
@@ -1140,7 +1140,7 @@ Verwenden Sie fuer Standardaenderungen immer zuerst die vorbereiteten GitHub Act
 Reihenfolge:
 
 1. Actions nutzen
-2. falls nicht abgedeckt: `src/data/content.yaml`
+2. falls nicht abgedeckt: `src/data/content/*.yaml`
 3. Bilder nur mit gleichem Dateinamen ersetzen
 4. Action-Ergebnis pruefen
 5. mergen

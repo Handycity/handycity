@@ -7,7 +7,7 @@ It explains exactly how to add, edit, and delete website content through GitHub 
 
 The canonical content source remains:
 
-- `src/data/content.yaml`
+- `src/data/content/*.yaml`
 
 The owner should primarily use GitHub Actions forms and only edit YAML directly as fallback.
 
@@ -27,7 +27,7 @@ Every owner action follows the same pipeline:
 
 1. Owner opens `Actions`.
 2. Owner runs a workflow with form inputs.
-3. Workflow updates `src/data/content.yaml` via script.
+3. Workflow updates `src/data/content/*.yaml` via script.
 4. Workflow runs:
 - `npm run content:validate`
 - `npm run assets:validate` (where configured)

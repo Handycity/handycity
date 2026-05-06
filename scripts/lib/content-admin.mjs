@@ -1,86 +1,69 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import yaml from 'js-yaml';
+import {
+  CONTENT_FILE_DEFINITIONS,
+  clearContentCache,
+  getContentFiles,
+  isContentDirectory,
+  loadContent,
+  resolveContentSource,
+  serializeContentFile,
+  splitContentByFile
+} from '../../src/lib/content-store.mjs';
 
-const HEADER = `# ============================================================
-# Handycity.at - Content Data File
-# ============================================================
-# This is the SINGLE source of truth for all editable content.
-# Edit this file to update the website. See EDITING.md for instructions.
-# ============================================================`;
-
-const SECTION_ORDER = [
-  ['site', 'Site Metadata'],
-  ['company', 'Company Info'],
-  ['hours', 'Opening Hours'],
-  ['hero', 'Hero Section'],
-  ['trustBar', 'Trust Bar'],
-  ['services', 'Services'],
-  ['geraeteRetterPraemie', 'Geraete-Retter-Praemie'],
-  ['brands', 'Brands'],
-  ['trust', 'Why Us / Trust'],
-  ['process', 'Process (How it works)'],
-  ['reviews', 'Reviews / Google Bewertungen'],
-  ['calculator', 'Repair Price Calculator'],
-  ['pickup', 'Hol & Bring Service'],
-  ['willhaben', 'Willhaben / Handy kaufen'],
-  ['faq', 'FAQ'],
-  ['contact', 'Contact Form'],
-  ['impressum', 'Impressum'],
-  ['datenschutz', 'Datenschutz'],
-  ['social', 'Social Links']
-];
+const LEGACY_CONTENT_FILE = 'src/data/content.yaml';
 
 function isNonEmptyString(value) {
   return typeof value === 'string' && value.trim().length > 0;
 }
 
-function yamlBlockForKey(key, value) {
-  return yaml.dump({ [key]: value }, {
-    noRefs: true,
-    lineWidth: -1,
-    quotingType: '"',
-    forceQuotes: false,
-    sortKeys: false
-  }).trimEnd();
-}
-
-export function getContentPath(customPath = process.env.CONTENT_PATH || 'src/data/content.yaml') {
-  return path.resolve(customPath);
+export function getContentPath(customPath = process.env.CONTENT_PATH || 'src/data/content') {
+  return resolveContentSource(customPath);
 }
 
 export async function readContent(customPath) {
   const contentPath = getContentPath(customPath);
-  const raw = await fs.readFile(contentPath, 'utf8');
-  const content = yaml.load(raw);
-  if (!content || typeof content !== 'object' || Array.isArray(content)) {
-    throw new Error('content.yaml does not contain a valid top-level object.');
-  }
-
+  clearContentCache();
+  const content = await loadContent(contentPath);
   return { contentPath, content };
 }
 
 export function serializeContent(content) {
-  const blocks = [HEADER];
-
-  for (const [key, label] of SECTION_ORDER) {
-    if (!(key in content)) continue;
-    blocks.push(`# ------ ${label} ------`);
-    blocks.push(yamlBlockForKey(key, content[key]));
-  }
-
-  for (const key of Object.keys(content)) {
-    if (SECTION_ORDER.some(([knownKey]) => knownKey === key)) continue;
-    blocks.push(`# ------ ${key} ------`);
-    blocks.push(yamlBlockForKey(key, content[key]));
-  }
-
-  return `${blocks.join('\n\n')}\n`;
+  const grouped = splitContentByFile(content);
+  return [...grouped.entries()].map(([fileName, entry]) => ({
+    fileName,
+    body: serializeContentFile(fileName, entry.label, entry.content)
+  }));
 }
 
 export async function writeContent(content, customPath) {
   const contentPath = getContentPath(customPath);
-  await fs.writeFile(contentPath, serializeContent(content), 'utf8');
+  const groupedFiles = serializeContent(content);
+
+  if (isContentDirectory(contentPath) || !path.extname(contentPath)) {
+    await fs.mkdir(contentPath, { recursive: true });
+
+    const existingYamlFiles = new Set(
+      (await fs.readdir(contentPath))
+        .filter((file) => file.endsWith('.yaml'))
+    );
+
+    for (const { fileName, body } of groupedFiles) {
+      await fs.writeFile(path.join(contentPath, fileName), body, 'utf8');
+      existingYamlFiles.delete(fileName);
+    }
+
+    for (const fileName of existingYamlFiles) {
+      await fs.unlink(path.join(contentPath, fileName));
+    }
+
+    const legacyPath = path.resolve(LEGACY_CONTENT_FILE);
+    await fs.rm(legacyPath, { force: true });
+  } else {
+    throw new Error('Writing to a single combined content file is no longer supported. Use a content directory.');
+  }
+
+  clearContentCache();
 }
 
 function pushIfMissing(errors, value, fieldPath) {
@@ -265,3 +248,5 @@ export function sortCalculatorPrices(prices) {
     );
   });
 }
+
+export { CONTENT_FILE_DEFINITIONS, getContentFiles, isContentDirectory };

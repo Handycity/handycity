@@ -43,6 +43,6 @@ Zusätzlich automatisiert:
 
 ## Daten- und Dokumentationsdateien
 
-- Hauptinhalt: `src/data/content.yaml`
+- Hauptinhalt: `src/data/content/*.yaml`
 - Bedienanleitungen: `OWNER_GUIDE.md`, `EDITING.md`
 - Diese Kundenübersicht: `CUSTOMER_OVERVIEW.md`

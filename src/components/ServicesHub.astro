@@ -100,54 +100,58 @@ const cards = intents.map((intent) => {
           </a>
         </div>
 
-        <div class="grid grid-cols-1 xl:grid-cols-2 gap-4 md:gap-5">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
           {cards.map((card) => (
-            <a href={card.href} class={card.cardClass}>
+            <a href={card.href} class={`${card.cardClass} h-full`}>
               <span class={`absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r ${card.gradient}`}></span>
 
-              <div class="flex items-start gap-3">
-                <span
-                  class={`inline-flex w-10 h-10 items-center justify-center rounded-xl bg-gradient-to-br ${card.gradient} text-white text-lg shadow-md group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300`}
-                  aria-hidden="true"
-                >
-                  {card.emoji}
-                </span>
+              <div class="flex h-full flex-col gap-4">
+                <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                  <div class="flex items-start gap-3">
+                    <span
+                      class={`inline-flex w-10 h-10 items-center justify-center rounded-xl bg-gradient-to-br ${card.gradient} text-white text-lg shadow-md group-hover:scale-110 group-hover:-rotate-6 transition-transform duration-300`}
+                      aria-hidden="true"
+                    >
+                      {card.emoji}
+                    </span>
 
-                <div>
-                  <h3 class="text-lg md:text-xl font-bold text-slate-900">{card.title}</h3>
-                  <p class="mt-1 text-sm text-slate-600 leading-snug">{card.tagline}</p>
+                    <div>
+                      <h3 class="text-lg md:text-xl font-bold text-slate-900">{card.title}</h3>
+                      <p class="mt-1 text-sm text-slate-600 leading-snug">{card.tagline}</p>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-wrap gap-1.5 lg:max-w-[14rem] lg:justify-end">
+                    {card.chips.map((chip) => (
+                      <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 text-xs font-medium">
+                        <span aria-hidden="true">{chip.emoji}</span>
+                        <span>{chip.label}</span>
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              <div class="mt-4 flex flex-wrap gap-1.5">
-                {card.chips.map((chip) => (
-                  <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 text-xs font-medium">
-                    <span aria-hidden="true">{chip.emoji}</span>
-                    <span>{chip.label}</span>
+                <div class="mt-auto border-t border-slate-100 pt-3 flex items-center justify-between gap-3">
+                  <span class="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-900">
+                    {card.cta}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M5 12h14" />
+                      <path d="m13 5 7 7-7 7" />
+                    </svg>
                   </span>
-                ))}
-              </div>
 
-              <div class="border-t border-slate-100 pt-3 mt-4 flex items-center justify-between gap-3">
-                <span class="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-900">
-                  {card.cta}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    aria-hidden="true"
-                  >
-                    <path d="M5 12h14" />
-                    <path d="m13 5 7 7-7 7" />
-                  </svg>
-                </span>
-
-                <span class="text-xs font-medium text-slate-500">{card.optionLabel}</span>
+                  <span class="text-xs font-medium text-slate-500">{card.optionLabel}</span>
+                </div>
               </div>
             </a>
           ))}

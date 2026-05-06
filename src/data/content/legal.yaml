@@ -1,0 +1,95 @@
+# ============================================================
+# Handycity.at - Content Segment
+# ============================================================
+# File: legal.yaml
+# Scope: Legal Pages
+# ============================================================
+
+impressum:
+  headline: Impressum
+  content: |
+    Handycity A.K. GmbH
+    Kardinalplatz 6
+    9020 Klagenfurt am Wörthersee
+    Österreich
+
+    Kontakt
+    Telefon: +43 463/918559
+    E-Mail: office@handycityarkaden.at
+
+    Rechtsform: Gesellschaft mit beschränkter Haftung (GmbH)
+    Firmenbuchgericht: Landesgericht Klagenfurt
+    Firmenbuchnummer: FN 302814 s
+    UID-Nummer: ATU63848359
+
+    Unternehmensgegenstand
+    Einzelhandel mit Mobiltelefonen und Telekommunikationsgeräten
+    sowie Reparaturdienstleistungen für mobile Endgeräte.
+
+    Gewerberechtlicher Geschäftsführer: Michael Kahlhammer
+    GISA-Zahlen: 34874929, 10688397
+    Kammerzugehörigkeit: Wirtschaftskammer Kärnten
+    Anwendbare gewerberechtliche Vorschriften: Gewerbeordnung (GewO), abrufbar unter https://www.ris.bka.gv.at
+
+    Stand: 05.05.2026
+datenschutz:
+  headline: Datenschutzerklärung
+  content: |
+    Stand: 05.05.2026
+
+    1) Verantwortlicher
+    Handycity A.K. GmbH
+    Kardinalplatz 6, 9020 Klagenfurt am Wörthersee
+    E-Mail: office@handycityarkaden.at
+    Tel: +43 463/918559
+
+    2) Hosting und technische Bereitstellung
+
+    Diese Website wird auf GitHub Pages (GitHub, Inc.) gehostet.
+    Beim Aufruf der Website werden technisch erforderliche Verbindungs- und
+    Protokolldaten (z. B. IP-Adresse, Datum/Uhrzeit, angeforderte Ressource,
+    Statuscode, Referrer, User-Agent) durch den Hosting-Anbieter verarbeitet.
+    Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (Betriebssicherheit und
+    technische Bereitstellung der Website).
+    Informationen von GitHub:
+    https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement
+
+    3) Kontaktaufnahme
+
+    Wenn Sie uns per E-Mail oder Telefon kontaktieren, verarbeiten wir die von Ihnen
+    übermittelten Daten zur Bearbeitung Ihrer Anfrage.
+    Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen) bzw.
+    Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an effizienter Kommunikation).
+
+    Das Kontaktformular auf dieser Website versendet keine Daten an einen
+    Formular-Provider. Beim Absenden wird lokal Ihr E-Mail-Programm geöffnet;
+    eine Übermittlung erfolgt erst, wenn Sie die E-Mail in Ihrem Programm senden.
+
+    4) Google Maps (Click-to-Load)
+
+    Die Karte wird erst nach Ihrer aktiven Bestätigung geladen.
+    Ab diesem Zeitpunkt werden Daten (insbesondere IP-Adresse und technische
+    Verbindungsdaten) an Google übertragen.
+    Rechtsgrundlage ist Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO.
+    Datenschutzerklärung von Google: https://policies.google.com/privacy
+
+    5) Externe Inhalte und Verlinkungen
+
+    In der Willhaben-Sektion werden Angebotsbilder von externen Willhaben-Servern
+    geladen. Beim Laden dieser Bilder kann Ihre IP-Adresse an den jeweiligen
+    Drittanbieter übertragen werden.
+
+    6) Speicherdauer
+
+    Wir speichern personenbezogene Daten nur so lange, wie es für die jeweiligen
+    Zwecke erforderlich ist bzw. gesetzliche Aufbewahrungspflichten bestehen.
+
+    7) Ihre Rechte
+
+    Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der
+    Verarbeitung, Datenübertragbarkeit und Widerspruch. Wenden Sie sich dazu an
+    die oben genannte Kontaktadresse.
+
+    Beschwerderecht bei der Datenschutzbehörde:
+    Österreichische Datenschutzbehörde, Barichgasse 40-42, 1030 Wien
+    https://www.dsb.gv.at

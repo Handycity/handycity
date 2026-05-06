@@ -1,0 +1,22 @@
+# ============================================================
+# Handycity.at - Content Segment
+# ============================================================
+# File: faq.yaml
+# Scope: FAQ
+# ============================================================
+
+faq:
+  headline: Häufig gestellte Fragen
+  items:
+    - question: Wie lange dauert eine Reparatur?
+      answer: Die meisten Reparaturen erledigen wir noch am selben Tag. Die genaue Dauer hängt vom Schaden ab – wir informieren Sie vorab.
+    - question: Was ist die Geräte-Retter-Prämie?
+      answer: Die Geräte-Retter-Prämie ist ein Förderprogramm des Bundesministeriums. Sie erhalten 50 % der Reparaturkosten zurück – bis zu €130. Als registrierter Partnerbetrieb können Sie den Bon direkt bei uns einlösen.
+    - question: Kann ich den Geräte-Retter-Bon bei Ihnen einlösen?
+      answer: Ja! Handycity ist ein registrierter Partnerbetrieb. Beantragen Sie Ihren Bon online auf geräte-retter-prämie.at und bringen Sie ihn einfach mit.
+    - question: Welche Geräte und Marken repariert ihr?
+      answer: Wir reparieren Smartphones und Tablets aller gängigen Marken – Apple, Samsung, Huawei, Xiaomi und viele mehr.
+    - question: Was kostet eine Reparatur?
+      answer: Die Kosten hängen vom Gerät und Schaden ab. Kontaktieren Sie uns für ein unverbindliches Angebot. Mit der Geräte-Retter-Prämie sparen Sie bis zu 50 %.
+    - question: Kann ich bei euch auch ein Handy kaufen oder verkaufen?
+      answer: Ja, Sie können bei uns Smartphones kaufen und Geräte direkt im Geschäft zum Ankauf anbieten.

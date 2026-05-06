@@ -10,7 +10,7 @@ Die Website ist eine vollständige Conversion- und Informationsseite für:
 - Kontakt, Standort, Öffnungszeiten
 - FAQ und rechtliche Seiten
 
-Der komplette Content wird zentral aus `src/data/content.yaml` geladen.
+Der komplette Content wird zentral aus `src/data/content/*.yaml` geladen.
 
 ## 2) Seitenaufbau und Sektionen (in Reihenfolge)
 
@@ -75,7 +75,7 @@ Aus `src/pages/index.astro`:
 - Framework: Astro (SSR/Static build)
 - Styling: Tailwind CSS v4 Tokens in `src/styles/global.css`
 - Interaktivität: Alpine.js + `@alpinejs/collapse`
-- Datenhaltung: YAML (`src/data/content.yaml`) als Single Source of Truth
+- Datenhaltung: YAML (`src/data/content/*.yaml`) als Single Source of Truth
 - Build: `npm run build` (Astro)
 - Node-Version: >= 22.12.0
 
@@ -152,7 +152,7 @@ Diese Workflows:
 
 ## 7) Wichtige Ablageorte
 
-- Inhalt: `src/data/content.yaml`
+- Inhalt: `src/data/content/*.yaml`
 - Komponenten: `src/components/*.astro`
 - Seite: `src/pages/index.astro`
 - Layout/SEO: `src/layouts/Layout.astro`

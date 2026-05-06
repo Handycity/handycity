@@ -1,13 +1,17 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { spawnSync } from 'node:child_process';
 
 const requiredAssets = [
-  'public/images/handycity-logo.png',
+  'public/images/handycity_logo_v1.png',
   'public/images/store-image-in.jpg',
   'public/images/display-reparatur.jpg',
   'public/images/kamera-reparatur.jpg',
   'public/images/willhaben.png',
-  'public/images/hol-bring.png'
+  'public/images/shop-innen-left.avif',
+  'public/images/shop-innen-right.avif',
+  'public/vendor/alpine.min.js',
+  'public/vendor/alpine-collapse.min.js'
 ];
 
 const missing = [];
@@ -22,6 +26,15 @@ for (const relativePath of requiredAssets) {
 
 if (missing.length) {
   throw new Error(`Missing required asset files:\n- ${missing.join('\n- ')}`);
+}
+
+const vendorCheck = spawnSync(process.execPath, ['scripts/sync-vendor-assets.mjs', '--check'], {
+  cwd: path.resolve('.'),
+  encoding: 'utf8'
+});
+
+if (vendorCheck.status !== 0) {
+  throw new Error(vendorCheck.stderr || vendorCheck.stdout || 'Vendor asset check failed.');
 }
 
 console.log('Asset validation passed.');

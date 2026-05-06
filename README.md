@@ -77,7 +77,7 @@ Zur lokalen Verifikation aller Owner-Add/Edit/Delete-Mechanismen (Preisrechner, 
 npm run owner:test:updates
 ```
 
-Der Test stellt `src/data/content.yaml` danach automatisch wieder auf den Ausgangszustand zurueck.
+Der Test stellt `src/data/content/*.yaml` danach automatisch wieder auf den Ausgangszustand zurueck.
 
 ## Architektur-Entscheidungen
 

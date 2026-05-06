@@ -1,0 +1,49 @@
+# ============================================================
+# Handycity.at - Content Segment
+# ============================================================
+# File: reviews.yaml
+# Scope: Reviews
+# ============================================================
+
+reviews:
+  headline: Das sagen unsere Kunden
+  googleUrl: https://www.google.com/maps/place/Handycity/@46.6237671,14.3123385,17z/data=!3m1!4b1!4m6!3m5!1s0x4770749d8151bf2b:0xbfb5d0cf51878c70!8m2!3d46.6237671!4d14.3123385!16s%2Fg%2F1tfvg0j3?hl=de-DE&entry=ttu&g_ep=EgoyMDI2MDQwNS4wIKXMDSoASAFQAw%3D%3D
+  averageRating: 4.6
+  totalReviews: 171
+  items:
+    - name: Mario
+      text: Habe diesen Betrieb zum ersten Mal besucht. Bin sehr zufrieden. Kann ich jedem weiter empfehlen.
+      rating: 5
+      date: vor einem Monat
+    - name: Serif Elezoski
+      text: Perfekte Beratung. Sehr empfehlenswert.
+      rating: 5
+      date: vor 4 Monaten
+    - name: Philipp Sadounik
+      text: Der Chef ist sehr freundlich und hilfsbereit. Er hat mich sehr gut beraten. Ich empfehle jeden in diesem Geschäft einzukaufen oder wenn einer Handy braucht.
+      rating: 5
+      date: vor 7 Monaten
+    - name: Markus Gamnig
+      text: Top Beratung, Top Service und gute Preise. Nur zu empfehlen.
+      rating: 5
+      date: vor 9 Monaten
+    - name: Ewald Spiess
+      text: Top Beratung, freundlich und unkompliziert. Faire Preise und zuverlässige Terminvereinbarung. Gerne wieder.
+      rating: 5
+      date: vor 10 Monaten
+    - name: Joe Snow
+      text: Schon telefonisch wurde mir ein Reparaturbonus angeboten sowie die Reparatur meines kaputten Handydisplays an einem Samstagvormittag. Innerhalb einer Stunde war alles erledigt, das Display sieht wie beim Neukauf meines Smartphones aus. Der Reparaturbonus wurde bereits genehmigt. Bin beeindruckt, es ist alles super gelaufen.
+      rating: 5
+      date: vor einem Jahr
+    - name: Karim Elkhaiat
+      text: Unfassbar nette Mitarbeiter. In 2 Minuten wurde mein Problem behoben und das auch noch gratis.
+      rating: 5
+      date: vor einem Jahr
+    - name: Cindy van Gorp
+      text: Schneller Service; ich konnte mein Gerät innerhalb einer halben Stunde abholen. Die Diagnose ging schnell und die Reparatur war kinderleicht. Mein Gerät funktionierte wieder. Die Mitarbeiter waren ehrlich; ich war erleichtert, dass es sich nur um ein kleines Problem handelte und keine hohen Kosten anfielen. Ein idealer Ort für Touristen, um ihr Gerät reparieren zu lassen.
+      rating: 5
+      date: vor einem Jahr
+    - name: ingrid grünwald
+      text: Sehr gute und kompetente Beratung. Wenn es ein Problem mit dem Handy gibt ist es mein erster Weg dort hin.
+      rating: 5
+      date: vor einem Jahr

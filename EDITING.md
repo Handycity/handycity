@@ -4,7 +4,7 @@ Diese Datei ist die praktische Anleitung fuer den Betreiber der Website. Sie erk
 
 Die Website ist so aufgebaut, dass fast alle Inhalte ueber eine zentrale Datei gepflegt werden:
 
-- `src/data/content.yaml`
+- `src/data/content/*.yaml`
 
 Solange es nur um Texte, Preise, Kontaktdaten, Bilder, FAQ, Bewertungen oder Angebote geht, muss in der Regel nur diese Datei angepasst werden.
 
@@ -92,7 +92,7 @@ Wenn Sie etwas aendern wollen, das nicht ueber die Standard-Workflows abgedeckt 
 
 ### So gehen Sie vor
 
-1. Datei `src/data/content.yaml` oeffnen
+1. Datei `src/data/content/*.yaml` oeffnen
 2. Auf das Stift-Symbol klicken
 3. Text anpassen
 4. `Commit changes` klicken
@@ -109,7 +109,7 @@ Wenn der Build fehlschlaegt, wurde meist:
 
 ### Hauptdatei fuer Inhalte
 
-- `src/data/content.yaml`
+- `src/data/content/*.yaml`
 
 Das ist die zentrale Inhaltsdatei. Hier stehen fast alle Texte und Daten.
 
@@ -909,7 +909,7 @@ Pruefen:
 
 Fuer normale Inhaltsaenderungen:
 
-1. `src/data/content.yaml` in GitHub oeffnen
+1. `src/data/content/*.yaml` in GitHub oeffnen
 2. nur den noetigen Text anpassen
 3. committen
 4. GitHub Actions pruefen
@@ -931,7 +931,7 @@ Fuer groessere Aenderungen:
 ## 13. Kurze Merkhilfe
 --------------------------------------------------
 
-- Inhalte -> `src/data/content.yaml`
+- Inhalte -> `src/data/content/*.yaml`
 - Bilder -> `public/images/`
 - Design/Layout -> `src/components/`
 - Seiten -> `src/pages/`
@@ -939,4 +939,4 @@ Fuer groessere Aenderungen:
 
 Wenn Sie nur Texte, Preise oder Kontaktdaten pflegen, bleiben Sie fast immer in:
 
-- `src/data/content.yaml`
+- `src/data/content/*.yaml`

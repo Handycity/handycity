@@ -2,10 +2,11 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import assert from 'node:assert/strict';
-import yaml from 'js-yaml';
+import { readContent } from './lib/content-admin.mjs';
 
 const ROOT = path.resolve('.');
-const CONTENT_PATH = path.join(ROOT, 'src/data/content.yaml');
+const CONTENT_DIR = path.join(ROOT, 'src/data/content');
+const BACKUP_DIR = path.join(ROOT, '.tmp-owner-content-backup');
 
 function runScript(scriptFile, env) {
   const result = spawnSync(process.execPath, [path.join(ROOT, scriptFile)], {
@@ -26,9 +27,9 @@ function runScript(scriptFile, env) {
   }
 }
 
-async function readContent() {
-  const raw = await fs.readFile(CONTENT_PATH, 'utf8');
-  return yaml.load(raw);
+async function readCurrentContent() {
+  const { content } = await readContent(CONTENT_DIR);
+  return content;
 }
 
 function findPrice(prices, { brand, device, repair }) {
@@ -43,7 +44,8 @@ function findOffer(offers, url) {
   return offers.find((item) => item.url === url);
 }
 
-const backup = await fs.readFile(CONTENT_PATH, 'utf8');
+await fs.rm(BACKUP_DIR, { recursive: true, force: true });
+await fs.cp(CONTENT_DIR, BACKUP_DIR, { recursive: true });
 
 try {
   const priceKey = {
@@ -60,7 +62,7 @@ try {
     PRICE: 'ab €123'
   });
 
-  let content = await readContent();
+  let content = await readCurrentContent();
   let priceRow = findPrice(content.calculator.prices, priceKey);
   assert(priceRow, 'Price row was not created.');
   assert.equal(priceRow.price, 'ab €123', 'Price row value mismatch after add.');
@@ -73,7 +75,7 @@ try {
     PRICE: 'ab €129'
   });
 
-  content = await readContent();
+  content = await readCurrentContent();
   priceRow = findPrice(content.calculator.prices, priceKey);
   assert(priceRow, 'Price row disappeared after update.');
   assert.equal(priceRow.price, 'ab €129', 'Price row value mismatch after update.');
@@ -85,7 +87,7 @@ try {
     REPAIR: priceKey.repair
   });
 
-  content = await readContent();
+  content = await readCurrentContent();
   priceRow = findPrice(content.calculator.prices, priceKey);
   assert.equal(priceRow, undefined, 'Price row still exists after remove.');
 
@@ -93,7 +95,7 @@ try {
     WILLHABEN_HEADLINE: 'ZZ Test Headline'
   });
 
-  content = await readContent();
+  content = await readCurrentContent();
   assert.equal(content.willhaben.headline, 'ZZ Test Headline', 'Willhaben section headline was not updated.');
 
   const offerUrl = 'https://www.willhaben.at/iad/kaufen-und-verkaufen/d/zz-owner-test-angebot-1234567890/';
@@ -111,7 +113,7 @@ try {
     DELIVERY: 'Selbstabholung'
   });
 
-  content = await readContent();
+  content = await readCurrentContent();
   let offer = findOffer(content.willhaben.offers, offerUrl);
   assert(offer, 'Willhaben offer was not created.');
   assert.equal(offer.price, '€ 111', 'Willhaben offer price mismatch after add.');
@@ -124,7 +126,7 @@ try {
     NOTE: 'Testnotiz'
   });
 
-  content = await readContent();
+  content = await readCurrentContent();
   offer = findOffer(content.willhaben.offers, offerUrl);
   assert(offer, 'Willhaben offer disappeared after update.');
   assert.equal(offer.price, '€ 119', 'Willhaben offer price mismatch after update.');
@@ -136,7 +138,7 @@ try {
     URL: offerUrl
   });
 
-  content = await readContent();
+  content = await readCurrentContent();
   offer = findOffer(content.willhaben.offers, offerUrl);
   assert.equal(offer, undefined, 'Willhaben offer still exists after remove.');
 
@@ -147,7 +149,7 @@ try {
     ANSWER: 'Antwort 1'
   });
 
-  content = await readContent();
+  content = await readCurrentContent();
   let faq = findFaq(content.faq.items, faqQuestion);
   assert(faq, 'FAQ item was not created.');
   assert.equal(faq.answer, 'Antwort 1', 'FAQ answer mismatch after add.');
@@ -158,7 +160,7 @@ try {
     ANSWER: 'Antwort 2'
   });
 
-  content = await readContent();
+  content = await readCurrentContent();
   faq = findFaq(content.faq.items, faqQuestion);
   assert(faq, 'FAQ item disappeared after update.');
   assert.equal(faq.answer, 'Antwort 2', 'FAQ answer mismatch after update.');
@@ -168,7 +170,7 @@ try {
     QUESTION: faqQuestion
   });
 
-  content = await readContent();
+  content = await readCurrentContent();
   faq = findFaq(content.faq.items, faqQuestion);
   assert.equal(faq, undefined, 'FAQ item still exists after remove.');
 
@@ -183,7 +185,7 @@ try {
     ACTION_TEXT: 'Anfragen'
   });
 
-  content = await readContent();
+  content = await readCurrentContent();
   let service = content.services.items.find((item) => item.name === serviceName);
   assert(service, 'Service item was not created.');
 
@@ -192,11 +194,13 @@ try {
     NAME: serviceName
   });
 
-  content = await readContent();
+  content = await readCurrentContent();
   service = content.services.items.find((item) => item.name === serviceName);
   assert.equal(service, undefined, 'Service item still exists after remove.');
 
   console.log('Owner update flow test completed successfully.');
 } finally {
-  await fs.writeFile(CONTENT_PATH, backup, 'utf8');
+  await fs.rm(CONTENT_DIR, { recursive: true, force: true });
+  await fs.cp(BACKUP_DIR, CONTENT_DIR, { recursive: true });
+  await fs.rm(BACKUP_DIR, { recursive: true, force: true });
 }

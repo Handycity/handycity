@@ -1,0 +1,71 @@
+# ============================================================
+# Handycity.at - Content Segment
+# ============================================================
+# File: sales.yaml
+# Scope: Willhaben and Sales
+# ============================================================
+
+willhaben:
+  headline: Handy kaufen & verkaufen
+  description: Diese Karten zeigen live synchronisierte Angebote aus dem Handycity-Willhaben-Shop. Mit einem Klick gelangen Sie direkt zur Anzeige; fuer Reservierung, Eintausch oder Rueckfragen erreichen Sie uns jederzeit.
+  highlights:
+    - Aktuelle Live-Angebote direkt aus dem Handycity-Shop
+    - Regelmaessig synchronisierte Daten fuer hohe Aktualitaet
+    - Persoenliche Beratung, Reservierung und Eintausch im Geschaeft
+    - Selbstabholung in Klagenfurt oder Versand je nach Anzeige
+  verifiedOn: 17. April 2026
+  url: https://www.willhaben.at/iad/shop/handycity-ak-gmbh
+  ctaText: Zum Willhaben-Shop
+  contactCtaText: Gerät anfragen
+  offers:
+    - title: Xiaomi Redmi Note 15 Pro+ Black 8GB Ram 256 GB Speicherplatz Neu/Händler
+      price: € 399
+      url: https://www.willhaben.at/iad/kaufen-und-verkaufen/d/xiaomi-redmi-note-15-pro-black-8gb-ram-256-gb-speicherplatz-neu-haendler-839911287/
+      image: https://cache.willhaben.at/mmo/7/839/911/287_20835883.jpg
+      imageAlt: Xiaomi Redmi Note 15 Pro+ Black 8GB Ram 256 GB Speicherplatz Neu/Händler von Handycity auf willhaben
+      listedAt: 09.03.2026
+      storage: 256 GB
+      unlocked: Ja
+      condition: Neu
+      delivery: Selbstabholung, Versand
+    - title: Sony Xperia 1 lV 12GB Ram 256GB Black Gebraucht/Händler
+      price: € 399
+      url: https://www.willhaben.at/iad/kaufen-und-verkaufen/d/sony-xperia-1-lv-12gb-ram-256gb-black-gebraucht-haendler-1131809265/
+      image: https://cache.willhaben.at/mmo/5/113/180/9265_-1119165167.jpg
+      imageAlt: Sony Xperia 1 lV 12GB Ram 256GB Black Gebraucht/Händler von Handycity auf willhaben
+      listedAt: 09.03.2026
+      storage: 256 GB
+      unlocked: Ja
+      condition: Gebraucht
+      delivery: Selbstabholung, Versand
+      note: Neuer Akku
+    - title: iPhone 12 64GB White Neu/Händler
+      price: € 369,90
+      url: https://www.willhaben.at/iad/kaufen-und-verkaufen/d/iphone-12-64gb-white-neu-haendler-956042433/
+      image: https://cache.willhaben.at/mmo/3/956/042/433_130080724.jpg
+      imageAlt: iPhone 12 64GB White Neu/Händler von Handycity auf willhaben
+      listedAt: 09.03.2026
+      storage: 64 GB
+      unlocked: Ja
+      condition: Neu
+      delivery: Selbstabholung, Versand
+    - title: Samsung S23 128GB Green Neu/Händler
+      price: € 469
+      url: https://www.willhaben.at/iad/kaufen-und-verkaufen/d/samsung-s23-128gb-green-neu-haendler-2099057942/
+      image: https://cache.willhaben.at/mmo/2/209/905/7942_544271083.jpg
+      imageAlt: Samsung S23 128GB Green Neu/Händler von Handycity auf willhaben
+      listedAt: 09.03.2026
+      storage: 128 GB
+      unlocked: Ja
+      condition: Neu
+      delivery: Selbstabholung, Versand
+    - title: iPhone 16e 256GB Black Neu/Händler
+      price: € 729
+      url: https://www.willhaben.at/iad/kaufen-und-verkaufen/d/iphone-16e-256gb-black-neu-haendler-1183800738/
+      image: https://cache.willhaben.at/mmo/8/118/380/0738_-1067652391.jpg
+      imageAlt: iPhone 16e 256GB Black Neu/Händler von Handycity auf willhaben
+      listedAt: 09.03.2026
+      storage: 256 GB
+      unlocked: Ja
+      condition: Neu
+      delivery: Selbstabholung, Versand
