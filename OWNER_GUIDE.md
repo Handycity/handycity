@@ -57,7 +57,6 @@ Hier liegen fast alle bearbeitbaren Inhalte:
 - Services
 - Preisrechner
 - Bewertungen
-- Hol- & Bring-Service
 - Willhaben / Ankauf / Verkauf
 - FAQ
 - Kontakt
@@ -71,12 +70,11 @@ Hier liegen fast alle bearbeitbaren Inhalte:
 
 Aktuell verwendete Bilder:
 
-- `public/images/handycity-logo.png`
+- `public/images/handycity_logo_v1.png`
 - `public/images/store-image-in.jpg`
 - `public/images/display-reparatur.jpg`
 - `public/images/kamera-reparatur.jpg`
-- `public/images/willhaben.png`
-- `public/images/hol-bring.png`
+- `public/images/willhaben.jpg`
 
 ### Dokumentation
 
@@ -140,7 +138,6 @@ Ohne Entwickler koennen gepflegt werden:
 - Service-Karten
 - Willhaben-Bereich
 - Ankauf / Verkauf / Angebote
-- Hol- & Bring-Service-Texte
 - FAQ
 - Bewertungen-Backup
 - Impressum
@@ -410,18 +407,17 @@ Damit aenderbar:
 Wenn moeglich, bestehende Icon-Namen weiterverwenden. Nicht willkuerlich neue Icon-Namen erfinden, wenn nicht klar ist, ob sie im Frontend unterstuetzt werden.
 
 --------------------------------------------------
-### 5.5 Owner Update Offers and Pickup
+### 5.5 Owner Update Offers
 --------------------------------------------------
 
 Workflow:
 
-- `Actions -> Owner Update Offers and Pickup`
+- `Actions -> Owner Update Offers`
 
 Damit aenderbar:
 
 - Willhaben-Sektion
 - Ankauf / Verkauf / Angebots-Texte
-- Hol- & Bring-Service
 
 ### Felder fuer Willhaben
 
@@ -430,14 +426,6 @@ Damit aenderbar:
 - `willhaben_url`
 - `willhaben_cta_text`
 - `willhaben_highlights`
-
-### Felder fuer Pickup
-
-- `pickup_headline`
-- `pickup_description`
-- `pickup_badge`
-- `pickup_cta_text`
-- `pickup_steps`
 
 ### Beispiel 1 - Willhaben-Headline aendern
 
@@ -458,20 +446,6 @@ Alternativ mit `|`:
 
 ```text
 Gepruefte Geraete mit persoenlicher Beratung | Ankauf direkt im Geschaeft | Datenuebernahme auf Wunsch
-```
-
-### Beispiel 3 - Hol- & Bring-Schritte setzen
-
-Format:
-
-- `Titel :: Text`
-
-Beispiel fuer `pickup_steps`:
-
-```text
-Abholung anfragen :: Kurz telefonisch oder ueber das Kontaktformular melden.
-Reparatur im Shop :: Wir pruefen das Geraet, nennen den Preis und reparieren es fachgerecht.
-Zurueckgebracht :: Ihr Geraet kommt repariert und einsatzbereit wieder zu Ihnen.
 ```
 
 --------------------------------------------------
@@ -887,29 +861,7 @@ Bearbeitung in GitHub:
 - Fuer Barrierefreiheit `imageAlt` immer passend zum Geraet pflegen.
 
 --------------------------------------------------
-### 6.8 Hol- & Bring-Service
---------------------------------------------------
-
-Bereich:
-
-```yaml
-pickup:
-  headline: "Hol & Bring Service"
-  description: "..."
-  badge: "10 EUR Pauschale innerhalb Klagenfurt"
-```
-
-Beispiel:
-
-```yaml
-pickup:
-  headline: "Hol & Bring Service in Klagenfurt"
-  description: "Wir holen Ihr Geraet in Klagenfurt ab, reparieren es und bringen es wieder zurueck."
-  badge: "10 EUR Pauschale innerhalb Klagenfurt"
-```
-
---------------------------------------------------
-### 6.9 FAQ
+### 6.8 FAQ
 --------------------------------------------------
 
 Bereich:
@@ -951,12 +903,11 @@ Der einfachste und sicherste Weg ist:
 
 ### Aktuelle Bilddateien
 
-- `public/images/handycity-logo.png`
+- `public/images/handycity_logo_v1.png`
 - `public/images/store-image-in.jpg`
 - `public/images/display-reparatur.jpg`
 - `public/images/kamera-reparatur.jpg`
-- `public/images/willhaben.png`
-- `public/images/hol-bring.png`
+- `public/images/willhaben.jpg`
 
 ### Beispiel 1 - Hero-Bild ersetzen
 
@@ -966,17 +917,11 @@ Neue Datei hochladen als:
 
 Dann wird das neue Bild automatisch im Hero genutzt.
 
-### Beispiel 2 - Hol- & Bring-Bild ersetzen
+### Beispiel 2 - Willhaben-Bild ersetzen
 
 Neue Datei hochladen als:
 
-- `public/images/hol-bring.png`
-
-### Beispiel 3 - Willhaben-Bild ersetzen
-
-Neue Datei hochladen als:
-
-- `public/images/willhaben.png`
+- `public/images/willhaben.jpg`
 
 ### Wichtiger Hinweis
 
@@ -1103,9 +1048,9 @@ Pruefen:
 
 - `Actions -> Owner Update Service Item`
 
-### Ich will Willhaben, Ankauf, Verkauf oder Hol- & Bring-Texte aendern
+### Ich will Willhaben, Ankauf oder Verkauf-Texte aendern
 
-- `Actions -> Owner Update Offers and Pickup`
+- `Actions -> Owner Update Offers`
 
 ### Ich will Willhaben-Angebote automatisch aktualisieren
 

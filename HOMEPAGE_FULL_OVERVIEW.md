@@ -25,11 +25,10 @@ Aus `src/pages/index.astro`:
 3. TrustBar (`#trustbar`)
 - Google-Bewertungszusammenfassung + 4 USP-Karten.
 
-4. Services Hub (`#services-hub`)
-- Intent-Navigation in 3 Karten:
+4. Services Hub (`#services`)
+- Intent-Navigation in 2 Karten:
   - Reparieren -> `#preisrechner`
   - Handy kaufen -> `#handy-kaufen`
-  - Extra-Service -> `#kontakt`
 
 5. Preisrechner (`#preisrechner`)
 - 3-stufiges Alpine-UI (Marke -> Modell -> Reparatur)
@@ -49,25 +48,22 @@ Aus `src/pages/index.astro`:
 9. Handy kaufen (`#handy-kaufen`)
 - Willhaben-Integration mit Angebotskarten aus YAML.
 
-10. Hol & Bring Service (`#hol-bring-service`)
-- Ablauf und Pauschalhinweis.
-
-11. Google Reviews (`#bewertungen`)
+10. Google Reviews (`#bewertungen`)
 - Bewertungs-Header + Carousel (Alpine).
 
-12. FAQ (`#faq`)
+11. FAQ (`#faq`)
 - Akkordeon mit Alpine + Collapse.
 
-13. Kontakt (`#kontakt`)
+12. Kontakt (`#kontakt`)
 - Kontaktkarten + Formular (öffnet Mailprogramm via `mailto:`).
 
-14. Standort (`#standort`)
+13. Standort (`#standort`)
 - Google Maps Embed + Route/Maps-Links + Öffnungszeiten.
 
-15. Markenleiste
+14. Markenleiste
 - Unterstützte Marken.
 
-16. Footer
+15. Footer
 - Navigationslinks, Rechtliches, Kontaktdaten.
 
 ## 3) Technische Architektur
@@ -145,7 +141,7 @@ Diese Workflows:
 - Business-Daten (Telefon, Adresse, Hero) ändern
 - Preisrechner-Einträge hinzufügen/entfernen
 - Services ändern
-- Willhaben-Textbausteine und Pickup-Bereich ändern
+- Willhaben-Textbausteine ändern
 - Beliebige weitere Inhalte über `Owner Update Content Advanced` add/edit/delete pflegen (z. B. FAQ, Rechtstexte, Social-Links, Headline-Felder)
 - Willhaben-Angebote und Google-Reviews automatisiert synchronisieren
 - Jede Änderung via CI validieren und automatisch deployen

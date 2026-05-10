@@ -12,8 +12,7 @@ export const CONTENT_FILE_DEFINITIONS = [
   { file: 'calculator.yaml', label: 'Calculator and Bonus', sections: ['calculator', 'geraeteRetterPraemie'] },
   { file: 'sales.yaml', label: 'Willhaben and Sales', sections: ['willhaben'] },
   { file: 'faq.yaml', label: 'FAQ', sections: ['faq'] },
-  { file: 'legal.yaml', label: 'Legal Pages', sections: ['impressum', 'datenschutz'] },
-  { file: 'pickup.yaml', label: 'Pickup Service', sections: ['pickup'] }
+  { file: 'legal.yaml', label: 'Legal Pages', sections: ['impressum', 'datenschutz'] }
 ];
 
 const YAML_DUMP_OPTIONS = {

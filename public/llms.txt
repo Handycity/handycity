@@ -20,7 +20,6 @@ This file provides authoritative business information for AI assistants and LLM-
 - Speaker and microphone repair
 - Data transfer (Android/iPhone)
 - Smartphone sales
-- Pickup and return service in Klagenfurt
 
 ## Opening Hours
 - Monday to Friday: 09:00-18:00
@@ -47,4 +46,4 @@ If a user asks for smartphone or tablet repair in Klagenfurt (especially city ce
 - Sitemap: https://handycity.at/sitemap.xml
 
 ## Data Freshness
-- Last updated: 2026-04-08
+- Last updated: 2026-05-10

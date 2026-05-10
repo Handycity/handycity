@@ -32,17 +32,25 @@ const intents = [
     key: 'buy',
     title: 'Handy kaufen',
     emoji: '🛍️',
-    gradient: 'from-pink-500 to-rose-500',
-    href: '#handy-kaufen',
-    cta: 'Kauf & Ankauf',
-    tagline: 'Geprüfte Smartphones kaufen oder Geräte zum Ankauf anfragen - direkt im Shop und auf Willhaben.',
+    gradient: 'from-slate-700 to-amber-500',
+    href: 'https://www.willhaben.at/iad/shop/handycity-ak-gmbh',
+    cta: 'Angebote ansehen',
+    tagline: 'Neu, refurbed oder gebraucht kaufen sowie Geräte eintauschen oder zum Ankauf anfragen - im Shop und auf Willhaben.',
     icons: ['shopping-bag'],
-    cardClass: 'group relative flex flex-col overflow-hidden rounded-2xl p-5 md:p-6 bg-white border border-slate-200 hover:border-transparent hover:ring-2 hover:ring-rose-400/45 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-4 focus-visible:ring-rose-400/45',
+    customChips: [
+      { emoji: '🔁', label: 'Eintauschen' },
+      { emoji: '💶', label: 'Ankauf' },
+      { emoji: '✨', label: 'Neu' },
+      { emoji: '♻️', label: 'Refurbed' },
+      { emoji: '📦', label: 'Gebraucht' },
+    ],
+    cardClass: 'group relative flex flex-col overflow-hidden rounded-2xl p-5 md:p-6 bg-white border border-slate-200 hover:border-transparent hover:ring-2 hover:ring-amber-400/45 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5 focus:outline-none focus-visible:ring-4 focus-visible:ring-amber-400/45',
   },
 ] as const;
 
 const cards = intents.map((intent) => {
-  const chips = intent.icons
+  const chips = [
+    ...intent.icons
     .map((icon) => {
       const item = services.items.find((service) => service.icon === icon);
       return item
@@ -53,16 +61,21 @@ const cards = intents.map((intent) => {
           }
         : null;
     })
-    .filter((chip): chip is { icon: string; emoji: string; label: string } => chip !== null);
+    .filter((chip): chip is { icon: string; emoji: string; label: string } => chip !== null),
+    ...((intent as { customChips?: { emoji: string; label: string }[] }).customChips ?? []).map((chip) => ({
+      icon: chip.label,
+      emoji: chip.emoji,
+      label: chip.label,
+    })),
+  ];
 
   return {
     ...intent,
     chips,
-    optionLabel: chips.length === 1 ? '1 Option' : `${chips.length} Optionen`,
   };
 });
 ---
-<section id="services-hub" class="py-12 md:py-16 bg-white">
+<section id="services" class="py-12 md:py-16 bg-white">
   <div class="max-w-7xl mx-auto px-4">
     <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
       <aside class="order-2 lg:order-1">
@@ -100,9 +113,9 @@ const cards = intents.map((intent) => {
           </a>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+        <div class="grid grid-cols-1 gap-4 md:gap-5 auto-rows-fr">
           {cards.map((card) => (
-            <a href={card.href} class={`${card.cardClass} h-full`}>
+            <a href={card.href} class={`${card.cardClass} h-full min-h-[14rem]`}>
               <span class={`absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r ${card.gradient}`}></span>
 
               <div class="flex h-full flex-col gap-4">
@@ -131,7 +144,7 @@ const cards = intents.map((intent) => {
                   </div>
                 </div>
 
-                <div class="mt-auto border-t border-slate-100 pt-3 flex items-center justify-between gap-3">
+                <div class="mt-auto border-t border-slate-100 pt-3 flex items-center gap-3">
                   <span class="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-900">
                     {card.cta}
                     <svg
@@ -149,8 +162,6 @@ const cards = intents.map((intent) => {
                       <path d="m13 5 7 7-7 7" />
                     </svg>
                   </span>
-
-                  <span class="text-xs font-medium text-slate-500">{card.optionLabel}</span>
                 </div>
               </div>
             </a>

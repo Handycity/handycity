@@ -56,7 +56,7 @@ Fuer den Betreiber gibt es jetzt GitHub-native Pflegewege ohne externes CMS:
 - `Actions -> Owner Update Opening Hours`
 - `Actions -> Owner Update Price Entry`
 - `Actions -> Owner Update Service Item`
-- `Actions -> Owner Update Offers and Pickup`
+- `Actions -> Owner Update Offers`
 - `Actions -> Owner Update FAQ Item`
 - `Actions -> Owner Update Willhaben Offer`
 - `Actions -> Owner Update Content Advanced` (voller Zugriff auf beliebige `content.yaml`-Felder inkl. Add/Edit/Delete)

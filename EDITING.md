@@ -23,7 +23,6 @@ Ohne Entwickler koennen Sie normalerweise selbst aendern:
 - Service-Liste
 - Reparaturpreise im Preisrechner
 - FAQ
-- Hol- & Bring-Service-Texte
 - Willhaben-Texte und Link
 - Bewertungen im Backup
 - Impressum
@@ -52,7 +51,7 @@ Fuer die haeufigsten Aenderungen gibt es vorbereitete Workflows unter `Actions`.
 - `Owner Update Opening Hours`
 - `Owner Update Price Entry`
 - `Owner Update Service Item`
-- `Owner Update Offers and Pickup`
+- `Owner Update Offers`
 - `Owner Update FAQ Item`
 - `Owner Update Willhaben Offer`
 - `Owner Update Content Advanced`
@@ -125,12 +124,11 @@ Fuer Bilder gibt es eine eigene Kurzanleitung:
 
 Aktuell wichtige Dateien:
 
-- `public/images/handycity-logo.png` -> Logo
+- `public/images/handycity_logo_v1.png` -> Logo
 - `public/images/store-image-in.jpg` -> Hero-Hintergrund / Innenansicht
 - `public/images/display-reparatur.jpg` -> Bild im Vertrauens-/Info-Bereich
 - `public/images/kamera-reparatur.jpg` -> Bild im Vertrauens-/Info-Bereich
-- `public/images/willhaben.png` -> Bild fuer Willhaben-Sektion
-- `public/images/hol-bring.png` -> Bild fuer Hol- & Bring-Service
+- `public/images/willhaben.jpg` -> Bild fuer Willhaben-Sektion
 
 ### Seiten
 
@@ -144,9 +142,8 @@ Diese Dateien bestimmen das Layout einzelner Sektionen:
 
 - `src/components/Hero.astro`
 - `src/components/TrustBar.astro`
-- `src/components/Services.astro`
+- `src/components/ServicesHub.astro`
 - `src/components/PriceCalculator.astro`
-- `src/components/PickupService.astro`
 - `src/components/GoogleReviews.astro`
 - `src/components/WillhabenShop.astro`
 - `src/components/Footer.astro`
@@ -580,27 +577,7 @@ Beispiel schlecht:
 
 wenn alles dasselbe meint
 
-### 5.15 Hol- & Bring-Service
-
-Pfad:
-
-```yaml
-pickup:
-  headline: "Hol & Bring Service"
-  description: "..."
-  badge: "10 EUR Pauschale innerhalb Klagenfurt"
-  ctaText: "Abholung anfragen"
-```
-
-Hier pflegen Sie:
-
-- Titel
-- Beschreibung
-- Preis-/Hinweis-Badge
-- CTA-Text
-- 3 Service-Schritte
-
-### 5.16 Willhaben / Ankauf / Verkauf
+### 5.15 Willhaben / Ankauf / Verkauf
 
 Pfad:
 
@@ -772,7 +749,6 @@ Beispiel:
 
 - `src/components/Hero.astro`
 - `src/components/WillhabenShop.astro`
-- `src/components/PickupService.astro`
 
 Wenn Sie nur Inhalte pflegen wollen, ist es besser, bestehende Dateinamen zu ersetzen statt neue Dateinamen einzufuehren.
 

@@ -7,7 +7,7 @@ const requiredAssets = [
   'public/images/store-image-in.jpg',
   'public/images/display-reparatur.jpg',
   'public/images/kamera-reparatur.jpg',
-  'public/images/willhaben.png',
+  'public/images/willhaben.jpg',
   'public/images/shop-innen-left.avif',
   'public/images/shop-innen-right.avif',
   'public/vendor/alpine.min.js',

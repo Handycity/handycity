@@ -27,7 +27,7 @@ Sie haben eine vollständige, moderne Handycity-Homepage mit:
 - Öffnungszeiten
 - Preisrechner-Einträge
 - Service-Einträge
-- Willhaben-/Pickup-Texte
+- Willhaben-Texte
 - FAQ-Einträge
 - Einzelne Willhaben-Angebote
 - Beliebige weitere Inhalte via `Owner Update Content Advanced` (inkl. Add/Edit/Delete an `content.yaml`-Feldern und Listen)

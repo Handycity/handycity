@@ -54,8 +54,8 @@ Use the specific workflow when possible:
 4. `Owner Update Service Item`
 - Service add/edit/remove.
 
-5. `Owner Update Offers and Pickup`
-- Willhaben section text and pickup section content.
+5. `Owner Update Offers`
+- Willhaben section text.
 
 6. `Owner Update FAQ Item`
 - Add/update/remove FAQ entries.
