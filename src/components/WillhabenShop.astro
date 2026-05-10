@@ -85,6 +85,8 @@ const baseUrl = import.meta.env.BASE_URL;
             <img
               src={`${baseUrl}images/willhaben.jpg`}
               alt="Willhaben Shop von Handycity"
+              width="1200"
+              height="1070"
               class="h-72 w-full object-cover md:h-[26rem]"
               loading="lazy"
               decoding="async"
@@ -113,6 +115,8 @@ const baseUrl = import.meta.env.BASE_URL;
                   <img
                     src={offer.image}
                     alt={offer.imageAlt || offer.title}
+                    width="600"
+                    height="480"
                     class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"
                     loading="lazy"
                     decoding="async"
@@ -173,6 +177,7 @@ const baseUrl = import.meta.env.BASE_URL;
                       target="_blank"
                       rel="noopener noreferrer"
                       class="inline-flex items-center justify-center gap-2 rounded-full bg-navy px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-navy-light"
+                      aria-label={`${offer.title} auf Willhaben öffnen`}
                     >
                       Willhaben oeffnen
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M8 7h9v9"/></svg>

@@ -21,7 +21,7 @@ function linkifyBonusDomain(text: string): string {
 
   return escaped.replace(
     /geräte-retter-prämie\.at/g,
-    `<a href="${bonusUrl}" target="_blank" rel="noopener noreferrer" class="font-medium text-green underline underline-offset-4 hover:text-green/80">geräte-retter-prämie.at</a>`
+    `<a href="${bonusUrl}" target="_blank" rel="noopener noreferrer" class="font-semibold text-green underline underline-offset-4 hover:text-navy">geräte-retter-prämie.at</a>`
   );
 }
 ---
@@ -65,7 +65,7 @@ function linkifyBonusDomain(text: string): string {
         href={data.ctaHref}
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 bg-green text-white px-6 py-3 rounded-lg font-semibold hover:bg-green/90 transition-colors"
+        class="inline-flex items-center gap-2 bg-green text-white px-6 py-3 rounded-lg font-semibold hover:bg-navy transition-colors"
       >
         {data.ctaText}
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>

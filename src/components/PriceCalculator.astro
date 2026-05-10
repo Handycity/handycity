@@ -27,7 +27,7 @@ const progressSteps = [
 <section id="preisrechner" class="py-16 md:py-24 bg-white">
   <div class="max-w-5xl mx-auto px-4">
     <div class="text-center mb-8 md:mb-10">
-      <div class="text-4xl animate-bounce-slow" aria-hidden="true">🔧</div>
+      <div class="text-4xl" aria-hidden="true">🔧</div>
       <h2 class="mt-3 text-2xl md:text-3xl font-bold text-navy">{calculator.headline}</h2>
       <p class="mt-2 text-slate-600">{calculator.subheadline}</p>
     </div>
@@ -58,7 +58,7 @@ const progressSteps = [
                   ? 'bg-green border-green text-white scale-110'
                   : isStepCurrent(${item.index})
                     ? 'bg-navy border-navy text-white scale-110 shadow-md shadow-navy/30'
-                    : 'bg-white border-slate-200 text-slate-400'`}
+                    : 'bg-white border-slate-200 text-slate-600'`}
               >
                 <template x-if={`isStepComplete(${item.index})`}>
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
@@ -95,7 +95,7 @@ const progressSteps = [
 
             <a
               href="#kontakt"
-              class="inline-flex items-center justify-center rounded-xl bg-green px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-emerald-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-green/40"
+              class="inline-flex items-center justify-center rounded-xl bg-green px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-navy focus:outline-none focus-visible:ring-2 focus-visible:ring-green/40"
             >
               ✉️ Kontakt aufnehmen
             </a>
@@ -204,7 +204,7 @@ const progressSteps = [
             <span x-show="!brandLogo(selectedBrand)" x-text="brandEmoji(selectedBrand)" aria-hidden="true"></span>
             <span x-text="selectedBrand"></span>
           </span>
-          <span class="text-slate-400" aria-hidden="true">→</span>
+          <span class="text-slate-600" aria-hidden="true">→</span>
           <span class="inline-flex items-center gap-1.5 bg-navy/10 text-navy text-xs font-semibold px-3 py-1 rounded-full">
             <span aria-hidden="true">📱</span>
             <span x-text="selectedDevice"></span>
@@ -261,7 +261,7 @@ const progressSteps = [
       </div>
     </div>
 
-    <p class="text-xs text-slate-400 text-center mt-4">Alle Preise sind Richtwerte inkl. MwSt. Der endgültige Preis wird nach Diagnose festgelegt.</p>
+    <p class="text-xs text-slate-600 text-center mt-4">Alle Preise sind Richtwerte inkl. MwSt. Der endgültige Preis wird nach Diagnose festgelegt.</p>
   </div>
 </section>
 
@@ -351,17 +351,4 @@ const progressSteps = [
 
 <style>
   [x-cloak] { display: none !important; }
-
-  @keyframes bounce-slow {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
-  }
-
-  .animate-bounce-slow {
-    animation: bounce-slow 2s ease-in-out infinite;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .animate-bounce-slow { animation: none !important; }
-  }
 </style>

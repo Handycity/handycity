@@ -22,6 +22,8 @@ const year = new Date().getFullYear();
           <img
             src={`${import.meta.env.BASE_URL}images/handycity_logo_v1.png`}
             alt="Handycity Logo"
+            width="320"
+            height="213"
             class="h-20 w-auto"
             loading="lazy"
             decoding="async"
@@ -39,7 +41,7 @@ const year = new Date().getFullYear();
 
       <!-- Links -->
       <div>
-        <h3 class="font-semibold text-sm uppercase tracking-wider mb-3 text-slate-400">Navigation</h3>
+        <h3 class="font-semibold text-sm uppercase tracking-wider mb-3 text-slate-200">Navigation</h3>
         <nav class="space-y-2 text-sm text-slate-300" aria-label="Footer Navigation">
           <a href="#services" class="hover:text-white transition-colors block">Services</a>
           <a href="#geraete-retter-praemie" class="hover:text-white transition-colors block">Geräte-Retter-Prämie</a>
@@ -52,7 +54,7 @@ const year = new Date().getFullYear();
 
       <!-- Legal + External -->
       <div>
-        <h3 class="font-semibold text-sm uppercase tracking-wider mb-3 text-slate-400">Rechtliches</h3>
+        <h3 class="font-semibold text-sm uppercase tracking-wider mb-3 text-slate-200">Rechtliches</h3>
         <nav class="space-y-2 text-sm text-slate-300" aria-label="Rechtliche Links">
           <a href={`${import.meta.env.BASE_URL}impressum`} class="hover:text-white transition-colors block">Impressum</a>
           <a href={`${import.meta.env.BASE_URL}datenschutz`} class="hover:text-white transition-colors block">Datenschutz</a>
@@ -65,7 +67,7 @@ const year = new Date().getFullYear();
       </div>
     </div>
 
-    <div class="border-t border-white/10 mt-10 space-y-2 pt-6 text-center text-xs text-slate-400">
+    <div class="border-t border-white/10 mt-10 space-y-2 pt-6 text-center text-xs text-slate-300">
       <div>{year} {company.legalName}. Alle Rechte vorbehalten.</div>
       <div>
         © <span class="font-semibold text-white">Logarithmix</span> Software Solutions {year}.

@@ -83,6 +83,8 @@ const cards = intents.map((intent) => {
           <img
             src={`${baseUrl}images/shop-innen-right.avif`}
             alt="Handycity Servicebereich im Shop"
+            width="1024"
+            height="768"
             class="h-[300px] w-full rounded-[1.25rem] object-cover sm:h-[360px] lg:h-[465px]"
             loading="lazy"
             decoding="async"
@@ -99,7 +101,7 @@ const cards = intents.map((intent) => {
           <div>
             <h2 class="text-2xl md:text-3xl font-bold text-navy flex items-center gap-2">
               {services.headline}
-              <span class="animate-wave" aria-hidden="true">👋</span>
+              <span aria-hidden="true">👋</span>
             </h2>
             <p class="mt-2 text-sm md:text-base text-slate-600">Wähle, was du brauchst — ein Klick genügt.</p>
           </div>
@@ -175,23 +177,3 @@ const cards = intents.map((intent) => {
     </div>
   </div>
 </section>
-
-<style>
-  @keyframes wave {
-    0%, 60%, 100% { transform: rotate(0deg); }
-    10%, 30% { transform: rotate(14deg); }
-    20% { transform: rotate(-8deg); }
-    40% { transform: rotate(-4deg); }
-    50% { transform: rotate(10deg); }
-  }
-
-  .animate-wave {
-    display: inline-block;
-    transform-origin: 70% 70%;
-    animation: wave 3.5s ease-in-out infinite;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .animate-wave { animation: none !important; }
-  }
-</style>
