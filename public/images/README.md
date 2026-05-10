@@ -8,7 +8,8 @@ Bestehende Datei mit gleichem Namen ersetzen. Dann muss am Code nichts geaendert
 
 ## Aktuell verwendete Bilddateien
 
-- `handycity_logo_v1.png` - Logo in Header und rechtlichen Seiten
+- `handycity_logo_transparent.png` - Logo in Header und rechtlichen Seiten
+- `handycity_logo_v1.png` - Logo mit hellem Hintergrund fuer dunkle Flaechen
 - `store-image-in.webp` - Hero-Hintergrund und Vertrauensbereich
 - `store-image-in.jpg` - Social-/SEO-Fallback-Bild
 - `display-reparatur.jpg` - Bild im Bereich "Warum Handycity"
