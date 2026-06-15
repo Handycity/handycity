@@ -11,6 +11,8 @@ npm run build    # Produktions-Build in dist/
 npm run preview  # Build-Preview starten
 ```
 
+> Hinweis: `repo_push/` ist ein lokales, nicht in Git eingechecktes Artefakt und wurde entfernt. Build-Ausgabe `dist/`, `.astro/` und `node_modules/` sind ebenfalls ausgeschlossen und werden nicht als Hosting-Quellcode geliefert.
+
 ## Projektstruktur
 
 ```
@@ -35,6 +37,7 @@ public/
 
 Siehe [EDITING.md](EDITING.md) für die Anleitung.
 Siehe [OWNER_GUIDE.md](OWNER_GUIDE.md) für die vollständige Betreiber-Dokumentation mit Schritt-für-Schritt-Beispielen.
+Siehe [OWNER_INTERACTION_RUNBOOK.md](OWNER_INTERACTION_RUNBOOK.md) für den professionellen End-to-End-Betriebsablauf (Add/Edit/Delete/Publish/Rollback).
 Siehe [HOMEPAGE_FULL_OVERVIEW.md](HOMEPAGE_FULL_OVERVIEW.md) für die vollständige Leistungs- und Integrationsübersicht.
 Siehe [CUSTOMER_OVERVIEW.md](CUSTOMER_OVERVIEW.md) für die kundenfreundliche Übergabe-Zusammenfassung.
 
@@ -55,7 +58,10 @@ Fuer den Betreiber gibt es jetzt GitHub-native Pflegewege ohne externes CMS:
 - `Actions -> Owner Update Opening Hours`
 - `Actions -> Owner Update Price Entry`
 - `Actions -> Owner Update Service Item`
-- `Actions -> Owner Update Offers and Pickup`
+- `Actions -> Owner Update Offers`
+- `Actions -> Owner Update FAQ Item`
+- `Actions -> Owner Update Willhaben Offer`
+- `Actions -> Owner Update Content Advanced` (voller Zugriff auf beliebige `content.yaml`-Felder inkl. Add/Edit/Delete)
 
 Diese Workflows schreiben die geprueften Aenderungen direkt nach `main` und loesen danach automatisch Build und Deploy aus.
 
@@ -64,6 +70,16 @@ Bilder werden direkt ueber `public/images/` gepflegt. Details stehen in `public/
 ## Deployment
 
 Push auf `main` → GitHub Actions baut und deployed automatisch auf GitHub Pages.
+
+## Owner-Flow Test
+
+Zur lokalen Verifikation aller Owner-Add/Edit/Delete-Mechanismen (Preisrechner, Willhaben, FAQ, Services):
+
+```sh
+npm run owner:test:updates
+```
+
+Der Test stellt `src/data/content/*.yaml` danach automatisch wieder auf den Ausgangszustand zurueck.
 
 ## Architektur-Entscheidungen
 
