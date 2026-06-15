@@ -102,31 +102,31 @@ const mailtoEmail = company.email;
 </section>
 
 <script>
-  import Alpine from 'alpinejs';
+  document.addEventListener('alpine:init', () => {
+    window.Alpine.data('contactForm', () => ({
+      sent: false,
 
-  Alpine.data('contactForm', () => ({
-    sent: false,
+      submitForm(formEl) {
+        const data = new FormData(formEl);
+        const email = formEl.dataset.email || '';
+        const name = data.get('name') || '';
+        const device = data.get('device') || '';
+        const userEmail = data.get('email') || '';
+        const message = data.get('message') || '';
 
-    submitForm(formEl: HTMLFormElement) {
-      const data = new FormData(formEl);
-      const email = formEl.dataset.email || '';
-      const name = data.get('name') || '';
-      const device = data.get('device') || '';
-      const userEmail = data.get('email') || '';
-      const message = data.get('message') || '';
+        const subject = encodeURIComponent(`Reparaturanfrage von ${name}${device ? ' - ' + device : ''}`);
+        const body = encodeURIComponent(
+          `Name: ${name}\n` +
+          `E-Mail: ${userEmail}\n` +
+          (device ? `Gerät: ${device}\n` : '') +
+          `\nNachricht:\n${message}`
+        );
 
-      const subject = encodeURIComponent(`Reparaturanfrage von ${name}${device ? ' – ' + device : ''}`);
-      const body = encodeURIComponent(
-        `Name: ${name}\n` +
-        `E-Mail: ${userEmail}\n` +
-        (device ? `Gerät: ${device}\n` : '') +
-        `\nNachricht:\n${message}`
-      );
-
-      window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
-      this.sent = true;
-    },
-  }));
+        window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+        this.sent = true;
+      },
+    }));
+  });
 </script>
 
 <style>

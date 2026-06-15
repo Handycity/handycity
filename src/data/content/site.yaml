@@ -1,0 +1,55 @@
+# ============================================================
+# Handycity.at - Content Segment
+# ============================================================
+# File: site.yaml
+# Scope: Site and Company
+# ============================================================
+
+site:
+  title: Handy & Tablet Reparatur Klagenfurt | Handycity
+  description: Professionelle Handy & Tablet Reparatur in Klagenfurt. Display, Akku, Kamera & mehr – schnell und zuverlässig. Geräte-Retter-Prämie Partnerbetrieb. ✆ +43 463 918559
+  url: https://handycity.at
+  locale: de_AT
+  language: de-AT
+company:
+  name: Handycity
+  legalName: Handycity A.K. GmbH
+  phone: +43 463 918559
+  phoneDisplay: +43 463 918 559
+  email: office@handycityarkaden.at
+  address:
+    street: Kardinalplatz 6
+    city: Klagenfurt am Wörthersee
+    zip: "9020"
+    country: AT
+  geo:
+    lat: 46.6237671
+    lng: 14.3123385
+  map:
+    placeUrl: https://www.google.com/maps/place/Handycity/@46.6237671,14.3123385,17z/data=!3m1!4b1!4m6!3m5!1s0x4770749d8151bf2b:0xbfb5d0cf51878c70!8m2!3d46.6237671!4d14.3123385!16s%2Fg%2F1tfvg0j3?hl=de-DE&entry=ttu&g_ep=EgoyMDI2MDQwNS4wIKXMDSoASAFQAw%3D%3D
+  uid: ATU63848359
+  schwerpunkt: Einzelhandel – Telekommunikation
+hours:
+  - day: Montag
+    time: 9:00–18:00
+    shortDay: Mo
+  - day: Dienstag
+    time: 9:00–18:00
+    shortDay: Di
+  - day: Mittwoch
+    time: 9:00–18:00
+    shortDay: Mi
+  - day: Donnerstag
+    time: 9:00–18:00
+    shortDay: Do
+  - day: Freitag
+    time: 9:00–18:00
+    shortDay: Fr
+  - day: Samstag
+    time: 9:00–13:00
+    shortDay: Sa
+  - day: Sonntag
+    time: Geschlossen
+    shortDay: So
+social:
+  willhaben: https://www.willhaben.at/iad/shop/handycity-ak-gmbh

@@ -16,6 +16,10 @@ Die Website bleibt auf GitHub Pages. Es gibt daher kein separates Admin-System a
 - entweder ueber vorbereitete `Actions`
 - oder direkt ueber Dateien im Repository
 
+Fuer den operativen End-to-End-Ablauf (inkl. Publish und Rollback) siehe zusaetzlich:
+
+- `OWNER_INTERACTION_RUNBOOK.md`
+
 --------------------------------------------------
 ## 1. Grundprinzip
 --------------------------------------------------
@@ -29,7 +33,7 @@ Es gibt drei Ebenen der Pflege:
 
 2. Direkte Inhaltsbearbeitung
    - fuer Inhalte, die nicht ueber einen Workflow abgedeckt sind
-   - Hauptdatei: `src/data/content.yaml`
+   - Hauptdatei: `src/data/content/*.yaml`
 
 3. Bildaustausch
    - ueber `public/images/`
@@ -43,7 +47,7 @@ Wenn moeglich, immer zuerst `Actions` verwenden.
 
 ### Zentrale Inhaltsdatei
 
-- `src/data/content.yaml`
+- `src/data/content/*.yaml`
 
 Hier liegen fast alle bearbeitbaren Inhalte:
 
@@ -53,7 +57,6 @@ Hier liegen fast alle bearbeitbaren Inhalte:
 - Services
 - Preisrechner
 - Bewertungen
-- Hol- & Bring-Service
 - Willhaben / Ankauf / Verkauf
 - FAQ
 - Kontakt
@@ -67,12 +70,11 @@ Hier liegen fast alle bearbeitbaren Inhalte:
 
 Aktuell verwendete Bilder:
 
-- `public/images/handycity-logo.png`
+- `public/images/handycity_logo_v1.png`
 - `public/images/store-image-in.jpg`
 - `public/images/display-reparatur.jpg`
 - `public/images/kamera-reparatur.jpg`
-- `public/images/willhaben.png`
-- `public/images/hol-bring.png`
+- `public/images/willhaben.jpg`
 
 ### Dokumentation
 
@@ -89,6 +91,9 @@ Die wichtigsten Workflows liegen in:
 - `.github/workflows/owner-update-price-entry.yml`
 - `.github/workflows/owner-update-service-item.yml`
 - `.github/workflows/owner-update-offers.yml`
+- `.github/workflows/owner-update-faq-item.yml`
+- `.github/workflows/owner-update-willhaben-offer.yml`
+- `.github/workflows/owner-update-content-advanced.yml`
 - `.github/workflows/owner-sync-willhaben.yml`
 - `.github/workflows/owner-sync-google-reviews.yml`
 - `.github/workflows/validate-site.yml`
@@ -133,7 +138,6 @@ Ohne Entwickler koennen gepflegt werden:
 - Service-Karten
 - Willhaben-Bereich
 - Ankauf / Verkauf / Angebote
-- Hol- & Bring-Service-Texte
 - FAQ
 - Bewertungen-Backup
 - Impressum
@@ -403,18 +407,17 @@ Damit aenderbar:
 Wenn moeglich, bestehende Icon-Namen weiterverwenden. Nicht willkuerlich neue Icon-Namen erfinden, wenn nicht klar ist, ob sie im Frontend unterstuetzt werden.
 
 --------------------------------------------------
-### 5.5 Owner Update Offers and Pickup
+### 5.5 Owner Update Offers
 --------------------------------------------------
 
 Workflow:
 
-- `Actions -> Owner Update Offers and Pickup`
+- `Actions -> Owner Update Offers`
 
 Damit aenderbar:
 
 - Willhaben-Sektion
 - Ankauf / Verkauf / Angebots-Texte
-- Hol- & Bring-Service
 
 ### Felder fuer Willhaben
 
@@ -423,14 +426,6 @@ Damit aenderbar:
 - `willhaben_url`
 - `willhaben_cta_text`
 - `willhaben_highlights`
-
-### Felder fuer Pickup
-
-- `pickup_headline`
-- `pickup_description`
-- `pickup_badge`
-- `pickup_cta_text`
-- `pickup_steps`
 
 ### Beispiel 1 - Willhaben-Headline aendern
 
@@ -453,22 +448,78 @@ Alternativ mit `|`:
 Gepruefte Geraete mit persoenlicher Beratung | Ankauf direkt im Geschaeft | Datenuebernahme auf Wunsch
 ```
 
-### Beispiel 3 - Hol- & Bring-Schritte setzen
+--------------------------------------------------
+### 5.6 Owner Update FAQ Item
+--------------------------------------------------
 
-Format:
+Workflow:
 
-- `Titel :: Text`
+- `Actions -> Owner Update FAQ Item`
 
-Beispiel fuer `pickup_steps`:
+Damit aenderbar:
 
-```text
-Abholung anfragen :: Kurz telefonisch oder ueber das Kontaktformular melden.
-Reparatur im Shop :: Wir pruefen das Geraet, nennen den Preis und reparieren es fachgerecht.
-Zurueckgebracht :: Ihr Geraet kommt repariert und einsatzbereit wieder zu Ihnen.
-```
+- FAQ-Eintrag anlegen
+- FAQ-Eintrag aktualisieren
+- FAQ-Eintrag entfernen
+
+Felder:
+
+- `action`: `upsert` oder `remove`
+- `question`
+- `answer` (bei `upsert` erforderlich)
+
+Beispiele:
+
+- Neu/Update:
+  - `action`: `upsert`
+  - `question`: `Bietet ihr Express-Service?`
+  - `answer`: `Ja, je nach Ersatzteil oft am selben Tag.`
+
+- Entfernen:
+  - `action`: `remove`
+  - `question`: `Bietet ihr Express-Service?`
 
 --------------------------------------------------
-### 5.6 Sync Willhaben Offers
+### 5.7 Owner Update Willhaben Offer
+--------------------------------------------------
+
+Workflow:
+
+- `Actions -> Owner Update Willhaben Offer`
+
+Damit aenderbar:
+
+- Einzelnes Angebot anlegen
+- Einzelnes Angebot aktualisieren
+- Einzelnes Angebot entfernen
+
+Felder:
+
+- `action`: `upsert` oder `remove`
+- `url` (empfohlener Schluessel) oder `title`
+- bei neuem `upsert`: Titel, Preis, Bilddaten und Meta-Felder
+
+Beispiele:
+
+- Neu:
+  - `action`: `upsert`
+  - `title`: `iPhone 14 128GB Black Neu/Haendler`
+  - `price`: `EUR 499`
+  - `url`: `https://www.willhaben.at/iad/kaufen-und-verkaufen/d/...`
+  - `image`: `https://cache.willhaben.at/...`
+  - `image_alt`: `iPhone 14 Black von Handycity auf willhaben`
+  - `listed_at`: `05.05.2026`
+  - `storage`: `128 GB`
+  - `unlocked`: `Ja`
+  - `condition`: `Neu`
+  - `delivery`: `Selbstabholung, Versand`
+
+- Entfernen:
+  - `action`: `remove`
+  - `url`: `https://www.willhaben.at/iad/kaufen-und-verkaufen/d/...`
+
+--------------------------------------------------
+### 5.8 Sync Willhaben Offers
 --------------------------------------------------
 
 Workflow:
@@ -492,7 +543,7 @@ Damit aenderbar:
 - Zeitplan laufen lassen, damit die Sektion automatisch aktuell bleibt
 
 --------------------------------------------------
-### 5.7 Sync Google Reviews Backup
+### 5.9 Sync Google Reviews Backup
 --------------------------------------------------
 
 Workflow:
@@ -517,12 +568,53 @@ Damit aenderbar:
 - `max_items` (optional)
 
 --------------------------------------------------
+### 5.10 Owner Update Content Advanced
+--------------------------------------------------
+
+Workflow:
+
+- `Actions -> Owner Update Content Advanced`
+
+Damit aenderbar:
+
+- beliebige Felder in `src/data/content/*.yaml`
+- Listen-Eintraege hinzufuegen/aktualisieren (`list_upsert`)
+- Listen-Eintraege loeschen (`list_remove`)
+- beliebige Felder entfernen (`remove`)
+
+Felder:
+
+- `action`: `set` | `remove` | `list_upsert` | `list_remove`
+- `target_path`: Pfad in `content.yaml`, z. B. `faq.items` oder `company.address.street`
+- `value_json`: JSON-Wert fuer die Aktion
+- `key_fields`: Schluesselfelder fuer Listenabgleich, z. B. `brand,device,repair`
+
+Beispiele:
+
+1. FAQ-Eintrag hinzufuegen:
+- `action`: `list_upsert`
+- `target_path`: `faq.items`
+- `key_fields`: `question`
+- `value_json`: `{"question":"Bietet ihr Express-Service?","answer":"Ja, je nach Ersatzteil oft am selben Tag."}`
+
+2. Rechtstext aendern:
+- `action`: `set`
+- `target_path`: `impressum.content`
+- `value_json`: `"Neuer Impressumstext ..."`
+
+3. Preiszeile loeschen:
+- `action`: `list_remove`
+- `target_path`: `calculator.prices`
+- `key_fields`: `brand,device,repair`
+- `value_json`: `{"brand":"Apple","device":"iPhone 15","repair":"Akku Tausch"}`
+
+--------------------------------------------------
 ## 6. Direkte Bearbeitung in `content.yaml`
 --------------------------------------------------
 
-Wenn kein passender Workflow existiert, erfolgt die Pflege direkt ueber:
+Wenn Sie keinen Action-Workflow verwenden moechten, erfolgt die Pflege direkt ueber:
 
-- `src/data/content.yaml`
+- `src/data/content/*.yaml`
 
 ### Wichtigste Regeln
 
@@ -769,29 +861,7 @@ Bearbeitung in GitHub:
 - Fuer Barrierefreiheit `imageAlt` immer passend zum Geraet pflegen.
 
 --------------------------------------------------
-### 6.8 Hol- & Bring-Service
---------------------------------------------------
-
-Bereich:
-
-```yaml
-pickup:
-  headline: "Hol & Bring Service"
-  description: "..."
-  badge: "10 EUR Pauschale innerhalb Klagenfurt"
-```
-
-Beispiel:
-
-```yaml
-pickup:
-  headline: "Hol & Bring Service in Klagenfurt"
-  description: "Wir holen Ihr Geraet in Klagenfurt ab, reparieren es und bringen es wieder zurueck."
-  badge: "10 EUR Pauschale innerhalb Klagenfurt"
-```
-
---------------------------------------------------
-### 6.9 FAQ
+### 6.8 FAQ
 --------------------------------------------------
 
 Bereich:
@@ -833,12 +903,11 @@ Der einfachste und sicherste Weg ist:
 
 ### Aktuelle Bilddateien
 
-- `public/images/handycity-logo.png`
+- `public/images/handycity_logo_v1.png`
 - `public/images/store-image-in.jpg`
 - `public/images/display-reparatur.jpg`
 - `public/images/kamera-reparatur.jpg`
-- `public/images/willhaben.png`
-- `public/images/hol-bring.png`
+- `public/images/willhaben.jpg`
 
 ### Beispiel 1 - Hero-Bild ersetzen
 
@@ -848,17 +917,11 @@ Neue Datei hochladen als:
 
 Dann wird das neue Bild automatisch im Hero genutzt.
 
-### Beispiel 2 - Hol- & Bring-Bild ersetzen
+### Beispiel 2 - Willhaben-Bild ersetzen
 
 Neue Datei hochladen als:
 
-- `public/images/hol-bring.png`
-
-### Beispiel 3 - Willhaben-Bild ersetzen
-
-Neue Datei hochladen als:
-
-- `public/images/willhaben.png`
+- `public/images/willhaben.jpg`
 
 ### Wichtiger Hinweis
 
@@ -879,7 +942,7 @@ Wenn kein API-Key hinterlegt ist, wird das Backup verwendet.
 
 Bereich:
 
-- `reviews` in `src/data/content.yaml`
+- `reviews` in `src/data/content/*.yaml`
 
 ### Backup einmalig automatisch aktualisieren
 
@@ -985,9 +1048,9 @@ Pruefen:
 
 - `Actions -> Owner Update Service Item`
 
-### Ich will Willhaben, Ankauf, Verkauf oder Hol- & Bring-Texte aendern
+### Ich will Willhaben, Ankauf oder Verkauf-Texte aendern
 
-- `Actions -> Owner Update Offers and Pickup`
+- `Actions -> Owner Update Offers`
 
 ### Ich will Willhaben-Angebote automatisch aktualisieren
 
@@ -995,7 +1058,11 @@ Pruefen:
 
 ### Ich will FAQ aendern
 
-- `src/data/content.yaml`
+- `Actions -> Owner Update FAQ Item`
+
+### Ich will ein einzelnes Willhaben-Angebot anlegen, aendern oder loeschen
+
+- `Actions -> Owner Update Willhaben Offer`
 
 ### Ich will Bewertungen aendern
 
@@ -1007,7 +1074,7 @@ Pruefen:
 
 ### Ich will Impressum oder Datenschutz aendern
 
-- `src/data/content.yaml`
+- `src/data/content/*.yaml`
 
 --------------------------------------------------
 ## 13. Empfehlung fuer den Betreiber
@@ -1018,7 +1085,7 @@ Verwenden Sie fuer Standardaenderungen immer zuerst die vorbereiteten GitHub Act
 Reihenfolge:
 
 1. Actions nutzen
-2. falls nicht abgedeckt: `src/data/content.yaml`
+2. falls nicht abgedeckt: `src/data/content/*.yaml`
 3. Bilder nur mit gleichem Dateinamen ersetzen
 4. Action-Ergebnis pruefen
 5. mergen

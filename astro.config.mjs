@@ -8,6 +8,17 @@ export default defineConfig({
   site: 'https://handycity.at',
   base,
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    server: {
+      watch: {
+        ignored: [
+          '**/repo_push/**',
+          '**/dist/**',
+          '**/.git/**',
+          '**/public/images/Handy mit Reparaturbonus _ Handycity Klagenfurt_files/**',
+          '**/public/images/shop-innen-right_files/**'
+        ]
+      }
+    }
   }
 });

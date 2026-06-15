@@ -1,0 +1,101 @@
+name: Owner Update Willhaben Offer
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "Angebot aktualisieren oder entfernen"
+        required: true
+        type: choice
+        options:
+          - upsert
+          - remove
+      title:
+        description: "Anzeigen-Titel (bei remove optional, wenn URL gesetzt)"
+        required: false
+        type: string
+      price:
+        description: "Preistext, z. B. EUR 399"
+        required: false
+        type: string
+      url:
+        description: "Willhaben Anzeigen-URL (empfohlener Schluessel)"
+        required: false
+        type: string
+      image:
+        description: "Bild-URL"
+        required: false
+        type: string
+      image_alt:
+        description: "Bild-Alt-Text"
+        required: false
+        type: string
+      listed_at:
+        description: "Datum, z. B. 09.03.2026"
+        required: false
+        type: string
+      storage:
+        description: "Speicher, z. B. 256 GB"
+        required: false
+        type: string
+      unlocked:
+        description: "Entsperrt-Status, z. B. Ja"
+        required: false
+        type: string
+      condition:
+        description: "Zustand, z. B. Neu/Gebraucht"
+        required: false
+        type: string
+      delivery:
+        description: "Lieferung, z. B. Selbstabholung, Versand"
+        required: false
+        type: string
+      note:
+        description: "Optionaler Hinweis (leer => entfernt bei upsert)"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - id: update
+        env:
+          ACTION: ${{ inputs.action }}
+          TITLE: ${{ inputs.title }}
+          PRICE: ${{ inputs.price }}
+          URL: ${{ inputs.url }}
+          IMAGE: ${{ inputs.image }}
+          IMAGE_ALT: ${{ inputs.image_alt }}
+          LISTED_AT: ${{ inputs.listed_at }}
+          STORAGE: ${{ inputs.storage }}
+          UNLOCKED: ${{ inputs.unlocked }}
+          CONDITION: ${{ inputs.condition }}
+          DELIVERY: ${{ inputs.delivery }}
+          NOTE: ${{ inputs.note }}
+        run: |
+          npm run owner:update:willhaben-offer
+          npm run content:validate
+          npm run assets:validate
+          ASTRO_TELEMETRY_DISABLED=1 PUBLIC_SITE_BASE=/handycity/ npm run build
+
+          if git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/content
+          git commit -m "chore: update willhaben offer"
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"

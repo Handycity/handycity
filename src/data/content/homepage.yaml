@@ -1,0 +1,138 @@
+# ============================================================
+# Handycity.at - Content Segment
+# ============================================================
+# File: homepage.yaml
+# Scope: Homepage Sections
+# ============================================================
+
+hero:
+  kicker: Klagenfurt am Wörthersee • Kardinalplatz 6
+  headline: Handy & Tablet Reparatur in Klagenfurt
+  subheadline: Schnell. Zuverlässig. Leistbar. Ihr Gerät ist bei uns in besten Händen.
+  ctaPrimary:
+    text: Jetzt anrufen
+    href: tel:+43463918559
+  ctaSecondary:
+    text: Reparatur anfragen
+    href: "#kontakt"
+  quickContactHeadline: Schnellkontakt
+  quickContactText: Für eine schnelle Einschätzung einfach Marke, Modell und Schaden nennen. Während der Öffnungszeiten melden wir uns rasch zurück.
+  quickContactNote: Direkt vor Ort am Kardinalplatz 6 oder per Anfrage über das Kontaktformular.
+  trustBadges:
+    - text: Geräte-Retter-Prämie Partner
+    - text: Erfahrene Techniker
+    - text: Faire Preise
+trustBar:
+  googleLabel: Google Bewertungen
+  googleHint: Echte Google-Daten werden eingeblendet, sobald sie verfügbar sind.
+  items:
+    - title: Schnell
+      text: Viele Reparaturen erledigen wir noch am selben Tag.
+      icon: zap
+    - title: Transparent
+      text: Richtpreise sofort sehen, finale Kosten vorab klar abgesprochen.
+      icon: shield-check
+    - title: Nachhaltig
+      text: Reparieren statt ersetzen spart Geld und schont Ressourcen.
+      icon: leaf
+    - title: Zentral
+      text: Direkt in Klagenfurt am Kardinalplatz erreichbar.
+      icon: map-pin
+services:
+  headline: Unsere Services
+  subheadline: Professionelle Reparatur für alle gängigen Geräte und Marken
+  items:
+    - name: Display Reparatur
+      description: Gebrochenes oder beschädigtes Display? Wir tauschen es schnell und fachgerecht aus.
+      icon: smartphone
+      price: Preis auf Anfrage
+    - name: Akku Tausch
+      description: Akku hält nicht mehr? Neuer Akku für längere Laufzeit – meist am selben Tag erledigt.
+      icon: battery-charging
+      price: Preis auf Anfrage
+    - name: Kamera Reparatur
+      description: Unscharfe Bilder oder defekte Kamera? Wir reparieren Front- und Hauptkamera.
+      icon: camera
+      price: Preis auf Anfrage
+    - name: Ladekonnektor
+      description: Handy lädt nicht mehr? Wir reparieren oder tauschen den Ladeanschluss.
+      icon: plug-zap
+      price: Preis auf Anfrage
+    - name: Lautsprecher & Mikrofon
+      description: Kein Ton oder Gesprächspartner hört Sie nicht? Wir beheben Audio-Probleme.
+      icon: volume-2
+      price: Preis auf Anfrage
+    - name: Handy Verkauf
+      description: Entdecken Sie unsere Auswahl an Smartphones – im Geschäft oder auf Willhaben.
+      icon: shopping-bag
+      price: ""
+brands:
+  headline: Wir reparieren alle Marken
+  items:
+    - Apple
+    - Samsung
+    - Huawei
+    - Xiaomi
+    - OnePlus
+    - Google
+    - Sony
+    - Nokia
+trust:
+  headline: Warum Handycity?
+  items:
+    - title: Erfahrene Techniker
+      description: Unser Team verfügt über langjährige Erfahrung in der Reparatur aller gängigen Geräte.
+      icon: award
+    - title: Schnelle Reparatur
+      description: Die meisten Reparaturen erledigen wir noch am selben Tag.
+      icon: zap
+    - title: Faire Preise
+      description: Transparente Preisgestaltung ohne versteckte Kosten. Geräte-Retter-Prämie einlösbar.
+      icon: piggy-bank
+    - title: Umwelt schonen
+      description: Reparieren statt wegwerfen – sparen Sie Geld und schonen Sie die Umwelt.
+      icon: leaf
+process:
+  headline: So einfach funktioniert's
+  steps:
+    - step: "1"
+      title: Kontakt aufnehmen
+      description: Rufen Sie uns an oder schreiben Sie uns – wir beraten Sie gerne.
+      icon: phone
+    - step: "2"
+      title: Gerät vorbeibringen
+      description: Kommen Sie zu uns am Kardinalplatz 6 und wir prüfen Ihr Gerät direkt vor Ort.
+      icon: map-pin
+    - step: "3"
+      title: Diagnose & Reparatur
+      description: Unsere Techniker analysieren den Schaden und reparieren Ihr Gerät fachgerecht.
+      icon: wrench
+    - step: "4"
+      title: Gerät abholen
+      description: Ihr repariertes Gerät ist bereit – schnell und zuverlässig.
+      icon: check-circle
+contact:
+  headline: Kontaktieren Sie uns
+  subheadline: Schreiben Sie uns oder rufen Sie direkt an – wir beraten Sie gerne
+  formAction: https://formspree.io/f/YOUR_FORM_ID
+  fields:
+    - name: name
+      label: Name
+      type: text
+      required: true
+    - name: email
+      label: E-Mail
+      type: email
+      required: true
+    - name: phone
+      label: Telefon
+      type: tel
+      required: false
+    - name: device
+      label: Gerät & Modell
+      type: text
+      required: false
+    - name: message
+      label: Ihre Nachricht
+      type: textarea
+      required: true

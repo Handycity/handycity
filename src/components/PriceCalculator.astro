@@ -15,6 +15,8 @@ interface Props {
 }
 
 const { calculator } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL;
+const priceDataId = 'repair-price-data';
 
 const progressSteps = [
   { index: 1, label: 'Marke' },
@@ -22,7 +24,7 @@ const progressSteps = [
   { index: 3, label: 'Reparatur' },
 ];
 ---
-<section id="preisrechner" class="py-16 md:py-24 bg-gradient-to-b from-slate-50 to-white">
+<section id="preisrechner" class="py-16 md:py-24 bg-white">
   <div class="max-w-5xl mx-auto px-4">
     <div class="text-center mb-8 md:mb-10">
       <div class="text-4xl animate-bounce-slow" aria-hidden="true">🔧</div>
@@ -31,9 +33,11 @@ const progressSteps = [
     </div>
 
     <div
-      x-data={`priceCalculator(${JSON.stringify(calculator.prices)})`}
+      x-data={`priceCalculator('${priceDataId}')`}
+      x-ref="calculatorRoot"
       class="relative bg-white border-2 border-slate-100 rounded-3xl p-6 md:p-10 shadow-lg shadow-slate-200/50 overflow-hidden"
     >
+      <script id={priceDataId} type="application/json" set:html={JSON.stringify(calculator.prices)}></script>
       <div class="absolute -top-12 -right-12 w-32 h-32 bg-navy/5 rounded-full blur-2xl" aria-hidden="true"></div>
       <div class="absolute -bottom-8 -left-8 w-24 h-24 bg-green/5 rounded-full blur-2xl" aria-hidden="true"></div>
 
@@ -41,7 +45,7 @@ const progressSteps = [
         <div class="absolute top-5 left-[16%] right-[16%] h-0.5 bg-slate-100">
           <div
             class="h-full bg-navy transition-all duration-300"
-            :style="step === 1 ? 'width: 0%' : step === 2 ? 'width: 50%' : 'width: 100%'"
+            :style="progressWidth()"
           ></div>
         </div>
 
@@ -50,22 +54,52 @@ const progressSteps = [
             <div class="flex flex-col items-center gap-2 text-center">
               <div
                 class="h-10 w-10 rounded-full border-2 flex items-center justify-center text-sm font-semibold transition-all duration-300"
-                :class={`step > ${item.index}
+                :class={`isStepComplete(${item.index})
                   ? 'bg-green border-green text-white scale-110'
-                  : step === ${item.index}
+                  : isStepCurrent(${item.index})
                     ? 'bg-navy border-navy text-white scale-110 shadow-md shadow-navy/30'
                     : 'bg-white border-slate-200 text-slate-400'`}
               >
-                <template x-if={`step > ${item.index}`}>
+                <template x-if={`isStepComplete(${item.index})`}>
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
                 </template>
-                <template x-if={`step <= ${item.index}`}>
+                <template x-if={`!isStepComplete(${item.index})`}>
                   <span>{item.index}</span>
                 </template>
               </div>
               <span class="text-xs font-medium text-slate-500">{item.label}</span>
             </div>
           ))}
+        </div>
+
+        <div
+          x-show="selectedRepair"
+          x-cloak
+          x-transition:enter="transition ease-out duration-200"
+          x-transition:enter-start="opacity-0 translate-y-2 scale-[0.98]"
+          x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+          class="mt-6 rounded-2xl border-2 border-green/20 bg-gradient-to-r from-green/10 via-white to-green/5 p-4 shadow-sm shadow-green/10"
+        >
+          <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div class="flex items-start gap-3">
+              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-green text-white shadow-md shadow-green/20">
+                <span class="text-lg" aria-hidden="true">🎉</span>
+              </div>
+              <div>
+                <p class="text-xs font-semibold uppercase tracking-[0.16em] text-green">Fertig ausgewählt</p>
+                <p class="mt-1 text-sm font-semibold text-slate-900">
+                  <span x-text="selectedRepair"></span> passt. Nächster Schritt: kurz Kontakt aufnehmen.
+                </p>
+              </div>
+            </div>
+
+            <a
+              href="#kontakt"
+              class="inline-flex items-center justify-center rounded-xl bg-green px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-emerald-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-green/40"
+            >
+              ✉️ Kontakt aufnehmen
+            </a>
+          </div>
         </div>
       </div>
 
@@ -88,7 +122,17 @@ const progressSteps = [
               class="border-2 rounded-2xl px-4 py-5 font-medium bg-white hover:-translate-y-1 hover:shadow-md transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-navy/40"
               :class="selectedBrand === brand ? 'border-navy bg-navy/5 text-navy shadow-md shadow-navy/10' : 'border-slate-100 hover:border-navy/40'"
             >
-              <div class="text-2xl mb-2" x-text="brandEmoji(brand)" aria-hidden="true"></div>
+              <div class="mb-2 flex h-8 items-center justify-center">
+                <img
+                  x-show="brandLogo(brand)"
+                  :src="brandLogo(brand)"
+                  :alt="brand + ' Logo'"
+                  class="h-7 w-auto object-contain"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span x-show="!brandLogo(brand)" class="text-2xl" x-text="brandEmoji(brand)" aria-hidden="true"></span>
+              </div>
               <div class="text-sm" x-text="brand"></div>
             </button>
           </template>
@@ -149,7 +193,15 @@ const progressSteps = [
 
         <div class="mt-4 mb-5 flex flex-wrap items-center justify-center gap-2">
           <span class="inline-flex items-center gap-1.5 bg-navy/10 text-navy text-xs font-semibold px-3 py-1 rounded-full">
-            <span x-text="brandEmoji(selectedBrand)" aria-hidden="true"></span>
+            <img
+              x-show="brandLogo(selectedBrand)"
+              :src="brandLogo(selectedBrand)"
+              :alt="selectedBrand + ' Logo'"
+              class="h-4 w-auto object-contain"
+              loading="lazy"
+              decoding="async"
+            />
+            <span x-show="!brandLogo(selectedBrand)" x-text="brandEmoji(selectedBrand)" aria-hidden="true"></span>
             <span x-text="selectedBrand"></span>
           </span>
           <span class="text-slate-400" aria-hidden="true">→</span>
@@ -168,8 +220,9 @@ const progressSteps = [
           <template x-for="repair in repairs" :key="repair.repair">
             <button
               type="button"
-              @click="selectedRepair = repair.repair"
+              @click="selectRepair(repair.repair)"
               class="w-full flex items-center justify-between border-2 border-slate-100 rounded-2xl px-5 py-4 bg-white hover:border-navy/30 transition-colors text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-navy/40"
+              :class="selectedRepair === repair.repair ? 'border-navy bg-navy/5 shadow-md shadow-navy/10' : ''"
             >
               <div class="inline-flex items-center gap-3 text-slate-900">
                 <span class="text-xl" x-text="repairEmoji(repair.repair)" aria-hidden="true"></span>
@@ -212,43 +265,88 @@ const progressSteps = [
   </div>
 </section>
 
-<script>
-  import Alpine from 'alpinejs';
+<script define:vars={{ baseUrl }}>
+  const brandLogoMap = {
+    'Apple': `${baseUrl}brands/apple.svg`,
+    'Samsung': `${baseUrl}brands/samsung.svg`,
+    'Huawei': `${baseUrl}brands/huawei.svg`,
+    'Xiaomi': `${baseUrl}brands/xiaomi.svg`,
+    'OnePlus': `${baseUrl}brands/oneplus.svg`,
+    'Google': `${baseUrl}brands/google.svg`,
+    'Sony': `${baseUrl}brands/sony.svg`,
+    'Nokia': `${baseUrl}brands/nokia.svg`,
+  };
 
-  const brandEmojiMap: Record<string, string> = {
+  const brandEmojiMap = {
     'Apple': '🍎', 'Samsung': '📱', 'Huawei': '🌐', 'Xiaomi': '🔧',
     'OnePlus': '⚡', 'Google': '🔍', 'Sony': '🎮', 'Nokia': '📞',
   };
 
-  const repairEmojiMap: Record<string, string> = {
+  const repairEmojiMap = {
     'Display': '🖥️', 'Akku': '🔋', 'Kamera': '📸',
     'Ladebuchse': '🔌', 'Lautsprecher': '🔊', 'Backcover': '🛡️',
   };
 
-  Alpine.data('priceCalculator', (allPrices) => ({
-    allPrices,
-    step: 1,
-    selectedBrand: '',
-    selectedDevice: '',
-    selectedRepair: '',
-    brandEmoji(brand)  {
-      return brandEmojiMap[brand] ?? '📱';
-    },
-    repairEmoji(repair){
-      const normalizedRepair = String(repair || '').toLowerCase();
-      const match = Object.entries(repairEmojiMap).find(([key]) => normalizedRepair.includes(key.toLowerCase()));
-      return match ? match[1] : '🔧';
-    },
-    get brands()  { return [...new Set(this.allPrices.map((p) => p.brand))]; },
-    get devices() { return [...new Set(this.allPrices.filter((p) => p.brand === this.selectedBrand).map((p) => p.device))]; },
-    get repairs() { return this.allPrices.filter((p) => p.brand === this.selectedBrand && p.device === this.selectedDevice); },
-    selectBrand(b)  { this.selectedBrand = b; this.selectedDevice = ''; this.selectedRepair = ''; this.step = 2; },
-    selectDevice(d) { this.selectedDevice = d; this.selectedRepair = ''; this.step = 3; },
-    goBack(toStep)  {
-      if (toStep <= 1) { this.selectedBrand = ''; this.selectedDevice = ''; this.selectedRepair = ''; this.step = 1; }
-      else if (toStep <= 2) { this.selectedDevice = ''; this.selectedRepair = ''; this.step = 2; }
-    },
-  }));
+  document.addEventListener('alpine:init', () => {
+    window.Alpine.data('priceCalculator', (dataScriptId) => ({
+      allPrices: (() => {
+        const source = document.getElementById(dataScriptId);
+        if (!source?.textContent) return [];
+
+        try {
+          const parsed = JSON.parse(source.textContent);
+          return Array.isArray(parsed) ? parsed : [];
+        } catch {
+          return [];
+        }
+      })(),
+      step: 1,
+      selectedBrand: '',
+      selectedDevice: '',
+      selectedRepair: '',
+      brandLogo(brand) {
+        return brandLogoMap[brand] ?? '';
+      },
+      brandEmoji(brand)  {
+        return brandEmojiMap[brand] ?? '📱';
+      },
+      repairEmoji(repair){
+        const normalizedRepair = String(repair || '').toLowerCase();
+        const match = Object.entries(repairEmojiMap).find(([key]) => normalizedRepair.includes(key.toLowerCase()));
+        return match ? match[1] : '🔧';
+      },
+      get brands()  { return [...new Set(this.allPrices.map((p) => p.brand))]; },
+      get devices() { return [...new Set(this.allPrices.filter((p) => p.brand === this.selectedBrand).map((p) => p.device))]; },
+      get repairs() { return this.allPrices.filter((p) => p.brand === this.selectedBrand && p.device === this.selectedDevice); },
+      scrollToStart() {
+        this.$nextTick(() => {
+          this.$refs.calculatorRoot?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      },
+      progressWidth() {
+        if (this.step === 1) return 'width: 0%';
+        if (this.step === 2) return 'width: 50%';
+        return 'width: 100%';
+      },
+      isStepComplete(index) {
+        return this.step > index || (index === 3 && Boolean(this.selectedRepair));
+      },
+      isStepCurrent(index) {
+        return this.step === index && !(index === 3 && this.selectedRepair);
+      },
+      selectBrand(b)  { this.selectedBrand = b; this.selectedDevice = ''; this.selectedRepair = ''; this.step = 2; this.scrollToStart(); },
+      selectDevice(d) { this.selectedDevice = d; this.selectedRepair = ''; this.step = 3; this.scrollToStart(); },
+      selectRepair(repair) {
+        this.selectedRepair = repair;
+        this.scrollToStart();
+      },
+      goBack(toStep)  {
+        if (toStep <= 1) { this.selectedBrand = ''; this.selectedDevice = ''; this.selectedRepair = ''; this.step = 1; }
+        else if (toStep <= 2) { this.selectedDevice = ''; this.selectedRepair = ''; this.step = 2; }
+        this.scrollToStart();
+      },
+    }));
+  });
 </script>
 
 <style>

@@ -10,7 +10,7 @@ Die Website ist eine vollständige Conversion- und Informationsseite für:
 - Kontakt, Standort, Öffnungszeiten
 - FAQ und rechtliche Seiten
 
-Der komplette Content wird zentral aus `src/data/content.yaml` geladen.
+Der komplette Content wird zentral aus `src/data/content/*.yaml` geladen.
 
 ## 2) Seitenaufbau und Sektionen (in Reihenfolge)
 
@@ -25,11 +25,10 @@ Aus `src/pages/index.astro`:
 3. TrustBar (`#trustbar`)
 - Google-Bewertungszusammenfassung + 4 USP-Karten.
 
-4. Services Hub (`#services-hub`)
-- Intent-Navigation in 3 Karten:
+4. Services Hub (`#services`)
+- Intent-Navigation in 2 Karten:
   - Reparieren -> `#preisrechner`
   - Handy kaufen -> `#handy-kaufen`
-  - Extra-Service -> `#kontakt`
 
 5. Preisrechner (`#preisrechner`)
 - 3-stufiges Alpine-UI (Marke -> Modell -> Reparatur)
@@ -49,25 +48,22 @@ Aus `src/pages/index.astro`:
 9. Handy kaufen (`#handy-kaufen`)
 - Willhaben-Integration mit Angebotskarten aus YAML.
 
-10. Hol & Bring Service (`#hol-bring-service`)
-- Ablauf und Pauschalhinweis.
-
-11. Google Reviews (`#bewertungen`)
+10. Google Reviews (`#bewertungen`)
 - Bewertungs-Header + Carousel (Alpine).
 
-12. FAQ (`#faq`)
+11. FAQ (`#faq`)
 - Akkordeon mit Alpine + Collapse.
 
-13. Kontakt (`#kontakt`)
+12. Kontakt (`#kontakt`)
 - Kontaktkarten + Formular (öffnet Mailprogramm via `mailto:`).
 
-14. Standort (`#standort`)
+13. Standort (`#standort`)
 - Google Maps Embed + Route/Maps-Links + Öffnungszeiten.
 
-15. Markenleiste
+14. Markenleiste
 - Unterstützte Marken.
 
-16. Footer
+15. Footer
 - Navigationslinks, Rechtliches, Kontaktdaten.
 
 ## 3) Technische Architektur
@@ -75,7 +71,7 @@ Aus `src/pages/index.astro`:
 - Framework: Astro (SSR/Static build)
 - Styling: Tailwind CSS v4 Tokens in `src/styles/global.css`
 - Interaktivität: Alpine.js + `@alpinejs/collapse`
-- Datenhaltung: YAML (`src/data/content.yaml`) als Single Source of Truth
+- Datenhaltung: YAML (`src/data/content/*.yaml`) als Single Source of Truth
 - Build: `npm run build` (Astro)
 - Node-Version: >= 22.12.0
 
@@ -125,6 +121,9 @@ Workflows in `.github/workflows/`:
 - `owner-update-price-entry.yml`
 - `owner-update-service-item.yml`
 - `owner-update-offers.yml`
+- `owner-update-faq-item.yml`
+- `owner-update-willhaben-offer.yml`
+- `owner-update-content-advanced.yml` (generischer Vollzugriff auf beliebige `content.yaml`-Pfade inkl. Add/Edit/Delete)
 
 Diese Workflows:
 - nehmen Eingaben im Action-Form entgegen
@@ -142,16 +141,16 @@ Diese Workflows:
 - Business-Daten (Telefon, Adresse, Hero) ändern
 - Preisrechner-Einträge hinzufügen/entfernen
 - Services ändern
-- Willhaben-Textbausteine und Pickup-Bereich ändern
+- Willhaben-Textbausteine ändern
+- Beliebige weitere Inhalte über `Owner Update Content Advanced` add/edit/delete pflegen (z. B. FAQ, Rechtstexte, Social-Links, Headline-Felder)
 - Willhaben-Angebote und Google-Reviews automatisiert synchronisieren
 - Jede Änderung via CI validieren und automatisch deployen
 
 ## 7) Wichtige Ablageorte
 
-- Inhalt: `src/data/content.yaml`
+- Inhalt: `src/data/content/*.yaml`
 - Komponenten: `src/components/*.astro`
 - Seite: `src/pages/index.astro`
 - Layout/SEO: `src/layouts/Layout.astro`
 - Owner-Skripte: `scripts/*.mjs`
 - Automationen: `.github/workflows/*.yml`
-

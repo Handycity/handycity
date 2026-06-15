@@ -27,7 +27,10 @@ Sie haben eine vollständige, moderne Handycity-Homepage mit:
 - Öffnungszeiten
 - Preisrechner-Einträge
 - Service-Einträge
-- Willhaben-/Pickup-Texte
+- Willhaben-Texte
+- FAQ-Einträge
+- Einzelne Willhaben-Angebote
+- Beliebige weitere Inhalte via `Owner Update Content Advanced` (inkl. Add/Edit/Delete an `content.yaml`-Feldern und Listen)
 
 Zusätzlich automatisiert:
 - Willhaben-Angebote synchronisieren
@@ -40,7 +43,6 @@ Zusätzlich automatisiert:
 
 ## Daten- und Dokumentationsdateien
 
-- Hauptinhalt: `src/data/content.yaml`
+- Hauptinhalt: `src/data/content/*.yaml`
 - Bedienanleitungen: `OWNER_GUIDE.md`, `EDITING.md`
 - Diese Kundenübersicht: `CUSTOMER_OVERVIEW.md`
-

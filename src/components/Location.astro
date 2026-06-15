@@ -13,7 +13,7 @@ const { company, hours } = Astro.props;
 const embedUrl = `https://www.google.com/maps?q=${company.geo.lat},${company.geo.lng}&z=17&hl=de&output=embed`;
 const mapsDirections = `https://www.google.com/maps/dir/?api=1&destination=${company.geo.lat},${company.geo.lng}`;
 ---
-<section id="standort" class="bg-slate-50 py-16 md:py-24">
+<section id="standort" class="bg-white py-16 md:py-24">
   <div class="mx-auto max-w-7xl px-4">
     <div class="mx-auto max-w-3xl text-center">
       <p class="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">Standort</p>
@@ -22,11 +22,33 @@ const mapsDirections = `https://www.google.com/maps/dir/?api=1&destination=${com
     </div>
 
     <div class="mt-10 overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-xl shadow-slate-100/80 lg:grid lg:grid-cols-[1.08fr_0.92fr]">
-      <div class="relative min-h-[420px] border-b border-slate-200 bg-slate-100 lg:border-b-0 lg:border-r">
+      <div class="relative min-h-[420px] border-b border-slate-200 bg-slate-100 lg:border-b-0 lg:border-r" x-data="{ mapAccepted: false }">
         <div class="absolute left-5 top-5 z-10 rounded-full bg-white/95 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-700 shadow-lg shadow-slate-300/40">
           Google Maps Live
         </div>
+
+        <div
+          x-show="!mapAccepted"
+          class="flex h-full min-h-[420px] items-center justify-center p-6"
+        >
+          <div class="max-w-md rounded-2xl border border-slate-200 bg-white/95 p-6 text-center shadow-sm">
+            <p class="text-base font-semibold text-slate-800">Google Maps laden</p>
+            <p class="mt-3 text-sm leading-6 text-slate-600">
+              Mit dem Laden der Karte werden Daten (z. B. Ihre IP-Adresse) an Google übertragen.
+            </p>
+            <button
+              type="button"
+              @click="mapAccepted = true"
+              class="mt-5 inline-flex items-center justify-center rounded-full bg-navy px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-navy-light"
+            >
+              Karte anzeigen
+            </button>
+          </div>
+        </div>
+
         <iframe
+          x-show="mapAccepted"
+          x-cloak
           src={embedUrl}
           class="h-full min-h-[420px] w-full"
           style="border:0"
@@ -83,3 +105,7 @@ const mapsDirections = `https://www.google.com/maps/dir/?api=1&destination=${com
     </div>
   </div>
 </section>
+
+<style>
+  [x-cloak] { display: none !important; }
+</style>

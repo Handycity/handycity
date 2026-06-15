@@ -4,7 +4,7 @@ Diese Datei ist die praktische Anleitung fuer den Betreiber der Website. Sie erk
 
 Die Website ist so aufgebaut, dass fast alle Inhalte ueber eine zentrale Datei gepflegt werden:
 
-- `src/data/content.yaml`
+- `src/data/content/*.yaml`
 
 Solange es nur um Texte, Preise, Kontaktdaten, Bilder, FAQ, Bewertungen oder Angebote geht, muss in der Regel nur diese Datei angepasst werden.
 
@@ -23,7 +23,6 @@ Ohne Entwickler koennen Sie normalerweise selbst aendern:
 - Service-Liste
 - Reparaturpreise im Preisrechner
 - FAQ
-- Hol- & Bring-Service-Texte
 - Willhaben-Texte und Link
 - Bewertungen im Backup
 - Impressum
@@ -52,7 +51,10 @@ Fuer die haeufigsten Aenderungen gibt es vorbereitete Workflows unter `Actions`.
 - `Owner Update Opening Hours`
 - `Owner Update Price Entry`
 - `Owner Update Service Item`
-- `Owner Update Offers and Pickup`
+- `Owner Update Offers`
+- `Owner Update FAQ Item`
+- `Owner Update Willhaben Offer`
+- `Owner Update Content Advanced`
 - `Sync Willhaben Offers`
 - `Sync Google Reviews Backup`
 
@@ -72,6 +74,10 @@ Danach passiert der Rest automatisch:
 - die Aenderung wird direkt nach `main` geschrieben
 - GitHub Pages deployt die neue Version
 
+Hinweis:
+
+- Mit `Owner Update Content Advanced` koennen beliebige Felder und Listen in `content.yaml` per Action gepflegt werden (setzen, hinzufuegen/aktualisieren, loeschen).
+
 ### Wo pruefen?
 
 - Repository -> `Actions`
@@ -81,11 +87,11 @@ Danach passiert der Rest automatisch:
 ## 3. Direkter Weg: Inhalte direkt in GitHub aendern
 --------------------------------------------------
 
-Wenn Sie etwas aendern wollen, das nicht ueber einen Workflow abgedeckt ist, koennen Sie weiterhin direkt in GitHub bearbeiten.
+Wenn Sie etwas aendern wollen, das nicht ueber die Standard-Workflows abgedeckt ist, nutzen Sie zuerst `Owner Update Content Advanced`. Direkte YAML-Bearbeitung bleibt als Fallback moeglich.
 
 ### So gehen Sie vor
 
-1. Datei `src/data/content.yaml` oeffnen
+1. Datei `src/data/content/*.yaml` oeffnen
 2. Auf das Stift-Symbol klicken
 3. Text anpassen
 4. `Commit changes` klicken
@@ -102,7 +108,7 @@ Wenn der Build fehlschlaegt, wurde meist:
 
 ### Hauptdatei fuer Inhalte
 
-- `src/data/content.yaml`
+- `src/data/content/*.yaml`
 
 Das ist die zentrale Inhaltsdatei. Hier stehen fast alle Texte und Daten.
 
@@ -118,12 +124,11 @@ Fuer Bilder gibt es eine eigene Kurzanleitung:
 
 Aktuell wichtige Dateien:
 
-- `public/images/handycity-logo.png` -> Logo
+- `public/images/handycity_logo_v1.png` -> Logo
 - `public/images/store-image-in.jpg` -> Hero-Hintergrund / Innenansicht
 - `public/images/display-reparatur.jpg` -> Bild im Vertrauens-/Info-Bereich
 - `public/images/kamera-reparatur.jpg` -> Bild im Vertrauens-/Info-Bereich
-- `public/images/willhaben.png` -> Bild fuer Willhaben-Sektion
-- `public/images/hol-bring.png` -> Bild fuer Hol- & Bring-Service
+- `public/images/willhaben.jpg` -> Bild fuer Willhaben-Sektion
 
 ### Seiten
 
@@ -137,9 +142,8 @@ Diese Dateien bestimmen das Layout einzelner Sektionen:
 
 - `src/components/Hero.astro`
 - `src/components/TrustBar.astro`
-- `src/components/Services.astro`
+- `src/components/ServicesHub.astro`
 - `src/components/PriceCalculator.astro`
-- `src/components/PickupService.astro`
 - `src/components/GoogleReviews.astro`
 - `src/components/WillhabenShop.astro`
 - `src/components/Footer.astro`
@@ -573,27 +577,7 @@ Beispiel schlecht:
 
 wenn alles dasselbe meint
 
-### 5.15 Hol- & Bring-Service
-
-Pfad:
-
-```yaml
-pickup:
-  headline: "Hol & Bring Service"
-  description: "..."
-  badge: "10 EUR Pauschale innerhalb Klagenfurt"
-  ctaText: "Abholung anfragen"
-```
-
-Hier pflegen Sie:
-
-- Titel
-- Beschreibung
-- Preis-/Hinweis-Badge
-- CTA-Text
-- 3 Service-Schritte
-
-### 5.16 Willhaben / Ankauf / Verkauf
+### 5.15 Willhaben / Ankauf / Verkauf
 
 Pfad:
 
@@ -765,7 +749,6 @@ Beispiel:
 
 - `src/components/Hero.astro`
 - `src/components/WillhabenShop.astro`
-- `src/components/PickupService.astro`
 
 Wenn Sie nur Inhalte pflegen wollen, ist es besser, bestehende Dateinamen zu ersetzen statt neue Dateinamen einzufuehren.
 
@@ -902,7 +885,7 @@ Pruefen:
 
 Fuer normale Inhaltsaenderungen:
 
-1. `src/data/content.yaml` in GitHub oeffnen
+1. `src/data/content/*.yaml` in GitHub oeffnen
 2. nur den noetigen Text anpassen
 3. committen
 4. GitHub Actions pruefen
@@ -924,7 +907,7 @@ Fuer groessere Aenderungen:
 ## 13. Kurze Merkhilfe
 --------------------------------------------------
 
-- Inhalte -> `src/data/content.yaml`
+- Inhalte -> `src/data/content/*.yaml`
 - Bilder -> `public/images/`
 - Design/Layout -> `src/components/`
 - Seiten -> `src/pages/`
@@ -932,4 +915,4 @@ Fuer groessere Aenderungen:
 
 Wenn Sie nur Texte, Preise oder Kontaktdaten pflegen, bleiben Sie fast immer in:
 
-- `src/data/content.yaml`
+- `src/data/content/*.yaml`
