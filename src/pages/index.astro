@@ -41,6 +41,32 @@ const reviewsData = liveReviews
       ...liveReviews,
     }
   : content.reviews;
+
+// Merge phone-expert prices (if present) into the calculator prices as enrichment/fallback
+import fs from 'fs';
+import path from 'path';
+const phoneExpertPath = path.resolve('./src/data/phone-expert/prices.json');
+let phoneExpertPrices = [];
+try {
+  if (fs.existsSync(phoneExpertPath)) {
+    phoneExpertPrices = JSON.parse(fs.readFileSync(phoneExpertPath, 'utf8'));
+  }
+} catch (err) {
+  console.error('phone-expert load failed:', err?.message || err);
+}
+
+const mergedCalculator = {
+  ...content.calculator,
+  prices: Array.isArray(content.calculator?.prices) ? [...content.calculator.prices] : [],
+};
+if (phoneExpertPrices.length) {
+  // add phone-expert entries that are not already present (by brand+device+repair)
+  const key = (p) => `${p.brand}||${p.device}||${p.repair}`;
+  const existing = new Set(mergedCalculator.prices.map(key));
+  for (const p of phoneExpertPrices) {
+    if (!existing.has(key(p))) mergedCalculator.prices.push(p);
+  }
+}
 ---
 <Layout>
   <Header company={content.company} />
