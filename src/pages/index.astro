@@ -42,17 +42,13 @@ const reviewsData = liveReviews
     }
   : content.reviews;
 
-// Merge phone-expert prices (if present) into the calculator prices as enrichment/fallback
-import fs from 'fs';
-import path from 'path';
-const phoneExpertPath = path.resolve('./src/data/phone-expert/prices.json');
+// Load phone-expert data if present (optional)
 let phoneExpertPrices = [];
 try {
-  if (fs.existsSync(phoneExpertPath)) {
-    phoneExpertPrices = JSON.parse(fs.readFileSync(phoneExpertPath, 'utf8'));
-  }
+  const mod = await import('../data/phone-expert/prices.json', { assert: { type: 'json' } });
+  phoneExpertPrices = mod?.default || [];
 } catch (err) {
-  console.error('phone-expert load failed:', err?.message || err);
+  // missing file or import not supported — ignore
 }
 
 const mergedCalculator = {
@@ -76,7 +72,7 @@ if (phoneExpertPrices.length) {
 
     <ServicesHub services={content.services} />
     <Process process={content.process} />
-    <PriceCalculator calculator={content.calculator} />
+    <PriceCalculator calculator={mergedCalculator} />
 
     <GeraeteRetterPraemie data={content.geraeteRetterPraemie} />
     <Trust trust={content.trust} />

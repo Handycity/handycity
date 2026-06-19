@@ -13,6 +13,15 @@ npm run preview  # Build-Preview starten
 
 > Hinweis: `repo_push/` ist ein lokales, nicht in Git eingechecktes Artefakt und wurde entfernt. Build-Ausgabe `dist/`, `.astro/` und `node_modules/` sind ebenfalls ausgeschlossen und werden nicht als Hosting-Quellcode geliefert.
 
+Note on Node.js: This project requires Node >= 22.12.0 (Astro 6). If your local `node -v` shows an older version, use `nvm` and the provided `.nvmrc`:
+
+```sh
+nvm install
+nvm use
+node -v  # should be >= v22.12.0
+```
+
+
 ## Projektstruktur
 
 ```
@@ -80,6 +89,28 @@ npm run owner:test:updates
 ```
 
 Der Test stellt `src/data/content/*.yaml` danach automatisch wieder auf den Ausgangszustand zurueck.
+
+## Phone-Expert Sync (automated)
+
+This repository includes an automated sync that ingests price data from phone-experts and merges it into the site's price calculator. The sync script writes to `src/data/phone-expert/prices.json`.
+
+- Run locally:
+
+```sh
+# use Node version from .nvmrc
+nvm install
+nvm use
+
+# produce/update the phone-expert data file
+npm run sync:phone-expert
+
+# validate generated content
+npm run content:validate
+```
+
+- CI / GitHub Actions: the workflow `.github/workflows/owner-sync-phone-expert.yml` runs weekly (and manually) and will commit changes back to `main` when data changes are detected.
+
+If you want improved price parsing or alternative sources, I can extend the script to extract currencies and normalize ranges before the next sync.
 
 ## Architektur-Entscheidungen
 

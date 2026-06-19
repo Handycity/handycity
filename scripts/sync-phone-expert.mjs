@@ -13,7 +13,13 @@ function normalizeItem(item) {
   const brand = item.brand || item.manufacturer || item.marke || item.vendor || item.make || '';
   const device = item.device || item.model || item.modell || item.phone || '';
   const repair = item.repair || item.repair_type || item.reparatur || item.service || item.repairName || '';
-  let price = item.price ?? item.preis ?? item.amount ?? item.cost ?? '';
+  let price = item.price ?? item.preis ?? item.amount ?? item.cost ?? item.price_eur ?? item.price_euro ?? item.price_eur_string ?? '';
+  // Try to extract a numeric price from free-text fields when explicit price fields are missing
+  const tryFields = [item.description, item.text, item.notes, item.body, item.price_text, item.detail, item.source_text].filter(Boolean).join('\n');
+  if (!price && tryFields) {
+    const m = tryFields.match(/([0-9]{1,3}(?:[.,][0-9]{1,2})?)(?=\s*(?:€|eur|eur\.|euro)?)/i);
+    if (m) price = m[1];
+  }
   if (typeof price === 'object') price = price.value || price.amount || '';
   price = String(price || '').trim();
   if (!brand && !device && !repair) return null;
