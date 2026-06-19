@@ -6,7 +6,7 @@
   --color-navy-dark: #7a1017;
   --color-cyan: #2d2d2d;
   --color-cyan-light: #444444;
-  --color-green: #047857;
+  --color-green: #10B981;
   --color-green-light: #D1FAE5;
   --color-slate-50: #F8FAFC;
   --color-slate-100: #F1F5F9;
@@ -20,7 +20,7 @@
 /* Smooth scroll */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 6.5rem;
+  scroll-padding-top: 5rem;
 }
 
 /* Skip link */

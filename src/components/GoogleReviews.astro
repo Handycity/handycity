@@ -90,7 +90,6 @@ const carouselState = `{
             target="_blank"
             rel="noopener noreferrer"
             class="ml-2 inline-flex items-center gap-1 text-sm font-medium text-slate-700 hover:underline"
-            aria-label="Google Bewertungen öffnen"
           >
             <span aria-hidden="true">
               <span class="text-[#4285F4]">G</span><span class="text-[#DB4437]">o</span><span class="text-[#F4B400]">o</span><span class="text-[#4285F4]">g</span><span class="text-[#0F9D58]">l</span><span class="text-[#DB4437]">e</span>
@@ -168,14 +167,10 @@ const carouselState = `{
               <button
                 type="button"
                 @click="goTo(index)"
-                class="inline-flex h-11 w-11 items-center justify-center rounded-full transition hover:bg-slate-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-navy/40"
+                class="h-2 rounded-full transition-all"
+                :class="activeIndex === index ? 'w-8 bg-[#4285F4]' : 'w-2 bg-slate-300 hover:bg-slate-400'"
                 :aria-label="`Rezension ${index + 1} anzeigen`"
-              >
-                <span
-                  class="h-2 rounded-full transition-all"
-                  :class="activeIndex === index ? 'w-8 bg-[#4285F4]' : 'w-2 bg-slate-400'"
-                ></span>
-              </button>
+              ></button>
             </template>
           </div>
 

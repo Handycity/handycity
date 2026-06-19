@@ -41,6 +41,28 @@ const reviewsData = liveReviews
       ...liveReviews,
     }
   : content.reviews;
+
+// Load phone-expert data if present (optional)
+let phoneExpertPrices = [];
+try {
+  const mod = await import('../data/phone-expert/prices.json', { assert: { type: 'json' } });
+  phoneExpertPrices = mod?.default || [];
+} catch (err) {
+  // missing file or import not supported — ignore
+}
+
+const mergedCalculator = {
+  ...content.calculator,
+  prices: Array.isArray(content.calculator?.prices) ? [...content.calculator.prices] : [],
+};
+if (phoneExpertPrices.length) {
+  // add phone-expert entries that are not already present (by brand+device+repair)
+  const key = (p) => `${p.brand}||${p.device}||${p.repair}`;
+  const existing = new Set(mergedCalculator.prices.map(key));
+  for (const p of phoneExpertPrices) {
+    if (!existing.has(key(p))) mergedCalculator.prices.push(p);
+  }
+}
 ---
 <Layout>
   <Header company={content.company} />
@@ -50,7 +72,7 @@ const reviewsData = liveReviews
 
     <ServicesHub services={content.services} />
     <Process process={content.process} />
-    <PriceCalculator calculator={content.calculator} />
+    <PriceCalculator calculator={mergedCalculator} />
 
     <GeraeteRetterPraemie data={content.geraeteRetterPraemie} />
     <Trust trust={content.trust} />

@@ -25,7 +25,9 @@
     "owner:update:offers": "node scripts/update-offers.mjs",
     "owner:test:updates": "node scripts/test-owner-updates.mjs",
     "owner:sync:willhaben": "node scripts/sync-willhaben-offers.mjs",
-    "owner:sync:google": "node scripts/save-google-reviews-backup.mjs"
+    "owner:sync:google": "node scripts/save-google-reviews-backup.mjs",
+    "owner:sync:phone-expert": "node scripts/sync-phone-expert.mjs",
+    "sync:phone-expert": "node scripts/sync-phone-expert.mjs"
   },
   "dependencies": {
     "@alpinejs/collapse": "^3.15.11",

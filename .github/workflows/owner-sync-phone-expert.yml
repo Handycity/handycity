@@ -1,0 +1,53 @@
+name: Sync Phone-Expert Data
+
+on:
+  workflow_dispatch:
+    inputs:
+      source:
+        description: "Optional source URL or path for phone-expert data"
+        required: false
+        type: string
+  schedule:
+    - cron: '0 5 * * 1' # weekly on Monday at 05:00 UTC
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Europe/Vienna
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - id: sync
+        env:
+          PHONE_EXPERT_SOURCE: ${{ github.event.inputs.source }}
+        run: |
+          if [ -n "${PHONE_EXPERT_SOURCE}" ]; then
+            export PHONE_EXPERT_SOURCE="${PHONE_EXPERT_SOURCE}"
+          fi
+          npm run owner:sync:phone-expert
+          npm run content:validate
+          npm run assets:validate
+          ASTRO_TELEMETRY_DISABLED=1 PUBLIC_SITE_BASE=/handycity/ npm run build
+
+          if git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/phone-expert || true
+          git commit -m "chore: sync phone-expert data"
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"

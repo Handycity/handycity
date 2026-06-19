@@ -4,9 +4,7 @@ import { spawnSync } from 'node:child_process';
 
 const requiredAssets = [
   'public/images/handycity_logo_v1.png',
-  'public/images/handycity_logo_transparent.png',
   'public/images/store-image-in.jpg',
-  'public/images/store-image-in.webp',
   'public/images/display-reparatur.jpg',
   'public/images/kamera-reparatur.jpg',
   'public/images/willhaben.jpg',
