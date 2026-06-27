@@ -58,7 +58,7 @@ jobs:
           npm run owner:update:hours
           npm run content:validate
           npm run assets:validate
-          ASTRO_TELEMETRY_DISABLED=1 PUBLIC_SITE_BASE=/handycity/ npm run build
+          ASTRO_TELEMETRY_DISABLED=1 PUBLIC_SITE_BASE=/ npm run build
 
           if git diff --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"

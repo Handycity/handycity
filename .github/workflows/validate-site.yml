@@ -21,4 +21,4 @@ jobs:
       - run: npm run build
         env:
           ASTRO_TELEMETRY_DISABLED: 1
-          PUBLIC_SITE_BASE: /handycity/
+          PUBLIC_SITE_BASE: /
