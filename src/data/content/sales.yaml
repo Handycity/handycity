@@ -18,6 +18,16 @@ willhaben:
   ctaText: Zum Willhaben-Shop
   contactCtaText: Gerät anfragen
   offers:
+    - title: Samsung S26 Ultra 256GB Black Neu/Händler
+      price: € 1.399,90
+      url: https://www.willhaben.at/iad/kaufen-und-verkaufen/d/samsung-s26-ultra-256gb-black-neu-haendler-1873813641/
+      image: https://cache.willhaben.at/mmo/1/187/381/3641_-1753100470_n.jpg
+      imageAlt: Samsung S26 Ultra 256GB Black Neu/Händler von Handycity auf willhaben
+      listedAt: 30.06.2026
+      storage: 256 GB
+      unlocked: Ja
+      condition: Neu
+      delivery: Selbstabholung, Versand
     - title: Apple iPhone 12 64GB White Neu/Händler
       price: € 369,90
       url: https://www.willhaben.at/iad/kaufen-und-verkaufen/d/apple-iphone-12-64gb-white-neu-haendler-1575571676/
@@ -45,16 +55,6 @@ willhaben:
       imageAlt: Samsung S26 512GB Black Neu/Händler von Handycity auf willhaben
       listedAt: 23.04.2026
       storage: ab 512 GB
-      unlocked: Ja
-      condition: Neu
-      delivery: Selbstabholung, Versand
-    - title: Samsung S26 Ultra 256GB Black Neu/Händler
-      price: € 1.399,90
-      url: https://www.willhaben.at/iad/kaufen-und-verkaufen/d/samsung-s26-ultra-256gb-black-neu-haendler-1873813641/
-      image: https://cache.willhaben.at/mmo/1/187/381/3641_-1753100470_n.jpg
-      imageAlt: Samsung S26 Ultra 256GB Black Neu/Händler von Handycity auf willhaben
-      listedAt: 22.04.2026
-      storage: 256 GB
       unlocked: Ja
       condition: Neu
       delivery: Selbstabholung, Versand
