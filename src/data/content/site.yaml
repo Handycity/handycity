@@ -27,9 +27,6 @@ company:
     lng: 14.3123385
   map:
     placeUrl: https://www.google.com/maps/place/Handycity/@46.6237671,14.3123385,17z/data=!3m1!4b1!4m6!3m5!1s0x4770749d8151bf2b:0xbfb5d0cf51878c70!8m2!3d46.6237671!4d14.3123385!16s%2Fg%2F1tfvg0j3?hl=de-DE&entry=ttu&g_ep=EgoyMDI2MDQwNS4wIKXMDSoASAFQAw%3D%3D
-  # UID-Nummer und Unternehmensgegenstand stehen ausschliesslich im Impressum
-  # (legal.yaml -> impressum.content). Sie sind rechtlich verbindlich und
-  # duerfen nur an einer Stelle gepflegt werden.
 hours:
   - day: Montag
     time: 9:00–18:00

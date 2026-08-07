@@ -13,7 +13,9 @@ on:
         default: "12"
         type: string
   schedule:
-    - cron: "11 */6 * * *"
+    # Shop listings change rarely (unchanged for weeks at a time), so a
+    # daily check is plenty. Was every 6h, which produced 4 runs a day.
+    - cron: "11 5 * * *"
 
 permissions:
   contents: write

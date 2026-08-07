@@ -22,7 +22,8 @@ on:
         default: "6"
         type: string
   schedule:
-    - cron: "17 5 * * *"
+    # Reviews accumulate slowly; weekly instead of daily.
+    - cron: "17 5 * * 1"
 
 permissions:
   contents: write

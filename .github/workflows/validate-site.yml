@@ -17,6 +17,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run content:validate
+      # Fails if the phone-expert import has entries not yet folded into the
+      # content store, so unvalidated prices can never reach a customer.
+      - run: npm run prices:check
       - run: npm run build
         env:
           ASTRO_TELEMETRY_DISABLED: 1

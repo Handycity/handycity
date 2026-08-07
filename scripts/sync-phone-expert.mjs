@@ -2,6 +2,7 @@
 import fs from 'fs/promises';
 import { existsSync } from 'fs';
 import path from 'path';
+import { normalizePriceList } from './lib/normalize-prices.mjs';
 
 const ROOT = process.cwd();
 const defaultSource = path.resolve(ROOT, 'research', 'phone-experts-repair-data.json');
@@ -60,21 +61,18 @@ async function run() {
     if (Array.isArray(candidates)) items = candidates.map(normalizeItem).filter(Boolean);
   }
 
-  // Deduplicate, keep lowest numeric price when possible
-  const map = new Map();
-  for (const it of items) {
-    const key = `${it.brand}||${it.device}||${it.repair}`;
-    const existing = map.get(key);
-    if (!existing) { map.set(key, it); continue; }
-    const a = Number(String(existing.price).replace(/[^0-9.,]/g, '').replace(',', '.')) || Infinity;
-    const b = Number(String(it.price).replace(/[^0-9.,]/g, '').replace(',', '.')) || Infinity;
-    if (b < a) map.set(key, it);
-  }
+  // Canonicalise brands, device casing, repair names and price formatting, and
+  // collapse the duplicates that fall out of it. Without this the import
+  // introduces devices that differ from the curated ones only by casing.
+  const { entries: out, stats } = normalizePriceList(items);
 
-  const out = [...map.values()];
   await fs.mkdir(outDir, { recursive: true });
   await fs.writeFile(outFile, JSON.stringify(out, null, 2), 'utf8');
-  console.log(`phone-expert: wrote ${out.length} entries to ${path.relative(ROOT, outFile)}`);
+  console.log(
+    `phone-expert: wrote ${out.length} entries to ${path.relative(ROOT, outFile)} ` +
+    `(${stats.input} parsed, ${stats.deduped} duplicates merged, ${stats.droppedNoPrice} dropped without a price)`
+  );
+  console.log('phone-expert: run "npm run prices:normalize" to fold these into the content store.');
 }
 
 if (import.meta.url === `file://${process.argv[1]}` || process.argv[1]?.endsWith('sync-phone-expert.mjs')) {

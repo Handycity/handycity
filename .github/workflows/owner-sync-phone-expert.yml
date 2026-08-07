@@ -7,11 +7,12 @@ on:
         description: "Optional source URL or path for phone-expert data"
         required: false
         type: string
-  # Schedule suspended pending review of the scraped price dataset this job
-  # imports (see CODE_REVIEW.md section 2.1). Still runnable via the Actions
-  # UI; re-enable by uncommenting once the price-data question is settled.
+  # Schedule suspended pending the decision on the scraped price dataset this
+  # job imports (see CODE_REVIEW.md section 2.1). Still runnable via the
+  # Actions UI. Uncomment to resume at a monthly cadence -- the source data
+  # changes slowly and every run rewrites the whole price table.
   # schedule:
-  #   - cron: '0 5 * * 1' # weekly on Monday at 05:00 UTC
+  #   - cron: '0 5 1 * *' # monthly, 1st at 05:00 UTC
 
 permissions:
   contents: write
@@ -39,6 +40,9 @@ jobs:
             export PHONE_EXPERT_SOURCE="${PHONE_EXPERT_SOURCE}"
           fi
           npm run owner:sync:phone-expert
+          # Fold the import into calculator.prices. The page no longer merges it
+          # at render time, so without this the sync would change nothing.
+          npm run prices:normalize
           npm run content:validate
           ASTRO_TELEMETRY_DISABLED=1 PUBLIC_SITE_BASE=/ npm run build
           npm run assets:validate
@@ -50,7 +54,7 @@ jobs:
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/data/phone-expert || true
+          git add -A src/data/phone-expert src/data/content
           git commit -m "chore: sync phone-expert data"
           git push origin HEAD:main
           echo "changed=true" >> "$GITHUB_OUTPUT"

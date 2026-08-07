@@ -12,6 +12,8 @@
     "astro": "astro",
     "reviews:backup": "node scripts/save-google-reviews-backup.mjs",
     "content:validate": "node scripts/validate-content.mjs",
+    "prices:normalize": "node scripts/normalize-calculator-prices.mjs",
+    "prices:check": "node scripts/normalize-calculator-prices.mjs --check",
     "assets:validate": "node scripts/validate-assets.mjs",
     "vendor:sync": "node scripts/sync-vendor-assets.mjs",
     "vendor:check": "node scripts/sync-vendor-assets.mjs --check",

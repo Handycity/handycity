@@ -80,10 +80,7 @@ brands:
 trust:
   kicker: Warum Handycity
   headline: Warum Handycity?
-  intro: >-
-    Ein Defekt muss nicht gleich ein neues Gerät bedeuten. Ob Display, Akku, Kamera oder Ladeanschluss:
-    wir reparieren wirtschaftlich, schnell und nachvollziehbar. So bleibt Ihr Smartphone im Einsatz und Sie
-    behalten Preis, Aufwand und Dauer jederzeit im Blick.
+  intro: "Ein Defekt muss nicht gleich ein neues Gerät bedeuten. Ob Display, Akku, Kamera oder Ladeanschluss: wir reparieren wirtschaftlich, schnell und nachvollziehbar. So bleibt Ihr Smartphone im Einsatz und Sie behalten Preis, Aufwand und Dauer jederzeit im Blick."
   items:
     - title: Erfahrene Techniker
       description: Unser Team verfügt über langjährige Erfahrung in der Reparatur aller gängigen Geräte.
