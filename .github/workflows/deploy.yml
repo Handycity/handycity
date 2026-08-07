@@ -16,6 +16,7 @@ on:
       - Owner Update Content Advanced
       - Sync Willhaben Offers
       - Sync Google Reviews Backup
+      - Sync Phone-Expert Data
     types:
       - completed
 

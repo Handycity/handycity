@@ -7,8 +7,11 @@ on:
         description: "Optional source URL or path for phone-expert data"
         required: false
         type: string
-  schedule:
-    - cron: '0 5 * * 1' # weekly on Monday at 05:00 UTC
+  # Schedule suspended pending review of the scraped price dataset this job
+  # imports (see CODE_REVIEW.md section 2.1). Still runnable via the Actions
+  # UI; re-enable by uncommenting once the price-data question is settled.
+  # schedule:
+  #   - cron: '0 5 * * 1' # weekly on Monday at 05:00 UTC
 
 permissions:
   contents: write

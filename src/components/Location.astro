@@ -22,7 +22,7 @@ const mapsDirections = `https://www.google.com/maps/dir/?api=1&destination=${com
     </div>
 
     <div class="mt-10 overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-xl shadow-slate-100/80 lg:grid lg:grid-cols-[1.08fr_0.92fr]">
-      <div class="relative min-h-[420px] border-b border-slate-200 bg-slate-100 lg:border-b-0 lg:border-r" x-data="{ mapAccepted: false }">
+      <div class="relative min-h-[420px] border-b border-slate-200 bg-slate-100 lg:border-b-0 lg:border-r" x-data="mapConsent()">
         <div class="absolute left-5 top-5 z-10 rounded-full bg-white/95 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-700 shadow-lg shadow-slate-300/40">
           Google Maps Live
         </div>
@@ -38,7 +38,7 @@ const mapsDirections = `https://www.google.com/maps/dir/?api=1&destination=${com
             </p>
             <button
               type="button"
-              @click="mapAccepted = true"
+              @click="accept()"
               class="mt-5 inline-flex items-center justify-center rounded-full bg-navy px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-navy-light"
             >
               Karte anzeigen
@@ -46,17 +46,23 @@ const mapsDirections = `https://www.google.com/maps/dir/?api=1&destination=${com
           </div>
         </div>
 
-        <iframe
-          x-show="mapAccepted"
-          x-cloak
-          src={embedUrl}
-          class="h-full min-h-[420px] w-full"
-          style="border:0"
-          allowfullscreen=""
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Google Maps – Handycity Standort"
-        ></iframe>
+        <!--
+          The iframe must stay out of the DOM until consent is given: a hidden
+          iframe with a resolved src is still fetched, which would send the
+          visitor's IP to Google before they answered the dialog above.
+          x-if removes the node entirely; x-show would only set display:none.
+        -->
+        <template x-if="mapAccepted">
+          <iframe
+            src={embedUrl}
+            class="h-full min-h-[420px] w-full"
+            style="border:0"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer"
+            title="Google Maps – Handycity Standort"
+          ></iframe>
+        </template>
       </div>
 
       <div class="bg-slate-950 p-6 text-white lg:p-8">
@@ -106,6 +112,29 @@ const mapsDirections = `https://www.google.com/maps/dir/?api=1&destination=${com
   </div>
 </section>
 
-<style>
-  [x-cloak] { display: none !important; }
-</style>
+<script>
+  const CONSENT_KEY = 'hc-maps-consent';
+
+  document.addEventListener('alpine:init', () => {
+    window.Alpine.data('mapConsent', () => ({
+      mapAccepted: false,
+
+      init() {
+        try {
+          this.mapAccepted = localStorage.getItem(CONSENT_KEY) === 'yes';
+        } catch {
+          // Storage unavailable (private mode): fall back to asking every visit.
+        }
+      },
+
+      accept() {
+        this.mapAccepted = true;
+        try {
+          localStorage.setItem(CONSENT_KEY, 'yes');
+        } catch {
+          // Consent still applies for this page view.
+        }
+      },
+    }));
+  });
+</script>
