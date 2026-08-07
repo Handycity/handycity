@@ -7,22 +7,31 @@ interface Props {
     highlights: string[];
     ctaText: string;
     ctaHref: string;
+    bonusUrl: string;
+    domainLabel: string;
     steps: { step: string; title: string; description: string }[];
   };
 }
 const { data } = Astro.props;
-const bonusUrl = 'https://geräte-retter-prämie.at';
+const { bonusUrl, domainLabel } = data;
 
-function linkifyBonusDomain(text: string): string {
-  const escaped = text
+function escapeHtml(value: string): string {
+  return value
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
 
-  return escaped.replace(
-    /geräte-retter-prämie\.at/g,
-    `<a href="${bonusUrl}" target="_blank" rel="noopener noreferrer" class="font-medium text-green underline underline-offset-4 hover:text-green/80">geräte-retter-prämie.at</a>`
-  );
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+// Turns every mention of the bonus domain inside owner-edited copy into a link.
+// Both the URL and the label come from content so the domain lives in one place.
+function linkifyBonusDomain(text: string): string {
+  const anchor = `<a href="${escapeHtml(bonusUrl)}" target="_blank" rel="noopener noreferrer" class="font-medium text-green underline underline-offset-4 hover:text-green/80">${escapeHtml(domainLabel)}</a>`;
+  return escapeHtml(text).replace(new RegExp(escapeRegExp(domainLabel), 'g'), anchor);
 }
 ---
 <section id="geraete-retter-praemie" class="py-16 md:py-24 bg-slate-50">

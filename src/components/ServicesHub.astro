@@ -2,9 +2,10 @@
 interface ServiceItem { name: string; description: string; icon: string; price: string; }
 interface Props {
   services: { headline: string; subheadline: string; items: ServiceItem[]; };
+  willhaben: { url: string };
 }
 
-const { services } = Astro.props;
+const { services, willhaben } = Astro.props;
 const baseUrl = import.meta.env.BASE_URL;
 
 const chipEmojiMap: Record<string, string> = {
@@ -33,7 +34,7 @@ const intents = [
     title: 'Handy kaufen',
     emoji: '🛍️',
     gradient: 'from-slate-700 to-amber-500',
-    href: 'https://www.willhaben.at/iad/shop/handycity-ak-gmbh',
+    href: willhaben.url,
     cta: 'Angebote ansehen',
     tagline: 'Neu, refurbed oder gebraucht kaufen sowie Geräte eintauschen oder zum Ankauf anfragen - im Shop und auf Willhaben.',
     icons: ['shopping-bag'],
@@ -101,7 +102,7 @@ const cards = intents.map((intent) => {
               {services.headline}
               <span class="animate-wave" aria-hidden="true">👋</span>
             </h2>
-            <p class="mt-2 text-sm md:text-base text-slate-600">Wähle, was du brauchst — ein Klick genügt.</p>
+            <p class="mt-2 text-sm md:text-base text-slate-600">{services.subheadline}</p>
           </div>
 
           <a

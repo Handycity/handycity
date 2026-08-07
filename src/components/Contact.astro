@@ -1,8 +1,17 @@
 ---
+import { formatHoursLine } from '../lib/hours.mjs';
+
+interface HoursItem {
+  day: string;
+  time: string;
+  shortDay: string;
+}
+
 interface Props {
   contact: {
     headline: string;
     subheadline: string;
+    visitLabel: string;
     fields: { name: string; label: string; type: string; required: boolean }[];
   };
   company: {
@@ -10,9 +19,11 @@ interface Props {
     phoneDisplay: string;
     email: string;
   };
+  hours: HoursItem[];
 }
-const { contact, company } = Astro.props;
+const { contact, company, hours } = Astro.props;
 const mailtoEmail = company.email;
+const hoursLine = formatHoursLine(hours, { separator: ', ' });
 ---
 <section id="kontakt" class="py-16 md:py-24 bg-slate-50">
   <div class="max-w-7xl mx-auto px-4">
@@ -47,8 +58,8 @@ const mailtoEmail = company.email;
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-cyan" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
             </div>
             <div>
-              <div class="text-xs text-slate-500">Besuchen Sie uns</div>
-              <div class="font-semibold text-slate-800 text-sm">Mo–Fr 09:00–18:00, Sa 09:00–13:00</div>
+              <div class="text-xs text-slate-500">{contact.visitLabel}</div>
+              <div class="font-semibold text-slate-800 text-sm">{hoursLine}</div>
             </div>
           </div>
         </div>

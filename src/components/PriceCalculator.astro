@@ -12,11 +12,18 @@ interface Props {
     subheadline: string;
     prices: RepairPrice[];
   };
+  company: {
+    phone: string;
+  };
+  bonus: {
+    teaser: { title: string; text: string; linkText: string };
+  };
 }
 
-const { calculator } = Astro.props;
+const { calculator, company, bonus } = Astro.props;
 const baseUrl = import.meta.env.BASE_URL;
 const priceDataId = 'repair-price-data';
+const telHref = `tel:${company.phone.replace(/\s/g, '')}`;
 
 const progressSteps = [
   { index: 1, label: 'Marke' },
@@ -236,17 +243,17 @@ const progressSteps = [
         <div class="mt-5 bg-gradient-to-r from-green/5 to-green/10 border-2 border-green/20 rounded-2xl p-5 flex items-start gap-4">
           <div class="text-2xl" aria-hidden="true">💰</div>
           <div>
-            <h4 class="font-bold text-green">Geräte-Retter-Prämie: Bis zu 50 % zurück!</h4>
+            <h4 class="font-bold text-green">{bonus.teaser.title}</h4>
             <p class="text-xs text-slate-600 mt-1">
-              Mit der Geräte-Retter-Prämie erhalten Sie bis zu €130 zurück.
-              <a href="#geraete-retter-praemie" class="font-semibold text-green hover:underline">Mehr erfahren →</a>
+              {bonus.teaser.text}
+              <a href="#geraete-retter-praemie" class="font-semibold text-green hover:underline">{bonus.teaser.linkText}</a>
             </p>
           </div>
         </div>
 
         <div class="mt-6 flex flex-col sm:flex-row gap-3">
           <a
-            href="tel:+43463918559"
+            href={telHref}
             class="inline-flex items-center justify-center rounded-xl bg-navy text-white px-6 py-3 font-semibold hover:bg-navy-light transition-colors"
           >
             📞 Jetzt anrufen

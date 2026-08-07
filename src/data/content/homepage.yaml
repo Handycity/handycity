@@ -78,7 +78,12 @@ brands:
     - Sony
     - Nokia
 trust:
+  kicker: Warum Handycity
   headline: Warum Handycity?
+  intro: >-
+    Ein Defekt muss nicht gleich ein neues Gerät bedeuten. Ob Display, Akku, Kamera oder Ladeanschluss:
+    wir reparieren wirtschaftlich, schnell und nachvollziehbar. So bleibt Ihr Smartphone im Einsatz und Sie
+    behalten Preis, Aufwand und Dauer jederzeit im Blick.
   items:
     - title: Erfahrene Techniker
       description: Unser Team verfügt über langjährige Erfahrung in der Reparatur aller gängigen Geräte.
@@ -111,10 +116,18 @@ process:
       title: Gerät abholen
       description: Ihr repariertes Gerät ist bereit – schnell und zuverlässig.
       icon: check-circle
+location:
+  kicker: Standort
+  headline: Standort & Öffnungszeiten
+  intro: Der Kartenpin ist auf den verifizierten Handycity-Standort gesetzt und öffnet auf Wunsch direkt den Google-Maps-Eintrag.
+  addressNote: Direkt am verifizierten Google-Maps-Eintrag. Route und Eintrag öffnen konsistent denselben Standort.
+  consentTitle: Google Maps laden
+  consentText: Mit dem Laden der Karte werden Daten (z. B. Ihre IP-Adresse) an Google übertragen.
+  consentButton: Karte anzeigen
 contact:
   headline: Kontaktieren Sie uns
   subheadline: Schreiben Sie uns oder rufen Sie direkt an – wir beraten Sie gerne
-  formAction: https://formspree.io/f/YOUR_FORM_ID
+  visitLabel: Besuchen Sie uns
   fields:
     - name: name
       label: Name

@@ -11110,6 +11110,12 @@ geraeteRetterPraemie:
     - Bis zu €130 für Reparatur, Service & Wartung
     - Bis zu €30 für Kostenvoranschlag
     - Bon online beantragen auf geräte-retter-prämie.at
+  bonusUrl: https://geräte-retter-prämie.at
+  domainLabel: geräte-retter-prämie.at
+  teaser:
+    title: 'Geräte-Retter-Prämie: Bis zu 50 % zurück!'
+    text: Mit der Geräte-Retter-Prämie erhalten Sie bis zu €130 zurück.
+    linkText: Mehr erfahren →
   ctaText: Mehr erfahren
   ctaHref: https://www.oesterreich.gv.at/de/themen/umwelt_und_klima/energie_und_ressourcen_sparen/geraete-retter-praemie
   steps:

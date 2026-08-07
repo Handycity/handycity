@@ -60,8 +60,8 @@ jobs:
         run: |
           npm run owner:update:service
           npm run content:validate
-          npm run assets:validate
           ASTRO_TELEMETRY_DISABLED=1 PUBLIC_SITE_BASE=/ npm run build
+          npm run assets:validate
 
           if git diff --quiet; then
             echo "changed=false" >> "$GITHUB_OUTPUT"

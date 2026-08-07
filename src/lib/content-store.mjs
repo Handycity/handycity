@@ -7,7 +7,7 @@ export const DEFAULT_CONTENT_SOURCE = 'src/data/content';
 
 export const CONTENT_FILE_DEFINITIONS = [
   { file: 'site.yaml', label: 'Site and Company', sections: ['site', 'company', 'hours', 'social'] },
-  { file: 'homepage.yaml', label: 'Homepage Sections', sections: ['hero', 'trustBar', 'services', 'brands', 'trust', 'process', 'contact'] },
+  { file: 'homepage.yaml', label: 'Homepage Sections', sections: ['hero', 'trustBar', 'services', 'brands', 'trust', 'process', 'location', 'contact'] },
   { file: 'reviews.yaml', label: 'Reviews', sections: ['reviews'] },
   { file: 'calculator.yaml', label: 'Calculator and Bonus', sections: ['calculator', 'geraeteRetterPraemie'] },
   { file: 'sales.yaml', label: 'Willhaben and Sales', sections: ['willhaben'] },

@@ -15,8 +15,17 @@ import FAQ from '../components/FAQ.astro';
 import Location from '../components/Location.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
+import { existsSync, readFileSync } from 'node:fs';
+import path from 'node:path';
 import { fetchGoogleReviews } from '../lib/google-places-reviews';
 import { loadContentSync } from '../lib/content-store.mjs';
+
+interface RepairPrice {
+  brand: string;
+  device: string;
+  repair: string;
+  price: string;
+}
 
 const content = loadContentSync() as Record<string, any>;
 
@@ -42,13 +51,19 @@ const reviewsData = liveReviews
     }
   : content.reviews;
 
-// Load phone-expert data if present (optional)
-let phoneExpertPrices = [];
-try {
-  const mod = await import('../data/phone-expert/prices.json', { assert: { type: 'json' } });
-  phoneExpertPrices = mod?.default || [];
-} catch (err) {
-  // missing file or import not supported — ignore
+// Supplementary price data. Optional by design, but a *present* file that fails
+// to load must not be swallowed: that would silently ship an incomplete price
+// list with a green build. Missing file => empty; anything else => fail loudly.
+// Resolved from the project root, not import.meta.url: during Astro's SSR build
+// import.meta.url points at bundled output, so a URL-relative path silently
+// misses the file and the merge below quietly does nothing.
+const phoneExpertPath = path.resolve(process.cwd(), 'src/data/phone-expert/prices.json');
+let phoneExpertPrices: RepairPrice[] = [];
+if (existsSync(phoneExpertPath)) {
+  phoneExpertPrices = JSON.parse(readFileSync(phoneExpertPath, 'utf8'));
+  if (!Array.isArray(phoneExpertPrices)) {
+    throw new Error(`${phoneExpertPath} must contain an array of price entries.`);
+  }
 }
 
 const mergedCalculator = {
@@ -57,7 +72,7 @@ const mergedCalculator = {
 };
 if (phoneExpertPrices.length) {
   // add phone-expert entries that are not already present (by brand+device+repair)
-  const key = (p) => `${p.brand}||${p.device}||${p.repair}`;
+  const key = (p: RepairPrice) => `${p.brand}||${p.device}||${p.repair}`;
   const existing = new Set(mergedCalculator.prices.map(key));
   for (const p of phoneExpertPrices) {
     if (!existing.has(key(p))) mergedCalculator.prices.push(p);
@@ -70,17 +85,17 @@ if (phoneExpertPrices.length) {
     <Hero hero={content.hero} company={content.company} hours={content.hours} />
     <TrustBar trustBar={content.trustBar} reviews={reviewsData} />
 
-    <ServicesHub services={content.services} />
+    <ServicesHub services={content.services} willhaben={content.willhaben} />
     <Process process={content.process} />
-    <PriceCalculator calculator={mergedCalculator} />
+    <PriceCalculator calculator={mergedCalculator} company={content.company} bonus={content.geraeteRetterPraemie} />
 
     <GeraeteRetterPraemie data={content.geraeteRetterPraemie} />
     <Trust trust={content.trust} />
     <WillhabenShop willhaben={content.willhaben} />
     <GoogleReviews reviews={reviewsData} />
     <FAQ faq={content.faq} />
-    <Contact contact={content.contact} company={content.company} />
-    <Location company={content.company} hours={content.hours} />
+    <Contact contact={content.contact} company={content.company} hours={content.hours} />
+    <Location company={content.company} hours={content.hours} location={content.location} />
     <Brands brands={content.brands} />
   </main>
   <Footer company={content.company} social={content.social} />
