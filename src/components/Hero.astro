@@ -50,8 +50,12 @@ const ctaSecondaryHref = resolveHref(hero.ctaSecondary.href);
 ---
 <section class="relative overflow-hidden bg-navy-dark text-white">
   <img
-    src={`${import.meta.env.BASE_URL}images/store-image-in.jpg`}
+    src={`${import.meta.env.BASE_URL}images/store-image-in.webp`}
     alt="Handycity Geschäft innen"
+    width="1440"
+    height="810"
+    fetchpriority="high"
+    decoding="async"
     class="absolute inset-0 h-full w-full object-cover brightness-[0.56] saturate-[0.92]"
   />
   <div class="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.16),_transparent_34%),linear-gradient(118deg,_rgba(156,20,29,0.88),_rgba(156,20,29,0.76)_42%,_rgba(122,16,23,0.64)_100%)]"></div>
