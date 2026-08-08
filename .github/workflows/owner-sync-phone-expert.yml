@@ -8,7 +8,7 @@ on:
         required: false
         type: string
   # Schedule suspended pending the decision on the scraped price dataset this
-  # job imports (see CODE_REVIEW.md section 2.1). Still runnable via the
+  # job imports (see docs/CODE_REVIEW.md section 2.1). Still runnable via the
   # Actions UI. Uncomment to resume at a monthly cadence -- the source data
   # changes slowly and every run rewrites the whole price table.
   # schedule:
