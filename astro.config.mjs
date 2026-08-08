@@ -11,13 +11,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
     server: {
       watch: {
-        ignored: [
-          '**/repo_push/**',
-          '**/dist/**',
-          '**/.git/**',
-          '**/public/images/Handy mit Reparaturbonus _ Handycity Klagenfurt_files/**',
-          '**/public/images/shop-innen-right_files/**'
-        ]
+        ignored: ['**/dist/**', '**/.git/**']
       }
     }
   }

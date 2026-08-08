@@ -23,6 +23,13 @@ html {
   scroll-padding-top: 5rem;
 }
 
+/* Hides Alpine-controlled elements until Alpine boots. Must be global: as a
+   component-scoped rule it only matches that component's own markup, which is
+   why it previously had to be copied into five components. */
+[x-cloak] {
+  display: none !important;
+}
+
 /* Skip link */
 .skip-link {
   position: absolute;

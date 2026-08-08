@@ -1,4 +1,6 @@
 ---
+import { buildBrandLogoMap, BRAND_EMOJI, FALLBACK_BRAND_EMOJI, BRAND_LOGO_SIZE } from '../lib/brands.mjs';
+
 interface RepairPrice {
   brand: string;
   device: string;
@@ -21,9 +23,15 @@ interface Props {
 }
 
 const { calculator, company, bonus } = Astro.props;
-const baseUrl = import.meta.env.BASE_URL;
 const priceDataId = 'repair-price-data';
 const telHref = `tel:${company.phone.replace(/\s/g, '')}`;
+
+// Passed into the client script below via define:vars — Alpine builds the brand
+// buttons in the browser, so it needs the resolved URLs, not the module.
+const brandLogoMap = buildBrandLogoMap(import.meta.env.BASE_URL);
+const brandEmojiMap = BRAND_EMOJI;
+const fallbackBrandEmoji = FALLBACK_BRAND_EMOJI;
+const brandLogoSize = BRAND_LOGO_SIZE;
 
 const progressSteps = [
   { index: 1, label: 'Marke' },
@@ -133,6 +141,8 @@ const progressSteps = [
                 <img
                   x-show="brandLogo(brand)"
                   :src="brandLogo(brand)"
+                  width={brandLogoSize}
+                  height={brandLogoSize}
                   :alt="brand + ' Logo'"
                   class="h-7 w-auto object-contain"
                   loading="lazy"
@@ -203,6 +213,8 @@ const progressSteps = [
             <img
               x-show="brandLogo(selectedBrand)"
               :src="brandLogo(selectedBrand)"
+              width={brandLogoSize}
+              height={brandLogoSize}
               :alt="selectedBrand + ' Logo'"
               class="h-4 w-auto object-contain"
               loading="lazy"
@@ -272,23 +284,7 @@ const progressSteps = [
   </div>
 </section>
 
-<script define:vars={{ baseUrl }}>
-  const brandLogoMap = {
-    'Apple': `${baseUrl}brands/apple.svg`,
-    'Samsung': `${baseUrl}brands/samsung.svg`,
-    'Huawei': `${baseUrl}brands/huawei.svg`,
-    'Xiaomi': `${baseUrl}brands/xiaomi.svg`,
-    'OnePlus': `${baseUrl}brands/oneplus.svg`,
-    'Google': `${baseUrl}brands/google.svg`,
-    'Sony': `${baseUrl}brands/sony.svg`,
-    'Nokia': `${baseUrl}brands/nokia.svg`,
-  };
-
-  const brandEmojiMap = {
-    'Apple': '🍎', 'Samsung': '📱', 'Huawei': '🌐', 'Xiaomi': '🔧',
-    'OnePlus': '⚡', 'Google': '🔍', 'Sony': '🎮', 'Nokia': '📞',
-  };
-
+<script define:vars={{ brandLogoMap, brandEmojiMap, fallbackBrandEmoji }}>
   const repairEmojiMap = {
     'Display': '🖥️', 'Akku': '🔋', 'Kamera': '📸',
     'Ladebuchse': '🔌', 'Lautsprecher': '🔊', 'Backcover': '🛡️',
@@ -315,7 +311,7 @@ const progressSteps = [
         return brandLogoMap[brand] ?? '';
       },
       brandEmoji(brand)  {
-        return brandEmojiMap[brand] ?? '📱';
+        return brandEmojiMap[brand] ?? fallbackBrandEmoji;
       },
       repairEmoji(repair){
         const normalizedRepair = String(repair || '').toLowerCase();
@@ -357,7 +353,6 @@ const progressSteps = [
 </script>
 
 <style>
-  [x-cloak] { display: none !important; }
 
   @keyframes bounce-slow {
     0%, 100% { transform: translateY(0); }
@@ -366,9 +361,5 @@ const progressSteps = [
 
   .animate-bounce-slow {
     animation: bounce-slow 2s ease-in-out infinite;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .animate-bounce-slow { animation: none !important; }
   }
 </style>

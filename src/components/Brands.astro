@@ -1,4 +1,6 @@
 ---
+import { buildBrandLogoMap, BRAND_LOGO_SIZE } from '../lib/brands.mjs';
+
 interface Props {
   brands: {
     headline: string;
@@ -7,17 +9,7 @@ interface Props {
 }
 const { brands } = Astro.props;
 const baseUrl = import.meta.env.BASE_URL;
-
-const brandLogoMap: Record<string, string> = {
-  Apple: `${baseUrl}brands/apple.svg`,
-  Samsung: `${baseUrl}brands/samsung.svg`,
-  Huawei: `${baseUrl}brands/huawei.svg`,
-  Xiaomi: `${baseUrl}brands/xiaomi.svg`,
-  OnePlus: `${baseUrl}brands/oneplus.svg`,
-  Google: `${baseUrl}brands/google.svg`,
-  Sony: `${baseUrl}brands/sony.svg`,
-  Nokia: `${baseUrl}brands/nokia.svg`,
-};
+const brandLogoMap: Record<string, string> = buildBrandLogoMap(baseUrl);
 ---
 <section class="py-12 bg-slate-50 border-y border-slate-200">
   <div class="max-w-7xl mx-auto px-4">
@@ -28,6 +20,8 @@ const brandLogoMap: Record<string, string> = {
           {brandLogoMap[brand] && (
             <img
               src={brandLogoMap[brand]}
+              width={BRAND_LOGO_SIZE}
+              height={BRAND_LOGO_SIZE}
               alt={`${brand} Logo`}
               class="h-5 w-auto object-contain"
               loading="lazy"
