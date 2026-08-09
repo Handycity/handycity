@@ -17,8 +17,9 @@ import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import { fetchGoogleReviews } from '../lib/google-places-reviews';
 import { loadContentSync } from '../lib/content-store.mjs';
+import type { Content } from '../lib/content-types';
 
-const content = loadContentSync() as Record<string, any>;
+const content = loadContentSync() as Content;
 
 let liveReviews = null;
 try {

@@ -1,8 +1,9 @@
 ---
 import '../styles/global.css';
 import { loadContentSync } from '../lib/content-store.mjs';
+import type { Content } from '../lib/content-types';
 
-const content = loadContentSync() as Record<string, any>;
+const content = loadContentSync() as Content;
 
 function parseOpeningHours(time: string) {
   const normalized = String(time || '').replace(/\s*[-–]\s*/g, '–');

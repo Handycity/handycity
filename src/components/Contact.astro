@@ -1,25 +1,11 @@
 ---
 import { formatHoursLine } from '../lib/hours.mjs';
-
-interface HoursItem {
-  day: string;
-  time: string;
-  shortDay: string;
-}
+import type { Company, Contact as ContactContent, Hours } from '../lib/content-types';
 
 interface Props {
-  contact: {
-    headline: string;
-    subheadline: string;
-    visitLabel: string;
-    fields: { name: string; label: string; type: string; required: boolean }[];
-  };
-  company: {
-    phone: string;
-    phoneDisplay: string;
-    email: string;
-  };
-  hours: HoursItem[];
+  contact: ContactContent;
+  company: Company;
+  hours: Hours;
 }
 const { contact, company, hours } = Astro.props;
 const mailtoEmail = company.email;
@@ -117,7 +103,7 @@ const hoursLine = formatHoursLine(hours, { separator: ', ' });
     window.Alpine.data('contactForm', () => ({
       sent: false,
 
-      submitForm(formEl) {
+      submitForm(formEl: HTMLFormElement) {
         const data = new FormData(formEl);
         const email = formEl.dataset.email || '';
         const name = data.get('name') || '';

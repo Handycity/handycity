@@ -1,13 +1,14 @@
 ---
 import '../styles/global.css';
 import { loadContentSync } from '../lib/content-store.mjs';
+import type { Content } from '../lib/content-types';
 
 interface Props {
   title: string;
 }
 
 const { title } = Astro.props;
-const content = loadContentSync() as Record<string, any>;
+const content = loadContentSync() as Content;
 const { site, company } = content;
 ---
 <!doctype html>

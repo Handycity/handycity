@@ -49,26 +49,27 @@ const intents = [
   },
 ] as const;
 
+interface Chip {
+  icon: string;
+  emoji: string;
+  label: string;
+}
+
 const cards = intents.map((intent) => {
-  const chips = [
-    ...intent.icons
-    .map((icon) => {
-      const item = services.items.find((service) => service.icon === icon);
-      return item
-        ? {
-            icon,
-            emoji: chipEmojiMap[icon] ?? '🔧',
-            label: item.name,
-          }
-        : null;
-    })
-    .filter((chip): chip is { icon: string; emoji: string; label: string } => chip !== null),
-    ...((intent as { customChips?: { emoji: string; label: string }[] }).customChips ?? []).map((chip) => ({
-      icon: chip.label,
-      emoji: chip.emoji,
-      label: chip.label,
-    })),
-  ];
+  // The icon list is a const tuple while the chips are plain strings, so the
+  // old inline type predicate widened `icon` and TypeScript stopped treating
+  // the nulls as filtered out — leaving `chip` possibly-null at both use sites.
+  // flatMap drops the misses without needing a predicate at all.
+  const iconChips: Chip[] = intent.icons.flatMap((icon) => {
+    const item = services.items.find((service) => service.icon === icon);
+    if (!item) return [];
+    return [{ icon, emoji: chipEmojiMap[icon] ?? '🔧', label: item.name }];
+  });
+
+  const customChips: Chip[] = ((intent as { customChips?: { emoji: string; label: string }[] }).customChips ?? [])
+    .map((chip) => ({ icon: chip.label, emoji: chip.emoji, label: chip.label }));
+
+  const chips: Chip[] = [...iconChips, ...customChips];
 
   return {
     ...intent,
