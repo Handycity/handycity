@@ -14,7 +14,7 @@ const { company } = Astro.props;
 >
   <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
     <!-- Logo -->
-    <a href="/" class="flex items-center gap-2 font-bold text-xl text-navy" aria-label="Handycity — zur Startseite">
+    <a href="/" class="flex items-center gap-2 font-bold text-xl text-brand" aria-label="Handycity — zur Startseite">
       {/* handycity_logo.png is the padding-cropped logo: its box height IS the
           visible height. The old asset carried 37% transparent padding, so any
           height set here rendered a logo ~1/3 smaller than the number suggested
@@ -24,19 +24,19 @@ const { company } = Astro.props;
 
     <!-- Desktop Nav -->
     <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600" aria-label="Hauptnavigation">
-      <a href="#services" class="hover:text-navy transition-colors">Services</a>
-      <a href="#preisrechner" class="hover:text-navy transition-colors">Preise</a>
-      <a href="#geraete-retter-praemie" class="hover:text-navy transition-colors">Geräte-Retter-Prämie</a>
-      <a href="#ueber-uns" class="hover:text-navy transition-colors">Über uns</a>
-      <a href="#bewertungen" class="hover:text-navy transition-colors">Bewertungen</a>
-      <a href="#handy-kaufen" class="hover:text-navy transition-colors">Angebote</a>
-      <a href="#kontakt" class="hover:text-navy transition-colors">Kontakt</a>
+      <a href="#services" class="hover:text-brand transition-colors">Services</a>
+      <a href="#preisrechner" class="hover:text-brand transition-colors">Preise</a>
+      <a href="#geraete-retter-praemie" class="hover:text-brand transition-colors">Geräte-Retter-Prämie</a>
+      <a href="#ueber-uns" class="hover:text-brand transition-colors">Über uns</a>
+      <a href="#bewertungen" class="hover:text-brand transition-colors">Bewertungen</a>
+      <a href="#handy-kaufen" class="hover:text-brand transition-colors">Angebote</a>
+      <a href="#kontakt" class="hover:text-brand transition-colors">Kontakt</a>
     </nav>
 
     <!-- Phone CTA -->
     <a
       href={`tel:${company.phone.replace(/\s/g, '')}`}
-      class="hidden md:flex items-center gap-2 bg-navy text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-navy-light transition-colors"
+      class="hidden md:flex items-center gap-2 bg-brand text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-brand-light transition-colors"
     >
       <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
       {company.phoneDisplay}
@@ -45,7 +45,7 @@ const { company } = Astro.props;
     <!-- Mobile menu button -->
     <button
       @click="open = !open"
-      class="md:hidden p-2 text-slate-600 hover:text-navy"
+      class="md:hidden p-2 text-slate-600 hover:text-brand"
       :aria-expanded="open.toString()"
       aria-label="Menü öffnen"
     >
@@ -62,16 +62,16 @@ const { company } = Astro.props;
     class="md:hidden border-t border-slate-200 bg-white"
   >
     <nav class="flex flex-col px-4 py-4 gap-3 text-sm font-medium text-slate-600" aria-label="Mobile Navigation">
-      <a href="#services" @click="open = false" class="hover:text-navy py-1">Services</a>
-      <a href="#preisrechner" @click="open = false" class="hover:text-navy py-1">Preise</a>
-      <a href="#geraete-retter-praemie" @click="open = false" class="hover:text-navy py-1">Geräte-Retter-Prämie</a>
-      <a href="#ueber-uns" @click="open = false" class="hover:text-navy py-1">Über uns</a>
-      <a href="#bewertungen" @click="open = false" class="hover:text-navy py-1">Bewertungen</a>
-      <a href="#handy-kaufen" @click="open = false" class="hover:text-navy py-1">Angebote</a>
-      <a href="#kontakt" @click="open = false" class="hover:text-navy py-1">Kontakt</a>
+      <a href="#services" @click="open = false" class="hover:text-brand py-1">Services</a>
+      <a href="#preisrechner" @click="open = false" class="hover:text-brand py-1">Preise</a>
+      <a href="#geraete-retter-praemie" @click="open = false" class="hover:text-brand py-1">Geräte-Retter-Prämie</a>
+      <a href="#ueber-uns" @click="open = false" class="hover:text-brand py-1">Über uns</a>
+      <a href="#bewertungen" @click="open = false" class="hover:text-brand py-1">Bewertungen</a>
+      <a href="#handy-kaufen" @click="open = false" class="hover:text-brand py-1">Angebote</a>
+      <a href="#kontakt" @click="open = false" class="hover:text-brand py-1">Kontakt</a>
       <a
         href={`tel:${company.phone.replace(/\s/g, '')}`}
-        class="flex items-center justify-center gap-2 bg-navy text-white px-4 py-2.5 rounded-lg font-semibold mt-2"
+        class="flex items-center justify-center gap-2 bg-brand text-white px-4 py-2.5 rounded-lg font-semibold mt-2"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         {company.phoneDisplay}

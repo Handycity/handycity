@@ -48,7 +48,7 @@ const resolveHref = (href: string) => (href.startsWith('tel:') ? telHref : href)
 const ctaPrimaryHref = resolveHref(hero.ctaPrimary.href);
 const ctaSecondaryHref = resolveHref(hero.ctaSecondary.href);
 ---
-<section class="relative overflow-hidden bg-navy-dark text-white">
+<section class="relative overflow-hidden bg-brand-dark text-white">
   <img
     src={`${import.meta.env.BASE_URL}images/store-image-in.webp`}
     alt="Handycity Geschäft innen"
@@ -70,7 +70,7 @@ const ctaSecondaryHref = resolveHref(hero.ctaSecondary.href);
       <div class="mt-8 flex flex-col gap-3 sm:flex-row">
         <a
           href={ctaPrimaryHref}
-          class="inline-flex items-center justify-center gap-2 rounded-full bg-navy px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-navy/30 transition hover:-translate-y-0.5 hover:bg-navy-light"
+          class="inline-flex items-center justify-center gap-2 rounded-full bg-brand px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand/30 transition hover:-translate-y-0.5 hover:bg-brand-light"
         >
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           {hero.ctaPrimary.text}
@@ -113,7 +113,7 @@ const ctaSecondaryHref = resolveHref(hero.ctaSecondary.href);
     </div>
 
     <aside class="rounded-[2rem] border border-white/10 bg-white/97 p-7 text-slate-900 shadow-2xl shadow-black/25 backdrop-blur">
-      <div class="inline-flex rounded-full bg-navy/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-navy">
+      <div class="inline-flex rounded-full bg-brand/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-brand">
         {hero.quickContactHeadline}
       </div>
       <h2 class="mt-5 text-2xl font-bold text-slate-900">Reparatur schnell einschätzen</h2>
@@ -122,13 +122,13 @@ const ctaSecondaryHref = resolveHref(hero.ctaSecondary.href);
       <div class="mt-6 space-y-3">
         <a
           href={telHref}
-          class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-navy px-5 py-3.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-navy-light"
+          class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3.5 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-brand-light"
         >
           Jetzt anrufen
         </a>
         <a
           href="#preisrechner"
-          class="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-3.5 text-sm font-semibold text-slate-800 transition hover:-translate-y-0.5 hover:border-navy/40 hover:text-navy"
+          class="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-5 py-3.5 text-sm font-semibold text-slate-800 transition hover:-translate-y-0.5 hover:border-brand/40 hover:text-brand"
         >
           Preischeck starten
         </a>

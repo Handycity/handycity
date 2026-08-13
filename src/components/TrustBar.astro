@@ -36,7 +36,7 @@ const iconPaths: Record<string, string> = {
       href={reviews.googleUrl}
       target="_blank"
       rel="noopener noreferrer"
-      class="flex items-center gap-4 rounded-3xl border border-slate-200 bg-slate-50 px-5 py-5 transition hover:-translate-y-0.5 hover:border-navy/30 hover:shadow-lg hover:shadow-slate-200/60"
+      class="flex items-center gap-4 rounded-3xl border border-slate-200 bg-slate-50 px-5 py-5 transition hover:-translate-y-0.5 hover:border-brand/30 hover:shadow-lg hover:shadow-slate-200/60"
       aria-label="Google Bewertungen öffnen"
     >
       <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white text-yellow-400 shadow-sm shadow-slate-200">
@@ -58,8 +58,8 @@ const iconPaths: Record<string, string> = {
     <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
       {trustBar.items.map((item) => (
         <div class="rounded-3xl border border-slate-200 bg-white px-5 py-5 shadow-sm shadow-slate-100">
-          <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-navy/10">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-navy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-brand/10">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <Fragment set:html={iconPaths[item.icon] || iconPaths['zap']} />
             </svg>
           </div>

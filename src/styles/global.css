@@ -1,11 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy: #9c141d;
-  --color-navy-light: #b91c26;
-  --color-navy-dark: #7a1017;
-  --color-cyan: #2d2d2d;
-  --color-cyan-light: #444444;
+  --color-brand: #9c141d;
+  --color-brand-light: #b91c26;
+  --color-brand-dark: #7a1017;
+  --color-ink: #2d2d2d;
+  --color-ink-light: #444444;
   --color-green: #10B981;
   --color-green-light: #D1FAE5;
   --color-slate-50: #F8FAFC;
@@ -37,7 +37,7 @@ html {
   top: 0;
   z-index: 100;
   padding: 0.5rem 1rem;
-  background: var(--color-navy);
+  background: var(--color-brand);
   color: white;
 }
 .skip-link:focus {

@@ -24,10 +24,10 @@ const { site, company } = content;
   <!-- Simple header -->
   <header class="bg-white border-b border-slate-200">
     <div class="max-w-3xl mx-auto px-4 h-16 flex items-center justify-between">
-      <a href={import.meta.env.BASE_URL} class="flex items-center gap-2 font-bold text-lg text-navy">
+      <a href={import.meta.env.BASE_URL} class="flex items-center gap-2 font-bold text-lg text-brand">
         <img width="234" height="135" src={`${import.meta.env.BASE_URL}images/handycity_logo.png`} alt="Handycity Logo" class="h-10 w-auto object-contain" />
       </a>
-      <a href={import.meta.env.BASE_URL} class="text-sm text-slate-600 hover:text-navy transition-colors">← Zurück zur Startseite</a>
+      <a href={import.meta.env.BASE_URL} class="text-sm text-slate-600 hover:text-brand transition-colors">← Zurück zur Startseite</a>
     </div>
   </header>
 
@@ -38,8 +38,8 @@ const { site, company } = content;
   <footer class="border-t border-slate-200 bg-slate-50">
     <div class="max-w-3xl mx-auto px-4 py-6 text-center text-xs text-slate-500">
       © {new Date().getFullYear()} {company.legalName}. Alle Rechte vorbehalten. ·
-      <a href={`${import.meta.env.BASE_URL}impressum`} class="hover:text-navy">Impressum</a> ·
-      <a href={`${import.meta.env.BASE_URL}datenschutz`} class="hover:text-navy">Datenschutz</a>
+      <a href={`${import.meta.env.BASE_URL}impressum`} class="hover:text-brand">Impressum</a> ·
+      <a href={`${import.meta.env.BASE_URL}datenschutz`} class="hover:text-brand">Datenschutz</a>
     </div>
   </footer>
 </body>

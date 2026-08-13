@@ -7,7 +7,7 @@ const content = loadContentSync() as Content;
 const { datenschutz } = content;
 ---
 <LegalLayout title={datenschutz.headline}>
-  <h1 class="text-2xl md:text-3xl font-bold text-navy mb-8">{datenschutz.headline}</h1>
+  <h1 class="text-2xl md:text-3xl font-bold text-brand mb-8">{datenschutz.headline}</h1>
   <div class="text-slate-600 leading-relaxed whitespace-pre-line">
     {datenschutz.content}
   </div>
