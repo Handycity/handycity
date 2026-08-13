@@ -123,8 +123,14 @@ imported half bypassed `failOnValidationErrors` entirely. Customers saw:
 | `iPhone 11` in device list | 2 entries (`iPhone 11`, `Iphone 11`) | 1 |
 | Brand buttons | 10, incl. a bogus `iPad` | 9, all real manufacturers |
 | Price formats | `€70` and `70` side by side | `€70` throughout |
-| Blank price badges | 3 | 0 |
 | Typos | `Kameragals`, `Laut/Leiste Taste`, 3× `Ein/Ausschaltknopf` | canonicalised |
+
+Correction to an earlier draft of this review: it claimed three repairs rendered
+a blank price badge. They did not. Three entries in `prices.json` have an empty
+price, but `calculator.yaml` already held the same three keys with
+`Preis auf Anfrage`, and the old dedup kept the curated side — so customers
+never saw a blank. Dropping them is still correct (they would have surfaced the
+moment the curated row was removed), but it was not a live defect.
 
 `scripts/lib/normalize-prices.mjs` canonicalises brand, device casing, repair
 names and price format; `scripts/normalize-calculator-prices.mjs` folds the
