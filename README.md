@@ -11,8 +11,6 @@ npm run build    # Produktions-Build in dist/
 npm run preview  # Build-Preview starten
 ```
 
-> Hinweis: `repo_push/` ist ein lokales, nicht in Git eingechecktes Artefakt und wurde entfernt. Build-Ausgabe `dist/`, `.astro/` und `node_modules/` sind ebenfalls ausgeschlossen und werden nicht als Hosting-Quellcode geliefert.
-
 Note on Node.js: This project requires Node >= 22.12.0 (Astro 6). If your local `node -v` shows an older version, use `nvm` and the provided `.nvmrc`:
 
 ```sh
@@ -26,38 +24,50 @@ node -v  # should be >= v22.12.0
 
 ```
 src/
-├── components/     # Astro-Komponenten (Header, Hero, Services, etc.)
+├── components/          # Astro-Komponenten (Header, Hero, Services, etc.)
 ├── data/
-│   └── content.yaml  # ← ALLE editierbaren Inhalte
-├── layouts/
-│   └── Layout.astro  # Basis-Layout mit SEO + Schema.org
-├── pages/
-│   └── index.astro   # Hauptseite
+│   ├── content/         # ← ALLE editierbaren Inhalte (eine YAML je Bereich)
+│   └── phone-expert/    # importierte Preisdaten (siehe docs/CODE_REVIEW.md)
+├── layouts/             # Layout.astro (SEO + Schema.org), LegalLayout.astro
+├── lib/
+│   ├── content-store.mjs    # liest + schreibt den Content-Store
+│   ├── content-schema.mjs   # Zod-Schema: definiert gueltigen Content
+│   ├── content-types.ts     # TypeScript-Typen, aus dem Schema abgeleitet
+│   ├── hours.mjs            # Oeffnungszeiten-Formatierung
+│   └── brands.mjs           # Marken-Logos und -Emojis
+├── pages/               # index.astro, impressum.astro, datenschutz.astro
 └── styles/
-    └── global.css     # Tailwind + Design-Tokens
+    └── global.css       # Tailwind + Design-Tokens
 public/
-├── CNAME             # Custom Domain
-├── robots.txt
-├── sitemap.xml
-└── images/
+├── CNAME                # Custom Domain
+├── robots.txt           # verweist auf die generierte sitemap-index.xml
+├── brands/ images/ vendor/
+scripts/                 # Owner-Actions, Sync-Jobs, Validierung
+docs/                    # Review + archivierte Dokumente
 ```
+
+Die Sitemap wird beim Build von `@astrojs/sitemap` erzeugt und liegt nicht im
+Repository.
 
 ## Inhalte bearbeiten
 
-Siehe [EDITING.md](EDITING.md) für die Anleitung.
-Siehe [OWNER_GUIDE.md](OWNER_GUIDE.md) für die vollständige Betreiber-Dokumentation mit Schritt-für-Schritt-Beispielen.
-Siehe [OWNER_INTERACTION_RUNBOOK.md](OWNER_INTERACTION_RUNBOOK.md) für den professionellen End-to-End-Betriebsablauf (Add/Edit/Delete/Publish/Rollback).
-Siehe [HOMEPAGE_FULL_OVERVIEW.md](HOMEPAGE_FULL_OVERVIEW.md) für die vollständige Leistungs- und Integrationsübersicht.
-Siehe [CUSTOMER_OVERVIEW.md](CUSTOMER_OVERVIEW.md) für die kundenfreundliche Übergabe-Zusammenfassung.
+- [EDITING.md](EDITING.md) — Inhalte direkt in `src/data/content/` bearbeiten
+- [OWNER_GUIDE.md](OWNER_GUIDE.md) — Betreiber-Dokumentation mit Schritt-für-Schritt-Beispielen
+- [docs/](docs/README.md) — Dokumentationsindex, Engineering-Review, archivierte Dokumente
 
-## Recherche-Dateien
+## Validierung
 
-Für die aktuelle Konkurrenz-/Förder-Recherche wurden folgende Dateien erzeugt:
+```sh
+npm run content:validate    # Content gegen src/lib/content-schema.mjs pruefen
+npm run workflows:validate  # Deploy-Kette: jeder pushende Workflow ist verdrahtet
+npm run check               # TypeScript/Astro-Typen
+npm run prices:check        # Preis-Import in den Content-Store uebernommen?
+npm run build
+npm run assets:validate     # laeuft nach dem Build gegen die echten Referenzen
+```
 
-- `research/geraete-retter-relevante-geraete.md`
-- `research/phone-experts-repair-data.csv`
-- `research/phone-experts-repair-data.json`
-- `research/phone-experts-repair-data-summary.md`
+Dieselben Schritte laufen in `.github/workflows/validate-site.yml` bei jedem
+Push und Pull Request.
 
 ## Owner Quick Start
 
@@ -70,11 +80,11 @@ Fuer den Betreiber gibt es jetzt GitHub-native Pflegewege ohne externes CMS:
 - `Actions -> Owner Update Offers`
 - `Actions -> Owner Update FAQ Item`
 - `Actions -> Owner Update Willhaben Offer`
-- `Actions -> Owner Update Content Advanced` (voller Zugriff auf beliebige `content.yaml`-Felder inkl. Add/Edit/Delete)
+- `Actions -> Owner Update Content Advanced` (voller Zugriff auf beliebige Felder im Content-Store inkl. Add/Edit/Delete)
 
 Diese Workflows schreiben die geprueften Aenderungen direkt nach `main` und loesen danach automatisch Build und Deploy aus.
 
-Bilder werden direkt ueber `public/images/` gepflegt. Details stehen in `public/images/README.md`.
+Bilder werden direkt ueber `public/images/` gepflegt.
 
 ## Deployment
 
@@ -92,7 +102,14 @@ Der Test stellt `src/data/content/*.yaml` danach automatisch wieder auf den Ausg
 
 ## Phone-Expert Sync (automated)
 
-This repository includes an automated sync that ingests price data from phone-experts and merges it into the site's price calculator. The sync script writes to `src/data/phone-expert/prices.json`.
+This repository includes a sync that ingests price data from phone-experts into
+`src/data/phone-expert/prices.json`. `npm run prices:normalize` then folds that
+file into `calculator.prices`, so the content store stays the single validated
+source — the page does not merge it at render time.
+
+> **The scheduled run is currently suspended** and the provenance of this
+> dataset is an open question. See `docs/CODE_REVIEW.md` section 2.1 before
+> re-enabling it.
 
 - Run locally:
 
@@ -108,9 +125,9 @@ npm run sync:phone-expert
 npm run content:validate
 ```
 
-- CI / GitHub Actions: the workflow `.github/workflows/owner-sync-phone-expert.yml` runs weekly (and manually) and will commit changes back to `main` when data changes are detected.
-
-If you want improved price parsing or alternative sources, I can extend the script to extract currencies and normalize ranges before the next sync.
+- CI / GitHub Actions: `.github/workflows/owner-sync-phone-expert.yml` is
+  manual-only for now (`workflow_dispatch`); the monthly schedule is commented
+  out pending the decision above.
 
 ## Architektur-Entscheidungen
 

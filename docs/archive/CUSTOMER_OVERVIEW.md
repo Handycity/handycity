@@ -30,7 +30,7 @@ Sie haben eine vollständige, moderne Handycity-Homepage mit:
 - Willhaben-Texte
 - FAQ-Einträge
 - Einzelne Willhaben-Angebote
-- Beliebige weitere Inhalte via `Owner Update Content Advanced` (inkl. Add/Edit/Delete an `content.yaml`-Feldern und Listen)
+- Beliebige weitere Inhalte via `Owner Update Content Advanced` (inkl. Add/Edit/Delete an Feldern und Listen im Content-Store)
 
 Zusätzlich automatisiert:
 - Willhaben-Angebote synchronisieren

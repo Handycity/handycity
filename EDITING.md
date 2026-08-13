@@ -76,7 +76,7 @@ Danach passiert der Rest automatisch:
 
 Hinweis:
 
-- Mit `Owner Update Content Advanced` koennen beliebige Felder und Listen in `content.yaml` per Action gepflegt werden (setzen, hinzufuegen/aktualisieren, loeschen).
+- Mit `Owner Update Content Advanced` koennen beliebige Felder und Listen in `src/data/content/` per Action gepflegt werden (setzen, hinzufuegen/aktualisieren, loeschen).
 
 ### Wo pruefen?
 
@@ -151,10 +151,10 @@ Diese Dateien bestimmen das Layout einzelner Sektionen:
 Diese Dateien sollten nur geaendert werden, wenn sich Design oder Struktur aendern sollen.
 
 --------------------------------------------------
-## 5. Regeln fuer `content.yaml`
+## 5. Regeln fuer die Content-Dateien
 --------------------------------------------------
 
-Die Datei `content.yaml` ist empfindlich. Kleine Formatfehler koennen den Build stoppen.
+Die YAML-Dateien in `src/data/content/` sind empfindlich. Kleine Formatfehler koennen den Build stoppen.
 
 ### Unbedingt beachten
 
@@ -191,7 +191,7 @@ Wenn Sie unsicher sind:
 
 ### 5.1 Seitentitel und SEO
 
-Pfad in `content.yaml`:
+Pfad im Content-Store:
 
 ```yaml
 site:
@@ -489,10 +489,10 @@ manuell pflegen.
 
 Die Website kann Google-Bewertungen auf zwei Arten nutzen:
 
-1. `content.yaml` als manuelles/statisches Backup
+1. Der Content-Store als manuelles/statisches Backup
 2. Google Places API als Live-Datenquelle
 
-Wenn kein API-Key gesetzt ist, wird das Backup aus `content.yaml` verwendet.
+Wenn kein API-Key gesetzt ist, wird das Backup aus `src/data/content/reviews.yaml` verwendet.
 
 Wenn ein API-Key gesetzt ist, koennen Live-Daten die Backup-Daten auf der Startseite ersetzen.
 
@@ -722,7 +722,7 @@ social:
   facebook: "https://facebook.com/..."
 ```
 
-Wenn neue Netzwerke zwar in `content.yaml` stehen, aber im Footer nicht sichtbar sind, muss ein Entwickler die Komponente erweitern.
+Wenn neue Netzwerke zwar im Content-Store stehen, aber im Footer nicht sichtbar sind, muss ein Entwickler die Komponente erweitern.
 
 --------------------------------------------------
 ## 7. Bilder austauschen oder neue Bilder einfuegen
@@ -818,10 +818,10 @@ Wenn alles korrekt war, steht dort:
 - Pages-Deployment erfolgreich
 
 --------------------------------------------------
-## 10. Wann reicht `content.yaml` nicht mehr?
+## 10. Wann reicht der Content-Store nicht mehr?
 --------------------------------------------------
 
-`content.yaml` reicht aus fuer Inhalte.
+Der Content-Store reicht aus fuer Inhalte.
 
 Ein Entwickler sollte ran, wenn Sie Folgendes wollen:
 
@@ -875,7 +875,7 @@ Pruefen:
 
 Pruefen:
 
-- `reviews` in `content.yaml`
+- `reviews` in `src/data/content/reviews.yaml`
 - ob Live-Google-Daten aktiv sind
 - ob ein API-Key in GitHub Actions hinterlegt ist
 
@@ -900,7 +900,7 @@ Fuer Bilder:
 Fuer groessere Aenderungen:
 
 1. Wunsch schriftlich festhalten
-2. pruefen, ob `content.yaml` reicht
+2. pruefen, ob der Content-Store reicht
 3. wenn nein: Entwickler hinzuziehen
 
 --------------------------------------------------

@@ -329,7 +329,7 @@ These will be fully documented in `DECISIONS.md` after approval, but previewing 
 |---|---|---|
 | **SSG** | Astro | Component model, islands architecture, better DX than 11ty for one-pager with interactive elements |
 | **Styling** | Tailwind CSS v4 | Utility-first, purges unused CSS to ~5KB for one-pager, works excellently with Astro |
-| **CMS** | Option 2: `content.yaml` + GitHub UI | Simplest, zero third-party dependency, no OAuth setup, owner edits one file — ideal for a single-page site with a single non-technical owner. Full guide in `EDITING.md` |
+| **CMS** | Option 2: YAML im Repo + GitHub UI | Simplest, zero third-party dependency, no OAuth setup, owner edits one file — ideal for a single-page site with a single non-technical owner. Full guide in `EDITING.md` |
 | **Forms** | Web3Forms | Free tier, no account needed for basic use, GDPR-friendly, email delivery |
 | **JS** | Alpine.js (2KB) | Mobile menu, FAQ accordion, form validation — tiny, declarative, no build step |
 | **Icons** | Lucide (inline SVG) | Treeshakeable, consistent, MIT licensed |

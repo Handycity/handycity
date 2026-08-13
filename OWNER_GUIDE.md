@@ -528,7 +528,7 @@ Workflow:
 
 Damit aenderbar:
 
-- Live-Angebote aus dem Willhaben-Shop automatisch nach `content.yaml` uebernehmen
+- Live-Angebote aus dem Willhaben-Shop automatisch in den Content-Store uebernehmen
 - `verifiedOn` automatisch auf den aktuellen Tag setzen
 - Trigger-basiert: manuell ueber `Run workflow` oder regelmaessig per Zeitplan
 
@@ -552,7 +552,7 @@ Workflow:
 
 Damit aenderbar:
 
-- Google-Bewertungen als Backup in `content.yaml` aktualisieren
+- Google-Bewertungen als Backup in `src/data/content/reviews.yaml` aktualisieren
 - Durchschnittsbewertung und Gesamtanzahl uebernehmen
 - Trigger-basiert: manuell ueber `Run workflow` oder regelmaessig per Zeitplan
 
@@ -585,7 +585,7 @@ Damit aenderbar:
 Felder:
 
 - `action`: `set` | `remove` | `list_upsert` | `list_remove`
-- `target_path`: Pfad in `content.yaml`, z. B. `faq.items` oder `company.address.street`
+- `target_path`: Pfad im Content-Store, z. B. `faq.items` oder `company.address.street`
 - `value_json`: JSON-Wert fuer die Aktion
 - `key_fields`: Schluesselfelder fuer Listenabgleich, z. B. `brand,device,repair`
 
@@ -609,7 +609,7 @@ Beispiele:
 - `value_json`: `{"brand":"Apple","device":"iPhone 15","repair":"Akku Tausch"}`
 
 --------------------------------------------------
-## 6. Direkte Bearbeitung in `content.yaml`
+## 6. Direkte Bearbeitung der Content-Dateien
 --------------------------------------------------
 
 Wenn Sie keinen Action-Workflow verwenden moechten, erfolgt die Pflege direkt ueber:
@@ -933,7 +933,7 @@ Wenn ein neuer Dateiname verwendet wird, muss ein Entwickler ggf. die Komponente
 
 Die Website kann Bewertungen auf zwei Arten anzeigen:
 
-1. Backup-Daten aus `content.yaml`
+1. Backup-Daten aus `src/data/content/reviews.yaml`
 2. Live-Daten ueber die Google Places API
 
 Wenn kein API-Key hinterlegt ist, wird das Backup verwendet.
@@ -964,7 +964,7 @@ Dafuer werden benoetigt:
 
 Vor dem Deploy pruefen die automatischen Validierungen:
 
-- ob `content.yaml` gueltig ist
+- ob der Content-Store gueltig ist
 - ob benoetigte Bilder vorhanden sind
 - ob der Astro-Build erfolgreich laeuft
 

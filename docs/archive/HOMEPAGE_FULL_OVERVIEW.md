@@ -79,11 +79,11 @@ Aus `src/pages/index.astro`:
 
 1. Google Reviews (live + Fallback)
 - `src/lib/google-places-reviews.ts` wird in `src/pages/index.astro` serverseitig aufgerufen.
-- Bei Fehlern fällt die Seite auf `content.yaml` Reviews zurück.
+- Bei Fehlern fällt die Seite auf `src/data/content/` Reviews zurück.
 - Optional via Env: `GOOGLE_PLACES_API_KEY`, `GOOGLE_PLACE_ID`.
 
 2. Willhaben-Angebote
-- Angebotsdaten in `content.yaml` unter `willhaben.offers`.
+- Angebotsdaten in `src/data/content/sales.yaml` unter `willhaben.offers`.
 - Automatisierbar per Sync-Script (`scripts/sync-willhaben-offers.mjs`).
 
 3. Google Maps
@@ -123,7 +123,7 @@ Workflows in `.github/workflows/`:
 - `owner-update-offers.yml`
 - `owner-update-faq-item.yml`
 - `owner-update-willhaben-offer.yml`
-- `owner-update-content-advanced.yml` (generischer Vollzugriff auf beliebige `content.yaml`-Pfade inkl. Add/Edit/Delete)
+- `owner-update-content-advanced.yml` (generischer Vollzugriff auf beliebige Content-Pfade inkl. Add/Edit/Delete)
 
 Diese Workflows:
 - nehmen Eingaben im Action-Form entgegen

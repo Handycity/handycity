@@ -24,6 +24,13 @@
 **Choice:** Single `src/data/content.yaml` file, edited via GitHub's web editor
 **Alternatives considered:** Decap CMS, TinaCMS
 
+> **Superseded (2026-08):** the single file was split into `src/data/content/`
+> (one YAML per section, see `CONTENT_FILE_DEFINITIONS` in
+> `src/lib/content-store.mjs`). `content.yaml` no longer exists. The decision
+> itself — YAML in the repo, edited through GitHub rather than a CMS — still
+> holds; only the file layout changed. Content is now validated against
+> `src/lib/content-schema.mjs`.
+
 **Rationale:**
 - **Simplest possible approach** — zero dependencies, zero authentication setup, zero third-party services
 - Owner opens one file on GitHub, edits text, commits → GitHub Actions rebuilds and deploys in ~60 seconds
@@ -80,6 +87,13 @@
 - Honeypot spam protection built in
 
 **Setup required:** Owner must get a free access key from web3forms.com and add it to `content.yaml` → `contact.accessKey`
+
+> **Never implemented (verified 2026-08):** there is no web3forms integration and
+> no `contact.accessKey` in the content store. The contact form builds a
+> `mailto:` link in the browser (`src/components/Contact.astro`), which means
+> submissions depend on the visitor having a mail client configured. If a real
+> form backend is wanted, that is a new decision to make, not a setup step to
+> follow.
 
 ---
 

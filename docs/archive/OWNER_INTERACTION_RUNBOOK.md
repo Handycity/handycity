@@ -70,7 +70,7 @@ Use the specific workflow when possible:
 - Refresh review backup in YAML from Google Places.
 
 10. `Owner Update Content Advanced` (full control)
-- Any `content.yaml` field or list entry via path-based operations:
+- Any content field or list entry via path-based operations:
   - `set`
   - `remove`
   - `list_upsert`
