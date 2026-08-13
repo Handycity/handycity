@@ -17,6 +17,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run content:validate
+      # Every workflow that pushes to main must be wired into deploy.yml,
+      # or its commits land without ever being published.
+      - run: npm run workflows:validate
       # Type-checks .astro frontmatter against the schema-derived content types.
       - run: npm run check
       # Fails if the phone-expert import has entries not yet folded into the

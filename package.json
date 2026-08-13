@@ -16,6 +16,7 @@
     "prices:normalize": "node scripts/normalize-calculator-prices.mjs",
     "prices:check": "node scripts/normalize-calculator-prices.mjs --check",
     "assets:validate": "node scripts/validate-assets.mjs",
+    "workflows:validate": "node scripts/validate-workflows.mjs",
     "vendor:sync": "node scripts/sync-vendor-assets.mjs",
     "vendor:check": "node scripts/sync-vendor-assets.mjs --check",
     "owner:update:business": "node scripts/update-business-info.mjs",
@@ -34,6 +35,7 @@
   },
   "dependencies": {
     "@alpinejs/collapse": "^3.15.11",
+    "@astrojs/sitemap": "^3.7.3",
     "@tailwindcss/vite": "^4.2.2",
     "alpinejs": "^3.15.11",
     "astro": "^6.1.4",
