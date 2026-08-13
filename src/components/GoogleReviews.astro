@@ -28,9 +28,24 @@ const carouselState = `{
   activeIndex: 0,
   autoplayMs: 5800,
   timer: null,
+  paused: false,
 
   init() {
+    // WCAG 2.2 2.2.2: content that auto-updates for more than five seconds
+    // needs a pause mechanism. Hover alone does not serve keyboard or touch
+    // users, hence the explicit toggle. Motion-sensitive visitors never get
+    // autoplay in the first place.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      this.paused = true;
+      return;
+    }
     if (this.reviews.length > 1) this.startAutoplay();
+  },
+
+  togglePause() {
+    this.paused = !this.paused;
+    if (this.paused) this.stopAutoplay();
+    else this.startAutoplay();
   },
 
   next() {
@@ -50,6 +65,9 @@ const carouselState = `{
 
   startAutoplay() {
     this.stopAutoplay();
+    // An explicit pause outranks hover-out and dot clicks, which both call in
+    // here; without this guard either would silently resume playback.
+    if (this.paused) return;
     if (this.reviews.length < 2) return;
     this.timer = setInterval(() => this.next(), this.autoplayMs);
   },
@@ -68,7 +86,7 @@ const carouselState = `{
 <section id="bewertungen" class="bg-slate-50 py-16 md:py-24">
   <div class="mx-auto max-w-7xl px-4">
     <div class="mx-auto max-w-3xl text-center">
-      <h2 class="text-2xl md:text-3xl font-bold text-navy">{reviews.headline}</h2>
+      <h2 class="text-2xl md:text-3xl font-bold text-brand">{reviews.headline}</h2>
     </div>
 
     <div class="mt-8 text-center">
@@ -177,6 +195,21 @@ const carouselState = `{
           <div class="flex items-center gap-2">
             <button
               type="button"
+              @click="togglePause()"
+              class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 transition hover:border-slate-300 hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand/40"
+              :aria-label="paused ? 'Rezensionen automatisch weiterblättern' : 'Automatisches Weiterblättern pausieren'"
+              :aria-pressed="(!paused).toString()"
+            >
+              <svg x-show="!paused" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <rect x="6" y="5" width="4" height="14" rx="1"></rect><rect x="14" y="5" width="4" height="14" rx="1"></rect>
+              </svg>
+              <svg x-show="paused" x-cloak xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <polygon points="7 4 20 12 7 20 7 4"></polygon>
+              </svg>
+            </button>
+
+            <button
+              type="button"
               @click="prev(); restartAutoplay()"
               class="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 transition hover:border-slate-300 hover:text-slate-900"
               aria-label="Vorherige Rezension"
@@ -216,7 +249,7 @@ const carouselState = `{
         href={reviews.googleUrl}
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 text-sm font-medium text-navy hover:underline"
+        class="inline-flex items-center gap-2 text-sm font-medium text-brand hover:underline"
       >
         Alle Bewertungen auf Google ansehen
         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
